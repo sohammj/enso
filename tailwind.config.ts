@@ -1,35 +1,39 @@
 import type { Config } from 'tailwindcss'
 
-
 const config: Config = {
-content: [
-'./app/**/*.{ts,tsx}',
-'./components/**/*.{ts,tsx}'
-],
-theme: {
-extend: {
-colors: {
-brand: {
-50: '#f0f8f6',
-100: '#d9efe9',
-200: '#b3dfd3',
-300: '#8dcfbd',
-400: '#66bfa7',
-500: '#40af91',
-600: '#339274',
-700: '#277558',
-800: '#1a583c',
-900: '#0e3b23'
-}
-},
-borderRadius: {
-'2xl': '1.25rem'
-},
-boxShadow: {
-soft: '0 10px 30px -10px rgba(0,0,0,0.25)'
-}
-}
-},
-plugins: []
+  content: ['./app/**/*.{ts,tsx}','./components/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          // pulled from logo vibe: deep navy + soft peach
+          navy: '#2D3A8C',
+          peach: '#F4B7A6',
+          mint: '#BFE3DB',
+        },
+        surface: {
+          50: '#FAFBFA',
+          100: '#F5F7F6',
+          200: '#EDEFEF',
+        }
+      },
+      borderRadius: {
+        '2xl': '1.25rem',
+        'blob': '32px'
+      },
+      boxShadow: {
+        soft: '0 12px 32px -16px rgba(20,24,40,.15)',
+      },
+      keyframes: {
+        fadeUp: { '0%':{opacity:0,transform:'translateY(10px)'}, '100%':{opacity:1,transform:'translateY(0)'} },
+        splashFade: { '0%':{opacity:1}, '100%':{opacity:0} }
+      },
+      animation: {
+        fadeUp: 'fadeUp .6s ease-out both',
+        splashFade: 'splashFade .6s ease-out both',
+      }
+    }
+  },
+  plugins: []
 }
 export default config

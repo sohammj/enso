@@ -1,11 +1,8 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/programs/page": "app/programs/page.js",
-  "/services/page": "app/services/page.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/page": "app/page.js",
+  "/programs/[slug]/page": "app/programs/[slug]/page.js",
   "/services/[slug]/page": "app/services/[slug]/page.js",
-  "/about/page": "app/about/page.js",
-  "/gallery/page": "app/gallery/page.js",
-  "/faq/page": "app/faq/page.js",
-  "/page": "app/page.js"
+  "/contact/page": "app/contact/page.js"
 }
