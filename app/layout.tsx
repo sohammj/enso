@@ -1,24 +1,25 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { Navbar } from '../components/Navbar'
-import { Footer } from '../components/Footer'
-import SplashScreen from '../components/SplashScreen'
-import { plusJakarta, playfair } from '../components/fonts'
+import "./globals.css";
+import type { Metadata } from "next";
+import { Nav } from "../components/layout/Nav";
+import { Footer } from "../components/layout/Footer";
+
 
 export const metadata: Metadata = {
-  title: 'Enso Mind Matters — Counselling & Programs',
-  description: 'Therapy services, programs, workshops, and community.'
-}
+title: "Enso Mind Matters",
+description: "Art-forward mental wellness – therapy, programs, community.",
+twitter: { card: "summary_large_image", title: "Enso Mind Matters" },
+openGraph: { title: "Enso Mind Matters", type: "website" }
+};
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className={`${plusJakarta.variable} ${playfair.variable}`}>
-      <body style={{fontFamily:'var(--font-jakarta)'}}>
-        <SplashScreen />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
-  )
+return (
+<html lang="en" className="scroll-smooth">
+<body className="bg-sand text-ink antialiased">
+<Nav />
+<main className="min-h-dvh pt-20">{children}</main>
+<Footer />
+</body>
+</html>
+);
 }

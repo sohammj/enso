@@ -2,52 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --bg: #FAFBFA;         /* surface.50 */
-  --card: #FFFFFF;
-  --ink: #1f2437;        /* dark text */
-  --muted: #4a5165;
-  --brand: #2D3A8C;      /* brand.navy */
-  --accent: #F4B7A6;     /* brand.peach */
-  --mint: #BFE3DB;       /* brand.mint (hex) */
-  --mint-rgb: 191 227 219; /* same color as r g b — for easy alpha */
+
+html, body { height: 100%; }
+
+
+/* Handwritten font for note */
+@font-face {
+font-family: 'EnsoNote';
+src: local('Caveat'), local('Pacifico');
 }
-
-html, body, #__next { height: 100%; }
-body {
-  @apply bg-[var(--bg)] text-[var(--ink)] antialiased;
-  font-feature-settings: "liga" 1, "kern" 1, "ss01" 1;
-}
-
-.container { @apply max-w-6xl mx-auto px-4; }
-.section { @apply py-16 md:py-24; }
-.h1 { @apply text-4xl md:text-6xl font-extrabold tracking-tight; }
-.h2 { @apply text-3xl md:text-4xl font-bold; }
-.h3 { @apply text-2xl md:text-3xl font-semibold; }
-.p  { @apply text-base/7 md:text-lg/8 text-[var(--muted)]; }
-
-.btn { @apply inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-medium shadow-soft bg-[var(--brand)] text-white hover:opacity-90 transition; }
-
-/* ⬇️ use CSS for the translucent mint background */
-.btn-ghost {
-  @apply inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-medium text-[var(--brand)] transition;
-  background-color: rgb(var(--mint-rgb) / 0.25);
-}
-.btn-ghost:hover {
-  background-color: rgb(var(--mint-rgb) / 0.40);
-}
-
-.card { @apply bg-[var(--card)] border border-black/[.06] rounded-2xl p-6 shadow-soft; }
-
-/* ⬇️ same tweak for the badge background */
-.badge {
-  @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm text-[var(--brand)];
-  background-color: rgb(var(--mint-rgb) / 0.40);
-}
-
-.heart { color: var(--accent); }
-
-img { @apply rounded-2xl; }
-
-/* splash overlay helper */
-.splash-fixed { @apply fixed inset-0 z-[60] grid place-items-center bg-[var(--bg)]; }

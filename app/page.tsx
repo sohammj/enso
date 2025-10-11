@@ -1,24 +1,28 @@
-import { Hero } from '../components/Hero'
-import AnnouncementBar from '../components/AnnouncementBar'
-import Stats from '../components/Stats'
-import LogosBar from '../components/LogosBar'
-import { Section } from '../components/Section'
-import { ProgramGrid } from '../components/ProgramGrid'
-import { ServiceGrid } from '../components/ServiceGrid'
+import { EnsoBrush } from "../components/hero/EnsoBrush";
+import { ClickSpark } from "../components/bits/ClickSpark";
+import { CurvedLoop } from "../components/bits/CurvedLoop";
+import { MagicBento } from "../components/bits/MagicBento";
+import { HandwrittenNote } from "../components/sections/HandwrittenNote";
+import { PauseReflect } from "../components/sections/PauseReflect";
+import { GoogleReviews } from "../components/sections/GoogleReviews";
+import { MapEmbed } from "../components/sections/MapEmbed";
 
-export default function HomePage() {
-  return (
-    <>
-      <AnnouncementBar />
-      <Hero />
-      <Stats />
-      <Section id="programs" title="Our Programs" subtitle="Community-led support and growth spaces.">
-        <ProgramGrid />
-      </Section>
-      <Section id="services" title="Services" subtitle="Evidence-informed, person-centered care.">
-        <ServiceGrid />
-      </Section>
-      <LogosBar />
-    </>
-  )
+
+export default function Home(){
+return (
+<>
+<ClickSpark />
+<EnsoBrush />
+<section className="mx-auto max-w-6xl px-4 py-10">
+<CurvedLoop />
+<div className="mt-10">
+<MagicBento />
+</div>
+</section>
+<HandwrittenNote />
+<PauseReflect />
+<GoogleReviews />
+<MapEmbed />
+</>
+);
 }
