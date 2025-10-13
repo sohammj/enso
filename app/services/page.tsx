@@ -1,10 +1,9 @@
-import { Section } from '../../components/Section'
-import { ServiceGrid } from '../../components/ServiceGrid'
+import MagicBento from '../../components/bits/MagicBento';
 
 export default function ServicesPage() {
-return (
-<Section title="Services" subtitle="Individual, group, and workshops.">
-<ServiceGrid />
-</Section>
-)
+  return (
+    <main className="flex justify-center py-20">
+      <MagicBento />
+    </main>
+  );
 }

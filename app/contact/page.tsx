@@ -1,4 +1,4 @@
-import { ContactForm } from '../../components/ContactForm'
+
 
 export default function ContactPage() {
 return (
@@ -12,7 +12,6 @@ return (
 <p className="p mt-2">Email: info@example.com • Phone: +91-00000 00000</p>
 </div>
 </div>
-<ContactForm />
 </div>
 </div>
 )
