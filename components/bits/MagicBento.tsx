@@ -140,7 +140,7 @@ const GlobalSpotlight = ({
         gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3 });
         gridRef.current
           .querySelectorAll(".card")
-          .forEach((card) => card.style.setProperty("--glow-intensity", "0"));
+          .forEach((card: HTMLElement) => card.style.setProperty("--glow-intensity", "0"));
         return;
       }
 
