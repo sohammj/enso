@@ -6,7 +6,7 @@ import { HandwrittenNote } from "../components/sections/HandwrittenNote";
 import { PauseReflect } from "../components/sections/PauseReflect";
 import { GoogleReviews } from "../components/sections/GoogleReviews";
 import { MapEmbed } from "../components/sections/MapEmbed";
-
+import { Component } from "../components/bits/3d-card";
 
 
 export default function Home(){
@@ -24,6 +24,7 @@ return (
 <PauseReflect />
 <GoogleReviews />
 <MapEmbed />
+<Component />
 </>
 );
 }
