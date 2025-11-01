@@ -26,7 +26,8 @@ export default function Home() {
       <ClickSpark />
 
       {/* HERO SECTION — with video background */}
-      <section className="relative h-[90vh] w-full overflow-hidden text-[#111] pt-[72px]">
+      {/* <section className="relative h-[90vh] w-full overflow-hidden text-[#111] pt-[72px]"> */}
+      <section className="relative h-[100vh] w-full overflow-hidden text-[#111] -mt-[80px]">
         {/* Background Video */}
         <video
           ref={videoRef}
