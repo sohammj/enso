@@ -91,35 +91,57 @@ export const services = [
   {
     slug: "individual-sessions",
     title: "Individual Sessions",
-    blurb:
-      "One-on-one sessions for children, adolescents, adults, couples, and families.",
-    body: [
-      // pulled + cleaned from Services page. :contentReference[oaicite:6]{index=6}
-      "In individual sessions, we create a private, compassionate space to talk about what you're carrying — anxiety, burnout, grief, relationship concerns, self-worth, identity, transition, and more.",
-      "We use verbal processing along with art-based techniques to help you express things that are hard to put into words.",
+    label: "Service",
+    subtitle: "Private, compassionate one-on-one space",
+    icon: "/icons/individual.svg", // or any local/public image
+    description: [
+      "In individual sessions, we create a private, compassionate space to talk about what you're carrying — anxiety, burnout, grief, self-worth, identity, and more.",
+      "We use verbal processing along with art-based techniques to help you express things that are hard to put into words."
     ],
+    cta: {
+      tagline: "Ready to begin your journey?",
+      subtitle: "One-on-one guidance tailored to you.",
+      text: "Book a session",
+      href: "/book-session",
+    },
   },
   {
     slug: "group-sessions",
     title: "Group Sessions",
-    blurb:
-      "Small-group circles that focus on connection, storytelling, and shared regulation.",
-    body: [
+    label: "Service",
+    subtitle: "Creative connection and reflection together",
+    icon: "/icons/group.svg",
+    description: [
       "Group spaces allow you to feel seen and understood by people navigating similar feelings.",
-      "We explore common themes (stress, boundaries, friendship, self-compassion) through creative work, grounding, and reflection.",
+      "We explore common themes — stress, boundaries, friendship, and self-compassion — through creative work, grounding, and reflection."
     ],
+    cta: {
+      tagline: "Want to join our next group?",
+      subtitle: "Connect, create, and reflect together.",
+      text: "Join the next session",
+      href: "/book-session",
+    },
   },
   {
-    slug: "workshops-and-training",
-    title: "Workshops & Training",
-    blurb:
-      "Custom mental health workshops for colleges, schools, NGOs, and companies.",
-    body: [
-      "We design interactive sessions for teams, educators, and students to build emotional literacy, empathy, and resilience.",
-      "We also run capacity-building trainings for educators so they can support student well-being through arts-based approaches.",
-    ],
+  slug: "workshops-and-training",
+  title: "Workshops & Training",
+  label: "Service",
+  subtitle: "Creative workshops for self-expression and learning",
+  icon: "/icons/workshop.svg", // optional, place any image in /public/icons/
+  description: [
+    "Our workshops and training sessions focus on exploring creativity, self-expression, and emotional awareness through art-based practices.",
+    "Each session is designed to help participants connect with themselves and others while learning tangible tools for mindfulness and well-being.",
+    "We facilitate both private group workshops and organizational training for teams seeking a balance of creativity, reflection, and connection."
+  ],
+  cta: {
+    tagline: "Want to organize a workshop?",
+    subtitle: "Reach out to plan a personalized art-based training.",
+    text: "Contact us",
+    href: "/book-session",
   },
+},
 ];
+
 
 export const faqs = [
   // adapted from the FAQ page. :contentReference[oaicite:7]{index=7}

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <ClickSpark />
-      <section className="bg-sand text-ink">
+      <section className="bg-white text-ink">
         <EnsoBrush />
       </section>
 
@@ -35,6 +35,7 @@ export default function Home() {
       <GoogleReviews />
       <CurvedLoop />
       <MapEmbed />
+      <QuizLite />
     </>
   );
 }
