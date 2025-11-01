@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import { EnsoBrush } from "../components/hero/EnsoBrush";
+import  EnsoBrush  from "../components/hero/EnsoBrush";
 import { ClickSpark } from "../components/bits/ClickSpark";
 import { CurvedLoop } from "../components/bits/CurvedLoop";
 import MagicBento from "../components/bits/MagicBento";
@@ -20,7 +20,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-10">
-        <CurvedLoop />
+        <PauseReflect />
         <div className="mt-10">
           <MagicBento />
         </div>
@@ -28,12 +28,12 @@ export default function Home() {
 
       <HandwrittenNote />
 
-      <section className="mx-auto max-w-4xl px-4 py-16 text-center">
+      {/* <section className="mx-auto max-w-4xl px-4 py-16 text-center">
         <QuizLite />
-      </section>
+      </section> */}
 
-      <PauseReflect />
       <GoogleReviews />
+      <CurvedLoop />
       <MapEmbed />
     </>
   );
