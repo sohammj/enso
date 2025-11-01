@@ -22,7 +22,7 @@ export default function ServicesPage() {
           >
             <h2 className="text-xl font-medium">{s.title}</h2>
             <p className="mt-2 text-sm opacity-80 leading-relaxed">
-              {s.blurb}
+              {s.description[0]}
             </p>
             <span className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
               Read more →
