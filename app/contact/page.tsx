@@ -1,18 +1,49 @@
-
+import { studioInfo } from "../../lib/data";
+import { MapEmbed } from "../../components/sections/MapEmbed";
 
 export default function ContactPage() {
-return (
-<div className="section">
-<div className="container grid md:grid-cols-2 gap-10">
-<div>
-<h1 className="h1">Contact</h1>
-<p className="p mt-4">Share address, directions, and session modalities here.</p>
-<div className="card mt-6">
-<p className="p">3 United House, Manmala Tank Rd, Mahim (placeholder)</p>
-<p className="p mt-2">Email: info@example.com • Phone: +91-00000 00000</p>
-</div>
-</div>
-</div>
-</div>
-)
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-14">
+      <h1 className="font-display text-4xl">Contact</h1>
+      <p className="mt-3 max-w-2xl text-lg opacity-80">
+        We offer in-person sessions in Mahim, Mumbai and online sessions.
+        Reach out — you don’t have to figure it out alone.
+      </p>
+
+      <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2">
+        <div className="rounded-2xl bg-white p-6 shadow-soft">
+          <h2 className="text-lg font-medium">Studio</h2>
+          <p className="mt-2 text-sm opacity-80 leading-relaxed">
+            {studioInfo.addressLine1}
+            <br />
+            {studioInfo.addressLine2}
+          </p>
+
+          <div className="mt-4 text-sm opacity-80">
+            <p>
+              Email:{" "}
+              <a
+                href={`mailto:${studioInfo.email}`}
+                className="underline underline-offset-4"
+              >
+                {studioInfo.email}
+              </a>
+            </p>
+            {studioInfo.phone && <p>Phone: {studioInfo.phone}</p>}
+          </div>
+
+          <a
+            href="/book"
+            className="mt-6 inline-block rounded-xl bg-ink px-4 py-2 text-white text-sm hover:opacity-90"
+          >
+            Book a session →
+          </a>
+        </div>
+
+        <div>
+          <MapEmbed />
+        </div>
+      </div>
+    </div>
+  );
 }

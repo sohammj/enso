@@ -1,14 +1,14 @@
 "use client";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import "./MagicBento.css";
 
-const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = "132, 0, 255";
 const MOBILE_BREAKPOINT = 768;
 
+// 🧩 Card Data — with icons beside titles
 const cardData = [
   // Programs
   {
@@ -17,7 +17,8 @@ const cardData = [
     description: "A reflective art circle for connection and presence.",
     label: "Program",
     href: "/programs/fika",
-    glowColor: "38, 67, 160", // royal
+    glowColor: "38, 67, 160",
+    icon: "/icons/pencil.svg",
   },
   {
     color: "#FFFFFF",
@@ -25,7 +26,8 @@ const cardData = [
     description: "Art-based therapy for resilience and emotional processing.",
     label: "Program",
     href: "/programs/cope",
-    glowColor: "38, 67, 160", // royal
+    glowColor: "38, 67, 160",
+    icon: "/icons/chat-bubble.svg",
   },
   {
     color: "#FFFFFF",
@@ -33,40 +35,39 @@ const cardData = [
     description: "Creative growth program focused on identity and healing.",
     label: "Program",
     href: "/programs/aakar",
-    glowColor: "38, 67, 160", // royal
+    glowColor: "38, 67, 160",
+    icon: "/icons/brush.svg",
   },
-    //   glowColor: "255, 209, 102", sun
-    // glowColor: "107, 181, 162", tea
-    // glowColor: "38, 67, 160", royal
-    
   // Services
   {
     color: "#FFFFFF",
     title: "Individual Session",
     description: "One-on-one art therapy for personalized emotional support.",
     label: "Service",
-    href: "/services/individual-session",
-    glowColor: "38, 67, 160", // royal
+    href: "/services/individual-sessions",
+    glowColor: "38, 67, 160",
+    icon: "/icons/individual.svg",
   },
   {
     color: "#FFFFFF",
     title: "Group Session",
     description: "Shared creative exploration fostering connection.",
     label: "Service",
-    href: "/services/group-session",
-    glowColor: "38, 67, 160", // royal
+    href: "/services/group-sessions",
+    glowColor: "38, 67, 160",
+    icon: "/icons/group.svg",
   },
   {
     color: "#FFFFFF",
     title: "Workshop & Training",
     description: "Therapist-led workshops for educators and organizations.",
     label: "Service",
-    href: "/services/workshop-training",
-    glowColor: "38, 67, 160", // royal
+    href: "/services/workshops-and-training",
+    glowColor: "38, 67, 160",
+    icon: "/icons/workshop.svg",
   },
 ];
 
-// Utility functions
 const calculateSpotlightValues = (radius: number) => ({
   proximity: radius * 0.5,
   fadeDistance: radius * 0.75,
@@ -140,7 +141,9 @@ const GlobalSpotlight = ({
         gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3 });
         gridRef.current
           .querySelectorAll(".card")
-          .forEach((card: HTMLElement) => card.style.setProperty("--glow-intensity", "0"));
+          .forEach((card: HTMLElement) =>
+            card.style.setProperty("--glow-intensity", "0")
+          );
         return;
       }
 
@@ -210,29 +213,35 @@ const MagicBento = ({
         />
       )}
 
-      <div
-        ref={gridRef}
-        className="bento-section grid gap-2 p-3 max-w-[54rem] select-none relative"
-      >
-        <div className="card-responsive grid gap-2">
+      <div ref={gridRef} className="bento-section relative mx-auto max-w-6xl px-4 select-none">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch">
           {cardData.map((card, i) => (
             <Link
               key={i}
               href={card.href}
-              className="card card--border-glow flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full p-5 rounded-[20px] border font-light overflow-hidden transition-all duration-300 ease-in-out"
+              className="card card--border-glow flex flex-col justify-between relative p-6 rounded-2xl border border-black/5 bg-white shadow-sm hover:shadow-lg transition-all duration-300 ease-out"
               style={{
-                backgroundColor: card.color,
                 "--glow-color": card.glowColor,
               } as React.CSSProperties}
             >
-              <div className="card__header flex justify-between gap-3 relative">
-                <span className="card__label text-base text-ink opacity-70">
+              <div>
+                <p className="uppercase text-xs tracking-widest text-gray-500 mb-2">
                   {card.label}
-                </span>
-              </div>
-              <div className="card__content flex flex-col relative">
-                <h3 className="font-medium text-lg mb-1">{card.title}</h3>
-                <p className="text-sm opacity-80 leading-5">
+                </p>
+
+                {/* 🔹 Title with icon beside it */}
+                <div className="flex items-center gap-2 mb-2">
+                  {card.icon && (
+                    <img
+                      src={card.icon}
+                      alt={`${card.title} icon`}
+                      className="w-6 h-6 object-contain opacity-80 transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
+                  <h3 className="font-medium text-xl text-gray-900">{card.title}</h3>
+                </div>
+
+                <p className="text-gray-600 leading-relaxed text-sm">
                   {card.description}
                 </p>
               </div>
