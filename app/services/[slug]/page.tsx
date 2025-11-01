@@ -16,7 +16,7 @@ export default function ServicePage() {
   };
 
   return (
-    <main className="text-[#111]">
+    <main className="text-[#111] bg-white">
       <section className="mx-auto max-w-4xl px-4 py-20">
         {/* HEADER */}
         <motion.div
@@ -51,9 +51,9 @@ export default function ServicePage() {
           variants={fadeUp}
           className="space-y-6 leading-relaxed text-lg opacity-90"
         >
-          {Array.isArray(service.description)
-            ? service.description.map((para, i) => <p key={i}>{para}</p>)
-            : <p>{service.body}</p>}
+          {service.description.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
         </motion.div>
 
         {/* CTA CARD */}
