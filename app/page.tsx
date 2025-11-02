@@ -9,6 +9,7 @@ import { PauseReflect } from "../components/sections/PauseReflect";
 import { GoogleReviews } from "../components/sections/GoogleReviews";
 import { MapEmbed } from "../components/sections/MapEmbed";
 import { QuizLite } from "../components/sections/QuizLite";
+import { AboutSection } from "../components/sections/AboutSection";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -66,6 +67,8 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <AboutSection />
 
       {/* Main sections remain unchanged */}
       <section className="mx-auto max-w-6xl px-4 py-10">

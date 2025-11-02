@@ -41,6 +41,20 @@ export default function AboutPage() {
             Location: {studioInfo.addressLine1} {studioInfo.addressLine2}
           </p>
         </div>
+          <div className="space-y-1">
+              <div className="text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>500+</div>
+              <div className="text-[#0E1E2A]/60">Sessions Held</div>
+          </div>
+            <div className="w-px bg-[#0E1E2A]/20" />
+              <div className="space-y-1">
+                <div className="text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>200+</div>
+                <div className="text-[#0E1E2A]/60">Lives Touched</div>
+            </div>
+            <div className="w-px bg-[#0E1E2A]/20" />
+              <div className="space-y-1">
+                <div className="text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>5 Years</div>
+                <div className="text-[#0E1E2A]/60">Of Practice</div>
+            </div>
       </div>
     </div>
   );
