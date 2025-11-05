@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Nav } from "../components/layout/Nav";
 import { Footer } from "../components/layout/Footer";
+// import SplashCursor from "../components/bits/SplashCursor";
 
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 return (
 <html lang="en" className="scroll-smooth">
 <body className="bg-sand text-ink antialiased">
+{/* <SplashCursor /> */}
 <Nav />
 <main className="min-h-dvh pt-20">{children}</main>
 <Footer />

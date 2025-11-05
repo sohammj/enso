@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2020"
-    ],
+    "lib": ["dom", "dom.iterable", "es2020"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,7 +17,13 @@
       }
     ],
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+
+    // ✅ Add these two lines 👇
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "**/*.ts",
@@ -29,7 +31,5 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

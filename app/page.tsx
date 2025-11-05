@@ -50,7 +50,7 @@ export default function Home() {
           onClick={toggleMute}
           className="absolute bottom-6 right-6 z-20 bg-white/70 hover:bg-white/90 transition backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium shadow-md"
         >
-          {muted ? "🔇 Sound Off" : "🔊 Sound On"}
+          {muted ? "🔇" : "🔊"}
         </button>
 
         {/* Foreground Text */}

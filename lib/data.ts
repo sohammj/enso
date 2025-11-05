@@ -102,7 +102,7 @@ export const services = [
       tagline: "Ready to begin your journey?",
       subtitle: "One-on-one guidance tailored to you.",
       text: "Book a session",
-      href: "/book-session",
+      href: "/book",
     },
   },
   {
@@ -119,7 +119,7 @@ export const services = [
       tagline: "Want to join our next group?",
       subtitle: "Connect, create, and reflect together.",
       text: "Join the next session",
-      href: "/book-session",
+      href: "/book",
     },
   },
   {
@@ -137,7 +137,7 @@ export const services = [
     tagline: "Want to organize a workshop?",
     subtitle: "Reach out to plan a personalized art-based training.",
     text: "Contact us",
-    href: "/book-session",
+    href: "/book",
   },
 },
 ];

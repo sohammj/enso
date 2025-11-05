@@ -16,7 +16,7 @@ export default function ProgramPage() {
   };
 
   return (
-    <main className="bg-[#F7F4EF] text-[#111]">
+    <main className="bg-white text-[#111]">
       <section className="mx-auto max-w-4xl px-4 py-20">
         {/* HEADER */}
         <motion.div

@@ -1,35 +1,35 @@
 "use client";
 
-import Link from "next/link";
+import MagicBento from "@/components/bits/MagicBento";
 import { services } from "../../lib/data";
 
 export default function ServicesPage() {
-  return (
-    <div className="mx-auto max-w-6xl px-4 py-14">
-      <h1 className="font-display text-4xl">Services</h1>
-      <p className="mt-3 max-w-3xl text-lg opacity-80">
-        Enso Counseling and Art Therapy Centre helps individuals externalize
-        and organize thoughts and emotions that are difficult to put into
-        words.
-      </p>
+  // Convert your services data into MagicBento’s format
+  const serviceCards = services.map((s) => ({
+    title: s.title,
+    description: s.description[0].slice(0, 120),
+    label: s.label || "Service",
+    href: `/services/${s.slug}`,
+    glowColor: "38, 67, 160", // Enso blue glow
+    icon: s.icon, // optional if available
+  }));
 
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-        {services.map((s) => (
-          <Link
-            key={s.slug}
-            href={`/services/${s.slug}`}
-            className="rounded-2xl bg-gradient-to-br from-sun/40 via-tea/40 to-royal/40 p-6 shadow-soft hover:from-tea/60 hover:to-royal/60 transition-all duration-500"
-          >
-            <h2 className="text-xl font-medium">{s.title}</h2>
-            <p className="mt-2 text-sm opacity-80 leading-relaxed">
-              {s.description[0]}
-            </p>
-            <span className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
-              Read more →
-            </span>
-          </Link>
-        ))}
-      </div>
-    </div>
+  return (
+    <main className="bg-white text-[#111] min-h-screen">
+      <section className="max-w-6xl mx-auto px-4 py-20">
+        <div className="text-center mb-12">
+          <h1 className="font-display text-4xl md:text-5xl mb-3">
+            Our Services
+          </h1>
+          <p className="text-lg opacity-70">
+            Explore how Enso Counseling and Art Therapy Centre supports individuals
+            in expressing, processing, and healing through creative practices.
+          </p>
+        </div>
+
+        {/* 🌟 MagicBento reused here */}
+        <MagicBento cards={serviceCards} enableSpotlight spotlightRadius={250} />
+      </section>
+    </main>
   );
 }

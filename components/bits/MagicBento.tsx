@@ -8,9 +8,8 @@ const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = "132, 0, 255";
 const MOBILE_BREAKPOINT = 768;
 
-// 🧩 Card Data — with icons beside titles
-const cardData = [
-  // Programs
+// 🧩 Default card data (for homepage)
+export const defaultCardData = [
   {
     color: "#FFFFFF",
     title: "Fika",
@@ -38,7 +37,6 @@ const cardData = [
     glowColor: "38, 67, 160",
     icon: "/icons/brush.svg",
   },
-  // Services
   {
     color: "#FFFFFF",
     title: "Individual Session",
@@ -197,6 +195,7 @@ const MagicBento = ({
   enableSpotlight = true,
   disableAnimations = false,
   spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
+  cards = defaultCardData, // ✅ Reusable data source
 }: any) => {
   const gridRef = useRef<HTMLDivElement | null>(null);
   const isMobile = useMobile();
@@ -215,7 +214,7 @@ const MagicBento = ({
 
       <div ref={gridRef} className="bento-section relative mx-auto max-w-6xl px-4 select-none">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch">
-          {cardData.map((card, i) => (
+          {cards.map((card: any, i: number) => (
             <Link
               key={i}
               href={card.href}
@@ -228,8 +227,6 @@ const MagicBento = ({
                 <p className="uppercase text-xs tracking-widest text-gray-500 mb-2">
                   {card.label}
                 </p>
-
-                {/* 🔹 Title with icon beside it */}
                 <div className="flex items-center gap-2 mb-2">
                   {card.icon && (
                     <img
@@ -240,10 +237,7 @@ const MagicBento = ({
                   )}
                   <h3 className="font-medium text-xl text-gray-900">{card.title}</h3>
                 </div>
-
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  {card.description}
-                </p>
+                <p className="text-gray-600 leading-relaxed text-sm">{card.description}</p>
               </div>
             </Link>
           ))}

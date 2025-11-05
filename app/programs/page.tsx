@@ -1,10 +1,19 @@
-import Link from "next/link";
-import Image from "next/image";
+"use client";
+import MagicBento from "@/components/bits/MagicBento";
 import { programs } from "../../lib/data";
 
 export default function ProgramsPage() {
+  const programCards = programs.map((p) => ({
+    title: p.title,
+    description: p.description[0].slice(0, 120),
+    label: p.label || "Program",
+    href: `/programs/${p.slug}`,
+    glowColor: "38, 67, 160",
+    icon: p.icon,
+  }));
+
   return (
-    <main className="bg-[#F7F4EF] text-[#111] min-h-screen">
+    <main className="bg-white text-[#111] min-h-screen">
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-12">
           <h1 className="font-display text-4xl md:text-5xl mb-3">
@@ -15,37 +24,7 @@ export default function ProgramsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {programs.map((program) => (
-            <Link
-              key={program.slug}
-              href={`/programs/${program.slug}`}
-              className="group bg-white rounded-2xl p-6 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              {program.icon && (
-                <Image
-                  src={program.icon}
-                  alt={`${program.title} icon`}
-                  width={48}
-                  height={48}
-                  className="opacity-80 mb-3"
-                />
-              )}
-              <p className="uppercase tracking-widest text-xs text-gray-500">
-                {program.label}
-              </p>
-              <h3 className="text-xl font-medium mt-1 mb-2">
-                {program.title}
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                {program.description[0].slice(0, 120)}...
-              </p>
-              <p className="text-[#2643A0] mt-3 text-sm font-medium group-hover:underline">
-                Learn more →
-              </p>
-            </Link>
-          ))}
-        </div>
+        <MagicBento cards={programCards} enableSpotlight spotlightRadius={250} />
       </section>
     </main>
   );
