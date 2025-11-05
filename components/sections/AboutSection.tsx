@@ -3,20 +3,37 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const float = {
+  animate: {
+    y: [0, -10, 0],
+    rotate: [0, 1.5, -1.5, 0],
+    transition: { repeat: Infinity, duration: 8, ease: "easeInOut" },
+  },
+};
+
 export function AboutSection() {
   return (
     <section
       id="about"
-      className="py-24 bg-white relative overflow-hidden"
+      className="py-24 relative overflow-hidden bg-white"
     >
-      
-
-      {/* Decorative watercolor blob */}
-      <div className="absolute top-20 right-0 w-96 h-96 rounded-full watercolor-blob bg-[var(--pastel-blush)]" />
+      {/* 🪶 Floating dragonflies */}
+      <motion.img
+        src="/dragonfly.svg"
+        alt=""
+        className="absolute top-[50px] left-[60px] w-[90px] opacity-90 rotate-[-10deg] -z-10"
+        {...float}
+      />
+      <motion.img
+        src="/dragonfly.svg"
+        alt=""
+        className="absolute bottom-[100px] right-[60px] w-[100px] opacity-90 rotate-[25deg] -z-10"
+        {...float}
+      />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Image Side */}
+          {/* 📸 Image Side */}
           <motion.div
             className="relative"
             initial={{ opacity: 0, x: -50 }}
@@ -25,65 +42,45 @@ export function AboutSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                    src="/paurl hande.jpg" // your image in /public
-                    alt="Enso art therapy workspace"
-                    width={1080}
-                    height={720}
-                    className="w-full h-[500px] object-cover"
-                    priority
-                />
-                <div className="absolute inset-0 border-8 border-white/20 rounded-3xl" />
+              <Image
+                src="/paurl hande.jpg"
+                alt="Enso art therapy workspace"
+                width={1080}
+                height={720}
+                className="w-full h-[500px] object-cover"
+                priority
+              />
+              <div className="absolute inset-0 border-8 border-white/20 rounded-3xl" />
             </div>
 
+            {/* Decorative left cluster */}
+            <div className="absolute left-[30px] top-[100px] opacity-90 -z-10">
+              <motion.img
+                src="/dragonfly.svg"
+                alt=""
+                className="w-[130px] rotate-[-10deg]"
+                {...float}
+              />
+              <motion.img
+                src="/dragonfly.svg"
+                alt=""
+                className="w-[90px] rotate-[8deg] absolute top-[90px] left-[60px]"
+                {...float}
+              />
+            </div>
 
-
-
-            {/* Floating dragonfly doodle */}
-            <motion.div
-              className="absolute -top-6 -right-6 w-20 h-20"
-              animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <svg viewBox="0 0 80 80" className="w-full h-full">
-                <circle cx="40" cy="35" r="6" fill="var(--pastel-mint)" />
-                <ellipse
-                  cx="35"
-                  cy="25"
-                  rx="8"
-                  ry="12"
-                  fill="var(--pastel-sky)"
-                  opacity="0.7"
-                />
-                <ellipse
-                  cx="45"
-                  cy="25"
-                  rx="8"
-                  ry="12"
-                  fill="var(--pastel-sky)"
-                  opacity="0.7"
-                />
-                <ellipse
-                  cx="35"
-                  cy="45"
-                  rx="7"
-                  ry="10"
-                  fill="var(--pastel-blush)"
-                  opacity="0.7"
-                />
-                <ellipse
-                  cx="45"
-                  cy="45"
-                  rx="7"
-                  ry="10"
-                  fill="var(--pastel-blush)"
-                  opacity="0.7"
-                />
-              </svg>
-            </motion.div>
+            {/* Subtle base accent */}
+            <div className="absolute bottom-[60px] left-[120px] opacity-90 -z-10">
+              <motion.img
+                src="/dragonfly.svg"
+                alt=""
+                className="w-[110px] rotate-[25deg]"
+                {...float}
+              />
+            </div>
           </motion.div>
 
-          {/* Text Side */}
+          {/* 🪷 Text Side */}
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, x: 50 }}
@@ -91,6 +88,7 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
+            {/* Heading */}
             <div className="flex items-center space-x-3">
               <motion.div
                 className="w-12 h-1 bg-[var(--royal-blue)] rounded-full"
@@ -108,6 +106,7 @@ export function AboutSection() {
               About Enso Mind Matters
             </h2>
 
+            {/* Paragraphs */}
             <div className="space-y-4 font-manrope text-gray-700 leading-relaxed">
               <p>
                 For over{" "}
@@ -137,35 +136,45 @@ export function AboutSection() {
                 inner worlds, discover resilience, and cultivate joy.
               </p>
             </div>
-           {/* Stats Row */}
+
+            {/* Stats Row */}
             <div className="flex flex-wrap items-center gap-8 pt-8">
-                <div className="space-y-1 text-center">
-                    <div className="text-3xl font-semibold text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    500+
-                    </div>
-                    <div className="text-[#0E1E2A]/60 text-sm">Sessions Held</div>
+              <div className="space-y-1 text-center">
+                <div
+                  className="text-3xl font-semibold text-[#0E1E2A]"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  500+
                 </div>
+                <div className="text-[#0E1E2A]/60 text-sm">Sessions Held</div>
+              </div>
 
-                <div className="w-px h-8 bg-[#0E1E2A]/20" />
+              <div className="w-px h-8 bg-[#0E1E2A]/20" />
 
-                <div className="space-y-1 text-center">
-                    <div className="text-3xl font-semibold text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    200+
-                    </div>
-                    <div className="text-[#0E1E2A]/60 text-sm">Lives Touched</div>
+              <div className="space-y-1 text-center">
+                <div
+                  className="text-3xl font-semibold text-[#0E1E2A]"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  200+
                 </div>
+                <div className="text-[#0E1E2A]/60 text-sm">Lives Touched</div>
+              </div>
 
-                <div className="w-px h-8 bg-[#0E1E2A]/20" />
+              <div className="w-px h-8 bg-[#0E1E2A]/20" />
 
-                <div className="space-y-1 text-center">
-                    <div className="text-3xl font-semibold text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    5 Years
-                    </div>
-                    <div className="text-[#0E1E2A]/60 text-sm">Of Practice</div>
+              <div className="space-y-1 text-center">
+                <div
+                  className="text-3xl font-semibold text-[#0E1E2A]"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  5 Years
                 </div>
+                <div className="text-[#0E1E2A]/60 text-sm">Of Practice</div>
+              </div>
             </div>
 
-
+            {/* CTA */}
             <motion.div
               className="pt-6"
               whileHover={{ x: 10 }}
@@ -193,6 +202,22 @@ export function AboutSection() {
             </motion.div>
           </motion.div>
         </div>
+      </div>
+
+      {/* Decorative dragonflies (bottom layer) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden z-[1]">
+        <motion.img
+          src="/dragonfly.svg"
+          alt=""
+          className="absolute top-[50px] left-[60px] w-[100px] opacity-90 rotate-[-10deg]"
+          {...float}
+        />
+        <motion.img
+          src="/dragonfly.svg"
+          alt=""
+          className="absolute bottom-[100px] right-[60px] w-[110px] opacity-90 rotate-[25deg]"
+          {...float}
+        />
       </div>
     </section>
   );

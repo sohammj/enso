@@ -7,7 +7,7 @@ export function Footer() {
         {/* Left Section */}
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <img src="/logo.svg" alt="Enso logo" className="w-8 h-8" />
+            <img src="/ensologo.svg" alt="Enso logo" className="w-8 h-8" />
             <span className="font-semibold text-lg tracking-tight">
               Enso Mind Matters
             </span>
@@ -16,10 +16,10 @@ export function Footer() {
           <p className="text-sm mt-2 opacity-80">
             Email:{" "}
             <a
-              href="mailto:info@example.com"
+              href="mailto:paruldewal@gmail.com"
               className="underline underline-offset-4 hover:opacity-100"
             >
-              info@example.com
+              paruldewal@gmail.com
             </a>
           </p>
         </div>
@@ -46,7 +46,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/book-session" className="hover:underline underline-offset-4">
+              <Link href="/book" className="hover:underline underline-offset-4">
                 Book
               </Link>
             </li>
@@ -78,10 +78,10 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar
       <div className="border-t border-black/10 text-center py-6 text-xs opacity-70">
         © {new Date().getFullYear()} Enso Mind Matters. All rights reserved.
-      </div>
+      </div> */}
     </footer>
   );
 }

@@ -11,7 +11,8 @@ export default function AboutPage() {
       </p>
 
       <div className="mt-10 grid grid-cols-1 items-start gap-10 md:grid-cols-2">
-        <div className="rounded-2xl bg-white p-6 shadow-soft">
+        {/* LEFT COLUMN - Photo + Stats */}
+        <div className="rounded-2xl bg-white p-6 shadow-soft flex flex-col items-center">
           <Image
             src={founder.headshot}
             alt={founder.name}
@@ -21,8 +22,46 @@ export default function AboutPage() {
           />
           <h2 className="mt-4 text-xl font-medium">{founder.name}</h2>
           <p className="text-sm opacity-70">{founder.bioShort}</p>
+
+          {/* Stats Section */}
+          <div className="mt-6 flex items-center justify-center gap-6 text-center">
+            <div>
+              <div
+                className="text-[#0E1E2A] text-2xl font-medium"
+                style={{ fontFamily: "Playfair Display, serif" }}
+              >
+                500+
+              </div>
+              <div className="text-[#0E1E2A]/60 text-sm">Sessions Held</div>
+            </div>
+
+            <div className="w-px h-8 bg-[#0E1E2A]/20" />
+
+            <div>
+              <div
+                className="text-[#0E1E2A] text-2xl font-medium"
+                style={{ fontFamily: "Playfair Display, serif" }}
+              >
+                200+
+              </div>
+              <div className="text-[#0E1E2A]/60 text-sm">Lives Touched</div>
+            </div>
+
+            <div className="w-px h-8 bg-[#0E1E2A]/20" />
+
+            <div>
+              <div
+                className="text-[#0E1E2A] text-2xl font-medium"
+                style={{ fontFamily: "Playfair Display, serif" }}
+              >
+                5 Years
+              </div>
+              <div className="text-[#0E1E2A]/60 text-sm">Of Practice</div>
+            </div>
+          </div>
         </div>
 
+        {/* RIGHT COLUMN - Biography */}
         <div className="space-y-4 text-lg opacity-90 leading-relaxed">
           {founder.bioLong.map((para, i) => (
             <p key={i}>{para}</p>
@@ -41,21 +80,11 @@ export default function AboutPage() {
             Location: {studioInfo.addressLine1} {studioInfo.addressLine2}
           </p>
         </div>
-          <div className="space-y-1">
-              <div className="text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>500+</div>
-              <div className="text-[#0E1E2A]/60">Sessions Held</div>
-          </div>
-            <div className="w-px bg-[#0E1E2A]/20" />
-              <div className="space-y-1">
-                <div className="text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>200+</div>
-                <div className="text-[#0E1E2A]/60">Lives Touched</div>
-            </div>
-            <div className="w-px bg-[#0E1E2A]/20" />
-              <div className="space-y-1">
-                <div className="text-[#0E1E2A]" style={{ fontFamily: 'Playfair Display, serif' }}>5 Years</div>
-                <div className="text-[#0E1E2A]/60">Of Practice</div>
-            </div>
       </div>
+
+
+      
+
     </div>
   );
 }

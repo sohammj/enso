@@ -21,3 +21,11 @@ src: local('Caveat'), local('Pacifico');
     @apply border-border; }
   body {
     @apply bg-background text-foreground; } }
+
+.brush-deco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
