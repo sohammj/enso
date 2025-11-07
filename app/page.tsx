@@ -11,6 +11,8 @@ import { GoogleReviews } from "../components/sections/GoogleReviews";
 import { MapEmbed } from "../components/sections/MapEmbed";
 // import { QuizLite } from "../components/sections/QuizLite";
 import { AboutSection } from "../components/sections/AboutSection";
+import Image from "next/image";
+
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -133,43 +135,54 @@ export default function Home() {
             </span>
           </div>
         </section>
-        
 
-        {/* 🌿 ABOUT + VISION + MISSION SECTION (Final Polished Version) */}
-        <section className="relative overflow-hidden bg-white py-24 md:py-28">
 
-          {/* Cream soft wave background (fills behind About section) */}
-          <div className="absolute top-0 left-0 w-full h-[420px] bg-[#FFF6CF] rounded-b-[120px] -z-10" />
 
-          <div className="max-w-6xl mx-auto px-6 md:px-10 relative z-10">
-            {/* --- ABOUT ENSO --- */}
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+        <section className="relative overflow-hidden bg-white py-28">
+           {/* 🌾 Soft beige background swoosh */}
+            <svg
+              className="absolute top-[40px] left-0 w-full h-[400px] -z-20"
+              viewBox="0 0 1440 320"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#FBF6E9"
+                d="M0,224L120,213.3C240,203,480,181,720,165.3C960,150,1200,160,1320,170.7L1440,181L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"
+              />
+            </svg>
+
+            {/* 🪶 Main content */}
+            <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-16 px-6 md:px-12 mt-12">
               {/* Left Text */}
-              <div className="space-y-5 md:pr-10">
-                <h3 className="font-[Playfair_Display] text-3xl md:text-4xl text-[#0E1E2A]">
+              <div className="flex-1 pt-6">
+                <h2 className="text-4xl font-[Playfair_Display] text-[#0E1E2A] mb-4">
                   About ENSO
-                </h3>
-                <p className="font-[Manrope] text-[#0E1E2A]/80 leading-relaxed text-lg md:text-[18px]">
-                  The name <span className="italic">“ENSO”</span> comes from a Japanese Zen symbol — 
-                  a hand-drawn circle representing wholeness, balance, and the beauty of imperfection.
+                </h2>
+                <p className="text-[#0E1E2A]/80 leading-relaxed text-lg max-w-md">
+                  The name “ENSO” comes from a Japanese Zen symbol — a hand-drawn circle
+                  representing wholeness, balance, and the beauty of imperfection.
                 </p>
               </div>
 
-              {/* Right Image with coral shape behind */}
-              <div className="relative flex justify-center md:justify-end">
-                {/* Coral accent block */}
-                <div className="absolute bottom-[-40px] right-[60px] w-[250px] h-[250px] bg-[#FFD8B0]/90 rounded-[70px] -z-10" />
-                <img
+              {/* Right Image with blush background */}
+              <div className="relative flex-1 flex justify-center md:justify-end">
+                {/* 🩰 Pink shape behind the image */}
+                <div className="absolute top-[-40px] right-[-50px] w-[320px] h-[320px] bg-[#FBD7C1] rounded-[90px] -z-10" />
+                {/* Subtle outline circle accent */}
+                <div className="absolute top-[50px] right-[60px] w-[70px] h-[70px] border border-[#FBE6DD] rounded-full -z-10 opacity-70" />
+
+                <Image
                   src="/hero11.jpeg"
-                  alt="Enso workspace"
-                  className="relative rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.15)] w-[320px] md:w-[420px] object-cover"
+                  alt="Enso space"
+                  width={340}
+                  height={340}
+                  className="rounded-md shadow-md object-cover"
                 />
               </div>
             </div>
 
-            {/* --- CONNECTOR LINE + VISION/MISSION --- */}
-            <div className="relative mt-20 md:ml-[84px]">
-              {/* Vertical Line */}
+            {/* --- Vision / Mission connector --- */}
+            <div className="relative mt-24 md:ml-[84px]">
               <div className="absolute left-0 top-0 h-full w-[2px] bg-[#FFD8B0]/70" />
 
               {/* Vision Marker */}
@@ -209,8 +222,12 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-          </div>
         </section>
+
+
+        
+
+        
 
 
 
