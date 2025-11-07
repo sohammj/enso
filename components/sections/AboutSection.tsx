@@ -181,7 +181,7 @@ export function AboutSection() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <a
-                href="#programs"
+                href="programs"
                 className="inline-flex items-center space-x-2 font-manrope text-[var(--royal-blue)] group"
               >
                 <span>Explore Our Approach</span>

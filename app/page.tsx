@@ -57,17 +57,166 @@ export default function Home() {
 
         <div className="relative z-10 flex flex-col justify-center h-full px-8 md:px-16 max-w-3xl text-left">
           <h1 className="font-display text-5xl md:text-6xl leading-tight">
-            Creating space for <br />
-            growth, healing, and <br />
-            community through <br />
+            You don’t need to be <br /> an artist to benefit <br /> from art therapy.
             <span className="text-[#111]">Art-Based Therapy.</span>
           </h1>
           <p className="mt-6 text-lg opacity-80">
-            At Enso Mind Matters, we believe in nurturing emotional well-being
-            through creativity, mindfulness, and connection.
+            ENSO is a space for emotional growth, self-discovery, and inner balance
+              through art therapy and counselling.
           </p>
         </div>
       </section>
+
+
+
+      {/* 🌿 INTRO SECTION */}
+        <section className="relative overflow-hidden py-28">
+          {/* <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center px-6">
+             Left Quote 
+            <div className="space-y-6">
+              <h2 className="font-[Playfair_Display] text-3xl md:text-4xl text-[var(--ink)] leading-snug">
+                You don’t need to be <br /> an artist to benefit <br /> from art therapy.
+              </h2>
+            </div>
+
+            Right Enso Image
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="flex justify-center"
+            >
+              <img
+                src="/enso-circle-blue.jpg" // Replace with your swirl image file
+                alt="enso brush circle"
+                className="rounded-full w-[350px] md:w-[420px] shadow-soft"
+              />
+            </motion.div>
+          </div> */}
+
+          {/* Welcome to Enso Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="relative max-w-3xl mx-auto mt-20 bg-[var(--cream)] text-[var(--ink)] rounded-2xl shadow-soft p-10 text-center"
+          >
+            <h3 className="font-[Playfair_Display] text-2xl mb-2">Welcome to ENSO</h3>
+            <div className="mx-auto w-16 h-[1px] bg-[var(--ink)]/40 mb-4" />
+            <p className="font-[Manrope] text-[var(--ink)]/80 leading-relaxed">
+              ENSO is a space for emotional growth, self-discovery, and inner balance
+              through art therapy and counselling. We believe that every individual
+              holds the power to express, transform, and heal — and art becomes the
+              bridge to that transformation.
+            </p>
+          </motion.div>
+
+          {/* Organic Divider Line */}
+          <div className="relative mt-24">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 800 150"
+              className="w-full opacity-70"
+            >
+              <path
+                d="M0,100 C200,50 400,150 800,80"
+                stroke="var(--sage)"
+                strokeWidth="2"
+                fill="none"
+              />
+            </svg>
+            <span className="absolute left-[5%] top-[40px] text-[var(--sage)] italic text-sm tracking-widest">
+              HEALING IS
+            </span>
+            <span className="absolute right-[5%] top-[90px] text-[var(--sage)] italic text-sm tracking-widest">
+              NON LINEAR
+            </span>
+          </div>
+        </section>
+        
+
+        {/* 🌿 ABOUT + VISION + MISSION SECTION (Final Polished Version) */}
+        <section className="relative overflow-hidden bg-white py-24 md:py-28">
+
+          {/* Cream soft wave background (fills behind About section) */}
+          <div className="absolute top-0 left-0 w-full h-[420px] bg-[#FFF6CF] rounded-b-[120px] -z-10" />
+
+          <div className="max-w-6xl mx-auto px-6 md:px-10 relative z-10">
+            {/* --- ABOUT ENSO --- */}
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Left Text */}
+              <div className="space-y-5 md:pr-10">
+                <h3 className="font-[Playfair_Display] text-3xl md:text-4xl text-[#0E1E2A]">
+                  About ENSO
+                </h3>
+                <p className="font-[Manrope] text-[#0E1E2A]/80 leading-relaxed text-lg md:text-[18px]">
+                  The name <span className="italic">“ENSO”</span> comes from a Japanese Zen symbol — 
+                  a hand-drawn circle representing wholeness, balance, and the beauty of imperfection.
+                </p>
+              </div>
+
+              {/* Right Image with coral shape behind */}
+              <div className="relative flex justify-center md:justify-end">
+                {/* Coral accent block */}
+                <div className="absolute bottom-[-40px] right-[60px] w-[250px] h-[250px] bg-[#FFD8B0]/90 rounded-[70px] -z-10" />
+                <img
+                  src="/hero11.jpeg"
+                  alt="Enso workspace"
+                  className="relative rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.15)] w-[320px] md:w-[420px] object-cover"
+                />
+              </div>
+            </div>
+
+            {/* --- CONNECTOR LINE + VISION/MISSION --- */}
+            <div className="relative mt-20 md:ml-[84px]">
+              {/* Vertical Line */}
+              <div className="absolute left-0 top-0 h-full w-[2px] bg-[#FFD8B0]/70" />
+
+              {/* Vision Marker */}
+              <div className="absolute -left-[23px] top-[4px]">
+                <div className="w-10 h-10 rounded-full bg-white shadow-md grid place-items-center">
+                  <div className="w-7 h-7 rounded-full bg-[#FFD8B0]" />
+                </div>
+              </div>
+
+              {/* Vision Text */}
+              <div className="pl-8 mb-16">
+                <h4 className="font-[Playfair_Display] text-2xl text-[#0E1E2A] mb-2">
+                  Our Vision
+                </h4>
+                <p className="font-[Manrope] text-[#0E1E2A]/80 leading-relaxed text-lg max-w-3xl">
+                  To create a mindful and compassionate space where art and psychology unite
+                  to support emotional well-being, self-awareness, and growth.
+                </p>
+              </div>
+
+              {/* Mission Marker */}
+              <div className="absolute -left-[23px] top-[150px] md:top-[170px]">
+                <div className="w-10 h-10 rounded-full bg-white shadow-md grid place-items-center">
+                  <div className="w-7 h-7 rounded-full bg-[#FFD8B0]" />
+                </div>
+              </div>
+
+              {/* Mission Text */}
+              <div className="pl-8">
+                <h4 className="font-[Playfair_Display] text-2xl text-[#0E1E2A] mb-4">
+                  Our Mission
+                </h4>
+                <ul className="list-disc pl-5 space-y-2 font-[Manrope] text-[#0E1E2A]/80 leading-relaxed text-lg max-w-3xl">
+                  <li>To make emotional healing accessible through creative expression.</li>
+                  <li>To support individuals in processing emotions, trauma, and stress through art.</li>
+                  <li>To promote mindfulness, resilience, and self-compassion.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
 
       {/* ABOUT SECTION */}
       <section className="relative overflow-hidden">
