@@ -314,14 +314,14 @@ export default function Home() {
           />
         </div>
 
-        <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
+        {/* <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
           <motion.img
             src="/dragonfly.svg"
             alt=""
             className="w-[120px] rotate-[30deg]"
             {...float}
           />
-        </div>
+        </div> */}
       </section>
       {/* <PauseReflect /> */}
 
