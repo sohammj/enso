@@ -2,13 +2,25 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Nav } from "../components/layout/Nav";
 import { Footer } from "../components/layout/Footer";
+import { Caveat } from "next/font/google";
 // import SplashCursor from "../components/bits/SplashCursor";
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export const metadata: Metadata = {
   title: "Enso Mind Matters",
   description: "Art-forward mental wellness – therapy, programs, community.",
-  twitter: { card: "summary_large_image", title: "Enso Mind Matters" },
-  openGraph: { title: "Enso Mind Matters", type: "website" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Enso Mind Matters",
+  },
+  openGraph: {
+    title: "Enso Mind Matters",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -18,7 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-background text-foreground antialiased selection:bg-[var(--sky)]/40 selection:text-[var(--ink)]">
+      <body
+        className={`${caveat.className} bg-background text-foreground antialiased selection:bg-[var(--sky)]/40 selection:text-[var(--ink)]`}
+      >
         {/* <SplashCursor /> */}
         <Nav />
         <main className="min-h-dvh pt-20">{children}</main>
@@ -27,9 +41,3 @@ export default function RootLayout({
     </html>
   );
 }
-import { Caveat } from "next/font/google";
-
-export const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400"],
-});
