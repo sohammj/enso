@@ -9,9 +9,13 @@ import { HandwrittenNote } from "../components/sections/HandwrittenNote";
 import { PauseReflect } from "../components/sections/PauseReflect";
 import { GoogleReviews } from "../components/sections/GoogleReviews";
 import { MapEmbed } from "../components/sections/MapEmbed";
-// import { QuizLite } from "../components/sections/QuizLite";
+import { QuizLite } from "../components/sections/QuizLite";
 import { AboutSection } from "../components/sections/AboutSection";
 import Image from "next/image";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import SupportSection from "../components/sections/SupportSection";
+import HandwrittenNotesSection from "../components/sections/HandwrittenNotesSection";
+
 
 
 export default function Home() {
@@ -59,9 +63,10 @@ export default function Home() {
 
         <div className="relative z-10 flex flex-col justify-center h-full px-8 md:px-16 max-w-3xl text-left">
           <h1 className="font-display text-5xl md:text-6xl leading-tight">
-            You don’t need to be <br /> an artist to benefit <br /> from art therapy.
-            <span className="text-[#111]">Art-Based Therapy.</span>
+            A space to Pause, <br /> Reflect, and Heal <br /> through art and <br /> conversation.
+            
           </h1>
+
           <p className="mt-6 text-lg opacity-80">
             ENSO is a space for emotional growth, self-discovery, and inner balance
               through art therapy and counselling.
@@ -97,138 +102,202 @@ export default function Home() {
           </div> */}
 
           {/* Welcome to Enso Card */}
+          {/* 🌿 Welcome to ENSO – Reference Style Card */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="relative max-w-3xl mx-auto mt-20 bg-[var(--cream)] text-[var(--ink)] rounded-2xl shadow-soft p-10 text-center"
+            className="relative max-w-5xl mx-auto mt-24 bg-[var(--cream)] rounded-3xl shadow-soft p-8 md:p-12"
           >
-            <h3 className="font-[Playfair_Display] text-2xl mb-2">Welcome to ENSO</h3>
-            <div className="mx-auto w-16 h-[1px] bg-[var(--ink)]/40 mb-4" />
-            <p className="font-[Manrope] text-[var(--ink)]/80 leading-relaxed">
-              ENSO is a space for emotional growth, self-discovery, and inner balance
-              through art therapy and counselling. We believe that every individual
-              holds the power to express, transform, and heal — and art becomes the
-              bridge to that transformation.
-            </p>
-          </motion.div>
-
-          {/* Organic Divider Line */}
-          <div className="relative mt-24">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 800 150"
-              className="w-full opacity-70"
-            >
-              <path
-                d="M0,100 C200,50 400,150 800,80"
-                stroke="var(--sage)"
-                strokeWidth="2"
-                fill="none"
-              />
-            </svg>
-            <span className="absolute left-[5%] top-[40px] text-[var(--sage)] italic text-sm tracking-widest">
-              HEALING IS
-            </span>
-            <span className="absolute right-[5%] top-[90px] text-[var(--sage)] italic text-sm tracking-widest">
-              NON LINEAR
-            </span>
-          </div>
-        </section>
-
-
-
-        <section className="relative overflow-hidden bg-white py-28">
-           {/* 🌾 Soft beige background swoosh */}
-            <svg
-              className="absolute top-[40px] left-0 w-full h-[400px] -z-20"
-              viewBox="0 0 1440 320"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="#FBF6E9"
-                d="M0,224L120,213.3C240,203,480,181,720,165.3C960,150,1200,160,1320,170.7L1440,181L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"
-              />
-            </svg>
-
-            {/* 🪶 Main content */}
-            <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-16 px-6 md:px-12 mt-12">
-              {/* Left Text */}
-              <div className="flex-1 pt-6">
-                <h2 className="text-4xl font-[Playfair_Display] text-[#0E1E2A] mb-4">
-                  About ENSO
-                </h2>
-                <p className="text-[#0E1E2A]/80 leading-relaxed text-lg max-w-md">
-                  The name “ENSO” comes from a Japanese Zen symbol — a hand-drawn circle
-                  representing wholeness, balance, and the beauty of imperfection.
-                </p>
-              </div>
-
-              {/* Right Image with blush background */}
-              <div className="relative flex-1 flex justify-center md:justify-end">
-                {/* 🩰 Pink shape behind the image */}
-                <div className="absolute top-[-40px] right-[-50px] w-[320px] h-[320px] bg-[#FBD7C1] rounded-[90px] -z-10" />
-                {/* Subtle outline circle accent */}
-                <div className="absolute top-[50px] right-[60px] w-[70px] h-[70px] border border-[#FBE6DD] rounded-full -z-10 opacity-70" />
-
+            <div className="grid md:grid-cols-[1fr_1.4fr] gap-10 items-center">
+              
+              {/* Left Image */}
+              <div className="relative">
                 <Image
                   src="/hero11.jpeg"
-                  alt="Enso space"
-                  width={340}
-                  height={340}
-                  className="rounded-md shadow-md object-cover"
+                  alt="Enso Art Therapy Space"
+                  width={420}
+                  height={420}
+                  className="rounded-2xl object-cover shadow-md"
                 />
               </div>
-            </div>
 
-            {/* --- Vision / Mission connector --- */}
-            <div className="relative mt-24 md:ml-[84px]">
-              <div className="absolute left-0 top-0 h-full w-[2px] bg-[#FFD8B0]/70" />
+              {/* Right Content */}
+              <div className="text-[var(--ink)]">
+                <h3 className="font-[Playfair_Display] text-3xl mb-4">
+                  Welcome to ENSO
+                </h3>
 
-              {/* Vision Marker */}
-              <div className="absolute -left-[23px] top-[4px]">
-                <div className="w-10 h-10 rounded-full bg-white shadow-md grid place-items-center">
-                  <div className="w-7 h-7 rounded-full bg-[#FFD8B0]" />
-                </div>
-              </div>
-
-              {/* Vision Text */}
-              <div className="pl-8 mb-16">
-                <h4 className="font-[Playfair_Display] text-2xl text-[#0E1E2A] mb-2">
-                  Our Vision
-                </h4>
-                <p className="font-[Manrope] text-[#0E1E2A]/80 leading-relaxed text-lg max-w-3xl">
-                  To create a mindful and compassionate space where art and psychology unite
-                  to support emotional well-being, self-awareness, and growth.
+                <p className="font-[Manrope] text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
+                  Enso Art Therapy and Counselling Centre offers a safe and inclusive space for healing, reflection, and inner balance.
                 </p>
-              </div>
 
-              {/* Mission Marker */}
-              <div className="absolute -left-[23px] top-[150px] md:top-[170px]">
-                <div className="w-10 h-10 rounded-full bg-white shadow-md grid place-items-center">
-                  <div className="w-7 h-7 rounded-full bg-[#FFD8B0]" />
-                </div>
-              </div>
+                <ul className="space-y-4 font-[Manrope] text-[var(--ink)]/90">
+                  <li className="flex items-center gap-3">
+                    <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center text-[#B88933]">
+                      🌱
+                    </span>
+                    Personal Growth
+                  </li>
 
-              {/* Mission Text */}
-              <div className="pl-8">
-                <h4 className="font-[Playfair_Display] text-2xl text-[#0E1E2A] mb-4">
-                  Our Mission
-                </h4>
-                <ul className="list-disc pl-5 space-y-2 font-[Manrope] text-[#0E1E2A]/80 leading-relaxed text-lg max-w-3xl">
-                  <li>To make emotional healing accessible through creative expression.</li>
-                  <li>To support individuals in processing emotions, trauma, and stress through art.</li>
-                  <li>To promote mindfulness, resilience, and self-compassion.</li>
+                  <li className="flex items-center gap-3">
+                    <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center text-[#B88933]">
+                      🧠
+                    </span>
+                    Emotional Well-being
+                  </li>
+
+                  <li className="flex items-center gap-3">
+                    <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center text-[#B88933]">
+                      🎨
+                    </span>
+                    Self-expression
+                  </li>
                 </ul>
               </div>
+
             </div>
+          </motion.div>
+
+
+
+          {/* Dandelion Animation - bottom-right */}
+          <div className="absolute bottom-[0px] right-[0px] w-[420px] opacity-70 pointer-events-none z-0">
+            <DotLottieReact
+              src="/enso-dandelion.lottie"
+              loop
+              autoplay
+              style={{
+                transform: "scaleX(-1)",  // Flip so it flows leftwards like your design
+              }}
+            />
+          </div>
+
+
+          {/* 🌿 Section Connector — Healing is Non Linear */}
+          {/* <section className="relative py-32 overflow-hidden">
+        
+            <svg
+              viewBox="0 0 1400 400"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto"
+            >
+              <path
+                d="
+                  M 80 120
+                  C 200 20, 320 260, 480 220
+                  S 760 40, 900 180
+                  S 1150 360, 1320 260
+                "
+                stroke="#B88933"
+                strokeWidth="6"
+                fill="none"
+                strokeLinecap="round"
+              />
+            </svg>
+
+    
+            <span className="absolute left-[6%] top-[80px] text-[#B88933] italic text-sm tracking-widest">
+              HEALING IS
+            </span>
+
+            <span className="absolute right-[6%] bottom-[90px] text-[#B88933] italic text-sm tracking-widest">
+              NON LINEAR
+            </span>
+          </section> */}
+
+
+
+
+
+
         </section>
 
 
-        
 
-        
+        <section className="relative overflow-hidden py-32">
 
+          {/* 🎨 Soft watercolor blob (left) */}
+          {/* <div className="absolute left-0 top-0 h-full w-[45%] bg-[#FBF6E9] rounded-r-[220px] opacity-90" /> */}
+
+          {/* ✨ Curved accent line (top-right) */}
+          {/* <svg
+            className="absolute top-[-120px] right-[-120px] w-[520px] h-[520px]"
+            viewBox="0 0 500 500"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M50 450 C200 200, 300 200, 450 50"
+              stroke="#B88933"
+              strokeWidth="3"
+              fill="none"
+            />
+          </svg>
+
+          
+          <span className="absolute top-[120px] right-[40px] rotate-[60deg] text-[#B88933] text-sm tracking-widest italic">
+            NON LINEAR
+          </span> */}
+
+          {/* 🧠 Main content */}
+          {/* <div className="relative max-w-5xl mx-auto px-6"> */}
+          <div className="relative max-w-5xl mx-auto px-6 mt-8">
+
+
+            {/* <h2 className="font-[Playfair_Display] text-4xl mb-4 text-[#0E1E2A]"> */}
+            {/* <h2 className="font-[Playfair_Display] text-[50px] leading-tight mb-3 text-[#0E1E2A]"> */}
+            <h2 className="font-[Playfair_Display] text-[44px] leading-[1.15] mb-4 text-[#0E1E2A]">
+
+
+              About ENSO
+            </h2>
+
+            {/* <div className="w-24 h-[2px] bg-[#B88933] mb-6" /> */}
+            {/* <div className="w-40 h-[3.5px] bg-[#B88933]/80 mb-8" /> */}
+            <div className="w-28 h-[2px] bg-[#B88933]/70 mb-10" />
+
+
+            <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
+              The Enso, a circle drawn in one continuous breath, holds within it the
+              beauty of being incomplete yet whole.
+            </p>
+
+            <p className="mt-6 max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
+              Inspired by the Enso — a circle drawn in one mindful stroke — we believe
+              healing is not about perfection, but presence.
+            </p>
+
+            {/* <p className="max-w-xl text-lg leading-relaxed text-[#0E1E2A]/80">
+              The Enso, a circle drawn in one continuous breath, holds within it the
+              beauty of being incomplete yet whole.
+              <br /><br />
+              Inspired by the Enso — a circle drawn in one mindful stroke — we believe
+              healing is not about perfection, but presence.
+            </p> */}
+          </div>
+
+          {/* 🌿 Closing statement */}
+          {/* <p className="relative mt-32 text-center max-w-4xl mx-auto px-6 font-[Playfair_Display] italic text-2xl text-[#0E1E2A]/90"> */}
+          <p className="relative mt-28 text-center max-w-4xl mx-auto px-6 font-[Playfair_Display] italic text-[24px] leading-[1.7] text-[#0E1E2A]/85">
+          {/* text-[26px] leading-[1.6] text-[#0E1E2A]/95 */}
+
+
+            Each session at Enso is an invitation to pause, reflect, and let your story
+            unfold naturally, one breath at a time.
+          </p>
+
+        </section>
+
+
+      <PauseReflect />
+
+      {/* Support SECTION */}
+      <SupportSection />
+      {/* <PauseReflect /> */}
+
+      {/* handwritten notes SECTION */}
+      {/* <HandwrittenNotesSection /> */}
 
 
 
@@ -236,11 +305,11 @@ export default function Home() {
 
 
       {/* ABOUT SECTION */}
-      <section className="relative overflow-hidden">
-        <AboutSection />
+      {/* <section className="relative overflow-hidden"> */}
+        {/* <AboutSection /> */}
 
         {/* 🌸 Gentle mid-left + lower-left cluster */}
-        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+        {/* <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
           <motion.img
             src="/dragonfly.svg"
             alt=""
@@ -263,18 +332,18 @@ export default function Home() {
             {...float}
           />
         </div>
-      </section>
+      </section> */}
 
 
       {/* PROGRAMS / SERVICES */}
-      <section className="relative mx-auto max-w-6xl px-4 py-20 overflow-hidden">
-        <PauseReflect />
+      {/* <section className="relative mx-auto max-w-6xl px-4 py-20 overflow-hidden">
+        
         <div className="mt-10">
           <MagicBento />
-        </div>
+        </div> */}
 
         {/* 🪶 Top-right drift cluster */}
-        <div className="absolute top-[20px] right-[-40px] opacity-90 -z-10">
+        {/* <div className="absolute top-[20px] right-[-40px] opacity-90 -z-10">
           <motion.img
             src="/dragonfly.svg"
             alt=""
@@ -299,11 +368,11 @@ export default function Home() {
             {...float}
           />
         </div>
-      </section>
+      </section> */}
 
       {/* HANDWRITTEN NOTE + REVIEWS */}
       <section className="relative overflow-hidden">
-        <HandwrittenNote />
+        {/* <HandwrittenNote /> */}
         <GoogleReviews />
 
         {/* 🌸 Gentle mid-left + lower-left cluster */}
@@ -360,6 +429,7 @@ export default function Home() {
           />
         </div>
       </section>
+       <HandwrittenNotesSection />
     </>
   );
 }

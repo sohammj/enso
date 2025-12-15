@@ -52,12 +52,38 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-[Manrope];
+    @apply text-foreground font-[Manrope];
+    background-color: #faf8f2; /* warm paper base */
+    background-image: url("/white-paper-texture.jpg");
+    background-repeat: repeat;
+    background-size: 700px 700px;
   }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-[Playfair_Display] tracking-tight;
   }
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.45),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(0, 0, 0, 0.04),
+      transparent 70%
+    );
+}
+
 
 /* 🌸 Brush & watercolor accent overlays */
 .brush-deco {
@@ -69,6 +95,32 @@ body {
 }
 
 /* ✨ Soft card shadow for Enso’s floating look */
-.shadow-soft {
+/* .shadow-soft {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+} */
+
+.shadow-soft {
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* globals.css */
+.font-handwritten {
+  font-family: 'Caveat', cursive;
+}
+@keyframes soft-float {
+  0% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+}
+
+.float-soft {
+  animation: soft-float 16s ease-in-out infinite;
 }
