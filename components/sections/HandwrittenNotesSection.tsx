@@ -2,50 +2,56 @@ import Image from "next/image";
 
 export default function HandwrittenNotesSection() {
   return (
-    <section className="relative py-36 overflow-hidden bg-[url('/paper-texture.jpg')] bg-repeat">
-
+    <section className="relative py-44 overflow-hidden bg-[url('/paper-texture.jpg')] bg-repeat">
 
       {/* Floating birds – top left */}
-        <div className="absolute top-[20px] left-[30px] opacity-70 pointer-events-none float-soft">
-        <Image
-            src="/birds.png"   // your transparent birds image
-            alt=""
-            width={260}
-            height={260}
-        />
+      {/* <div className="absolute top-[40px] left-[60px] opacity-70 pointer-events-none float-soft z-10">
+        <Image src="/birds.png" alt="" width={220} height={220} />
+      </div> */}
+
+      {/* Cards wrapper */}
+      <div className="relative max-w-6xl mx-auto h-[420px]">
+
+        {/* LEFT CARD */}
+        <div className="absolute left-0 top-[60px] scale-[1.05] z-10">
+          <Card
+            text={
+              <>
+                Thank you for being here. <br />
+                I know it takes courage <br />
+                to reach out.
+              </>
+            }
+          />
         </div>
 
-            
-      {/* Notes container */}
-      <div className="relative max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-10">
-
-        {/* Left note */}
-        <div className="relative bg-[#EFE6D8] rounded-2xl px-10 py-12 shadow-[0_20px_40px_rgba(0,0,0,0.08)] rotate-[-2deg] max-w-sm text-center">
-          <p className="font-[Caveat] text-[26px] leading-[1.6] text-[#2B2B2B]">
-            Thank you for being here. <br />
-            I know it takes courage <br />
-            to reach out.
-          </p>
+        {/* CENTER CARD */}
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 scale-[1.25] z-20">
+          <Card
+            text={
+              <>
+                Enso is a space that listens <br />
+                — a space to explore your emotions, <br />
+                reconnect with yourself, <br />
+                and grow at your own pace.
+              </>
+            }
+            large
+          />
         </div>
 
-        {/* Center note (main) */}
-        <div className="relative bg-[#F3EBDD] rounded-2xl px-14 py-16 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-10 text-center">
-          <p className="font-[Caveat] text-[28px] md:text-[30px] leading-[1.6] text-[#2B2B2B]">
-            Enso is a space that listens <br />
-            — a space to explore your emotions, <br />
-            reconnect with yourself, <br />
-            and grow at your own pace.
-          </p>
-        </div>
-
-        {/* Right note */}
-        <div className="relative bg-[#EFE6D8] rounded-2xl px-10 py-12 shadow-[0_20px_40px_rgba(0,0,0,0.08)] rotate-[2deg] max-w-sm text-center">
-          <p className="font-[Caveat] text-[26px] leading-[1.6] text-[#2B2B2B]">
-            Sometimes, <br />
-            the smallest step towards <br />
-            yourself <br />
-            changes everything.
-          </p>
+        {/* RIGHT CARD */}
+        <div className="absolute right-0 top-[60px] scale-[1.05] z-10">
+          <Card
+            text={
+              <>
+                Sometimes, <br />
+                the smallest step towards <br />
+                yourself <br />
+                changes everything.
+              </>
+            }
+          />
         </div>
       </div>
 
@@ -60,5 +66,37 @@ export default function HandwrittenNotesSection() {
         />
       </div>
     </section>
+  );
+}
+
+/* ---------- Card component ---------- */
+
+function Card({
+  text,
+  large = false,
+}: {
+  text: React.ReactNode;
+  large?: boolean;
+}) {
+  return (
+    <div className="relative">
+      <Image
+        src="/card_hand.png"
+        alt=""
+        width={large ? 520 : 420}
+        height={large ? 360 : 300}
+        className="drop-shadow-[0_18px_35px_rgba(0,0,0,0.18)]"
+      />
+
+      {/* Text overlay */}
+      <div className="absolute inset-0 flex items-center justify-center px-10 text-center">
+        <p
+          className={`font-handwritten text-[#2B2B2B] leading-[1.6]
+          ${large ? "text-[26px]" : "text-[22px]"}`}
+        >
+          {text}
+        </p>
+      </div>
+    </div>
   );
 }

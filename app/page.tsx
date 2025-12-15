@@ -129,7 +129,8 @@ export default function Home() {
                 </h3>
 
                 <p className="font-[Manrope] text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
-                  Enso Art Therapy and Counselling Centre offers a safe and inclusive space for healing, reflection, and inner balance.
+                  Enso Art Therapy and Counseling Centre offers a safe and inclusive space for emotional well-being, personal growth, and self-expression.
+                  {/* Enso Art Therapy and Counselling Centre offers a safe and inclusive space for healing, reflection, and inner balance. */}
                 </p>
 
                 <ul className="space-y-4 font-[Manrope] text-[var(--ink)]/90">
@@ -259,13 +260,7 @@ export default function Home() {
 
 
             <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
-              The Enso, a circle drawn in one continuous breath, holds within it the
-              beauty of being incomplete yet whole.
-            </p>
-
-            <p className="mt-6 max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
-              Inspired by the Enso — a circle drawn in one mindful stroke — we believe
-              healing is not about perfection, but presence.
+              The Enso, a circle drawn in one continuous breath, holds within it the beauty of being incomplete yet whole. Inspired by the Enso — a circle drawn in one mindful stroke — we believe healing is not about perfection, but presence.
             </p>
 
             {/* <p className="max-w-xl text-lg leading-relaxed text-[#0E1E2A]/80">
@@ -290,10 +285,44 @@ export default function Home() {
         </section>
 
 
-      <PauseReflect />
+      
 
       {/* Support SECTION */}
       <SupportSection />
+
+
+      <PauseReflect />
+
+
+       <section className="relative overflow-hidden">
+        <HandwrittenNotesSection />
+        
+
+        {/* 🌸 Gentle mid-left + lower-left cluster */}
+        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[150px] rotate-[-15deg]"
+            {...float}
+          />
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
+            {...float}
+          />
+        </div>
+
+        <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[120px] rotate-[30deg]"
+            {...float}
+          />
+        </div>
+      </section>
       {/* <PauseReflect /> */}
 
       {/* handwritten notes SECTION */}
@@ -429,7 +458,7 @@ export default function Home() {
           />
         </div>
       </section>
-       <HandwrittenNotesSection />
+     
     </>
   );
 }

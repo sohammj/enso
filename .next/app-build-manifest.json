@@ -17,16 +17,16 @@
       "static/css/app/programs/page.css",
       "static/chunks/app/programs/page.js"
     ],
-    "/programs/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/[slug]/page.js"
-    ],
     "/services/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/services/page.css",
       "static/chunks/app/services/page.js"
+    ],
+    "/gallery/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/gallery/page.js"
     ],
     "/book/page": [
       "static/chunks/webpack.js",
@@ -42,11 +42,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/about/page.js"
-    ],
-    "/gallery/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/gallery/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
