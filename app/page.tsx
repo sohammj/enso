@@ -59,12 +59,14 @@ export default function Home() {
           {muted ? "🔇" : "🔊"}
         </button>
 
-        <div className="relative z-10 flex flex-col justify-center h-full px-8 md:px-16 max-w-3xl">
-          <h1 className="font-display text-5xl md:text-6xl leading-tight">
+        <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16 max-w-3xl">
+          <h1 className="font-display text-[32px] leading-snug md:text-6xl md:leading-tight">
+
             A space to Pause, <br /> Reflect, and Heal <br /> through art and <br /> conversation.
           </h1>
 
-          <p className="mt-6 text-lg opacity-80">
+          <p className="mt-4 md:mt-6 text-base md:text-lg opacity-80">
+
             ENSO is a space for emotional growth, self-discovery, and inner balance
             through art therapy and counselling.
           </p>
@@ -75,7 +77,7 @@ export default function Home() {
       <section className="relative overflow-visible">
 
         {/* 🌸 Gentle mid-left + lower-left cluster */}
-        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
           <motion.img
             src="/dragonfly.svg"
             alt=""
@@ -101,7 +103,7 @@ export default function Home() {
         
 
         {/* 🌕 GLOBAL WATERCOLOUR BLOB */}
-        <div className="absolute left-[-280px] top-[-420px] bottom-[-300px] w-[800px] pointer-events-none z-0">
+        <div className="hidden md:block absolute left-[-280px] top-[-420px] bottom-[-300px] w-[800px] pointer-events-none z-0">
           <Image
             src="/blob.png"
             alt=""
@@ -112,12 +114,12 @@ export default function Home() {
         </div>
 
         {/* 🌿 WELCOME CARD */}
-        <section className="relative overflow-visible py-28 z-10">
+        <section className="relative overflow-visible py-16 md:py-28 z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="relative max-w-5xl mx-auto mt-24 bg-[var(--cream)] rounded-3xl shadow-soft p-8 md:p-12"
+            className="relative max-w-5xl mx-auto mt-12 md:mt-24 bg-[var(--cream)] rounded-3xl shadow-soft p-6 md:p-12"
           >
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-10 items-center">
               <Image
@@ -125,7 +127,7 @@ export default function Home() {
                 alt="Enso Art Therapy Space"
                 width={420}
                 height={420}
-                className="rounded-2xl object-cover shadow-md"
+                className="w-full max-w-[320px] mx-auto md:max-w-none rounded-2xl object-cover shadow-md"
               />
 
               <div>
@@ -203,7 +205,7 @@ export default function Home() {
         <section className="relative py-32 z-10">
           <div className="max-w-5xl mx-auto px-6">
             {/* 🌸 Gentle mid-left + lower-left cluster */}
-            <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+            <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
               <motion.img
                 src="/dragonfly.svg"
                 alt=""
@@ -217,7 +219,9 @@ export default function Home() {
                 {...float}
               />
             </div>
-            <h2 className="font-[Playfair_Display] text-[44px] mb-4 text-[#0E1E2A]">
+            {/* <h2 className="font-[Playfair_Display] text-[44px] mb-4 text-[#0E1E2A]"> */}
+            <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A]">
+
               About ENSO
             </h2>
 
@@ -229,7 +233,7 @@ export default function Home() {
             </p>
           </div>
 
-          <p className="mt-32 text-center max-w-4xl mx-auto px-6 font-[Playfair_Display] italic text-[24px] text-[#0E1E2A]/85">
+          <p className="mt-16 md:mt-32 text-center max-w-4xl mx-auto px-6 font-[Playfair_Display] italic text-[18px] md:text-[24px] text-[#0E1E2A]/85">
             Each session at Enso is an invitation to pause, reflect, and let your story
             unfold naturally, one breath at a time.
           </p>
@@ -252,7 +256,7 @@ export default function Home() {
       
         <HandwrittenNotesSection />
         {/* 🌸 Gentle mid-left + lower-left cluster */}
-        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
           <motion.img
             src="/dragonfly.svg"
             alt=""
@@ -273,7 +277,7 @@ export default function Home() {
        
         <GoogleReviews />
         {/* 🌸 Gentle mid-left + lower-left cluster */}
-        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
           <motion.img
             src="/dragonfly.svg"
             alt=""
