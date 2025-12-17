@@ -11,6 +11,7 @@ import { GoogleReviews } from "../components/sections/GoogleReviews";
 import { MapEmbed } from "../components/sections/MapEmbed";
 import SupportSection from "../components/sections/SupportSection";
 import HandwrittenNotesSection from "../components/sections/HandwrittenNotesSection";
+import StartConversationSection from "../components/sections/StartConversationSection";
 
 
 
@@ -229,7 +230,7 @@ export default function Home() {
 
             <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
               The Enso, a circle drawn in one continuous breath, holds within it the beauty
-              of being incomplete yet whole.
+              of being incomplete yet whole. Inspired by the Enso — a circle drawn in one mindful stroke — we believe healing is not about perfection, but presence.
             </p>
           </div>
 
@@ -300,6 +301,7 @@ export default function Home() {
             {...float}
           />
         </div>
+        <StartConversationSection />
         <MapEmbed />
         {/* 🌬️ Calm finale bottom-right group */}
         <div className="absolute bottom-[100px] right-[60px] opacity-90 -z-10">

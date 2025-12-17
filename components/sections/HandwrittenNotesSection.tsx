@@ -35,7 +35,7 @@ export default function HandwrittenNotesSection() {
               Sometimes, <br />
               the smallest step towards <br />
               yourself <br />
-              changes everything.
+              changes everything. — Parul
             </>
           }
         />
@@ -80,7 +80,7 @@ export default function HandwrittenNotesSection() {
                 Sometimes, <br />
                 the smallest step towards <br />
                 yourself <br />
-                changes everything.
+                changes everything. — Parul
               </>
             }
           />
