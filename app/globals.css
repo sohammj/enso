@@ -135,6 +135,18 @@ body::before {
   );
 }
 
+/* * {
+  outline: 1px solid rgba(255, 0, 0, 0.1);
+} */
+
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
 
 
 
