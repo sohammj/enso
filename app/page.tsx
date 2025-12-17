@@ -245,6 +245,7 @@ export default function Home() {
         {/* 🌿 SUPPORT */}
         <SupportSection />
       </section>
+      <PauseReflect />
 
       {/* 🐉 ABOVE HANDWRITTEN NOTES */}
       <section className="relative">
@@ -319,7 +320,7 @@ export default function Home() {
         </div>
       </section>
 
-      <PauseReflect />
+      {/* <PauseReflect /> */}
     </>
   );
 }
