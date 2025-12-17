@@ -124,3 +124,13 @@ body::before {
 .float-soft {
   animation: soft-float 16s ease-in-out infinite;
 }
+
+.blob-fade {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
