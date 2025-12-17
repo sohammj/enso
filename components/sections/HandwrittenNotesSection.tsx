@@ -1,19 +1,13 @@
 import Image from "next/image";
+import React from "react";
 
 export default function HandwrittenNotesSection() {
   return (
     <section className="relative py-44 overflow-hidden bg-[url('/paper-texture.jpg')] bg-repeat">
-
-      {/* Floating birds – top left */}
-      {/* <div className="absolute top-[40px] left-[60px] opacity-70 pointer-events-none float-soft z-10">
-        <Image src="/birds.png" alt="" width={220} height={220} />
-      </div> */}
-
-      {/* Cards wrapper */}
-      <div className="relative max-w-6xl mx-auto h-[420px]">
+      <div className="relative max-w-6xl mx-auto h-[420px] isolate">
 
         {/* LEFT CARD */}
-        <div className="absolute left-0 top-[60px] scale-[1.05] z-10">
+        <div className="absolute left-0 top-[70px] -translate-x-[45px] scale-[1.0] z-10">
           <Card
             text={
               <>
@@ -26,22 +20,22 @@ export default function HandwrittenNotesSection() {
         </div>
 
         {/* CENTER CARD */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 scale-[1.25] z-20">
+        <div className="absolute left-1/2 top-[10px] -translate-x-1/2 scale-[1.12] z-20">
           <Card
+            large
             text={
               <>
                 Enso is a space that listens <br />
-                — a space to explore your emotions, <br />
+                   a space to explore your emotions, <br />
                 reconnect with yourself, <br />
                 and grow at your own pace.
               </>
             }
-            large
           />
         </div>
 
         {/* RIGHT CARD */}
-        <div className="absolute right-0 top-[60px] scale-[1.05] z-10">
+        <div className="absolute right-0 top-[70px] translate-x-[50px] scale-[1.0] z-10">
           <Card
             text={
               <>
@@ -69,8 +63,7 @@ export default function HandwrittenNotesSection() {
   );
 }
 
-/* ---------- Card component ---------- */
-
+/* ---------------- CARD ---------------- */
 function Card({
   text,
   large = false,
@@ -79,20 +72,42 @@ function Card({
   large?: boolean;
 }) {
   return (
-    <div className="relative">
+    <div
+      className="
+        relative
+        transition-all duration-300 ease-out
+        hover:-translate-y-[6px]
+        hover:scale-[1.03]
+        hover:z-[10]
+      "
+    >
+      {/* Card image */}
       <Image
         src="/card_hand.png"
         alt=""
-        width={large ? 520 : 420}
-        height={large ? 360 : 300}
-        className="drop-shadow-[0_18px_35px_rgba(0,0,0,0.18)]"
+        width={large ? 500 : 420}
+        height={large ? 340 : 300}
+        className="
+          drop-shadow-[0_14px_30px_rgba(0,0,0,0.18)]
+          transition-shadow duration-300
+          hover:drop-shadow-[0_24px_48px_rgba(0,0,0,0.26)]
+        "
       />
 
-      {/* Text overlay */}
-      <div className="absolute inset-0 flex items-center justify-center px-10 text-center">
+      {/* Text */}
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
         <p
-          className={`font-handwritten text-[#2B2B2B] leading-[1.6]
-          ${large ? "text-[26px]" : "text-[22px]"}`}
+          className={`
+            font-handwritten
+            text-[#2B2B2B]
+            leading-[1.5]
+            tracking-[0.01em]
+            ${large ? "text-[24px]" : "text-[21px]"}
+          `}
+          style={{
+            mixBlendMode: "multiply",
+            textShadow: "0 0.5px 0.5px rgba(0,0,0,0.1)",
+          }}
         >
           {text}
         </p>

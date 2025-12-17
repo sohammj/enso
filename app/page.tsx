@@ -12,6 +12,10 @@ import { MapEmbed } from "../components/sections/MapEmbed";
 import SupportSection from "../components/sections/SupportSection";
 import HandwrittenNotesSection from "../components/sections/HandwrittenNotesSection";
 
+
+
+/* ================= PAGE ================= */
+
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
@@ -70,6 +74,32 @@ export default function Home() {
       {/* 🌕 WELCOME + ABOUT + SUPPORT WRAPPER */}
       <section className="relative overflow-visible">
 
+        {/* 🌸 Gentle mid-left + lower-left cluster */}
+        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[150px] rotate-[-15deg]"
+            {...float}
+          />
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
+            {...float}
+          />
+        </div>
+
+        {/* <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[120px] rotate-[30deg]"
+            {...float}
+          /> */}
+        {/* </div> */}
+        
+
         {/* 🌕 GLOBAL WATERCOLOUR BLOB */}
         <div className="absolute left-[-280px] top-[-420px] bottom-[-300px] w-[800px] pointer-events-none z-0">
           <Image
@@ -82,7 +112,7 @@ export default function Home() {
         </div>
 
         {/* 🌿 WELCOME CARD */}
-        <section className="relative overflow-hidden py-28 z-10">
+        <section className="relative overflow-visible py-28 z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -132,11 +162,61 @@ export default function Home() {
               style={{ transform: "scaleX(-1)" }}
             />
           </div>
+          {/* 🎨 CURVE — STARTS FROM WELCOME */}
+          {/* 🎨 CURVE — STARTS FROM WELCOME */}
+          {/* 🎨 CURVE — LEFT-ANCHORED FROM CARD */}
+          {/* <div
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              -translate-x-[640px]
+              bottom-[-220px]
+              z-0
+            "
+          >
+            <Image
+              src="/enso-curve.webp"
+              alt=""
+              width={2000}
+              height={650}
+              priority
+              className="
+                select-none
+                scale-[1.9]
+                origin-left
+              "
+            />
+
+          </div>
+ */}
+
+
         </section>
 
+       
+
+
+        
+
         {/* 🌿 ABOUT ENSO */}
-        <section className="relative py-24 z-10">
+        <section className="relative py-32 z-10">
           <div className="max-w-5xl mx-auto px-6">
+            {/* 🌸 Gentle mid-left + lower-left cluster */}
+            <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+              <motion.img
+                src="/dragonfly.svg"
+                alt=""
+                className="w-[150px] rotate-[-15deg]"
+                {...float}
+              />
+              <motion.img
+                src="/dragonfly.svg"
+                alt=""
+                className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
+                {...float}
+              />
+            </div>
             <h2 className="font-[Playfair_Display] text-[44px] mb-4 text-[#0E1E2A]">
               About ENSO
             </h2>
@@ -145,8 +225,7 @@ export default function Home() {
 
             <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
               The Enso, a circle drawn in one continuous breath, holds within it the beauty
-              of being incomplete yet whole. Inspired by the Enso — a circle drawn in one
-              mindful stroke — we believe healing is not about perfection, but presence.
+              of being incomplete yet whole.
             </p>
           </div>
 
@@ -155,35 +234,92 @@ export default function Home() {
             unfold naturally, one breath at a time.
           </p>
         </section>
-        {/* 🌕 RIGHT CIRCULAR GLOW — BETWEEN ABOUT & SUPPORT */}
+
+        {/* 🌕 GLOW */}
         <div className="relative h-[200px] overflow-visible pointer-events-none">
           <div
-            className="
-            absolute
-            right-[-220px]
-            top-1/2
-            -translate-y-1/2
-            w-[380px]
-            h-[380px]
-            rounded-full
-            bg-yellow-400
-            opacity-95
-            blur-[120px]
-            "
+            className="absolute right-[-220px] top-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full bg-yellow-400 opacity-95 blur-[120px]"
           />
         </div>
 
-
-
-        {/* 🌿 HOW WE SUPPORT YOU */}
+        {/* 🌿 SUPPORT */}
         <SupportSection />
       </section>
 
-      {/* REMAINING SECTIONS */}
+      {/* 🐉 ABOVE HANDWRITTEN NOTES */}
+      <section className="relative">
+      
+        <HandwrittenNotesSection />
+        {/* 🌸 Gentle mid-left + lower-left cluster */}
+        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[150px] rotate-[-15deg]"
+            {...float}
+          />
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
+            {...float}
+          />
+        </div>
+      </section>
+
+      {/* 🐉 MAP WHITESPACE */}
+      <section className="relative">
+       
+        <GoogleReviews />
+        {/* 🌸 Gentle mid-left + lower-left cluster */}
+        <div className="absolute left-[40px] top-[120px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[150px] rotate-[-15deg]"
+            {...float}
+          />
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
+            {...float}
+          />
+        </div>
+
+        <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[120px] rotate-[30deg]"
+            {...float}
+          />
+        </div>
+        <MapEmbed />
+        {/* 🌬️ Calm finale bottom-right group */}
+        <div className="absolute bottom-[100px] right-[60px] opacity-90 -z-10">
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[160px] rotate-[10deg]"
+            {...float}
+          />
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[110px] absolute -top-[60px] left-[-50px] rotate-[28deg]"
+            {...float}
+          />
+          <motion.img
+            src="/dragonfly.svg"
+            alt=""
+            className="w-[90px] absolute top-[100px] left-[70px] rotate-[8deg]"
+            {...float}
+          />
+        </div>
+      </section>
+
       <PauseReflect />
-      <HandwrittenNotesSection />
-      <GoogleReviews />
-      <MapEmbed />
     </>
   );
 }
