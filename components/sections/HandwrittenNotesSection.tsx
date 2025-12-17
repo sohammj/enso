@@ -3,8 +3,46 @@ import React from "react";
 
 export default function HandwrittenNotesSection() {
   return (
-    <section className="relative py-44 overflow-hidden bg-[url('/paper-texture.jpg')] bg-repeat">
-      <div className="relative max-w-6xl mx-auto h-[420px] isolate">
+    <section className="relative py-28 md:py-44 overflow-hidden bg-[url('/paper-texture.jpg')] bg-repeat">
+      
+      {/* ===== MOBILE LAYOUT ===== */}
+      <div className="flex flex-col items-center gap-10 md:hidden">
+        <Card
+          text={
+            <>
+              Thank you for being here. <br />
+              I know it takes courage <br />
+              to reach out.
+            </>
+          }
+        />
+
+        <Card
+          large
+          text={
+            <>
+              Enso is a space that listens <br />
+              a space to explore your emotions, <br />
+              reconnect with yourself, <br />
+              and grow at your own pace.
+            </>
+          }
+        />
+
+        <Card
+          text={
+            <>
+              Sometimes, <br />
+              the smallest step towards <br />
+              yourself <br />
+              changes everything.
+            </>
+          }
+        />
+      </div>
+
+      {/* ===== DESKTOP LAYOUT (UNCHANGED) ===== */}
+      <div className="relative max-w-6xl mx-auto h-[420px] isolate hidden md:block">
 
         {/* LEFT CARD */}
         <div className="absolute left-0 top-[70px] -translate-x-[45px] scale-[1.0] z-10">
@@ -26,7 +64,7 @@ export default function HandwrittenNotesSection() {
             text={
               <>
                 Enso is a space that listens <br />
-                   a space to explore your emotions, <br />
+                a space to explore your emotions, <br />
                 reconnect with yourself, <br />
                 and grow at your own pace.
               </>
@@ -102,7 +140,7 @@ function Card({
             text-[#2B2B2B]
             leading-[1.5]
             tracking-[0.01em]
-            ${large ? "text-[24px]" : "text-[21px]"}
+            ${large ? "text-[22px] md:text-[24px]" : "text-[20px] md:text-[21px]"}
           `}
           style={{
             mixBlendMode: "multiply",
