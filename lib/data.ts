@@ -48,7 +48,7 @@ export const programs = [
       href: "/book",
       tagline: "Want to join the next session?",
     },
-    icon: "/icons/chat-bubble.svg",
+    icon: "/icons/fika.svg",
 
   },
   {
@@ -66,7 +66,7 @@ export const programs = [
       href: "/book",
       tagline: "Want to experience the next Cope session?",
     },
-    icon: "/icons/pencil.svg",
+    icon: "/icons/cope.png",
   },
   {
     slug: "aakar",
@@ -83,7 +83,7 @@ export const programs = [
       href: "/book",
       tagline: "Ready to begin your growth journey?",
     },
-    icon: "/icons/brush.svg",
+    icon: "/icons/akar.svg",
   },
 ];
 
@@ -93,7 +93,7 @@ export const services = [
     title: "Individual Sessions",
     label: "Service",
     subtitle: "Private, compassionate one-on-one space",
-    icon: "/icons/individual.svg", // or any local/public image
+    icon: "/icons/individual1.png", // or any local/public image
     description: [
       "In individual sessions, we create a private, compassionate space to talk about what you're carrying — anxiety, burnout, grief, self-worth, identity, and more.",
       "We use verbal processing along with art-based techniques to help you express things that are hard to put into words."

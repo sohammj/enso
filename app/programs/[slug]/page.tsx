@@ -1,8 +1,20 @@
 "use client";
+
 import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import { programs } from "../../../lib/data";
 import { motion } from "framer-motion";
+const float = {
+  animate: {
+    y: [0, -12, 0],
+    rotate: [0, 2, -2, 0],
+    transition: {
+      repeat: Infinity,
+      duration: 8,
+      ease: "easeInOut",
+    },
+  },
+};
 
 export default function ProgramPage() {
   const { slug } = useParams();
@@ -11,71 +23,150 @@ export default function ProgramPage() {
   if (!program) return notFound();
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 24 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.9, ease: "easeOut" },
+    },
   };
 
   return (
-    <main className="bg-white text-[#111]">
-      <section className="mx-auto max-w-4xl px-4 py-20">
-        {/* HEADER */}
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          className="text-center mb-10"
-        >
+    <main className="relative bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] overflow-hidden">
+      
+      {/* 🌸 Soft Watercolour Blob */}
+      <div className="hidden md:block absolute left-[-260px] top-[-220px] w-[700px] -z-10">
+        <Image
+          src="/blob.png"
+          alt=""
+          width={700}
+          height={700}
+          className="opacity-90"
+        />
+      </div>
+
+      {/* 🐉 RIGHT SIDE DRAGONFLIES */}
+      <div className="hidden md:block absolute right-[40px] top-[220px] opacity-90 -z-10">
+        <motion.img
+          src="/dragonfly.svg"
+          alt=""
+          className="w-[140px] rotate-[12deg]"
+          {...float}
+        />
+
+        <motion.img
+          src="/dragonfly.svg"
+          alt=""
+          className="w-[100px] absolute top-[120px] right-[60px] rotate-[-8deg]"
+          {...float}
+        />
+
+        <motion.img
+          src="/dragonfly.svg"
+          alt=""
+          className="w-[80px] absolute top-[260px] right-[10px] rotate-[20deg]"
+          {...float}
+        />
+      </div>
+
+
+      {/* HEADER */}
+      <section className="max-w-4xl mx-auto px-6 pt-32 pb-20 text-center">
+        <motion.div initial="hidden" animate="show" variants={fadeUp}>
           {program.icon && (
             <Image
               src={program.icon}
-              alt={`${program.title} icon`}
-              width={64}
-              height={64}
-              className="mx-auto mb-4 opacity-80"
+              alt=""
+              width={72}
+              height={72}
+              className="mx-auto mb-6 opacity-90"
             />
           )}
-          <p className="uppercase tracking-wide text-sm opacity-70">
-            {program.label}
-          </p>
-          <h1 className="font-display text-4xl">{program.title}</h1>
-          <p className="text-lg opacity-70 mt-2">{program.subtitle}</p>
-        </motion.div>
 
-        {/* DESCRIPTION */}
+          <p className="uppercase tracking-widest text-xs opacity-60 mb-2">
+            {program.label || "Program"}
+          </p>
+
+          <h1 className="font-[Playfair_Display] text-[40px] md:text-[52px] leading-tight">
+            {program.title}
+          </h1>
+
+          {program.subtitle && (
+            <p className="mt-3 text-lg opacity-75">
+              {program.subtitle}
+            </p>
+          )}
+
+          <div className="w-24 h-[2px] bg-[#B88933]/70 mx-auto mt-8" />
+        </motion.div>
+      </section>
+
+      {/* CONTENT */}
+      <section className="max-w-3xl mx-auto px-6 pb-28">
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="space-y-6 leading-relaxed text-lg opacity-90"
+          className="space-y-8 text-[18px] leading-[1.9] opacity-85"
         >
           {program.description.map((para, i) => (
             <p key={i}>{para}</p>
           ))}
         </motion.div>
+      </section>
 
-        {/* CTA CARD */}
-        {program.cta && (
+      {/* 🌿 PAUSE QUOTE (Homepage-style rhythm) */}
+      <section className="max-w-4xl mx-auto px-6 pb-24">
+        <p className="text-center font-[Playfair_Display] italic text-[20px] md:text-[24px] opacity-80">
+          There is no right way to heal — only your way.
+        </p>
+      </section>
+
+      {/* CTA */}
+      {program.cta && (
+        <section className="pb-32 px-6">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mt-12 bg-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4"
+            className="
+              max-w-4xl mx-auto
+              bg-[var(--cream)]
+              rounded-3xl
+              shadow-soft
+              p-8 md:p-12
+              flex flex-col md:flex-row
+              items-center justify-between gap-6
+            "
           >
             <div>
-              <p className="text-base font-medium">{program.cta.tagline}</p>
-              <p className="text-sm opacity-70">{program.subtitle}</p>
+              <p className="font-medium text-lg">
+                {program.cta.tagline}
+              </p>
+              <p className="text-sm opacity-70 mt-1">
+                {program.subtitle}
+              </p>
             </div>
+
             <a
               href={program.cta.href}
-              className="bg-[#2643A0] text-white rounded-full px-5 py-3 hover:opacity-90 transition"
+              className="
+                px-7 py-3
+                rounded-full
+                bg-[#2643A0]
+                text-white
+                text-sm
+                hover:opacity-90
+                transition
+              "
             >
               {program.cta.text}
             </a>
           </motion.div>
-        )}
-      </section>
+        </section>
+      )}
     </main>
   );
 }

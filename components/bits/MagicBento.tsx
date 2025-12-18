@@ -44,7 +44,7 @@ export const defaultCardData = [
     label: "Service",
     href: "/services/individual-sessions",
     glowColor: "38, 67, 160",
-    icon: "/icons/individual.svg",
+    icon: "/icons/individual1.png",
   },
   {
     color: "#FFFFFF",
