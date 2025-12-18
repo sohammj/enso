@@ -17,6 +17,23 @@ export const metadata: Metadata = {
   },
 };
 
+// export default function RootLayout({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return (
+//     <html lang="en" className="scroll-smooth">
+//       <body className="bg-background text-foreground antialiased selection:bg-[var(--sky)]/40 selection:text-[var(--ink)]">
+//         {/* <SplashCursor /> */}
+//         <Nav />
+//         <main className="min-h-dvh pt-20">{children}</main>
+//         <Footer />
+//       </body>
+//     </html>
+//   );
+// }
+
 export default function RootLayout({
   children,
 }: {
@@ -25,11 +42,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="bg-background text-foreground antialiased selection:bg-[var(--sky)]/40 selection:text-[var(--ink)]">
-        {/* <SplashCursor /> */}
-        <Nav />
-        <main className="min-h-dvh pt-20">{children}</main>
-        <Footer />
+        {/* GLOBAL WRAPPER — THIS FIXES HORIZONTAL SCROLL */}
+        <div className="relative overflow-x-hidden">
+          <Nav />
+          <main className="min-h-dvh pt-20">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
 }
+
