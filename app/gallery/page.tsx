@@ -1,53 +1,76 @@
 "use client";
 
-import CircularGallery from "@/components/bits/CircularGallery";
-import MasonryGallery from "@/components/bits/MasonryGallery";
+import Image from "next/image";
 
-const circularImages = [
-  { image: "/gallery/Art therapy with cancer survivors.jpeg", text: "Art Therapy with Cancer Survivors" },
-  { image: "/gallery/Drum session with kids.jpeg", text: "Drum Session with Kids" },
-  { image: "/gallery/Group Session on goal setting.jpeg", text: "Group Session on Goal Setting" },
-  { image: "/gallery/Movement session with college students.jpeg", text: "Movement Session" },
-  { image: "/gallery/Shivaji Park Art Festival 2022.jpeg", text: "Shivaji Park Art Festival 2022" },
-  { image: "/gallery/Visual art session for kids.jpeg", text: "Visual Art Session for Kids" },
+/* ================= DATA ================= */
+
+const images = [
+  {
+    src: "/gallery/Art therapy with cancer survivors.jpeg",
+    title: "Art Therapy with Cancer Survivors",
+  },
+  {
+    src: "/gallery/Drum session with kids.jpeg",
+    title: "Drum Session with Kids",
+  },
+  {
+    src: "/gallery/Group Session on goal setting.jpeg",
+    title: "Group Session on Goal Setting",
+  },
+  {
+    src: "/gallery/Movement session with college students.jpeg",
+    title: "Movement Session with College Students",
+  },
+  {
+    src: "/gallery/Shivaji Park Art Festival 2022.jpeg",
+    title: "Shivaji Park Art Festival 2022",
+  },
+  {
+    src: "/gallery/Visual art session for kids.jpeg",
+    title: "Visual Art Session for Kids",
+  },
 ];
 
-const masonryImages = [
-  "/gallery/Art therapy with cancer survivors.jpeg",
-  "/gallery/Drum session with kids.jpeg",
-  "/gallery/Group Session on goal setting.jpeg",
-  "/gallery/Movement session with college students.jpeg",
-  "/gallery/Shivaji Park Art Festival 2022.jpeg",
-  "/gallery/Visual art session for kids.jpeg",
-];
+/* ================= PAGE ================= */
 
 export default function GalleryPage() {
   return (
-    <section className="relative w-screen  py-20 overflow-visible">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <h1 className="font-display text-4xl text-[#506EA1] mb-3">Gallery</h1>
-        <p className="opacity-80 text-[#3A3A3A]/80">
+    <section className="relative py-24 bg-[url('/paper-texture.jpg')] bg-repeat">
+      {/* ===== Header ===== */}
+      <div className="max-w-6xl mx-auto px-6 text-center mb-20">
+        <h1 className="font-display text-4xl text-[#506EA1] mb-4">
+          Gallery
+        </h1>
+        <p className="text-[#3A3A3A]/80 max-w-xl mx-auto">
           Glimpses from circles, workshops, campus sessions, and quiet reflections.
         </p>
       </div>
 
-      {/* Circular (top) */}
-      <div className="relative w-full h-[65vh] overflow-visible mt-16">
-        <CircularGallery
-          items={circularImages}
-          bend={1.0}
-          textColor="#506EA1"
-          borderRadius={0.06}
-          scrollEase={0.03}
-        />
-      </div>
+      {/* ===== IMAGE GRID ===== */}
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {images.map((img) => (
+            <div
+              key={img.src}
+              className="relative overflow-hidden rounded-2xl bg-white shadow-soft"
+            >
+              <Image
+                src={img.src}
+                alt={img.title}
+                width={600}
+                height={420}
+                className="w-full h-full object-cover"
+              />
 
-      {/* Masonry (bottom) */}
-      <div className="mt-24">
-        <h2 className="text-center text-2xl font-medium text-[#506EA1] mb-8">
-          All Photos
-        </h2>
-        <MasonryGallery images={masonryImages} />
+              {/* Soft caption */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-4 py-3">
+                <p className="text-sm text-white">
+                  {img.title}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
