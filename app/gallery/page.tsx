@@ -48,9 +48,9 @@ export default function GalleryPage() {
 
       {/* ===== IMAGE GRID ===== */}
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center text-2xl font-medium text-[#506EA1] mb-12">
+        {/* <h2 className="text-center text-2xl font-medium text-[#506EA1] mb-12">
           All Photos
-        </h2>
+        </h2> */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {images.map((img) => (
