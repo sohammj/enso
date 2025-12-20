@@ -2,6 +2,8 @@
 
 import { faqs } from "../../lib/data";
 import { motion } from "framer-motion";
+import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+
 const float = {
   animate: {
     y: [0, -10, 0],
@@ -130,6 +132,8 @@ export default function FAQPage() {
           </a>
         </div>
       </section>
+      <StickyGetInTouch />
+
     </main>
   );
 }

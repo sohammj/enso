@@ -42,7 +42,7 @@ export default function SupportSection() {
   const router = useRouter();
 
   return (
-    <section className="py-40 bg-[url('/paper-texture.jpg')] bg-repeat">
+    <section className="pt-8 pb-20 bg-[url('/paper-texture.jpg')] bg-repeat">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-24 px-6">
         <h2 className="font-[Playfair_Display] text-[56px] leading-tight text-[#0E1E2A]">

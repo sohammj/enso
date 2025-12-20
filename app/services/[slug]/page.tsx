@@ -4,6 +4,7 @@ import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { services } from "../../../lib/data";
+import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 
 const float = {
   animate: {
@@ -161,6 +162,8 @@ export default function ServicePage() {
           </motion.div>
         </section>
       )}
+      <StickyGetInTouch />
+
     </main>
   );
 }

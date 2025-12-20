@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { services } from "../../lib/data";
+import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+
 
 export default function ServicesPage() {
   const router = useRouter();
@@ -123,6 +125,8 @@ export default function ServicesPage() {
 
         </div>
       </section>
+      <StickyGetInTouch />
+
     </main>
   );
 }

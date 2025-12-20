@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+
 
 /* ================= DATA ================= */
 
@@ -111,6 +113,8 @@ export default function GalleryPage() {
           ))}
         </div>
       </div>
+      <StickyGetInTouch />
+
     </section>
   );
 }

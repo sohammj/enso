@@ -12,6 +12,8 @@ import { MapEmbed } from "../components/sections/MapEmbed";
 import SupportSection from "../components/sections/SupportSection";
 import HandwrittenNotesSection from "../components/sections/HandwrittenNotesSection";
 import StartConversationSection from "../components/sections/StartConversationSection";
+import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+
 
 
 
@@ -203,7 +205,7 @@ export default function Home() {
         
 
         {/* 🌿 ABOUT ENSO */}
-        <section className="relative py-32 z-10">
+        <section className="relative pt-20 pb-8 z-10">
           <div className="max-w-5xl mx-auto px-6">
             {/* 🌸 Gentle mid-left + lower-left cluster */}
             <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
@@ -246,11 +248,17 @@ export default function Home() {
             className="absolute right-[-220px] top-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full bg-yellow-400 opacity-95 blur-[120px]"
           />
         </div>
+        {/* <PauseReflect /> */}
+        {/* PAUSE & REFLECT — CENTERED BETWEEN SECTIONS */}
+        <section className="relative flex items-center justify-center h-[32vh]">
+          <PauseReflect />
+        </section>
+
 
         {/* 🌿 SUPPORT */}
         <SupportSection />
       </section>
-      <PauseReflect />
+      {/* <PauseReflect /> */}
 
       {/* 🐉 ABOVE HANDWRITTEN NOTES */}
       <section className="relative">
@@ -327,6 +335,10 @@ export default function Home() {
       </section>
 
       {/* <PauseReflect /> */}
+      {/* <StickyGetInTouch /> */}
+      <StickyGetInTouch showAfterScroll />
+
+
     </>
   );
 }
