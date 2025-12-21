@@ -84,10 +84,9 @@ export default function BookPage() {
      
 
       {/* Heading */}
-      <h1 className="font-display text-4xl">Book a Session</h1>
+      <h1 className="font-display text-4xl">Connect With Us Here</h1>
       <p className="mt-2 text-sm opacity-80">
-        Tell us what you’re seeking support with. We’ll reply with available
-        time slots and next steps.
+        Tell us what you’re seeking support for. We will reach out to you soon.
       </p>
 
       {/* Success */}
