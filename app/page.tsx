@@ -243,7 +243,7 @@ export default function Home() {
         
 
         {/* 🌿 ABOUT ENSO */}
-        <section className="relative pt-20 pb-8 z-10">
+        <section className="relative pt-20 pb-10 z-10">
           <div className="max-w-5xl mx-auto px-6">
             {/* 🌸 Gentle mid-left + lower-left cluster */}
             <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">

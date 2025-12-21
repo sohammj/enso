@@ -38,14 +38,16 @@
                 </g>
             </g>
         </g>
-        <g transform="matrix(0.680257,0.007263,-0.006349,0.594657,584.94095,65.749685)">
+        <g transform="matrix(0.65706,0.006881,-0.005993,0.572242,614.47244,86.93155)">
             <g transform="matrix(0.633281,0.773922,-0.773922,0.633281,0,0)">
                 <text x="1470.044px" y="-545.054px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">N</text>
             </g>
             <g transform="matrix(0.661911,0.749582,-0.749582,0.661911,0,0)">
+                <g transform="matrix(53.999824,0,0,53.999824,1567.980691,-488.067987)">
+                </g>
                 <text x="1525.978px" y="-488.068px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">O</text>
             </g>
-            <g transform="matrix(0.689651,0.724142,-0.724142,0.689651,0,0)">
+            <g transform="matrix(0.689651,0.724142,-0.724142,0.689651,1.822566,2.126327)">
                 <text x="1580.161px" y="-428.916px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">N</text>
             </g>
             <g transform="matrix(0.722139,0.691748,-0.691748,0.722139,0,0)">
@@ -57,13 +59,13 @@
             <g transform="matrix(0.755969,0.654608,-0.654608,0.755969,0,0)">
                 <text x="1707.529px" y="-269.036px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">N</text>
             </g>
-            <g transform="matrix(0.777323,0.629102,-0.629102,0.777323,0,0)">
+            <g transform="matrix(0.755955,0.611808,-0.629102,0.777323,37.537626,30.379907)">
                 <text x="1752.086px" y="-210.952px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">E</text>
             </g>
-            <g transform="matrix(0.795588,0.605838,-0.605838,0.795588,0,0)">
+            <g transform="matrix(0.795588,0.605838,-0.605838,0.795588,5.335856,4.779192)">
                 <text x="1785.915px" y="-158.205px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">A</text>
             </g>
-            <g transform="matrix(0.81389,0.58102,-0.58102,0.81389,0,0)">
+            <g transform="matrix(0.81389,0.58102,-0.58102,0.81389,8.194946,8.78087)">
                 <text x="1819.256px" y="-102.151px" style="font-family:'Helvetica';font-size:54px;fill:rgb(174,101,0);">R</text>
             </g>
         </g>
