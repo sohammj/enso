@@ -145,7 +145,7 @@ export default function Home() {
               pointer-events-none
               absolute
               left-[-0.5%]          /* ⬅️ pulls curve start to the left */
-              top-[640px]         /* ⬆️ vertical placement */
+              top-[660px]         /* ⬆️ vertical placement */
               w-[115%]            /* 🔍 zoom out / in */
               scale-y-[0.85]      /* 📉 reduces height only */
               opacity-45
