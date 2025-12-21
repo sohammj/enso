@@ -118,6 +118,44 @@ export default function Home() {
 
         {/* 🌿 WELCOME CARD */}
         <section className="relative overflow-visible py-16 md:py-28 z-10">
+          {/* 🪶 HEALING IS NON-LINEAR CURVE */}
+          {/* <img
+            src="/enso-curve.svg"
+            alt=""
+            aria-hidden
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              -translate-x-[61%]
+              top-[500px]
+              w-[95%]
+              opacity-45
+              mix-blend-multiply
+              blur-[0.3px]
+              z-[1]
+            "
+          /> */}
+          
+          <img
+            src="/enso-curve.svg"
+            alt=""
+            aria-hidden
+            className="
+              pointer-events-none
+              absolute
+              left-[-0.5%]          /* ⬅️ pulls curve start to the left */
+              top-[640px]         /* ⬆️ vertical placement */
+              w-[115%]            /* 🔍 zoom out / in */
+              scale-y-[0.85]      /* 📉 reduces height only */
+              opacity-45
+              mix-blend-multiply
+              blur-[0.3px]
+              z-[1]
+            "
+          />
+
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
