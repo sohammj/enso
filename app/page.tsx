@@ -106,7 +106,9 @@ export default function Home() {
         
 
         {/* 🌕 GLOBAL WATERCOLOUR BLOB */}
-        <div className="hidden md:block absolute left-[-280px] top-[-420px] bottom-[-300px] w-[800px] pointer-events-none z-0">
+        {/* <div className="hidden md:block absolute left-[-280px] top-[-420px] bottom-[-300px] w-[800px] pointer-events-none z-0"> */}
+        <div className="hidden lg:block absolute left-[-280px] top-[-420px] bottom-[-300px] w-[800px] pointer-events-none z-0">
+
           <Image
             src="/blob.png"
             alt=""
@@ -119,24 +121,6 @@ export default function Home() {
         {/* 🌿 WELCOME CARD */}
         <section className="relative overflow-visible py-16 md:py-28 z-10">
           {/* 🪶 HEALING IS NON-LINEAR CURVE */}
-          {/* <img
-            src="/enso-curve.svg"
-            alt=""
-            aria-hidden
-            className="
-              pointer-events-none
-              absolute
-              left-1/2
-              -translate-x-[61%]
-              top-[500px]
-              w-[95%]
-              opacity-45
-              mix-blend-multiply
-              blur-[0.3px]
-              z-[1]
-            "
-          /> */}
-          
           <img
             src="/enso-curve.svg"
             alt=""
@@ -144,16 +128,27 @@ export default function Home() {
             className="
               pointer-events-none
               absolute
-              left-[-0.5%]          /* ⬅️ pulls curve start to the left */
-              top-[660px]         /* ⬆️ vertical placement */
-              w-[115%]            /* 🔍 zoom out / in */
-              scale-y-[0.85]      /* 📉 reduces height only */
+              z-[1]
               opacity-45
               mix-blend-multiply
               blur-[0.3px]
-              z-[1]
+
+              hidden
+
+              /* 💻 LAPTOP + DESKTOP */
+              md:block
+              md:left-[-0.5%]
+              md:top-[660px]
+              md:w-[115%]
+              md:scale-y-[0.85]
+
+              /* 🖥️ LARGE DESKTOP */
+              xl:top-[700px]
+              xl:w-[112%]
+              xl:scale-y-[0.82]
             "
           />
+
 
 
           <motion.div
