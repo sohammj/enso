@@ -347,6 +347,7 @@ export default function Home() {
           />
         </div>
       </section>
+      <StartConversationSection />
 
       {/* 🐉 MAP WHITESPACE */}
       <section className="relative">
@@ -376,7 +377,7 @@ export default function Home() {
             {...float}
           />
         </div>
-        <StartConversationSection />
+        {/* <StartConversationSection /> */}
         <MapEmbed />
         {/* 🌬️ Calm finale bottom-right group */}
         <div className="absolute bottom-[100px] right-[60px] opacity-90 -z-10">

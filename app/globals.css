@@ -43,7 +43,8 @@ body {
 @layer base {
   :root {
     /* Core Pastel Palette (from brand sheet) */
-    --cream: #fcf6de;
+    /* --cream: #fcf6de; */
+    --cream: #FFF3CC;
     --peach: #ffdac0;
     --pale-yellow: #fff6cf;
     --sage: #e4eecc;
