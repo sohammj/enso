@@ -63,12 +63,12 @@ export default function Home() {
         </button>
 
         <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16 max-w-3xl">
-          <h1 className="font-display text-[32px] leading-snug md:text-6xl md:leading-tight">
+          <h1 className="font-title text-[32px] md:text-6xl leading-tight">
 
             A space to Pause, <br /> Reflect, and Heal <br /> through art and <br /> conversation.
           </h1>
 
-          <p className="mt-4 md:mt-6 text-base md:text-lg opacity-80">
+          <p className="font-body mt-4 md:mt-6 text-base md:text-lg opacity-80">
 
             ENSO is a space for emotional growth, self-discovery, and inner balance
             through art therapy and counselling.
@@ -269,10 +269,44 @@ export default function Home() {
             </p>
           </div>
 
-          <p className="mt-16 md:mt-32 text-center max-w-4xl mx-auto px-6 font-[Playfair_Display] italic text-[18px] md:text-[24px] text-[#0E1E2A]/85">
+          {/* <p className="mt-16 md:mt-32 text-center max-w-4xl mx-auto px-6 font-[Playfair_Display] italic text-[18px] md:text-[24px] text-[#0E1E2A]/85"> */}
+          {/* <p
+            className="
+              mt-16 md:mt-32
+              text-center
+              max-w-4xl mx-auto px-6
+              font-quote
+              text-[20px] md:text-[26px]
+              leading-[1.7]
+              text-[#0E1E2A]/85
+            "
+            style={{
+              mixBlendMode: "multiply",
+              textShadow: "0 0.6px 0.6px rgba(0,0,0,0.12)",
+            }}
+          >
+            Each session at Enso is an invitation to pause, reflect, and let your story
+            unfold naturally, one breath at a time.
+          </p> */}
+          <p
+            className="
+              mt-16 md:mt-32
+              text-center
+              max-w-4xl mx-auto px-6
+              font-quote
+              text-[20px] md:text-[26px]
+              leading-[1.7]
+              text-[#0E1E2A]/85
+            "
+            style={{
+              mixBlendMode: "multiply",
+              textShadow: "0 0.6px 0.6px rgba(0,0,0,0.12)",
+            }}
+          >
             Each session at Enso is an invitation to pause, reflect, and let your story
             unfold naturally, one breath at a time.
           </p>
+
         </section>
 
         {/* 🌕 GLOW */}

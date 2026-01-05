@@ -15,7 +15,7 @@ export function PauseReflect() {
         <p className="text-sm uppercase tracking-wide opacity-60">
           Pause & Reflect
         </p>
-        <p className="mt-3 text-2xl">
+        <p className="mt-3 text-2xl ">
           <TextCursor />
         </p>
       </div>

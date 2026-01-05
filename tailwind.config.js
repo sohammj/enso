@@ -55,16 +55,10 @@ module.exports = {
   			}
   		},
   		fontFamily: {
-  			display: [
-  				'Playfair Display',
-  				'serif'
-  			],
-  			sans: [
-  				'Poppins',
-  				'ui-sans-serif',
-  				'system-ui'
-  			]
-  		},
+			display: ["Charter", "serif"],        // titles
+			body: ["Gotham", "sans-serif"],       // paragraphs, nav
+			handwritten: ["Afterglow", "cursive"] // quotes / poetic text
+		},
   		boxShadow: {
   			soft: '0 10px 30px rgba(0,0,0,0.08)'
   		},

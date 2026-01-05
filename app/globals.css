@@ -8,9 +8,35 @@ body {
 }
 
 /* ✍️ Handwritten note font (used in small accents) */
-@font-face {
+/* @font-face {
   font-family: 'EnsoNote';
   src: local('Caveat'), local('Pacifico');
+} */
+ @font-face {
+  font-family: "Charter";
+  src: url("/fonts/Charter.ttc") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Afterglow";
+  src: url("/fonts/Afterglow-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.font-quote {
+  font-family: "Afterglow", serif;
+  font-style: italic; /* only if you want the quote italic like the design */
 }
 
 /* 🌿 Custom Theme Variables */

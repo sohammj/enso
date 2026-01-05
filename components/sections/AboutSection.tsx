@@ -97,17 +97,17 @@ export function AboutSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               />
-              <span className="font-manrope text-[var(--royal-blue)] uppercase tracking-wider">
+              <span className="font-body text-[var(--royal-blue)] uppercase tracking-wider">
                 Our Story
               </span>
             </div>
 
-            <h2 className="font-playfair text-4xl md:text-5xl text-gray-900">
+            <h2 className="font-tittle text-4xl md:text-5xl text-gray-900">
               About Enso Mind Matters
             </h2>
 
             {/* Paragraphs */}
-            <div className="space-y-4 font-manrope text-gray-700 leading-relaxed">
+            <div className="space-y-4 font-body text-gray-700 leading-relaxed">
               <p>
                 For over{" "}
                 <span className="text-[var(--royal-blue)]">14 years</span>, Enso
