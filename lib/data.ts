@@ -45,7 +45,7 @@ export const programs = [
     ],
     cta: {
       text: "Join the next Fika circle",
-      href: "/book",
+      href: "/start-a-conversation",
       tagline: "Want to join the next session?",
     },
     icon: "/icons/fika.svg",
@@ -63,7 +63,7 @@ export const programs = [
     ],
     cta: {
       text: "Book a Cope session",
-      href: "/book",
+      href: "/start-a-conversation",
       tagline: "Want to experience the next Cope session?",
     },
     icon: "/icons/cope.png",
@@ -80,7 +80,7 @@ export const programs = [
     ],
     cta: {
       text: "Enroll in Aakar",
-      href: "/book",
+      href: "/start-a-conversation",
       tagline: "Ready to begin your growth journey?",
     },
     icon: "/icons/akar.svg",
@@ -101,8 +101,8 @@ export const services = [
     cta: {
       tagline: "Ready to begin your journey?",
       subtitle: "One-on-one guidance tailored to you.",
-      text: "Book a session",
-      href: "/book",
+      text: "Start a conversation",
+      href: "/start-a-conversation",
     },
   },
   {
@@ -119,7 +119,7 @@ export const services = [
       tagline: "Want to join our next group?",
       subtitle: "Connect, create, and reflect together.",
       text: "Join the next session",
-      href: "/book",
+      href: "/start-a-conversation",
     },
   },
   {
@@ -137,7 +137,7 @@ export const services = [
     tagline: "Want to organize a workshop?",
     subtitle: "Reach out to plan a personalized art-based training.",
     text: "Contact us",
-    href: "/book",
+    href: "/start-a-conversation",
   },
 },
 ];

@@ -35,10 +35,10 @@ export default function ContactPage() {
           </div>
 
           <a
-            href="/book"
+            href="/start-a-conversation"
             className="mt-6 inline-block rounded-xl bg-ink px-4 py-2 text-white text-sm hover:opacity-90"
           >
-            Book a session →
+            Start a conversation →
           </a>
         </div>
 

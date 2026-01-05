@@ -34,7 +34,7 @@ export default function StickyGetInTouch({
         y: visible ? 0 : 20,
       }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      onClick={() => router.push("/book")}
+      onClick={() => router.push("/start-a-conversation")}
       className="
         fixed
         bottom-[90px]

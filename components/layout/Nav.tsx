@@ -10,7 +10,7 @@ const links = [
   { href: "/programs", label: "Our Programs" },
   { href: "/services", label: "Services" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/book", label: "Book a Session" },
+  { href: "/start-a-conversation", label: "Start a conversation" },
   { href: "/faq", label: "FAQ" },
   { href: "/about", label: "Our Journey" },
 ];

@@ -46,8 +46,8 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/book" className="hover:underline underline-offset-4">
-                Book
+              <Link href="/start-a-conversation" className="hover:underline underline-offset-4">
+                Start a conversation
               </Link>
             </li>
           </ul>

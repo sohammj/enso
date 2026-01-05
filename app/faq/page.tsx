@@ -116,7 +116,7 @@ export default function FAQPage() {
           </p>
 
           <a
-            href="/book"
+            href="/start-a-conversation"
             className="
               inline-block
               px-7 py-3
@@ -128,7 +128,7 @@ export default function FAQPage() {
               transition
             "
           >
-            Book a session
+            Start a conversation
           </a>
         </div>
       </section>

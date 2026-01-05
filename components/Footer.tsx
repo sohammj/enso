@@ -21,7 +21,7 @@ export function Footer() {
             <li><Link href="/programs" className="underline underline-offset-4">Programs</Link></li>
             <li><Link href="/services" className="underline underline-offset-4">Services</Link></li>
             <li><Link href="/about" className="underline underline-offset-4">About</Link></li>
-            <li><Link href="/book" className="underline underline-offset-4">Book</Link></li>
+            <li><Link href="/start-a-conversation" className="underline underline-offset-4">Start a conversation</Link></li>
           </ul>
         </div>
 
