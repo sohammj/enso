@@ -155,9 +155,27 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="relative max-w-5xl mx-auto mt-12 md:mt-24 bg-[var(--cream)] rounded-3xl shadow-soft p-6 md:p-12"
+            className="
+              relative
+              mx-auto
+              mt-10 md:mt-24
+              bg-[var(--cream)]
+              rounded-3xl
+              shadow-soft
+
+              /* 📱 Mobile sizing */
+              max-w-[92%]
+              px-5 py-6
+
+              /* 💻 Desktop */
+              md:max-w-5xl
+              md:p-12
+            "
+
           >
-            <div className="grid md:grid-cols-[1fr_1.4fr] gap-10 items-center">
+            {/* <div className="grid md:grid-cols-[1fr_1.4fr] gap-10 items-center"> */}
+            <div className="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-10 items-center">
+
               <Image
                 src="/hero11.jpeg"
                 alt="Enso Art Therapy Space"
@@ -192,7 +210,22 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="absolute bottom-0 right-0 w-[420px] opacity-70 pointer-events-none">
+          {/* <div className="absolute bottom-0 right-0 w-[420px] opacity-70 pointer-events-none"> */}
+          <div
+            className="
+              absolute
+              bottom-[-20px]
+              right-[-10px]
+              w-[220px]
+              opacity-60
+              pointer-events-none
+
+              md:bottom-0
+              md:right-0
+              md:w-[420px]
+            "
+          >
+
             <DotLottieReact
               src="/enso-dandelion.lottie"
               loop
