@@ -195,16 +195,29 @@ export default function Home() {
                 </p>
 
                 <ul className="space-y-4">
-                  {["Personal Growth", "Emotional Well-being", "Self-expression"].map(
+                  {[
+                    { label: "Personal Growth", emoji: "🌱" },
+                    { label: "Emotional Well-being", emoji: "💛" },
+                    { label: "Self-expression", emoji: "🎨" },
+                  ].map(({ label, emoji }) => (
+                    <li key={label} className="flex items-center gap-3">
+                      <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center text-lg">
+                        {emoji}
+                      </span>
+                      {label}
+                    </li>
+                  ))}
+
+                  {/* {["Personal Growth", "Emotional Well-being", "Self-expression"].map(
                     (item) => (
                       <li key={item} className="flex items-center gap-3">
                         <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center text-[#B88933]">
-                          🌱
+                          d
                         </span>
                         {item}
                       </li>
                     )
-                  )}
+                  )} */}
                 </ul>
               </div>
             </div>
@@ -343,16 +356,17 @@ export default function Home() {
         </section>
 
         {/* 🌕 GLOW */}
-        <div className="relative h-[200px] overflow-visible pointer-events-none">
+        <div className="relative py-32 md:py-36 overflow-visible pointer-events-none">
           <div
             className="absolute right-[-220px] top-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full bg-yellow-400 opacity-95 blur-[120px]"
           />
+          <PauseReflect />
         </div>
         {/* <PauseReflect /> */}
         {/* PAUSE & REFLECT — CENTERED BETWEEN SECTIONS */}
-        <section className="relative flex items-center justify-center h-[32vh]">
+        {/* <section className="relative flex items-center justify-center h-[32vh]">
           <PauseReflect />
-        </section>
+        </section> */}
 
 
         {/* 🌿 SUPPORT */}

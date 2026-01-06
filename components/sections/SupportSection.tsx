@@ -9,7 +9,7 @@ const cards = [
     description:
       "Space to pause, reflect, and work through emotions at your own pace.",
     bg: "#FFF2CC",
-    href: "/services/individual-therapy",
+    href: "/services/individual-sessions",
     image: "/icons/individual.png", // your small image path here
   },
   {
@@ -17,7 +17,7 @@ const cards = [
     description:
       "Grow through shared stories, connection, and collective healing.",
     bg: "#F4EFEA",
-    href: "/services/group-therapy",
+    href: "/services/group-sessions",
     image: "/icons/group.png",
   },
   {
@@ -25,7 +25,7 @@ const cards = [
     description:
       "Bringing art and therapy to spaces where voices need to be seen and supported.",
     bg: "#F8D7C4",
-    href: "/services/ngo-collaborations",
+    href: "/services/workshops-and-training",
     image: "/icons/ngo.png",
   },
   {
@@ -33,7 +33,7 @@ const cards = [
     description:
       "Reflective and creative experiences that bring balance, awareness, and connection to teams.",
     bg: "#DCEEEA",
-    href: "/services/corporate-sessions",
+    href: "/services/workshops-and-training",
     image: "/icons/corporate.png",
   },
 ];

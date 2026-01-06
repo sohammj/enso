@@ -51,7 +51,7 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-[#111] hover:opacity-70 transition"
+              className="text-[16px] font-medium text-[#111] hover:opacity-70 transition"
             >
               {l.label}
             </Link>
