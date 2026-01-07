@@ -4,18 +4,40 @@ import { Nav } from "../components/layout/Nav";
 import { Footer } from "../components/layout/Footer";
 // import SplashCursor from "../components/bits/SplashCursor";
 
+// export const metadata: Metadata = {
+//   title: "Enso Mind Matters",
+//   description: "Art-forward mental wellness – therapy, programs, community.",
+//   twitter: {
+//     card: "summary_large_image",
+//     title: "Enso Mind Matters",
+//   },
+//   openGraph: {
+//     title: "Enso Mind Matters",
+//     type: "website",
+//   },
+// };
+
 export const metadata: Metadata = {
   title: "Enso Mind Matters",
   description: "Art-forward mental wellness – therapy, programs, community.",
+
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
+  },
+
   twitter: {
     card: "summary_large_image",
     title: "Enso Mind Matters",
   },
+
   openGraph: {
     title: "Enso Mind Matters",
     type: "website",
   },
 };
+
 
 // export default function RootLayout({
 //   children,
