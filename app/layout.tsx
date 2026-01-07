@@ -21,12 +21,6 @@ export const metadata: Metadata = {
   title: "Enso Mind Matters",
   description: "Art-forward mental wellness – therapy, programs, community.",
 
-  icons: {
-    icon: [
-      { url: "/favicon.ico", type: "image/x-icon" },
-    ],
-  },
-
   twitter: {
     card: "summary_large_image",
     title: "Enso Mind Matters",
