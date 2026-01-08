@@ -123,8 +123,8 @@ function SocialDock() {
           <Image
             src="/enso.png"
             alt="Enso"
-            width={50}
-            height={50}
+            width={75}
+            height={75}
             className={`cursor-pointer select-none opacity-90 hover:opacity-100 transition
               ${open ? "rotate-90" : "rotate-0"}
             `}
