@@ -89,24 +89,37 @@ function SocialDock() {
         {/* dropdown */}
         <div
           className={[
-            "absolute bottom-14 right-0",
+            // "absolute bottom-14 right-0",
+            "absolute bottom-20 right-0",
             "transition-all duration-200",
-            open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none",
+            open ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none",
           ].join(" ")}
         >
-          <div className="flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/90 backdrop-blur shadow-soft">
+          {/* <div className="flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/90 backdrop-blur shadow-soft"> */}
+          <div className="flex flex-col overflow-hidden rounded-3xl border border-black/10 bg-white/95 backdrop-blur shadow-soft">
+
             {socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
                 target={s.href.startsWith("http") ? "_blank" : undefined}
                 rel={s.href.startsWith("http") ? "noreferrer" : undefined}
-                className="flex h-12 w-12 items-center justify-center border-b border-black/10 last:border-b-0 active:bg-black/[0.04]"
+                className="flex h-16 w-16 items-center justify-center border-b border-black/10 last:border-b-0 active:bg-black/[0.05]"
+
+                // className="flex h-12 w-12 items-center justify-center border-b border-black/10 last:border-b-0 active:bg-black/[0.04]"
                 aria-label={s.label}
                 title={s.label}
                 onClick={() => setOpen(false)}
               >
-                <Image src={s.icon} alt="" width={18} height={18} className="opacity-90" />
+                {/* <Image src={s.icon} alt="" width={18} height={18} className="opacity-90" /> */}
+                <Image
+                  src={s.icon}
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="opacity-95"
+                />
+
               </a>
             ))}
           </div>
