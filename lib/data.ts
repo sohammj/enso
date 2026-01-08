@@ -32,60 +32,161 @@ export const founder = {
   headshot: "/paurl hande.jpg", // add asset
 };
 
-export const programs = [
+// export const programs = [
+//   {
+//     slug: "fika",
+//     title: "Fika",
+//     subtitle: "Support Circle",
+//     label: "Program",
+//     description: [
+//       "Fika is a monthly support circle where we slow down and connect. We hold space to talk about emotions, stress, anxiety, coping, friendship, and mindfulness — without judgment.",
+//       "Each month we explore a different theme, for example: ‘Rewind Your Friendship’, ‘Finding Your Emotional Lighthouse’, ‘Let’s Scan Anxiety’, ‘Mindfulness’. Sessions use art-based therapy, gentle prompts, and shared conversation.",
+//       "Anyone who needs a pause, wants to understand their emotions more deeply, or simply wants to be witnessed in a safe group is welcome.",
+//     ],
+//     cta: {
+//       text: "Join the next Fika circle",
+//       href: "/start-a-conversation",
+//       tagline: "Want to join the next session?",
+//     },
+//     icon: "/icons/fika.svg",
+
+//   },
+//   {
+//    slug: "cope",
+//     title: "Cope",
+//     subtitle: "Resilience & Expression",
+//     label: "Program",
+//     description: [
+//       "Cope is more than just a therapy program — it’s a growing community of people learning to process emotions through art and awareness.",
+//       "We explore stress, anxiety, and change using creative techniques. Sessions include journaling, guided art prompts, and reflections that help translate emotion into expression and growth.",
+//       "Our aim is to nurture resilience, balance, and inner peace — so participants feel more empowered and self-aware in their daily lives.",
+//     ],
+//     cta: {
+//       text: "Book a Cope session",
+//       href: "/start-a-conversation",
+//       tagline: "Want to experience the next Cope session?",
+//     },
+//     icon: "/icons/cope.png",
+//   },
+//   {
+//     slug: "aakar",
+//     title: "Aakar",
+//     subtitle: "Creative Growth Program",
+//     label: "Program",
+//     description: [
+//       "Aakar focuses on identity and healing through creative exploration. It helps participants understand their inner narratives using art-based reflection and group work.",
+//       "The sessions combine introspection, artistic engagement, and mindful dialogue to foster personal growth and connection.",
+//       "This program is ideal for those seeking deeper self-understanding through creativity.",
+//     ],
+//     cta: {
+//       text: "Enroll in Aakar",
+//       href: "/start-a-conversation",
+//       tagline: "Ready to begin your growth journey?",
+//     },
+//     icon: "/icons/akar.svg",
+//   },
+// ];
+export type ProgramStatus = "ongoing" | "past";
+
+export type Program = {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  label?: string;
+  status: ProgramStatus;
+  preview?: string; // short summary for cards
+  description: string[]; // full detail page content
+  icon?: string;
+  cta?: {
+    text: string;
+    href: string;
+    tagline?: string;
+  };
+};
+
+export const programs: Program[] = [
+  // ✅ ONGOING
+  {
+    slug: "aakar",
+    title: "AAKAR",
+    subtitle: "Experiential Group Session",
+    label: "Program",
+    status: "ongoing",
+    preview:
+      "A once-a-month experiential space to pause, reflect, and express in a supportive community.",
+    description: [
+      "AAKAR is a once-a-month experiential group session created to offer individuals a space to pause, reflect, and express themselves in a supportive community setting. Conducted both online and offline, AAKAR brings people together to explore mindfulness and self-awareness through simple yet meaningful activities.",
+      "The sessions are offered at a minimal cost, keeping the space accessible and inclusive. Rather than focusing on problem-solving alone, AAKAR emphasizes slowing down, noticing inner experiences, and sharing reflections with others in a safe, non-judgmental environment.",
+      "Each AAKAR session revolves around a thoughtfully chosen theme or activity, such as mindfulness-based explorations, Pause and Reflect, Try Not Laugh, Speaking Tree sessions focused on boundary setting, and Ink and Insight using writing and reflection for self-exploration.",
+      "These activities invite participants to observe their thoughts, emotions, and patterns while learning from shared experiences within the group.",
+    ],
+    icon: "/icons/akar.svg",
+    cta: {
+      text: "Enquire about AAKAR",
+      href: "/start-a-conversation",
+      tagline: "Want to join an upcoming session?",
+    },
+  },
+  {
+    slug: "mind-matters-workplace",
+    title: "MindMatter @ Workplace",
+    subtitle: "Corporate Wellbeing & Leadership",
+    label: "Program",
+    status: "ongoing",
+    preview:
+      "A customized corporate wellbeing and leadership program designed around your organization’s needs.",
+    description: [
+      "MindMatter @ Workplace is a customized corporate program by Enso Art Therapy and Counseling Centre, designed to support employee wellbeing and leadership development.",
+      "We work closely with organizations to curate and design interventions based on their specific needs, culture, and goals.",
+      "What we offer includes customized workshops on workplace wellbeing, emotional intelligence, communication, mindfulness, and team dynamics; psychometric assessments to understand strengths, behavior patterns, and leadership potential; one-on-one leadership and behavioral skill development interventions; and a Corporate Leadership Readiness Program for emerging and current leaders.",
+      "Grounded in psychology and experiential learning, our programs focus on building self-awareness.",
+    ],
+    icon: "/icons/mindmatters.png", // change if you have a better file
+    cta: {
+      text: "Discuss a workplace program",
+      href: "/start-a-conversation",
+      tagline: "Want a custom intervention for your team?",
+    },
+  },
+
+  // 🕊 PAST
   {
     slug: "fika",
     title: "Fika",
-    subtitle: "Support Circle",
-    label: "Program",
+    subtitle: "Online Support Group",
+    label: "Past Program",
+    status: "past",
+    preview:
+      "An online support group created during COVID-19 to offer connection, emotional expression, and shared presence.",
     description: [
-      "Fika is a monthly support circle where we slow down and connect. We hold space to talk about emotions, stress, anxiety, coping, friendship, and mindfulness — without judgment.",
-      "Each month we explore a different theme, for example: ‘Rewind Your Friendship’, ‘Finding Your Emotional Lighthouse’, ‘Let’s Scan Anxiety’, ‘Mindfulness’. Sessions use art-based therapy, gentle prompts, and shared conversation.",
-      "Anyone who needs a pause, wants to understand their emotions more deeply, or simply wants to be witnessed in a safe group is welcome.",
+      "Inspired by the Swedish tradition of Fika—a mindful pause from daily activity to connect over coffee, light food, and conversation—Enso Art Therapy and Counseling Centre initiated an online emotional support group during the COVID-19 pandemic titled “Fika in COVID Time.”",
+      "At a time marked by isolation, uncertainty, and emotional overwhelm, this program was conceptualized as a safe, informal, and inclusive virtual space where individuals could pause, connect, and simply be.",
+      "“Fika in COVID Time” was an open online support group, welcoming individuals at any stage of life, with any mental health concern—or even those who simply needed connection during a difficult period.",
+      "Participants were not required to have a specific diagnosis or agenda. The emphasis was on human connection, emotional expression, and shared presence.",
     ],
-    cta: {
-      text: "Join the next Fika circle",
-      href: "/start-a-conversation",
-      tagline: "Want to join the next session?",
-    },
     icon: "/icons/fika.svg",
-
+    // no CTA for past programs
   },
   {
-   slug: "cope",
+    slug: "cope",
     title: "Cope",
-    subtitle: "Resilience & Expression",
-    label: "Program",
+    subtitle: "Career Orientations in Psychology & Education",
+    label: "Past Program",
+    status: "past",
+    preview:
+      "An initiative guiding students toward clarity on psychology career pathways through accessible webinars and mentoring.",
     description: [
-      "Cope is more than just a therapy program — it’s a growing community of people learning to process emotions through art and awareness.",
-      "We explore stress, anxiety, and change using creative techniques. Sessions include journaling, guided art prompts, and reflections that help translate emotion into expression and growth.",
-      "Our aim is to nurture resilience, balance, and inner peace — so participants feel more empowered and self-aware in their daily lives.",
+      "The C.O.P.E Project (Career Orientations in Psychology & Education) is an initiative by a group of like-minded, qualified psychology graduates from the 2010 batch of D.G. Ruparel College, Mumbai.",
+      "United by a shared commitment to education and mentorship, the initiative was created to support students who aspire to build a career in the field of psychology.",
+      "The primary aim of The C.O.P.E Project is to educate and guide young minds about the diverse pathways available in psychology and education. Many students enter the field with enthusiasm but limited clarity about academic routes, specializations, and real-world professional expectations.",
+      "Since the onset of the COVID-19 pandemic, The C.O.P.E Project has been organizing online webinars and orientation sessions conducted by professionals working across various domains of psychology.",
+      "These sessions focus on understanding different career pathways in psychology, academic requirements and specializations, practical realities of working in the field, and setting realistic expectations about training, challenges, and growth. To ensure accessibility, these webinars are offered at a minimal cost.",
     ],
-    cta: {
-      text: "Book a Cope session",
-      href: "/start-a-conversation",
-      tagline: "Want to experience the next Cope session?",
-    },
     icon: "/icons/cope.png",
-  },
-  {
-    slug: "aakar",
-    title: "Aakar",
-    subtitle: "Creative Growth Program",
-    label: "Program",
-    description: [
-      "Aakar focuses on identity and healing through creative exploration. It helps participants understand their inner narratives using art-based reflection and group work.",
-      "The sessions combine introspection, artistic engagement, and mindful dialogue to foster personal growth and connection.",
-      "This program is ideal for those seeking deeper self-understanding through creativity.",
-    ],
-    cta: {
-      text: "Enroll in Aakar",
-      href: "/start-a-conversation",
-      tagline: "Ready to begin your growth journey?",
-    },
-    icon: "/icons/akar.svg",
+    // no CTA for past programs
   },
 ];
+
 
 export const services = [
   {
