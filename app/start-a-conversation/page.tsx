@@ -139,9 +139,11 @@ function SocialDock() {
             width={75}
             height={75}
             className={`cursor-pointer select-none opacity-90 hover:opacity-100 transition
+              translate-x-1
               ${open ? "rotate-90" : "rotate-0"}
             `}
           />
+
         </button>
 
       </div>
