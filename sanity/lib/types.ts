@@ -40,3 +40,20 @@ export type HomePageData = {
     // cards?: SupportCard[];
   };
 };
+
+export type Program = {
+  _id?: string;
+  title?: string;
+  slug?: string;
+  status?: "ongoing" | "past";
+  label?: string;
+  subtitle?: string;
+  preview?: string;
+  description?: string[];
+  icon?: any; // Sanity image
+  cta?: {
+    tagline?: string;
+    text?: string;
+    href?: string;
+  };
+};
