@@ -2,24 +2,7 @@
 
 import Image from "next/image";
 import ScrollLockHorizontal from "@/components/bits/ScrollLockHorizontal";
-
-type Founder = {
-  name: string;
-  headshot: string;
-  bioShort: string;
-  bioLong: string[];
-};
-
-type StudioInfo = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-};
-
-type Props = {
-  founder: Founder;
-  studioInfo: StudioInfo;
-};
+import type { JourneyContent } from "@/sanity/lib/types";
 
 /* =========================================================
    STYLE PRIMITIVES
@@ -41,7 +24,7 @@ const FRAME_X = "px-0 md:px-14";
 const FRAME_Y = "py-0 md:py-12";
 
 function StepTag() {
-  return <div className="text-xs tracking-[0.22em] uppercase text-black/35">(Step)</div>;
+  return <div className="text-xs tracking-[0.22em] uppercase text-black/35"></div>;
 }
 
 function BigNo({ n }: { n: string }) {
@@ -69,7 +52,7 @@ function Body({ children }: { children: React.ReactNode }) {
 }
 
 /* =========================================================
-   PANEL 01 - Photo + Content (Vertical on mobile, side-by-side on desktop)
+   PANEL 01
 ========================================================= */
 function PanelPhotoLeft({
   photoSrc,
@@ -85,43 +68,35 @@ function PanelPhotoLeft({
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
-        {/* Mobile: Clean Vertical Stack */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-          {/* Photo */}
           <div className="flex items-center justify-center mb-12">
             <div className={`relative ${PHOTO_SIZE_MOBILE} rounded-full overflow-hidden shadow-lg`}>
-              <Image src={photoSrc} alt="" fill className="object-cover" priority />
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
-          
-          {/* Title & Body */}
+
           <div className={`text-center ${PAD_X} mb-12`}>
             <Title>{title}</Title>
             <Body>{body}</Body>
           </div>
-          
-          {/* Step Number */}
+
           <div className={`text-center ${PAD_X}`}>
             <StepTag />
             <BigNo n={stepNo} />
           </div>
         </div>
 
-        {/* Desktop: Horizontal Grid */}
         <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
-          {/* PHOTO COL */}
           <div className="relative overflow-hidden">
             <div className="h-full w-full flex items-center justify-center px-10">
               <div className={`relative ${PHOTO_SIZE_DESKTOP} rounded-full overflow-hidden`}>
-                <Image src={photoSrc} alt="" fill className="object-cover" priority />
+                {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
               </div>
             </div>
           </div>
 
-          {/* VERTICAL LINE */}
           <div className={`relative z-10 h-full border-l ${LINE}`} />
 
-          {/* CONTENT COL */}
           <div className="grid h-full grid-rows-[1fr_1px_1fr]">
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
@@ -144,7 +119,7 @@ function PanelPhotoLeft({
 }
 
 /* =========================================================
-   PANEL 02 - Number + Content + Rounded Photo
+   PANEL 02
 ========================================================= */
 function PanelPhotoRightRounded({
   stepNo,
@@ -160,29 +135,24 @@ function PanelPhotoRightRounded({
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
-        {/* Mobile: Clean Vertical Stack */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-          {/* Step Number */}
           <div className={`text-center ${PAD_X} mb-12`}>
             <StepTag />
             <BigNo n={stepNo} />
           </div>
-          
-          {/* Photo */}
+
           <div className="flex items-center justify-center mb-12">
             <div className={`relative w-[320px] h-[320px] rounded-3xl overflow-hidden shadow-lg`}>
-              <Image src={photoSrc} alt="" fill className="object-cover" priority />
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
-          
-          {/* Title & Body */}
+
           <div className={`text-center ${PAD_X}`}>
             <Title>{bottomTitle}</Title>
             <Body>{bottomBody}</Body>
           </div>
         </div>
 
-        {/* Desktop: Horizontal Grid */}
         <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
           <div className="grid h-full grid-rows-[1fr_1px_1fr]">
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
@@ -199,10 +169,12 @@ function PanelPhotoRightRounded({
               </div>
             </div>
           </div>
+
           <div className={`relative z-10 h-full border-l ${LINE}`} />
+
           <div className={`relative z-20 flex items-center justify-center ${PAD_X}`}>
             <div className={`relative w-[360px] md:w-[400px] h-[360px] md:h-[400px] rounded-2xl overflow-hidden`}>
-              <Image src={photoSrc} alt="" fill className="object-cover" priority />
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
         </div>
@@ -212,7 +184,7 @@ function PanelPhotoRightRounded({
 }
 
 /* =========================================================
-   PANEL 03 - Photo Right Circle
+   PANEL 03
 ========================================================= */
 function PanelPhotoRightCircle({
   photoSrc,
@@ -228,29 +200,24 @@ function PanelPhotoRightCircle({
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
-        {/* Mobile: Clean Vertical Stack */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-          {/* Step Number */}
           <div className={`text-center ${PAD_X} mb-12`}>
             <StepTag />
             <BigNo n={stepNo} />
           </div>
-          
-          {/* Photo */}
+
           <div className="flex items-center justify-center mb-12">
             <div className={`relative ${PHOTO_SIZE_MOBILE} rounded-full overflow-hidden shadow-lg`}>
-              <Image src={photoSrc} alt="" fill className="object-cover" priority />
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
-          
-          {/* Title & Body */}
+
           <div className={`text-center ${PAD_X}`}>
             <Title>{title}</Title>
             <Body>{body}</Body>
           </div>
         </div>
 
-        {/* Desktop: Horizontal Grid */}
         <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
           <div className="grid h-full grid-rows-[1fr_1px_1fr]">
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
@@ -267,11 +234,13 @@ function PanelPhotoRightCircle({
               </div>
             </div>
           </div>
+
           <div className={`relative z-10 h-full border-l ${LINE}`} />
+
           <div className="relative overflow-hidden">
             <div className="h-full w-full flex items-center justify-center px-10">
               <div className={`relative ${PHOTO_SIZE_DESKTOP} rounded-full overflow-hidden`}>
-                <Image src={photoSrc} alt="" fill className="object-cover" priority />
+                {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
               </div>
             </div>
           </div>
@@ -282,7 +251,7 @@ function PanelPhotoRightCircle({
 }
 
 /* =========================================================
-   PANEL 04 - No Photos (2x2 Grid)
+   PANEL 04
 ========================================================= */
 function PanelNoPhotos({
   topLeftTitle,
@@ -302,9 +271,7 @@ function PanelNoPhotos({
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
-        {/* Mobile: Vertical Stack - Logical Order (04 then 05) */}
         <div className="md:hidden">
-          {/* Step 04 */}
           <div className={`${SECTION_MOBILE} ${BORDER_MOBILE}`}>
             <div className={`text-center ${PAD_X} mb-8`}>
               <StepTag />
@@ -315,8 +282,7 @@ function PanelNoPhotos({
               <Body>{topLeftBody}</Body>
             </div>
           </div>
-          
-          {/* Step 05 */}
+
           <div className={`${SECTION_MOBILE}`}>
             <div className={`text-center ${PAD_X} mb-8`}>
               <StepTag />
@@ -329,7 +295,6 @@ function PanelNoPhotos({
           </div>
         </div>
 
-        {/* Desktop: 2x2 Grid */}
         <div className={`hidden md:grid h-full grid-cols-2 grid-rows-2 ${LINE}`}>
           <div className={`flex items-center justify-center text-center ${PAD_X} border-r ${LINE} border-b ${LINE}`}>
             <div>
@@ -337,21 +302,21 @@ function PanelNoPhotos({
               <Body>{topLeftBody}</Body>
             </div>
           </div>
-          
+
           <div className={`flex items-center justify-center text-center ${PAD_X} border-b ${LINE}`}>
             <div>
               <StepTag />
               <BigNo n={topRightStep} />
             </div>
           </div>
-          
+
           <div className={`flex items-center justify-center text-center ${PAD_X} border-r ${LINE}`}>
             <div>
               <StepTag />
               <BigNo n={bottomLeftStep} />
             </div>
           </div>
-          
+
           <div className={`flex items-center justify-center text-center ${PAD_X}`}>
             <div>
               <Title>{bottomRightTitle}</Title>
@@ -365,42 +330,17 @@ function PanelNoPhotos({
 }
 
 /* =========================================================
-   MAIN COMPONENT
+   MAIN
 ========================================================= */
-export default function JourneyHorizontal({ founder, studioInfo }: Props) {
-  const copy = {
-    s1: {
-      title: "BRIEFING",
-      body: "Meeting (in person or via video call) and discussion of the project idea. We listen to your wishes and goals to understand exactly what you want to achieve.",
-      no: "01",
-    },
-    s2: {
-      no: "02",
-      title: "ANALYTICS",
-      body: "After prepayment, we conduct a comprehensive market analysis, study competitors, and identify the target audience. Based on the collected information, we prepare the project's technical specification (TS) and agree on it with you.",
-    },
-    s3: {
-      title: "CONCEPT",
-      body: "We are starting to develop the design of the first page. We create a concept and present it to you. After receiving feedback, we make the necessary adjustments and approve the final version.",
-      no: "03",
-    },
-    s4: {
-      topLeftTitle: "DESIGN-PROJECT",
-      topLeftBody: "Based on the approved concept, we are developing the design of all other pages. We present each page and coordinate it with you to make sure that the result meets your expectations.",
-      topRightStep: "05",
-      bottomLeftStep: "04",
-      bottomRightTitle: "DEVELOPMENT",
-      bottomRightBody: "At the final stage, we begin the project's layout and development. We are presenting the completed website to you for review. We make any necessary adjustments, if required, and upon completion, sign the acceptance certificate, finalizing the project in accordance with all your requirements.",
-    },
-  };
+export default function JourneyHorizontal({ journey }: { journey: JourneyContent }) {
+  const photo1 = journey.photo1;
+  const photo2 = journey.photo2;
+  const photo3 = journey.photo3;
 
-  const photo1 = founder.headshot;
-  const photo2 = founder.headshot;
-  const photo3 = founder.headshot;
+  const copy = journey.steps;
 
   return (
     <>
-      {/* Mobile: Vertical Stack (no ScrollLockHorizontal) */}
       <div className="md:hidden">
         <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} stepNo={copy.s1.no} />
         <PanelPhotoRightRounded stepNo={copy.s2.no} bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
@@ -415,7 +355,6 @@ export default function JourneyHorizontal({ founder, studioInfo }: Props) {
         />
       </div>
 
-      {/* Desktop: Horizontal Scroll */}
       <div className="hidden md:block">
         <ScrollLockHorizontal speed={1.1} className={BG}>
           <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} stepNo={copy.s1.no} />

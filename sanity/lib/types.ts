@@ -93,3 +93,44 @@ export type FAQPageData = {
     href?: string;
   };
 };
+export type AboutPageData = {
+  heading?: string;
+  photos?: {
+    photo1?: any;
+    photo2?: any;
+    photo3?: any;
+  };
+  steps?: {
+    s1?: { no?: string; title?: string; body?: string };
+    s2?: { no?: string; title?: string; body?: string };
+    s3?: { no?: string; title?: string; body?: string };
+    s4?: {
+      topLeftTitle?: string;
+      topLeftBody?: string;
+      topRightStep?: string;
+      bottomLeftStep?: string;
+      bottomRightTitle?: string;
+      bottomRightBody?: string;
+    };
+  };
+};
+
+export type JourneyContent = {
+  heading: string;
+  photo1: string;
+  photo2: string;
+  photo3: string;
+  steps: {
+    s1: { no: string; title: string; body: string };
+    s2: { no: string; title: string; body: string };
+    s3: { no: string; title: string; body: string };
+    s4: {
+      topLeftTitle: string;
+      topLeftBody: string;
+      topRightStep: string;
+      bottomLeftStep: string;
+      bottomRightTitle: string;
+      bottomRightBody: string;
+    };
+  };
+};

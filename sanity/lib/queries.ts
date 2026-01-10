@@ -100,6 +100,29 @@ export const FAQ_PAGE_QUERY = /* groq */ `
 `;
 
 
+export const ABOUT_PAGE_QUERY = /* groq */ `
+*[_type == "aboutPage" && _id == "aboutPage"][0]{
+  heading,
+  photos{
+    photo1,
+    photo2,
+    photo3
+  },
+  steps{
+    s1{ no, title, body },
+    s2{ no, title, body },
+    s3{ no, title, body },
+    s4{
+      topLeftTitle,
+      topLeftBody,
+      topRightStep,
+      bottomLeftStep,
+      bottomRightTitle,
+      bottomRightBody
+    }
+  }
+}
+`;
 
 
 // cards[]{

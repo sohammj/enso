@@ -9,10 +9,21 @@ export const structure: StructureResolver = (S) =>
         .id("homePage")
         .child(S.document().schemaType("homePage").documentId("homePage")),
 
+
+      S.divider(),
+
       S.listItem()
         .title("FAQ Page")
         .id("faqPage")
         .child(S.document().schemaType("faqPage").documentId("faqPage")),
+
+
+      S.divider(),
+
+      S.listItem()
+        .title("About Page (Our Journey)")
+        .id("aboutPage")
+        .child(S.document().schemaType("aboutPage").documentId("aboutPage")),
 
       S.divider(),
 
@@ -20,6 +31,8 @@ export const structure: StructureResolver = (S) =>
         .title("Programs")
         .schemaType("program")
         .child(S.documentTypeList("program").title("Programs")),
+      
+      S.divider(),
 
       S.listItem()
         .title("Services")
