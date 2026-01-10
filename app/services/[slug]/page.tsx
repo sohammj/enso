@@ -5,9 +5,12 @@ import { fetchServiceBySlug } from "@/sanity/lib/fetchServiceBySlug";
 export default async function ServiceSlugPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const service = await fetchServiceBySlug(params.slug);
+  const { slug } = await params;
+
+  const service = await fetchServiceBySlug(slug);
   if (!service) return notFound();
+
   return <ServiceClient service={service} />;
 }
