@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 60; // 24 hours
+export const revalidate = 0; // 24 hours
 
 export async function GET() {
   const key = process.env.GOOGLE_MAPS_API_KEY;
