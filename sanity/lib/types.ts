@@ -77,3 +77,19 @@ export type Service = {
   };
 };
 
+
+export type FAQItem = {
+  q?: string;
+  a?: string;
+};
+
+export type FAQPageData = {
+  title?: string;
+  subtitle?: string;
+  items?: FAQItem[];
+  cta?: {
+    text?: string;
+    buttonText?: string;
+    href?: string;
+  };
+};

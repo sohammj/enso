@@ -90,6 +90,17 @@ export const SERVICE_BY_SLUG_QUERY = /* groq */ `
 
 
 
+export const FAQ_PAGE_QUERY = /* groq */ `
+*[_type == "faqPage" && _id == "faqPage"][0]{
+  title,
+  subtitle,
+  items[]{ q, a },
+  cta{ text, buttonText, href }
+}
+`;
+
+
+
 
 // cards[]{
 //       title,
