@@ -59,6 +59,38 @@ export const PROGRAM_BY_SLUG_QUERY = /* groq */ `
 `;
 
 
+export const SERVICES_QUERY = /* groq */ `
+*[_type == "service" && (!defined(status) || status == "active")]
+| order(coalesce(order, 9999) asc, _createdAt desc) {
+  _id,
+  title,
+  "slug": slug.current,
+  label,
+  subtitle,
+  preview,
+  description,
+  icon,
+  cta
+}
+`;
+
+export const SERVICE_BY_SLUG_QUERY = /* groq */ `
+*[_type == "service" && slug.current == $slug][0]{
+  _id,
+  title,
+  "slug": slug.current,
+  label,
+  subtitle,
+  preview,
+  description,
+  icon,
+  cta
+}
+`;
+
+
+
+
 // cards[]{
 //       title,
 //       description,

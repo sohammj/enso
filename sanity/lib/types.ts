@@ -57,3 +57,23 @@ export type Program = {
     href?: string;
   };
 };
+
+
+export type Service = {
+  _id: string;
+  title: string;
+  slug?: string; // we’ll map currentSlug below
+  label?: string;
+  subtitle?: string;
+  status?: "active" | "hidden";
+  preview?: string;
+  description?: string[];
+  icon?: any; // Sanity image object
+  cta?: {
+    tagline?: string;
+    subtitle?: string;
+    text?: string;
+    href?: string;
+  };
+};
+

@@ -8,7 +8,16 @@ export const structure: StructureResolver = (S) =>
         .title("Home Page")
         .id("homePage")
         .child(S.document().schemaType("homePage").documentId("homePage")),
-      ...S.documentTypeListItems().filter(
-        (listItem) => !["homePage"].includes(listItem.getId() as string)
-      ),
+
+      S.divider(),
+
+      S.listItem()
+        .title("Programs")
+        .schemaType("program")
+        .child(S.documentTypeList("program").title("Programs")),
+
+      S.listItem()
+        .title("Services")
+        .schemaType("service")
+        .child(S.documentTypeList("service").title("Services")),
     ]);

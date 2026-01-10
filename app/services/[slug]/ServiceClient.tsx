@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
-import type { Program } from "@/sanity/lib/types";
+import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 
 const float = {
@@ -14,21 +14,19 @@ const float = {
   },
 };
 
-
 function isSvgUrl(url?: string | null) {
   if (!url) return false;
-  // Sanity SVG URLs typically end with .svg and include query params
   return url.split("?")[0].toLowerCase().endsWith(".svg");
 }
 
-export default function ProgramClient({ program }: { program: Program }) {
+export default function ServiceClient({ service }: { service: Service }) {
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } },
   };
 
-  const iconSrc = program.icon
-    ? urlFor(program.icon).width(200).height(200).fit("max").url()
+  const iconSrc = service.icon
+    ? urlFor(service.icon).width(200).height(200).fit("max").url()
     : null;
 
   return (
@@ -47,34 +45,32 @@ export default function ProgramClient({ program }: { program: Program }) {
         <motion.div initial="hidden" animate="show" variants={fadeUp}>
           {iconSrc && (
             isSvgUrl(iconSrc) ? (
-                <img
-                    src={iconSrc}
-                    alt={program.title || "Program"}
-                    className="mx-auto mb-6 opacity-90 w-[72px] h-[72px] object-contain"
-                    loading="lazy"
-                />
-                ) : (
-                <Image
-                    src={iconSrc}
-                    alt={program.title || "Program"}
-                    width={72}
-                    height={72}
-                    className="mx-auto mb-6 opacity-90 object-contain"
-                />
-                )
-            )}
+              <img
+                src={iconSrc}
+                alt={service.title || "Service"}
+                className="mx-auto mb-6 opacity-90 w-[72px] h-[72px] object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <Image
+                src={iconSrc}
+                alt={service.title || "Service"}
+                width={72}
+                height={72}
+                className="mx-auto mb-6 opacity-90 object-contain"
+              />
+            )
+          )}
 
           <p className="uppercase tracking-widest text-xs opacity-60 mb-2">
-            {program.label || "Program"}
+            {service.label || "Service"}
           </p>
 
           <h1 className="font-[Playfair_Display] text-[40px] md:text-[52px] leading-tight">
-            {program.title}
+            {service.title}
           </h1>
 
-          {program.subtitle && (
-            <p className="mt-3 text-lg opacity-75">{program.subtitle}</p>
-          )}
+          {service.subtitle && <p className="mt-3 text-lg opacity-75">{service.subtitle}</p>}
 
           <div className="w-24 h-[2px] bg-[#B88933]/70 mx-auto mt-8" />
         </motion.div>
@@ -88,7 +84,7 @@ export default function ProgramClient({ program }: { program: Program }) {
           variants={fadeUp}
           className="space-y-8 text-[18px] leading-[1.9] opacity-85"
         >
-          {(program.description || []).map((para, i) => (
+          {(service.description || []).map((para, i) => (
             <p key={i}>{para}</p>
           ))}
         </motion.div>
@@ -96,11 +92,11 @@ export default function ProgramClient({ program }: { program: Program }) {
 
       <section className="max-w-4xl mx-auto px-6 pb-24">
         <p className="text-center font-[Playfair_Display] italic text-[20px] md:text-[24px] opacity-80">
-          There is no right way to heal — only your way.
+          Healing unfolds gently, when given the space to breathe.
         </p>
       </section>
 
-      {program.cta?.href && (
+      {service.cta?.href && (
         <section className="pb-32 px-6">
           <motion.div
             initial="hidden"
@@ -110,15 +106,15 @@ export default function ProgramClient({ program }: { program: Program }) {
             className="max-w-4xl mx-auto bg-[var(--cream)] rounded-3xl shadow-soft p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6"
           >
             <div>
-              <p className="font-medium text-lg">{program.cta?.tagline}</p>
-              <p className="text-sm opacity-70 mt-1">{program.subtitle}</p>
+              <p className="font-medium text-lg">{service.cta?.tagline}</p>
+              <p className="text-sm opacity-70 mt-1">{service.cta?.subtitle}</p>
             </div>
 
             <a
-              href={program.cta?.href}
+              href={service.cta?.href}
               className="px-7 py-3 rounded-full bg-[#2643A0] text-white text-sm hover:opacity-90 transition"
             >
-              {program.cta?.text || "Learn more"}
+              {service.cta?.text || "Learn more"}
             </a>
           </motion.div>
         </section>
