@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Nav } from "../components/layout/Nav";
 import { Footer } from "../components/layout/Footer";
+import { SanityLive } from "@/sanity/lib/live";
 // import SplashCursor from "../components/bits/SplashCursor";
 
 // export const metadata: Metadata = {
@@ -64,8 +65,14 @@ export default function RootLayout({
           <main className="min-h-dvh pt-20">{children}</main>
           <Footer />
         </div>
+        <SanityLive />
       </body>
     </html>
   );
 }
+
+
+
+
+
 

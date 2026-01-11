@@ -1,18 +1,13 @@
-import { client } from "./client";
+import { fetchFromSanity } from "./fetch";
 import { HOME_PAGE_QUERY } from "./queries";
 import type { HomePageData } from "./types";
 
 export async function fetchHomePage(): Promise<HomePageData | null> {
   try {
-    const data = await client.fetch<HomePageData | null>(
-      HOME_PAGE_QUERY,
-      {},
-      {
-        next: { tags: ["sanity", "home"] },
-        revalidate: 86400,
-      } as any
-    );
-
+    const data = await fetchFromSanity<HomePageData | null>({
+      query: HOME_PAGE_QUERY,
+      tags: ["home"],
+    });
     return data ?? null;
   } catch (e) {
     console.error("fetchHomePage error:", e);

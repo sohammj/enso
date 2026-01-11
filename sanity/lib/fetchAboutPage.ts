@@ -1,18 +1,13 @@
-import { client } from "./client";
+import { fetchFromSanity } from "./fetch";
 import { ABOUT_PAGE_QUERY } from "./queries";
 import type { AboutPageData } from "./types";
 
 export async function fetchAboutPage(): Promise<AboutPageData | null> {
   try {
-    const data = await client.fetch<AboutPageData | null>(
-      ABOUT_PAGE_QUERY,
-      {},
-      {
-        next: { tags: ["sanity", "about"] },
-        revalidate: 21600, // fallback: 1 day
-      } as any
-    );
-
+    const data = await fetchFromSanity<AboutPageData | null>({
+      query: ABOUT_PAGE_QUERY,
+      tags: ["about"],
+    });
     return data ?? null;
   } catch (e) {
     console.error("fetchAboutPage error:", e);
