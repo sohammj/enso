@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import JourneyHorizontal from "@/components/sections/JourneyHorizontal";
 
