@@ -7,8 +7,12 @@ export async function fetchProgramBySlug(slug: string): Promise<Program | null> 
     const data = await client.fetch<Program | null>(
       PROGRAM_BY_SLUG_QUERY,
       { slug },
-      {} as any
+      {
+        next: { tags: ["sanity", "programs", `program:${slug}`] },
+        revalidate: 21600,
+      } as any
     );
+
     return data ?? null;
   } catch (e) {
     console.error("fetchProgramBySlug error:", e);
