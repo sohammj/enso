@@ -6,15 +6,16 @@ type FetchArgs = {
   tags?: string[];
 };
 
-export async function fetchFromSanity<T>({ query, params = {}, tags = [] }: FetchArgs) {
-  const res = await sanityFetch<T>({
+export async function fetchFromSanity<T>({
+  query,
+  params = {},
+  tags = [],
+}: FetchArgs): Promise<T> {
+  const res = await sanityFetch({
     query,
     params,
-    // ✅ Next cache tags (this is what we invalidate)
-    next: { tags: ["sanity", ...tags] },
-    // ✅ fallback revalidate if webhook ever fails
-    revalidate: 86400,
+    // IMPORTANT: don't use `next:` here because your next-sanity types don't support it
   });
 
-  return res.data;
+  return res.data as T;
 }
