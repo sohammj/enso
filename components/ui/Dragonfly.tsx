@@ -17,7 +17,7 @@ type Props = {
    */
   twist?: number;
   /**
-   * Makes hover feel “fluttery”
+   * Makes hover feel "fluttery"
    */
   hoverScale?: number;
   /**
@@ -35,7 +35,7 @@ export default function Dragonfly({
   hoverScale = 1.06,
   floatDuration = 8,
 }: Props) {
-  const ref = useRef<HTMLImageElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   // Scroll progress relative to where this element enters/leaves viewport
   const { scrollYProgress } = useScroll({
@@ -54,35 +54,35 @@ export default function Dragonfly({
   const rSpring = useSpring(r, { stiffness: 80, damping: 20, mass: 0.6 });
 
   return (
-    <motion.img
+    <motion.div
       ref={ref}
-      src={src}
-      alt={alt}
-      className={[
-        // IMPORTANT: allow hover on the dragonfly itself
-        "pointer-events-auto select-none",
-        className,
-      ].join(" ")}
+      className="pointer-events-auto inline-block"
       style={{ x: xSpring, y: ySpring, rotate: rSpring }}
-      // Your original float, but nicer: small perpetual drift
-      animate={{
-        y: [0, -10, 0],
-        rotate: [0, 1.5, -1.5, 0],
-      }}
-      transition={{
-        duration: floatDuration,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      // Hover flutter
-      whileHover={{
-        scale: hoverScale,
-        y: -14,
-        rotate: [0, -6, 6, -4, 4, 0],
-        transition: { duration: 0.55, ease: "easeOut" },
-      }}
-      // Tap / click feel (optional)
-      whileTap={{ scale: 0.98 }}
-    />
+    >
+      <motion.img
+        src={src}
+        alt={alt}
+        className={`select-none ${className}`}
+        // Your original float, but nicer: small perpetual drift
+        animate={{
+          y: [0, -10, 0],
+          rotate: [0, 1.5, -1.5, 0],
+        }}
+        transition={{
+          duration: floatDuration,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        // Hover flutter
+        whileHover={{
+          scale: hoverScale,
+          y: -14,
+          rotate: [0, -6, 6, -4, 4, 0],
+          transition: { duration: 0.55, ease: "easeOut" },
+        }}
+        // Tap / click feel (optional)
+        whileTap={{ scale: 0.98 }}
+      />
+    </motion.div>
   );
 }
