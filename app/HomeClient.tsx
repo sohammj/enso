@@ -13,6 +13,8 @@ import SupportSection from "../components/sections/SupportSection";
 import HandwrittenNotesSection from "../components/sections/HandwrittenNotesSection";
 import StartConversationSection from "../components/sections/StartConversationSection";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+import Dragonfly from "@/components/ui/Dragonfly";
+
 
 import type { HomePageData, SupportCard } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
@@ -227,17 +229,17 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
       <section className="relative overflow-visible">
         {/* 🌸 Gentle mid-left + lower-left cluster */}
         <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[150px] rotate-[-15deg]"
-            {...float}
+            drift={22}
+            twist={6}
+            floatDuration={9}
           />
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
-            {...float}
+            drift={18}
+            twist={5}
+            floatDuration={8}
           />
         </div>
 
@@ -374,19 +376,20 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
           <div className="max-w-5xl mx-auto px-6">
             {/* keep your extra dragonflies block inside About (original had it) */}
             <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
-              <motion.img
-                src="/dragonfly.svg"
-                alt=""
+              <Dragonfly
                 className="w-[150px] rotate-[-15deg]"
-                {...float}
+                drift={22}
+                twist={6}
+                floatDuration={9}
               />
-              <motion.img
-                src="/dragonfly.svg"
-                alt=""
+              <Dragonfly
                 className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
-                {...float}
+                drift={18}
+                twist={5}
+                floatDuration={8}
               />
             </div>
+
 
             <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A]">
               {aboutTitle}
@@ -440,19 +443,20 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
       <section className="relative">
         <HandwrittenNotesSection />
         <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[150px] rotate-[-15deg]"
-            {...float}
+            drift={22}
+            twist={6}
+            floatDuration={9}
           />
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
-            {...float}
+            drift={18}
+            twist={5}
+            floatDuration={8}
           />
         </div>
+
       </section>
 
       <StartConversationSection />
@@ -462,49 +466,49 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
         {/* <GoogleReviews /> */}
 
         <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[150px] rotate-[-15deg]"
-            {...float}
+            drift={22}
+            twist={6}
+            floatDuration={9}
           />
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
-            {...float}
+            drift={18}
+            twist={5}
+            floatDuration={8}
           />
         </div>
 
         <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[120px] rotate-[30deg]"
-            {...float}
+            drift={20}
+            twist={7}
+            floatDuration={10}
           />
         </div>
 
         <MapEmbed />
 
         <div className="absolute bottom-[100px] right-[60px] opacity-90 -z-10">
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[160px] rotate-[10deg]"
-            {...float}
+            drift={24}
+            twist={8}
+            floatDuration={9}
           />
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[110px] absolute -top-[60px] left-[-50px] rotate-[28deg]"
-            {...float}
+            drift={18}
+            twist={7}
+            floatDuration={8}
           />
-          <motion.img
-            src="/dragonfly.svg"
-            alt=""
+          <Dragonfly
             className="w-[90px] absolute top-[100px] left-[70px] rotate-[8deg]"
-            {...float}
+            drift={16}
+            twist={6}
+            floatDuration={7.5}
           />
         </div>
       </section>
