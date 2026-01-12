@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+import Dragonfly from "@/components/ui/Dragonfly";
 import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -16,9 +17,9 @@ export default function ServicesClient({ services }: { services: Service[] }) {
   const getBg = (i: number) => bgColors[i % bgColors.length];
 
   return (
-    <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen">
+    <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen relative">
       {/* HEADER */}
-      <section className="pt-24 md:pt-28 pb-16 md:pb-24 text-center px-6">
+      <section className="pt-24 md:pt-28 pb-16 md:pb-24 text-center px-6 relative z-10">
         <h1 className="font-[Playfair_Display] text-[40px] md:text-[56px] leading-tight">
           Our Services
         </h1>
@@ -31,8 +32,36 @@ export default function ServicesClient({ services }: { services: Service[] }) {
         </p>
       </section>
 
+      {/* 🦋 LEFT TOP CLUSTER */}
+      <div className="hidden md:block absolute left-[40px] top-[200px] opacity-85 z-0 pointer-events-auto">
+        <Dragonfly
+          className="w-[140px] rotate-[-18deg]"
+          drift={28}
+          twist={8}
+          floatDuration={8}
+        />
+      </div>
+      <div className="hidden md:block absolute left-[80px] top-[340px] opacity-85 z-0 pointer-events-auto">
+        <Dragonfly
+          className="w-[100px] rotate-[8deg]"
+          drift={24}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
+
+      {/* 🦋 RIGHT SIDE */}
+      <div className="hidden md:block absolute right-[50px] top-[420px] opacity-80 z-0 pointer-events-auto">
+        <Dragonfly
+          className="w-[110px] rotate-[-10deg]"
+          drift={22}
+          twist={7}
+          floatDuration={8}
+        />
+      </div>
+
       {/* SERVICES CARDS */}
-      <section className="pb-32 md:pb-40">
+      <section className="pb-32 md:pb-40 relative z-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-14 px-6">
           {services.map((service, i) => {
             const bg = getBg(i);
