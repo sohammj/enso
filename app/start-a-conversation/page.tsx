@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { studioInfo } from "../../lib/data";
 import { useState } from "react";
+import Dragonfly from "@/components/ui/Dragonfly";
 
 /* ================= Schema ================= */
 
@@ -14,7 +15,7 @@ const Schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   contact: z.string().min(3, "Please enter your email or phone"),
   preferred: z.enum(["Email", "Call", "WhatsApp"]),
-  message: z.string().min(5, "Tell us a little about what you’re looking for"),
+  message: z.string().min(5, "Tell us a little about what you're looking for"),
 });
 
 type FormData = z.infer<typeof Schema>;
@@ -32,11 +33,6 @@ const float = {
     ease: "easeInOut",
   },
 };
-
-
-
-// add if not already
-// import Image from "next/image";
 
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/enso-mind-matters", icon: "/icons/linkedin.svg" },
@@ -89,15 +85,12 @@ function SocialDock() {
         {/* dropdown */}
         <div
           className={[
-            // "absolute bottom-14 right-0",
             "absolute bottom-20 right-0",
             "transition-all duration-200",
             open ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none",
           ].join(" ")}
         >
-          {/* <div className="flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/90 backdrop-blur shadow-soft"> */}
           <div className="flex flex-col overflow-hidden rounded-3xl border border-black/10 bg-white/95 backdrop-blur shadow-soft">
-
             {socials.map((s) => (
               <a
                 key={s.label}
@@ -105,13 +98,10 @@ function SocialDock() {
                 target={s.href.startsWith("http") ? "_blank" : undefined}
                 rel={s.href.startsWith("http") ? "noreferrer" : undefined}
                 className="flex h-16 w-16 items-center justify-center border-b border-black/10 last:border-b-0 active:bg-black/[0.05]"
-
-                // className="flex h-12 w-12 items-center justify-center border-b border-black/10 last:border-b-0 active:bg-black/[0.04]"
                 aria-label={s.label}
                 title={s.label}
                 onClick={() => setOpen(false)}
               >
-                {/* <Image src={s.icon} alt="" width={18} height={18} className="opacity-90" /> */}
                 <Image
                   src={s.icon}
                   alt=""
@@ -119,7 +109,6 @@ function SocialDock() {
                   height={28}
                   className="opacity-95"
                 />
-
               </a>
             ))}
           </div>
@@ -143,9 +132,7 @@ function SocialDock() {
               ${open ? "rotate-90" : "rotate-0"}
             `}
           />
-
         </button>
-
       </div>
 
       {/* click outside overlay (mobile) */}
@@ -161,10 +148,8 @@ function SocialDock() {
   );
 }
 
-
 /* ================= Page ================= */
 
-// export default function BookPage() {
 export default function StartConversation() {
   const {
     register,
@@ -185,46 +170,43 @@ export default function StartConversation() {
     reset();
   };
 
-  // return (
-  //   <div className="relative mx-auto max-w-2xl px-4 py-14">
   return (
-  <div className="relative mx-auto max-w-2xl px-4 py-14">
-    {/* Social rail — choose left or right */}
-    {/* <SocialRail side="left" /> */}
-    <SocialDock />
+    <div className="relative mx-auto max-w-2xl px-4 py-14">
+      {/* Social rail */}
+      <SocialDock />
 
-     {/* 🦋 LEFT SIDE – gentle vertical cluster */}
-      <div className="hidden lg:block absolute left-[-180px] top-[140px] opacity-80 -z-10">
-        <motion.img
-          src="/dragonfly.svg"
-          alt=""
+      {/* 🦋 LEFT SIDE – gentle vertical cluster - NOW ANIMATED */}
+      <div className="hidden lg:block absolute left-[-180px] top-[140px] opacity-80 z-0">
+        <Dragonfly
           className="w-[140px] rotate-[-12deg]"
-          {...float}
+          drift={24}
+          twist={6}
+          floatDuration={8}
         />
-        <motion.img
-          src="/dragonfly.svg"
-          alt=""
-          className="w-[90px] rotate-[6deg] absolute top-[120px] left-[90px]"
-          {...float}
+      </div>
+      <div className="hidden lg:block absolute left-[-90px] top-[260px] opacity-80 z-0">
+        <Dragonfly
+          className="w-[90px] rotate-[6deg]"
+          drift={18}
+          twist={5}
+          floatDuration={8}
         />
       </div>
 
-      {/* 🦋 RIGHT SIDE – balancing single */}
-      <div className="hidden lg:block absolute right-[-160px] top-[320px] opacity-70 -z-10">
-        <motion.img
-          src="/dragonfly.svg"
-          alt=""
+      {/* 🦋 RIGHT SIDE – balancing single - NOW ANIMATED */}
+      <div className="hidden lg:block absolute right-[-160px] top-[320px] opacity-70 z-0">
+        <Dragonfly
           className="w-[110px] rotate-[10deg]"
-          {...float}
+          drift={20}
+          twist={6}
+          floatDuration={8}
         />
       </div>
-      
-     
 
       {/* Heading */}
       <h1 className="font-display text-4xl">Connect With Us Here</h1>
       <p className="mt-2 text-sm opacity-80">
-        Tell us what you’re seeking support for. We will reach out to you soon.
+        Tell us what you're seeking support for. We will reach out to you soon.
       </p>
 
       {/* Success */}
@@ -269,7 +251,7 @@ export default function StartConversation() {
         <textarea
           className="rounded-xl border border-black/10 bg-white px-4 py-3"
           rows={5}
-          placeholder="Anything you’d like to share"
+          placeholder="Anything you'd like to share"
           {...register("message")}
         />
         {errors.message && (

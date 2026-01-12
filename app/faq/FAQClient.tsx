@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import { faqs as fallbackFaqs } from "../../lib/data";
 import type { FAQPageData } from "@/sanity/lib/types";
+import Dragonfly from "@/components/ui/Dragonfly";
 
 const float = {
   animate: {
@@ -25,15 +26,15 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
 
   const ctaText =
     data?.cta?.text ||
-    "Still unsure? Reach out and we’ll gently point you in the right direction.";
+    "Still unsure? Reach out and we'll gently point you in the right direction.";
 
   const ctaBtn = data?.cta?.buttonText || "Start a conversation";
   const ctaHref = data?.cta?.href || "/start-a-conversation";
 
   return (
-    <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen relative">
+    <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen relative overflow-hidden">
       {/* HEADER */}
-      <section className="pt-28 pb-20 text-center px-6">
+      <section className="pt-28 pb-20 text-center px-6 relative z-10">
         <h1 className="font-[Playfair_Display] text-[48px] md:text-[56px] leading-tight">
           {title}
         </h1>
@@ -43,24 +44,26 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
         <p className="text-[18px] opacity-80 max-w-xl mx-auto">{subtitle}</p>
       </section>
 
-      {/* 🦋 RIGHT DRAGONFLIES */}
-      <div className="hidden md:block absolute right-[40px] top-[260px] opacity-70 -z-10">
-        <motion.img
-          src="/dragonfly.svg"
-          alt=""
+      {/* 🦋 RIGHT DRAGONFLIES - ANIMATED */}
+      <div className="hidden md:block fixed right-[40px] top-[260px] opacity-70 z-[5]">
+        <Dragonfly
           className="w-[140px] rotate-[10deg]"
-          {...float}
+          drift={24}
+          twist={6}
+          floatDuration={8}
         />
-        <motion.img
-          src="/dragonfly.svg"
-          alt=""
-          className="w-[100px] absolute top-[120px] right-[60px] rotate-[-6deg]"
-          {...float}
+      </div>
+      <div className="hidden md:block fixed right-[-20px] top-[380px] opacity-70 z-[5]">
+        <Dragonfly
+          className="w-[100px] rotate-[-6deg]"
+          drift={20}
+          twist={5}
+          floatDuration={8}
         />
       </div>
 
       {/* FAQ LIST */}
-      <section className="max-w-3xl mx-auto px-6 pb-28">
+      <section className="max-w-3xl mx-auto px-6 pb-28 relative z-10">
         <div className="space-y-6">
           {items.map((f, i) => (
             <motion.details
@@ -90,12 +93,12 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
       </section>
 
       {/* 🌾 DANDELION */}
-      <div className="hidden md:block absolute right-[60px] bottom-[260px] opacity-80 -z-10">
+      <div className="hidden md:block absolute right-[60px] bottom-[260px] opacity-80 z-0 pointer-events-none">
         <motion.img src="/dandelion.svg" alt="" className="w-[180px]" {...float} />
       </div>
 
       {/* CTA */}
-      <section className="pb-32 px-6">
+      <section className="pb-32 px-6 relative z-10">
         <div className="max-w-4xl mx-auto bg-[var(--cream)] rounded-3xl shadow-soft p-8 md:p-12 text-center">
           <p className="text-[17px] opacity-80 mb-6">{ctaText}</p>
 
