@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { studioInfo } from "../../lib/data";
+import { studioInfo } from "@/lib/data";
 import { useState } from "react";
 import Dragonfly from "@/components/ui/Dragonfly";
 
