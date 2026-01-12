@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import DomeGallery from '@/components/bits/DomeGallery'; 
 
@@ -160,8 +160,29 @@ export default function GalleryPage() {
 /* ================= DOME GALLERY MODAL ================= */
 
 function DomeGalleryModal({ album, onClose }: { album: Album; onClose: () => void }) {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    // Store original styles
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    const originalPosition = window.getComputedStyle(document.body).position;
+    
+    // Lock scroll
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = originalStyle;
+      document.body.style.position = originalPosition;
+      document.body.style.width = '';
+      document.body.style.height = '';
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-50 bg-[#F5F3EF] w-screen h-screen overflow-hidden">
+    <div className="fixed inset-0 z-[9999] bg-[#F5F3EF] w-screen h-screen overflow-hidden touch-none overscroll-none">
       {/* Close Button */}
       <button
         onClick={onClose}
