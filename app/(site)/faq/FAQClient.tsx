@@ -53,7 +53,7 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
           floatDuration={8}
         />
       </div>
-      <div className="hidden md:block fixed right-[-60px] top-[380px] opacity-70 z-[5]">
+      <div className="hidden md:block fixed right-[60px] top-[380px] opacity-70 z-[5]">
         <Dragonfly
           className="w-[100px] rotate-[-6deg]"
           drift={20}
