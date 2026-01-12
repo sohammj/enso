@@ -33,7 +33,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
       </section>
 
       {/* 🦋 LEFT TOP CLUSTER */}
-      <div className="hidden md:block absolute left-[40px] top-[200px] opacity-85 z-[5]">
+      <div className="hidden md:block absolute left-[40px] top-[200px] opacity-85 z-[60]">
         <Dragonfly
           className="w-[140px] rotate-[-18deg]"
           drift={28}
@@ -41,7 +41,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
           floatDuration={8}
         />
       </div>
-      <div className="hidden md:block absolute left-[80px] top-[340px] opacity-85 z-[5]">
+      <div className="hidden md:block absolute left-[80px] top-[340px] opacity-85 z-[60]">
         <Dragonfly
           className="w-[100px] rotate-[8deg]"
           drift={24}
@@ -51,7 +51,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
       </div>
 
       {/* 🦋 RIGHT SIDE */}
-      <div className="hidden md:block absolute right-[50px] top-[420px] opacity-80 z-[5]">
+      <div className="hidden md:block absolute right-[50px] top-[420px] opacity-80 z-[60]">
         <Dragonfly
           className="w-[110px] rotate-[-10deg]"
           drift={22}
