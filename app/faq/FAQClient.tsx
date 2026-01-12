@@ -45,7 +45,7 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
       </section>
 
       {/* 🦋 RIGHT DRAGONFLIES - ANIMATED */}
-      <div className="hidden md:block fixed right-[50px] top-[260px] opacity-70 z-[5]">
+      <div className="hidden md:block fixed right-[80px] top-[260px] opacity-70 z-[5]">
         <Dragonfly
           className="w-[140px] rotate-[10deg]"
           drift={24}
@@ -53,7 +53,7 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
           floatDuration={8}
         />
       </div>
-      <div className="hidden md:block fixed right-[-35px] top-[380px] opacity-70 z-[5]">
+      <div className="hidden md:block fixed right-[-60px] top-[380px] opacity-70 z-[5]">
         <Dragonfly
           className="w-[100px] rotate-[-6deg]"
           drift={20}

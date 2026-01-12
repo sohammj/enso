@@ -19,6 +19,24 @@ export const homePage = defineType({
         }),
         defineField({ name: "subheadline", title: "Subheadline", type: "text", rows: 3 }),
       ],
+      preview: {
+        select: {
+          firstLine: "hero.headlineLines.0",
+          sub: "hero.subheadline",
+        },
+        prepare({
+          firstLine,
+          sub,
+        }: {
+          firstLine?: string;
+          sub?: string;
+        }) {
+          return {
+            title: "Home Page",
+            subtitle: [firstLine, sub].filter(Boolean).join(" • "),
+          };
+        },
+      },
     }),
 
     defineField({
