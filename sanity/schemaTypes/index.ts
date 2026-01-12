@@ -4,7 +4,8 @@ import { program } from "./program";
 import service from "./service";
 import { faqPage } from "./faqPage";
 import { aboutPage } from "./aboutPage";
+import galleryAlbum from "./galleryAlbum";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [homePage, program, service,faqPage, aboutPage],
+  types: [homePage, program, service,faqPage, aboutPage, galleryAlbum],
 };

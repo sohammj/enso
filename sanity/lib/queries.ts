@@ -125,6 +125,24 @@ export const ABOUT_PAGE_QUERY = /* groq */ `
 `;
 
 
+
+export const GALLERY_ALBUMS_QUERY = `*[_type == "galleryAlbum"] | order(order asc, _createdAt desc) {
+  _id,
+  title,
+  "slug": slug.current,
+  "coverImage": coverImage.asset->url,
+  "photos": photos[].asset->url
+}`;
+
+export const GALLERY_ALBUM_BY_SLUG_QUERY = `*[_type == "galleryAlbum" && slug.current == $slug][0] {
+  _id,
+  title,
+  "slug": slug.current,
+  "coverImage": coverImage.asset->url,
+  "photos": photos[].asset->url
+}`;
+
+
 // cards[]{
 //       title,
 //       description,

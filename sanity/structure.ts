@@ -35,6 +35,13 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
 
       S.listItem()
+        .title('Gallery Albums')
+        .schemaType('galleryAlbum')
+        .child(S.documentTypeList('galleryAlbum').title('Gallery Albums')),
+
+      S.divider(),
+
+      S.listItem()
         .title("Services")
         .schemaType("service")
         .child(S.documentTypeList("service").title("Services")),
