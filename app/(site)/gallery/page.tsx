@@ -4,9 +4,18 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import DomeGallery from '@/components/bits/DomeGallery'; 
 
+/* ================= TYPES ================= */
+
+type Album = {
+  id: string;
+  title: string;
+  coverImage: string;
+  photos: string[];
+};
+
 /* ================= SAMPLE DATA ================= */
 
-const ALBUMS = [
+const ALBUMS: Album[] = [
   {
     id: 'cancer-survivors',
     title: 'Art Therapy with Cancer Survivors',
@@ -78,7 +87,7 @@ const ALBUMS = [
 /* ================= MAIN COMPONENT ================= */
 
 export default function GalleryPage() {
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
 
   return (
     <>
@@ -150,7 +159,7 @@ export default function GalleryPage() {
 
 /* ================= DOME GALLERY MODAL ================= */
 
-function DomeGalleryModal({ album, onClose }) {
+function DomeGalleryModal({ album, onClose }: { album: Album; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 bg-[#F5F3EF]">
       {/* Close Button */}
