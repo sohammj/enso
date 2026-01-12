@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+import Dragonfly from "@/components/ui/Dragonfly";
 import type { Program } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -15,11 +16,9 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
   const getBg = (i: number) => bgColors[i % bgColors.length];
 
   function isSvgUrl(url?: string | null) {
-  if (!url) return false;
-  // Sanity SVG URLs typically end with .svg and include query params
-  return url.split("?")[0].toLowerCase().endsWith(".svg");
-}
-
+    if (!url) return false;
+    return url.split("?")[0].toLowerCase().endsWith(".svg");
+  }
 
   const Section = ({
     title,
@@ -30,7 +29,7 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
     subtitle: string;
     items: Program[];
   }) => (
-    <section className="pb-20">
+    <section className="pb-20 relative">
       <div className="text-center px-6">
         {!!title && (
           <h2 className="font-[Playfair_Display] text-[30px] md:text-[40px]">
@@ -129,25 +128,24 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
                         <div className="h-[200px] flex items-center justify-center mt-6">
                           {iconSrc ? (
                             isSvgUrl(iconSrc) ? (
-                                <img
+                              <img
                                 src={iconSrc}
                                 alt={program.title || "Program"}
                                 className="w-[88px] h-[88px] object-contain"
                                 loading="lazy"
-                                />
+                              />
                             ) : (
-                                <Image
+                              <Image
                                 src={iconSrc}
                                 alt={program.title || "Program"}
                                 width={88}
                                 height={88}
                                 className="object-contain"
-                                />
+                              />
                             )
-                        ) : (
+                          ) : (
                             <div className="text-sm opacity-60">Explore</div>
-                            )}
-
+                          )}
                         </div>
                       </div>
 
@@ -190,8 +188,8 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
   );
 
   return (
-    <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen">
-      <section className="pt-24 md:pt-28 pb-12 md:pb-16 text-center px-6">
+    <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen relative overflow-visible">
+      <section className="pt-24 md:pt-28 pb-12 md:pb-16 text-center px-6 relative z-20">
         <h1 className="font-[Playfair_Display] text-[40px] md:text-[56px] leading-tight">
           Our Programs
         </h1>
@@ -202,6 +200,66 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
           Explore ways to express, connect, and heal through creativity.
         </p>
       </section>
+
+      {/* 🦋 LEFT TOP */}
+      <div className="hidden md:block absolute left-[50px] top-[200px] opacity-85 z-[5]">
+        <Dragonfly
+          className="w-[135px] rotate-[-20deg]"
+          drift={26}
+          twist={7}
+          floatDuration={8}
+        />
+      </div>
+
+      {/* 🦋 LEFT MIDDLE */}
+      <div className="hidden md:block absolute left-[70px] top-[480px] opacity-85 z-[5]">
+        <Dragonfly
+          className="w-[105px] rotate-[12deg]"
+          drift={22}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
+
+      {/* 🦋 RIGHT TOP */}
+      <div className="hidden md:block absolute right-[60px] top-[320px] opacity-80 z-[5]">
+        <Dragonfly
+          className="w-[125px] rotate-[18deg]"
+          drift={24}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
+
+      {/* 🦋 RIGHT MIDDLE */}
+      <div className="hidden md:block absolute right-[40px] top-[600px] opacity-80 z-[5]">
+        <Dragonfly
+          className="w-[115px] rotate-[-8deg]"
+          drift={20}
+          twist={5}
+          floatDuration={8}
+        />
+      </div>
+
+      {/* 🦋 BOTTOM LEFT (for Past Programs section) */}
+      <div className="hidden md:block absolute left-[90px] top-[1100px] opacity-75 z-[5]">
+        <Dragonfly
+          className="w-[120px] rotate-[25deg]"
+          drift={22}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
+
+      {/* 🦋 BOTTOM RIGHT (for Past Programs section) */}
+      <div className="hidden md:block absolute right-[100px] top-[1200px] opacity-75 z-[5]">
+        <Dragonfly
+          className="w-[110px] rotate-[-15deg]"
+          drift={20}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
 
       <Section title="" subtitle="" items={ongoing} />
 
