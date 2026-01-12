@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-import MagicBento from "../components/bits/MagicBento";
-import { PauseReflect } from "../components/sections/PauseReflect";
-import { GoogleReviews } from "../components/sections/GoogleReviews";
-import { MapEmbed } from "../components/sections/MapEmbed";
-import SupportSection from "../components/sections/SupportSection";
-import HandwrittenNotesSection from "../components/sections/HandwrittenNotesSection";
-import StartConversationSection from "../components/sections/StartConversationSection";
+import MagicBento from "@/components/bits/MagicBento";
+import { PauseReflect } from "@/components/sections/PauseReflect";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
+import { MapEmbed } from "@/components/sections/MapEmbed";
+import SupportSection from "@/components/sections/SupportSection";
+import HandwrittenNotesSection from "@/components/sections/HandwrittenNotesSection";
+import StartConversationSection from "@/components/sections/StartConversationSection";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 
