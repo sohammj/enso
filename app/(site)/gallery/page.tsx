@@ -182,6 +182,11 @@ function DomeGalleryModal({ album, onClose }: { album: Album; onClose: () => voi
       <div className="w-full h-full">
         <DomeGallery 
           images={album.photos}
+          fit={1}
+          minRadius={750}
+          maxVerticalRotationDeg={5}
+          segments={28}
+          dragDampening={1}
           overlayBlurColor="#F5F3EF"
           imageBorderRadius="20px"
           openedImageBorderRadius="20px"
