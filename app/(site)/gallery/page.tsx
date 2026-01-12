@@ -103,7 +103,7 @@ export default function GalleryPage() {
         }
       `}</style>
 
-      <section className="relative py-24 bg-[#F5F3EF] min-h-screen">
+      <section className="relative py-24  min-h-screen">
         {/* Header */}
         <div className="max-w-6xl mx-auto px-6 text-center mb-20">
           <h1 className="font-serif text-5xl text-[#506EA1] mb-4">
