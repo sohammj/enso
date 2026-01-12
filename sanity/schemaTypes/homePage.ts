@@ -103,7 +103,7 @@ export const homePage = defineType({
     },
     prepare({ line1, sub }: { line1?: string; sub?: string }) {
       return {
-        title: "Home Page",
+        title: "   ",
         subtitle: [line1, sub].filter(Boolean).join(" • "),
       };
     },
