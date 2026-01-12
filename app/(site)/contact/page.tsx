@@ -1,5 +1,5 @@
-import { studioInfo } from "../../lib/data";
-import { MapEmbed } from "../../components/sections/MapEmbed";
+import { studioInfo } from "@/lib/data";
+import { MapEmbed } from "@/components/sections/MapEmbed";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 
 

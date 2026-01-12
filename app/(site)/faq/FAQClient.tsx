@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
-import { faqs as fallbackFaqs } from "../../lib/data";
+import { faqs as fallbackFaqs } from "@/lib/data";
 import type { FAQPageData } from "@/sanity/lib/types";
 import Dragonfly from "@/components/ui/Dragonfly";
 
