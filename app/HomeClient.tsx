@@ -130,9 +130,9 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
   };
 
   // ========== Resolve content with fallbacks ==========
-    const heroHeadlineLines =
-      splitHeadlineToLines(data?.hero?.headlineLines?.join("\n")) ||
-      DEFAULTS.hero.headlineLines;
+  const heroHeadlineLines =
+    splitHeadlineToLines(data?.hero?.headlineLines?.join("\n")) ||
+    DEFAULTS.hero.headlineLines;
 
   const heroSub = data?.hero?.subheadline || DEFAULTS.hero.subheadline;
 
@@ -181,59 +181,59 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
   return (
     <>
       {/* HERO */}
-        <section className="relative h-[100vh] w-full overflow-hidden text-[#111] -mt-[80px]">
-            <video
-                ref={videoRef}
-                className="absolute inset-0 w-full h-full object-cover"
-                autoPlay
-                loop
-                muted={muted}
-                playsInline
-                preload="auto"
-            >
-                <source src={DEFAULTS.hero.fallbackVideoPath} type="video/mp4" />
-            </video>
+      <section className="relative h-[100vh] w-full overflow-hidden text-[#111] -mt-[80px]">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted={muted}
+          playsInline
+          preload="auto"
+        >
+          <source src={DEFAULTS.hero.fallbackVideoPath} type="video/mp4" />
+        </video>
 
-            {/* keep original look: bg-black/10 */}
-            <div
-                className="absolute inset-0"
-                style={{ backgroundColor: "rgba(0,0,0,0.1)" }}
-            />
+        {/* keep original look: bg-black/10 */}
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(0,0,0,0.1)" }}
+        />
 
-            <button
-                onClick={toggleMute}
-                className="absolute bottom-6 right-6 z-20 bg-white/70 hover:bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm shadow-md"
-            >
-                {muted ? DEFAULTS.hero.soundButtonLabelMuted : DEFAULTS.hero.soundButtonLabelUnmuted}
-            </button>
+        <button
+          onClick={toggleMute}
+          className="absolute bottom-6 right-6 z-20 bg-white/70 hover:bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm shadow-md"
+        >
+          {muted ? DEFAULTS.hero.soundButtonLabelMuted : DEFAULTS.hero.soundButtonLabelUnmuted}
+        </button>
 
-            <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16 max-w-3xl">
-                <h1 className="font-title text-[32px] md:text-6xl leading-tight">
-                {heroHeadlineLines[0]}
-                <br />
-                {heroHeadlineLines[1]}
-                <br />
-                {heroHeadlineLines[2]}
-                <br />
-                {heroHeadlineLines[3]}
-                </h1>
+        <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16 max-w-3xl">
+          <h1 className="font-title text-[32px] md:text-6xl leading-tight">
+            {heroHeadlineLines[0]}
+            <br />
+            {heroHeadlineLines[1]}
+            <br />
+            {heroHeadlineLines[2]}
+            <br />
+            {heroHeadlineLines[3]}
+          </h1>
 
-                <p className="font-body mt-4 md:mt-6 text-base md:text-lg opacity-80">
-                {heroSub}
-                </p>
-            </div>
-        </section>
+          <p className="font-body mt-4 md:mt-6 text-base md:text-lg opacity-80">
+            {heroSub}
+          </p>
+        </div>
+      </section>
 
 
       {/* 🌕 WELCOME + ABOUT + SUPPORT WRAPPER */}
       <section className="relative overflow-visible">
-        {/* 🌸 Gentle mid-left + lower-left cluster */}
-        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
+        {/* 🌸 Gentle mid-left + lower-left cluster - POSITION FROM OLD CODE */}
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 z-0">
           <Dragonfly
             className="w-[150px] rotate-[-15deg]"
             drift={22}
             twist={6}
-            floatDuration={9}
+            floatDuration={8}
           />
           <Dragonfly
             className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
@@ -309,18 +309,18 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
                 className="w-full max-w-[320px] mx-auto md:max-w-none rounded-2xl object-cover shadow-md"
               /> */}
               <Image
-                    src={welcomeImageSrc}
-                    alt="Enso Art Therapy Space"
-                    width={520}
-                    height={520}
-                    className="
-                        w-full
-                        h-full
-                        rounded-2xl
-                        object-cover
-                        shadow-md
-                    "
-                />
+                src={welcomeImageSrc}
+                alt="Enso Art Therapy Space"
+                width={520}
+                height={520}
+                className="
+                  w-full
+                  h-full
+                  rounded-2xl
+                  object-cover
+                  shadow-md
+                "
+              />
 
 
               <div>
@@ -373,24 +373,27 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
 
         {/* 🌿 ABOUT ENSO */}
         <section className="relative pt-20 pb-10 z-10">
+          {/* 🌸 About section - cluster of 2 - MOVED OUTSIDE CONTAINER */}
+          <div className="hidden md:block absolute left-[30px] top-[120px] opacity-90 z-[5]">
+            <Dragonfly
+              className="w-[150px] rotate-[-15deg]"
+              drift={22}
+              twist={6}
+              floatDuration={8}
+            />
+          </div>
+          
+          {/* Second dragonfly lower right in About */}
+          <div className="hidden md:block absolute left-[70px] top-[200px] opacity-90 z-[5]">
+            <Dragonfly
+              className="w-[130px] rotate-[15deg]"
+              drift={20}
+              twist={5}
+              floatDuration={8}
+            />
+          </div>
+
           <div className="max-w-5xl mx-auto px-6">
-            {/* keep your extra dragonflies block inside About (original had it) */}
-            <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
-              <Dragonfly
-                className="w-[150px] rotate-[-15deg]"
-                drift={22}
-                twist={6}
-                floatDuration={9}
-              />
-              <Dragonfly
-                className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
-                drift={18}
-                twist={5}
-                floatDuration={8}
-              />
-            </div>
-
-
             <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A]">
               {aboutTitle}
             </h2>
@@ -421,56 +424,83 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
           </p>
         </section>
 
-        {/* 🌕 GLOW + PAUSE & REFLECT (keep same wrapper) */}
-        <div className="relative py-32 md:py-36 overflow-visible pointer-events-none">
-          <div
-            className="absolute right-[-220px] top-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full bg-yellow-400 opacity-95 blur-[120px]"
-          />
+        {/* 🌕 GLOW + PAUSE & REFLECT */}
+        <div className="relative py-32 md:py-36 overflow-visible">
+          <div className="absolute right-[-220px] top-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full bg-yellow-400 opacity-95 blur-[120px] pointer-events-none" />
           <PauseReflect label={pauseLabel} phrases={pausePhrases} />
         </div>
 
         {/* 🌿 SUPPORT */}
-        {/* <SupportSection title={supportTitle} subtitle={supportSubtitle}  /> */}
         <SupportSection
-            title={supportTitle}
-            subtitle={supportSubtitle}
-            cards={supportCards}
+          title={supportTitle}
+          subtitle={supportSubtitle}
+          cards={supportCards}
         />
 
       </section>
 
+      {/* 🌸 Support section - dragonflies OUTSIDE the main wrapper */}
+      <div className="hidden md:block absolute right-[80px] top-[2800px] opacity-90 z-[5]">
+        <Dragonfly
+          className="w-[130px] rotate-[12deg]"
+          drift={20}
+          twist={5}
+          floatDuration={8}
+        />
+      </div>
+      <div className="hidden md:block absolute left-[60px] top-[3100px] opacity-90 z-[5]">
+        <Dragonfly
+          className="w-[115px] rotate-[-18deg]"
+          drift={18}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
+
       {/* 🐉 ABOVE HANDWRITTEN NOTES */}
       <section className="relative">
-        <HandwrittenNotesSection />
-        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
+        {/* 🌸 Handwritten Notes - cluster of 3 - POSITIONED BETTER */}
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 z-[5]">
           <Dragonfly
             className="w-[150px] rotate-[-15deg]"
             drift={22}
             twist={6}
-            floatDuration={9}
+            floatDuration={8}
           />
+        </div>
+        <div className="hidden md:block absolute left-[120px] top-[220px] opacity-90 z-[5]">
           <Dragonfly
-            className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
+            className="w-[100px] rotate-[5deg]"
             drift={18}
             twist={5}
             floatDuration={8}
           />
         </div>
-
+        <div className="hidden md:block absolute left-[60px] top-[340px] opacity-90 z-[5]">
+          <Dragonfly
+            className="w-[120px] rotate-[-25deg]"
+            drift={20}
+            twist={7}
+            floatDuration={8}
+          />
+        </div>
+        
+        <HandwrittenNotesSection />
       </section>
 
       <StartConversationSection />
 
-      {/* 🐉 MAP WHITESPACE (keep same as original) */}
+      {/* 🐉 MAP WHITESPACE */}
       <section className="relative">
-        {/* <GoogleReviews /> */}
+        <GoogleReviews />
 
-        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 -z-10">
+        {/* 🌸 Gentle mid-left + lower-left cluster - POSITION FROM OLD CODE */}
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 z-0">
           <Dragonfly
             className="w-[150px] rotate-[-15deg]"
             drift={22}
             twist={6}
-            floatDuration={9}
+            floatDuration={8}
           />
           <Dragonfly
             className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
@@ -480,23 +510,25 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
           />
         </div>
 
-        <div className="absolute bottom-[60px] left-[100px] opacity-90 -z-10">
+        {/* Single dragonfly on left - POSITION FROM OLD CODE */}
+        <div className="hidden md:block absolute bottom-[60px] left-[100px] opacity-90 z-0">
           <Dragonfly
             className="w-[120px] rotate-[30deg]"
             drift={20}
             twist={7}
-            floatDuration={10}
+            floatDuration={8}
           />
         </div>
 
         <MapEmbed />
 
-        <div className="absolute bottom-[100px] right-[60px] opacity-90 -z-10">
+        {/* 🌬️ Calm finale bottom-right group - POSITION FROM OLD CODE */}
+        <div className="hidden md:block absolute bottom-[100px] right-[60px] opacity-90 z-0">
           <Dragonfly
             className="w-[160px] rotate-[10deg]"
             drift={24}
             twist={8}
-            floatDuration={9}
+            floatDuration={8}
           />
           <Dragonfly
             className="w-[110px] absolute -top-[60px] left-[-50px] rotate-[28deg]"
@@ -508,7 +540,7 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
             className="w-[90px] absolute top-[100px] left-[70px] rotate-[8deg]"
             drift={16}
             twist={6}
-            floatDuration={7.5}
+            floatDuration={8}
           />
         </div>
       </section>
