@@ -161,25 +161,25 @@ export default function GalleryPage() {
 
 function DomeGalleryModal({ album, onClose }: { album: Album; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 bg-[#F5F3EF]">
+    <div className="fixed inset-0 z-50 bg-[#F5F3EF] w-screen h-screen overflow-hidden">
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 z-[100] p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-300 hover:scale-110"
+        className="absolute top-4 right-4 md:top-6 md:right-6 z-[100] p-2 md:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-300 hover:scale-110"
         aria-label="Close gallery"
       >
-        <X className="w-6 h-6 text-[#506EA1]" />
+        <X className="w-5 h-5 md:w-6 md:h-6 text-[#506EA1]" />
       </button>
 
       {/* Album Title */}
-      <div className="absolute top-6 left-6 z-[100] bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg">
-        <h2 className="text-[#506EA1] font-medium text-lg">
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-[100] bg-white/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full shadow-lg max-w-[60vw]">
+        <h2 className="text-[#506EA1] font-medium text-sm md:text-lg truncate">
           {album.title}
         </h2>
       </div>
 
       {/* Dome Gallery Component */}
-      <div className="w-full h-full">
+      <div className="w-full h-full bg-[#F5F3EF]">
         <DomeGallery 
           images={album.photos}
           fit={1}
@@ -187,7 +187,7 @@ function DomeGalleryModal({ album, onClose }: { album: Album; onClose: () => voi
           maxVerticalRotationDeg={5}
           segments={28}
           dragDampening={1}
-          overlayBlurColor="#F5F3EF"
+          overlayBlurColor="transparent"
           imageBorderRadius="20px"
           openedImageBorderRadius="20px"
           grayscale={false}
