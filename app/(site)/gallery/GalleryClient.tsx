@@ -88,7 +88,6 @@ export default function GalleryClient({ albums }: GalleryClientProps) {
 }
 
 /* ================= DOME GALLERY MODAL ================= */
-/* ================= DOME GALLERY MODAL ================= */
 function DomeGalleryModal({ 
   album, 
   onClose 
@@ -115,36 +114,38 @@ function DomeGalleryModal({
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-[#F5F3EF] w-screen h-screen overflow-hidden">
+    <div className="fixed inset-0 z-[9999] bg-[#F5F3EF] w-screen h-screen overflow-hidden touch-none overscroll-none">
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 md:top-6 md:right-6 z-[10000] p-2 md:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-300 hover:scale-110"
+        className="absolute top-4 right-4 md:top-6 md:right-6 z-[100] p-2 md:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-300 hover:scale-110"
         aria-label="Close gallery"
       >
         <X className="w-5 h-5 md:w-6 md:h-6 text-[#506EA1]" />
       </button>
 
       {/* Album Title */}
-      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-[10000] bg-white/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full shadow-lg max-w-[60vw]">
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-[100] bg-white/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full shadow-lg max-w-[60vw]">
         <h2 className="text-[#506EA1] font-medium text-sm md:text-lg truncate">
           {album.title}
         </h2>
       </div>
 
       {/* Dome Gallery Component */}
-      <DomeGallery 
-        images={album.photos}
-        fit={1}
-        minRadius={750}
-        maxVerticalRotationDeg={5}
-        segments={28}
-        dragDampening={1}
-        overlayBlurColor="#F5F3EF"
-        imageBorderRadius="20px"
-        openedImageBorderRadius="20px"
-        grayscale={false}
-      />
+      <div className="w-full h-full bg-[#F5F3EF]">
+        <DomeGallery 
+          images={album.photos}
+          fit={1}
+          minRadius={750}
+          maxVerticalRotationDeg={5}
+          segments={28}
+          dragDampening={1}
+          overlayBlurColor="transparent"
+          imageBorderRadius="20px"
+          openedImageBorderRadius="20px"
+          grayscale={false}
+        />
+      </div>
     </div>
   );
 }
