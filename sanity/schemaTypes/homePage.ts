@@ -4,6 +4,7 @@ export const homePage = defineType({
   name: "homePage",
   title: "Home Page",
   type: "document",
+
   fields: [
     defineField({
       name: "hero",
@@ -11,32 +12,19 @@ export const homePage = defineType({
       type: "object",
       fields: [
         defineField({
-            name: "headlineLines",
-            title: "Headline (lines)",
-            description: "Each item becomes a new line (keeps the exact formatting).",
-            type: "array",
-            of: [{ type: "string" }],
+          name: "headlineLines",
+          title: "Headline (lines)",
+          description: "Each item becomes a new line (keeps the exact formatting).",
+          type: "array",
+          of: [{ type: "string" }],
         }),
-        defineField({ name: "subheadline", title: "Subheadline", type: "text", rows: 3 }),
+        defineField({
+          name: "subheadline",
+          title: "Subheadline",
+          type: "text",
+          rows: 3,
+        }),
       ],
-      preview: {
-        select: {
-          firstLine: "hero.headlineLines.0",
-          sub: "hero.subheadline",
-        },
-        prepare({
-          firstLine,
-          sub,
-        }: {
-          firstLine?: string;
-          sub?: string;
-        }) {
-          return {
-            title: "Home Page",
-            subtitle: [firstLine, sub].filter(Boolean).join(" • "),
-          };
-        },
-      },
     }),
 
     defineField({
@@ -46,7 +34,12 @@ export const homePage = defineType({
       fields: [
         defineField({ name: "title", title: "Title", type: "string" }),
         defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
-        defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+        defineField({
+          name: "image",
+          title: "Image",
+          type: "image",
+          options: { hotspot: true },
+        }),
         defineField({
           name: "highlights",
           title: "Highlights",
@@ -102,4 +95,17 @@ export const homePage = defineType({
       ],
     }),
   ],
+
+  preview: {
+    select: {
+      line1: "hero.headlineLines.0",
+      sub: "hero.subheadline",
+    },
+    prepare({ line1, sub }: { line1?: string; sub?: string }) {
+      return {
+        title: "Home Page",
+        subtitle: [line1, sub].filter(Boolean).join(" • "),
+      };
+    },
+  },
 });
