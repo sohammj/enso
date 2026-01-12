@@ -211,26 +211,6 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
         />
       </div>
 
-      {/* 🦋 LEFT MIDDLE */}
-      <div className="hidden md:block absolute left-[70px] top-[480px] opacity-85 z-[5]">
-        <Dragonfly
-          className="w-[105px] rotate-[12deg]"
-          drift={22}
-          twist={6}
-          floatDuration={8}
-        />
-      </div>
-
-      {/* 🦋 RIGHT TOP */}
-      <div className="hidden md:block absolute right-[60px] top-[320px] opacity-80 z-[5]">
-        <Dragonfly
-          className="w-[125px] rotate-[18deg]"
-          drift={24}
-          twist={6}
-          floatDuration={8}
-        />
-      </div>
-
       {/* 🦋 RIGHT MIDDLE */}
       <div className="hidden md:block absolute right-[40px] top-[600px] opacity-80 z-[5]">
         <Dragonfly

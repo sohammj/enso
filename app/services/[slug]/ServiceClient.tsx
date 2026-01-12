@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+import Dragonfly from "@/components/ui/Dragonfly";
 import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -30,18 +31,38 @@ export default function ServiceClient({ service }: { service: Service }) {
     : null;
 
   return (
-    <main className="relative bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] overflow-hidden">
-      <div className="hidden md:block absolute left-[-260px] top-[-220px] w-[700px] -z-10">
+    <main className="relative bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] overflow-visible">
+      <div className="hidden md:block absolute left-[-260px] top-[-220px] w-[700px] pointer-events-none z-0">
         <Image src="/blob.png" alt="" width={700} height={700} className="opacity-90" />
       </div>
 
-      <div className="hidden md:block absolute right-[40px] top-[220px] opacity-90 -z-10">
-        <motion.img src="/dragonfly.svg" alt="" className="w-[140px] rotate-[12deg]" {...float} />
-        <motion.img src="/dragonfly.svg" alt="" className="w-[100px] absolute top-[120px] right-[60px] rotate-[-8deg]" {...float} />
-        <motion.img src="/dragonfly.svg" alt="" className="w-[80px] absolute top-[260px] right-[10px] rotate-[20deg]" {...float} />
+      {/* 🦋 RIGHT SIDE CLUSTER - NOW ANIMATED */}
+      <div className="hidden md:block absolute right-[40px] top-[220px] opacity-90 z-[5]">
+        <Dragonfly
+          className="w-[140px] rotate-[12deg]"
+          drift={24}
+          twist={6}
+          floatDuration={8}
+        />
+      </div>
+      <div className="hidden md:block absolute right-[-20px] top-[340px] opacity-90 z-[5]">
+        <Dragonfly
+          className="w-[100px] rotate-[-8deg]"
+          drift={20}
+          twist={5}
+          floatDuration={8}
+        />
+      </div>
+      <div className="hidden md:block absolute right-[30px] top-[480px] opacity-90 z-[5]">
+        <Dragonfly
+          className="w-[80px] rotate-[20deg]"
+          drift={18}
+          twist={5}
+          floatDuration={8}
+        />
       </div>
 
-      <section className="max-w-4xl mx-auto px-6 pt-32 pb-20 text-center">
+      <section className="max-w-4xl mx-auto px-6 pt-32 pb-20 text-center relative z-10">
         <motion.div initial="hidden" animate="show" variants={fadeUp}>
           {iconSrc && (
             isSvgUrl(iconSrc) ? (
@@ -76,7 +97,7 @@ export default function ServiceClient({ service }: { service: Service }) {
         </motion.div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 pb-28">
+      <section className="max-w-3xl mx-auto px-6 pb-28 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -90,14 +111,14 @@ export default function ServiceClient({ service }: { service: Service }) {
         </motion.div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-6 pb-24">
+      <section className="max-w-4xl mx-auto px-6 pb-24 relative z-10">
         <p className="text-center font-[Playfair_Display] italic text-[20px] md:text-[24px] opacity-80">
           Healing unfolds gently, when given the space to breathe.
         </p>
       </section>
 
       {service.cta?.href && (
-        <section className="pb-32 px-6">
+        <section className="pb-32 px-6 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="show"
