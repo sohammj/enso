@@ -228,19 +228,21 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
       {/* 🌕 WELCOME + ABOUT + SUPPORT WRAPPER */}
       <section className="relative overflow-visible">
         {/* 🌸 Gentle mid-left + lower-left cluster - POSITION FROM OLD CODE */}
-        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 z-0">
+        <div className="hidden md:block absolute left-[40px] top-[120px] opacity-90 z-[50]">
           <Dragonfly
             className="w-[150px] rotate-[-15deg]"
             drift={22}
             twist={6}
             floatDuration={8}
           />
-          <Dragonfly
-            className="w-[100px] rotate-[5deg] absolute top-[100px] left-[80px]"
-            drift={18}
-            twist={5}
-            floatDuration={8}
-          />
+          <div className="hidden md:block absolute left-[70px] top-[200px] opacity-90 z-[50]">
+            <Dragonfly
+              className="w-[130px] rotate-[15deg]"
+              drift={20}
+              twist={5}
+              floatDuration={8}
+            />
+          </div>
         </div>
 
         {/* 🌕 GLOBAL WATERCOLOUR BLOB */}
