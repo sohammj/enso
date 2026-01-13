@@ -14,9 +14,14 @@ function useIsMobile() {
 
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      ) || window.innerWidth < 768;
+      // More aggressive mobile detection
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileUA = /iphone|ipad|ipod|android|webos|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isSmallScreen = window.innerWidth <= 1024; // Increased threshold
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      const mobile = isMobileUA || (isSmallScreen && isTouchDevice);
+      console.log('Mobile detection:', { isMobileUA, isSmallScreen, isTouchDevice, result: mobile });
       setIsMobile(mobile);
     };
 
