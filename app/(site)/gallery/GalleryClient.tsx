@@ -157,7 +157,7 @@ function DomeGalleryModal({
       <div className="w-full h-full bg-[#F5F3EF]">
         <DomeGallery 
           images={album.photos}
-          fit={1}
+          fit={isMobile ? 0.85 : 1}
           minRadius={isMobile ? 650 : 750}
           maxVerticalRotationDeg={isMobile ? 0 : 5}
           segments={isMobile ? 20 : 28}
