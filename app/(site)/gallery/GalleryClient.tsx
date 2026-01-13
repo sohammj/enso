@@ -8,6 +8,26 @@ interface GalleryClientProps {
   albums: GalleryAlbum[];
 }
 
+// Hook to detect mobile devices
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768;
+      setIsMobile(mobile);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+}
+
 export default function GalleryClient({ albums }: GalleryClientProps) {
   const [selectedAlbum, setSelectedAlbum] = useState<GalleryAlbum | null>(null);
 
@@ -95,6 +115,8 @@ function DomeGalleryModal({
   album: GalleryAlbum; 
   onClose: () => void;
 }) {
+  const isMobile = useIsMobile();
+
   // Lock body scroll when modal is open
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -112,6 +134,25 @@ function DomeGalleryModal({
       document.body.style.height = '';
     };
   }, []);
+
+  // Mobile-optimized parameters
+  const domeParams = isMobile
+    ? {
+        fit: 1,
+        minRadius: 600,
+        maxVerticalRotationDeg: 0,
+        segments: 20,
+        dragDampening: 1.2,
+        grayscale: true
+      }
+    : {
+        fit: 1,
+        minRadius: 750,
+        maxVerticalRotationDeg: 5,
+        segments: 28,
+        dragDampening: 1,
+        grayscale: false
+      };
 
   return (
     <div className="fixed inset-0 z-[9999] bg-[#F5F3EF] w-screen h-screen overflow-hidden touch-none overscroll-none">
@@ -135,15 +176,15 @@ function DomeGalleryModal({
       <div className="w-full h-full bg-[#F5F3EF]">
         <DomeGallery 
           images={album.photos}
-          fit={1}
-          minRadius={750}
-          maxVerticalRotationDeg={5}
-          segments={28}
-          dragDampening={1}
+          fit={domeParams.fit}
+          minRadius={domeParams.minRadius}
+          maxVerticalRotationDeg={domeParams.maxVerticalRotationDeg}
+          segments={domeParams.segments}
+          dragDampening={domeParams.dragDampening}
           overlayBlurColor="transparent"
           imageBorderRadius="20px"
           openedImageBorderRadius="20px"
-          grayscale={false}
+          grayscale={domeParams.grayscale}
         />
       </div>
     </div>
