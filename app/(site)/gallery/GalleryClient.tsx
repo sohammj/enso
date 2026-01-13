@@ -135,25 +135,6 @@ function DomeGalleryModal({
     };
   }, []);
 
-  // Mobile-optimized parameters
-  const domeParams = isMobile
-    ? {
-        fit: 1,
-        minRadius: 600,
-        maxVerticalRotationDeg: 0,
-        segments: 20,
-        dragDampening: 1.2,
-        grayscale: true
-      }
-    : {
-        fit: 1,
-        minRadius: 750,
-        maxVerticalRotationDeg: 5,
-        segments: 28,
-        dragDampening: 1,
-        grayscale: false
-      };
-
   return (
     <div className="fixed inset-0 z-[9999] bg-[#F5F3EF] w-screen h-screen overflow-hidden touch-none overscroll-none">
       {/* Close Button */}
@@ -176,15 +157,15 @@ function DomeGalleryModal({
       <div className="w-full h-full bg-[#F5F3EF]">
         <DomeGallery 
           images={album.photos}
-          fit={domeParams.fit}
-          minRadius={domeParams.minRadius}
-          maxVerticalRotationDeg={domeParams.maxVerticalRotationDeg}
-          segments={domeParams.segments}
-          dragDampening={domeParams.dragDampening}
+          fit={1}
+          minRadius={isMobile ? 650 : 750}
+          maxVerticalRotationDeg={isMobile ? 0 : 5}
+          segments={isMobile ? 20 : 28}
+          dragDampening={isMobile ? 1.2 : 1}
           overlayBlurColor="transparent"
           imageBorderRadius="20px"
           openedImageBorderRadius="20px"
-          grayscale={domeParams.grayscale}
+          grayscale={false}
         />
       </div>
     </div>
