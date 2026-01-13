@@ -163,10 +163,10 @@ function DomeGalleryModal({
         <DomeGallery 
           images={album.photos}
           fit={isMobile ? 0.85 : 1}
-          minRadius={isMobile ? 850 : 750}
+          minRadius={isMobile ? 900 : 750}
           maxVerticalRotationDeg={isMobile ? 0 : 5}
           segments={isMobile ? 20 : 28}
-          dragDampening={isMobile ? 1.2 : 1}
+          dragDampening={isMobile ? 1.5 : 1}
           overlayBlurColor="transparent"
           imageBorderRadius="20px"
           openedImageBorderRadius="25px"
