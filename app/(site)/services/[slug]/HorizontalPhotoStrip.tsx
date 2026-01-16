@@ -169,26 +169,28 @@ export default function HorizontalPhotoStrip({
               return (
                 <div key={idx} className={`${align} max-w-sm`}>
                   {it.label && (
-                    <p className="text-[10px] tracking-[0.15em] uppercase opacity-60 mb-3 font-medium">
-                      {it.label}
-                    </p>
-                  )}
-                  
-                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
+                        <p className="text-[11px] tracking-[0.15em] uppercase opacity-60 mb-3 font-medium">
+                            {it.label}
+                        </p>
+                    )}
+
+                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
                     <Image
-                      src={imgUrl}
-                      alt={it.caption || it.label || "Photo"}
-                      fill
-                      className={`object-cover ${it.grayscale ? "grayscale" : ""}`}
-                      sizes="(max-width: 768px) 90vw, 400px"
+                        src={imgUrl}
+                        alt={it.caption || it.label || "Photo"}
+                        fill
+                        className={`object-cover transition-transform duration-500 hover:scale-[1.02] ${
+                        it.grayscale ? "grayscale" : ""
+                        }`}
+                        sizes="(min-width: 1024px) 360px, 70vw"
                     />
-                  </div>
-                  
-                  {it.caption && (
-                    <p className="mt-4 text-[15px] leading-relaxed opacity-75">
-                      {it.caption}
-                    </p>
-                  )}
+                    </div>
+
+                    {it.caption && (
+                        <p className="mt-4 text-[15px] leading-relaxed opacity-75 text-justify whitespace-normal break-words">
+                            {it.caption}
+                        </p>
+                    )}
                 </div>
               );
             })}
@@ -262,7 +264,7 @@ export default function HorizontalPhotoStrip({
                 </div>
 
                 {it.caption && (
-                  <p className="mt-4 text-[15px] leading-relaxed opacity-75 max-w-[90%]">
+                  <p className="mt-4 text-[15px] leading-relaxed opacity-75 text-justify whitespace-normal break-words">
                     {it.caption}
                   </p>
                 )}
