@@ -202,7 +202,7 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
       </section>
 
       {/* 🦋 LEFT TOP */}
-      <div className="hidden md:block absolute left-[50px] top-[200px] opacity-85 z-[5]">
+      <div className="hidden md:block absolute left-[50px] top-[200px] opacity-85 z-[50]">
         <Dragonfly
           className="w-[135px] rotate-[-20deg]"
           drift={26}

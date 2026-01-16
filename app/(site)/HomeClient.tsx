@@ -41,9 +41,9 @@ const DEFAULTS = {
       "Enso Art Therapy and Counseling Centre offers a safe and inclusive space for emotional well-being, personal growth, and self-expression.",
     fallbackImagePath: "/hero11.jpeg",
     highlights: [
-      { label: "Personal Growth", emoji: "🌱" },
-      { label: "Emotional Well-being", emoji: "💛" },
-      { label: "Self-expression", emoji: "🎨" },
+      { label: "Personal Growth", iconType: "dragonfly" },
+      { label: "Emotional Well-being", iconType: "dragonfly" },
+      { label: "Self-expression", iconType: "dragonfly" },
     ],
   },
   about: {
@@ -336,15 +336,31 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
 
                 <ul className="space-y-4">
                   {highlights.map((h, idx) => (
-                    <li
-                      key={`${h.label ?? "item"}-${idx}`}
-                      className="flex items-center gap-3"
-                    >
-                      <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center text-lg">
-                        {h.emoji || "•"}
+                    <li key={`${h.label ?? "item"}-${idx}`} className="flex items-center gap-3">
+                      <span className="w-9 h-9 rounded-full bg-white shadow grid place-items-center">
+                        {h?.iconType === "image" && h?.iconImage?.asset ? (
+                          <Image
+                            src={urlFor(h.iconImage).width(60).height(60).fit("crop").url()}
+                            alt=""
+                            width={22}
+                            height={22}
+                            className="object-contain"
+                          />
+                        ) : h?.iconType === "dragonfly" ? (
+                          <Dragonfly
+                            className="w-[22px] h-[22px]"
+                            drift={8}
+                            twist={3}
+                            floatDuration={6}
+                          />
+                        ) : (
+                          <span className="text-lg leading-none">{h?.emoji || "•"}</span>
+                        )}
                       </span>
+
                       {h.label}
                     </li>
+
                   ))}
                 </ul>
               </div>

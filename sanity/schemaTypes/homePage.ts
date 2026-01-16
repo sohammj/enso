@@ -51,7 +51,12 @@ export const homePage = defineType({
               type: "object",
               fields: [
                 defineField({ name: "label", title: "Label", type: "string" }),
-                defineField({ name: "emoji", title: "Emoji", type: "string" }),
+                defineField({
+                  name: "icon",
+                  title: "Optional Icon Image (leave empty to use dragonfly)",
+                  type: "image",
+                  options: { hotspot: true },
+                }),
               ],
             }),
           ],
