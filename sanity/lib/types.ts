@@ -1,4 +1,4 @@
-export type HomeHighlight = { label?: string; emoji?: string };
+export type HomeHighlight = { label?: string; icon?: any; };
 
 export type SupportCard = {
   title?: string;
