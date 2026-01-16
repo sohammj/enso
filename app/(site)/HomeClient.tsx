@@ -227,8 +227,8 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
             {heroHeadlineLines[3]}
           </h1>
 
-          {/* <p className="font-body mt-4 md:mt-6 text-base md:text-lg opacity-80"> */}
-          <p className="font-body mt-4 md:mt-6 text-base md:text-lg text-[#0E1E2A]/90 drop-shadow-sm">
+          {/* <p className="font-body mt-4 md:mt-6 text-base md:text-lg opacity-100"> */}
+          <p className="font-body mt-4 md:mt-6 text-base md:text-lg text-[#000000]">
             {heroSub}
           </p>
         </div>
