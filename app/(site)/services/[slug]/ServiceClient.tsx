@@ -7,7 +7,7 @@ import Dragonfly from "@/components/ui/Dragonfly";
 import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 import { useRef } from "react";
-import HorizontalPhotoStrip from "./HorizontalPhotoStrip";
+import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
 
 
 const float = {

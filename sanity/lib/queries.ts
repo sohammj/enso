@@ -39,7 +39,8 @@ export const PROGRAMS_QUERY = /* groq */ `
   preview,
   description,
   icon,
-  cta
+  cta,
+  photoStrip[]{ image, label, caption }
 }
 `;
 
@@ -54,7 +55,8 @@ export const PROGRAM_BY_SLUG_QUERY = /* groq */ `
   preview,
   description,
   icon,
-  cta
+  cta,
+  photoStrip[]{ image, label, caption }
 }
 `;
 

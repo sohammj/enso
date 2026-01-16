@@ -1,10 +1,41 @@
-import { defineField, defineType } from "sanity";
+// import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const program = defineType({
   name: "program",
   title: "Programs",
   type: "document",
   fields: [
+
+
+
+    defineField({
+      name: "photoStrip",
+      title: "Photo Strip (Horizontal)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          name: "photoStripItem",
+          title: "Photo + Text",
+          type: "object",
+          fields: [
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+            }),
+            defineField({ name: "label", title: "Label (small)", type: "string" }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
+          ],
+          preview: {
+            select: { title: "label", subtitle: "caption", media: "image" },
+          },
+        }),
+      ],
+    }),
+
+
     defineField({
       name: "title",
       title: "Title",

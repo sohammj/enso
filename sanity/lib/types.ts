@@ -56,6 +56,7 @@ export type Program = {
     text?: string;
     href?: string;
   };
+  photoStrip?: { image?: any; label?: string; caption?: string }[];
 };
 
 

@@ -6,6 +6,7 @@ import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 import type { Program } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
+import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
 
 const float = {
   animate: {
@@ -118,6 +119,11 @@ export default function ProgramClient({ program }: { program: Program }) {
           There is no right way to heal — only your way.
         </p>
       </section>
+
+      {/* Photo Strip Section - same as ServiceClient */}
+      {program.photoStrip?.length ? (
+        <HorizontalPhotoStrip items={program.photoStrip} />
+      ) : null}
 
       {program.cta?.href && (
         <section className="pb-32 px-6 relative z-10">
