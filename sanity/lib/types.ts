@@ -75,6 +75,7 @@ export type Service = {
     text?: string;
     href?: string;
   };
+  photoStrip?: { image?: any; label?: string; caption?: string }[];
 };
 
 
@@ -134,3 +135,10 @@ export type JourneyContent = {
     };
   };
 };
+
+export type PhotoStripItem = {
+  image?: any;
+  label?: string;
+  caption?: string;
+};
+

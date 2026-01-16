@@ -6,6 +6,9 @@ import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
+import { useRef } from "react";
+import HorizontalPhotoStrip from "./HorizontalPhotoStrip";
+
 
 const float = {
   animate: {
@@ -18,6 +21,80 @@ const float = {
 function isSvgUrl(url?: string | null) {
   if (!url) return false;
   return url.split("?")[0].toLowerCase().endsWith(".svg");
+}
+function PhotoStrip({
+  items,
+}: {
+  items: { image?: any; label?: string; caption?: string }[];
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Convert vertical wheel to horizontal scroll
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    }
+  };
+
+  return (
+    <section className="relative z-10 pb-28">
+      <div
+        ref={ref}
+        onWheel={onWheel}
+        className="
+          overflow-x-auto overflow-y-hidden
+          px-6
+          no-scrollbar
+        "
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
+        
+        <div className="min-w-max flex gap-10 items-start py-4">
+          {items.map((it, idx) => {
+            if (!it?.image?.asset) return null;
+
+            const imgUrl = urlFor(it.image)
+              .width(900)
+              .height(900)
+              .fit("crop")
+              .url();
+
+            return (
+              <figure key={idx} className="w-[260px] md:w-[340px] shrink-0">
+                {(it.label || it.caption) && (
+                  <div className="mb-2">
+                    {it.label && (
+                      <p className="text-[10px] tracking-widest uppercase opacity-60">
+                        {it.label}
+                      </p>
+                    )}
+                    {it.caption && (
+                      <p className="text-sm opacity-70 leading-snug mt-1">
+                        {it.caption}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                <div className="relative w-full aspect-square overflow-hidden rounded-xl shadow-soft">
+                  <Image
+                    src={imgUrl}
+                    alt={it.caption || it.label || "Photo"}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </figure>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default function ServiceClient({ service }: { service: Service }) {
@@ -116,7 +193,11 @@ export default function ServiceClient({ service }: { service: Service }) {
           Healing unfolds gently, when given the space to breathe.
         </p>
       </section>
-
+      
+      {/* {service.photoStrip?.length ? <PhotoStrip items={service.photoStrip} /> : null} */}
+      {service.photoStrip?.length ? (
+        <HorizontalPhotoStrip items={service.photoStrip} />
+      ) : null}
       {service.cta?.href && (
         <section className="pb-32 px-6 relative z-10">
           <motion.div

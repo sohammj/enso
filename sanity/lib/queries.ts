@@ -70,7 +70,9 @@ export const SERVICES_QUERY = /* groq */ `
   preview,
   description,
   icon,
-  cta
+  cta,
+  photoStrip[]{ image, label, caption }
+
 }
 `;
 
@@ -84,7 +86,9 @@ export const SERVICE_BY_SLUG_QUERY = /* groq */ `
   preview,
   description,
   icon,
-  cta
+  cta,
+  photoStrip[]{ image, label, caption }
+
 }
 `;
 
