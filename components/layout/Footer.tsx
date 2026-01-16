@@ -16,10 +16,10 @@ export function Footer() {
           <p className="text-sm mt-2 opacity-80">
             Email:{" "}
             <a
-              href="mailto:paruldewal@gmail.com"
+              href="mailto:parul.enso@gmail.com"
               className="underline underline-offset-4 hover:opacity-100"
             >
-              paruldewal@gmail.com
+              parul.enso@gmail.com
             </a>
           </p>
         </div>
