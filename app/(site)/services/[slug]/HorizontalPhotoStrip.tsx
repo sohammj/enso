@@ -8,28 +8,31 @@ type PhotoStripItem = {
   image?: any;
   label?: string;
   caption?: string;
-
-  // Optional layout controls (if you later add these fields in Sanity)
-  top?: string; // e.g. "15%"
-  left?: string; // e.g. "55%"
-  width?: string; // e.g. "220px"
+  top?: string;
+  left?: string;
+  width?: string;
   zIndex?: number;
   grayscale?: boolean;
-
-  // Mobile controls (optional)
   mobileOrder?: number;
   mobileAlign?: "left" | "center" | "right";
 };
 
-function useIsMobile(breakpoint = 1024) {
-  const [isMobile, setIsMobile] = useState(false);
+const MOBILE_BREAKPOINT = 768;
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
+  
   useEffect(() => {
-    const run = () => setIsMobile(window.innerWidth < breakpoint);
-    run();
-    window.addEventListener("resize", run);
-    return () => window.removeEventListener("resize", run);
-  }, [breakpoint]);
-  return isMobile;
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const onChange = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+    mql.addEventListener("change", onChange);
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  
+  return !!isMobile;
 }
 
 function DecorativePath() {
@@ -63,28 +66,22 @@ function DecorativePath() {
   );
 }
 
-// If you don’t store positions in Sanity yet, we “auto-place” them to look good.
-function withFallbackLayout(items: PhotoStripItem[]): Required<Pick<PhotoStripItem, "top" | "left" | "width" | "zIndex">> & PhotoStripItem {
-  // not used directly
-  return {} as any;
-}
-
 export default function HorizontalPhotoStrip({
   items,
 }: {
   items: PhotoStripItem[];
 }) {
-  const isMobile = useIsMobile(1024);
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [translateX, setTranslateX] = useState(0);
   const [isFixed, setIsFixed] = useState(false);
 
-  // Build a Lovable-ish layout if Sanity items don’t have positions
+  // Build layout with proper spacing
   const laidOut = useMemo(() => {
-    const baseLeft = 5; // %
-    const step = 22; // %
+    const baseLeft = 5;
+    const step = 22;
     return (items || []).map((it, idx) => {
       const hasLayout = !!it.top && !!it.left && !!it.width;
       if (hasLayout) return it;
@@ -114,7 +111,7 @@ export default function HorizontalPhotoStrip({
       const sectionTop = section.offsetTop;
       const scrollY = window.scrollY;
 
-      const containerWidth = container.scrollWidth; // total “world”
+      const containerWidth = container.scrollWidth; // total "world"
       const viewportWidth = window.innerWidth;
       const maxTranslate = Math.max(0, containerWidth - viewportWidth);
 
@@ -138,7 +135,12 @@ export default function HorizontalPhotoStrip({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
-  // MOBILE: simple stacked layout (Lovable also does vertical on mobile)
+  // Calculate dynamic section height based on scroll distance needed
+  const sectionHeight = useMemo(() => {
+    return "calc(100vh + 2200px)";
+  }, []);
+
+  // MOBILE: simple stacked layout
   if (isMobile) {
     const sorted = [...laidOut].sort(
       (a, b) => (a.mobileOrder ?? 9999) - (b.mobileOrder ?? 9999)
@@ -151,7 +153,7 @@ export default function HorizontalPhotoStrip({
             <DecorativePath />
           </div>
 
-          <div className="relative space-y-10">
+          <div className="relative space-y-12">
             {sorted.map((it, idx) => {
               if (!it?.image?.asset) return null;
 
@@ -165,19 +167,25 @@ export default function HorizontalPhotoStrip({
               const imgUrl = urlFor(it.image).width(1200).height(1200).fit("crop").url();
 
               return (
-                <div key={idx} className={`${align}`} style={{ width: "80%" }}>
-                  {it.label && <p className="gallery-label mb-2">{it.label}</p>}
-                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-soft">
+                <div key={idx} className={`${align} max-w-sm`}>
+                  {it.label && (
+                    <p className="text-[10px] tracking-[0.15em] uppercase opacity-60 mb-3 font-medium">
+                      {it.label}
+                    </p>
+                  )}
+                  
+                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
                     <Image
                       src={imgUrl}
                       alt={it.caption || it.label || "Photo"}
                       fill
                       className={`object-cover ${it.grayscale ? "grayscale" : ""}`}
-                      sizes="80vw"
+                      sizes="(max-width: 768px) 90vw, 400px"
                     />
                   </div>
+                  
                   {it.caption && (
-                    <p className="mt-3 text-sm opacity-70 leading-relaxed">
+                    <p className="mt-4 text-[15px] leading-relaxed opacity-75">
                       {it.caption}
                     </p>
                   )}
@@ -190,12 +198,12 @@ export default function HorizontalPhotoStrip({
     );
   }
 
-  // DESKTOP: pinned horizontal scroll like Lovable
+  // DESKTOP: pinned horizontal scroll
   return (
     <section
       ref={sectionRef}
       className="relative z-10"
-      style={{ height: "calc(100vh + 2200px)" }} // feel free to tweak
+      style={{ height: sectionHeight }}
     >
       <div
         className={`${isFixed ? "fixed top-0" : "absolute"} left-0 w-full h-screen overflow-hidden`}
@@ -213,7 +221,7 @@ export default function HorizontalPhotoStrip({
             transition: "transform 80ms ease-out",
           }}
         >
-          {/* Decorative */}
+          {/* Decorative paths */}
           <div className="absolute inset-0 opacity-40">
             <DecorativePath />
           </div>
@@ -231,13 +239,17 @@ export default function HorizontalPhotoStrip({
                 style={{
                   top: it.top ?? "20%",
                   left: it.left ?? `${idx * 25}%`,
-                  width: it.width ?? "240px",
+                  width: it.width ?? "280px",
                   zIndex: it.zIndex ?? 2,
                 }}
               >
-                {it.label && <p className="gallery-label mb-2">{it.label}</p>}
+                {it.label && (
+                  <p className="text-[11px] tracking-[0.15em] uppercase opacity-60 mb-3 font-medium">
+                    {it.label}
+                  </p>
+                )}
 
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-soft">
+                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
                   <Image
                     src={imgUrl}
                     alt={it.caption || it.label || "Photo"}
@@ -250,7 +262,7 @@ export default function HorizontalPhotoStrip({
                 </div>
 
                 {it.caption && (
-                  <p className="mt-3 text-sm opacity-70 leading-relaxed">
+                  <p className="mt-4 text-[15px] leading-relaxed opacity-75 max-w-[90%]">
                     {it.caption}
                   </p>
                 )}
