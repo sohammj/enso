@@ -45,4 +45,15 @@ export const structure: StructureResolver = (S) =>
         .title("Services")
         .schemaType("service")
         .child(S.documentTypeList("service").title("Services")),
+
+      S.divider(),
+
+      S.listItem()
+        .title("Private Booking Page")
+        .id("privateBookingPageSingleton")
+        .child(
+          S.document()
+            .schemaType("privateBookingPage")
+            .documentId("privateBookingPage")
+        ),
     ]);

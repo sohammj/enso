@@ -149,6 +149,25 @@ export const GALLERY_ALBUM_BY_SLUG_QUERY = `*[_type == "galleryAlbum" && slug.cu
 }`;
 
 
+export const privateBookingPageQuery = `
+*[_type == "privateBookingPage" && _id == "privateBookingPage"][0]{
+  _id,
+  pageTitle,
+  pageSubtitle,
+  intakeFormEmbedUrl,
+  calendarEmbedUrl,
+  instagramUrl,
+  sessionDurationText,
+  feeAmount,
+  feeCurrency,
+  afterIntakeMessage,
+  newClientLabel,
+  returningClientLabel
+}
+`;
+
+
+
 // cards[]{
 //       title,
 //       description,
