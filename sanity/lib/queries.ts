@@ -115,20 +115,15 @@ export const ABOUT_PAGE_QUERY = /* groq */ `
     photo3
   },
   steps{
-    s1{ no, title, body },
-    s2{ no, title, body },
-    s3{ no, title, body },
-    s4{
-      topLeftTitle,
-      topLeftBody,
-      topRightStep,
-      bottomLeftStep,
-      bottomRightTitle,
-      bottomRightBody
-    }
+    s1{ title, body },
+    s2{ title, body },
+    s3{ title, body },
+    s4{ title, body },
+    s5{ title, body }
   }
 }
 `;
+
 
 
 

@@ -124,17 +124,11 @@ export type AboutPageData = {
     photo3?: any;
   };
   steps?: {
-    s1?: { no?: string; title?: string; body?: string };
-    s2?: { no?: string; title?: string; body?: string };
-    s3?: { no?: string; title?: string; body?: string };
-    s4?: {
-      topLeftTitle?: string;
-      topLeftBody?: string;
-      topRightStep?: string;
-      bottomLeftStep?: string;
-      bottomRightTitle?: string;
-      bottomRightBody?: string;
-    };
+    s1?: { title?: string; body?: string };
+    s2?: { title?: string; body?: string };
+    s3?: { title?: string; body?: string };
+    s4?: { title?: string; body?: string };
+    s5?: { title?: string; body?: string };
   };
 };
 
@@ -144,19 +138,15 @@ export type JourneyContent = {
   photo2: string;
   photo3: string;
   steps: {
-    s1: { no: string; title: string; body: string };
-    s2: { no: string; title: string; body: string };
-    s3: { no: string; title: string; body: string };
-    s4: {
-      topLeftTitle: string;
-      topLeftBody: string;
-      topRightStep: string;
-      bottomLeftStep: string;
-      bottomRightTitle: string;
-      bottomRightBody: string;
-    };
+    s1: { title: string; body: string };
+    s2: { title: string; body: string };
+    s3: { title: string; body: string };
+    s4: { title: string; body: string };
+    s5: { title: string; body: string };
   };
 };
+
+
 
 export type PhotoStripItem = {
   image?: any;

@@ -9,10 +9,7 @@ import type { JourneyContent } from "@/sanity/lib/types";
 ========================================================= */
 const LINE = "border-black/10";
 const BG = "bg-transparent";
-
-// Desktop: horizontal panels
 const PANEL_H_DESKTOP = "md:h-[560px]";
-// Mobile: auto height with padding
 const SECTION_MOBILE = "py-16";
 const BORDER_MOBILE = "border-b-2 border-black/10";
 
@@ -27,14 +24,6 @@ function StepTag() {
   return <div className="text-xs tracking-[0.22em] uppercase text-black/35"></div>;
 }
 
-function BigNo({ n }: { n: string }) {
-  return (
-    <div className="mt-3 font-display text-[80px] md:text-[150px] leading-none text-black">
-      {n}
-    </div>
-  );
-}
-
 function Title({ children }: { children: React.ReactNode }) {
   return (
     <div className="font-display uppercase tracking-wide text-[36px] md:text-[64px] leading-[0.95] text-black">
@@ -43,12 +32,16 @@ function Title({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Body({ children }: { children: React.ReactNode }) {
+function BodyInNoSlot({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-4 md:mt-6 text-[15px] md:text-[16px] leading-[1.65] text-black/65 max-w-[520px] mx-auto">
+    <p className="mt-3 md:mt-0 text-[15px] md:text-[16px] leading-[1.7] text-black/65 max-w-[520px] mx-auto">
       {children}
     </p>
   );
+}
+
+function hasContent(title?: string, body?: string) {
+  return Boolean((title && title.trim()) || (body && body.trim()));
 }
 
 /* =========================================================
@@ -58,16 +51,15 @@ function PanelPhotoLeft({
   photoSrc,
   title,
   body,
-  stepNo,
 }: {
   photoSrc: string;
   title: string;
   body: string;
-  stepNo: string;
 }) {
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
+        {/* MOBILE */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
           <div className="flex items-center justify-center mb-12">
             <div className={`relative ${PHOTO_SIZE_MOBILE} rounded-full overflow-hidden shadow-lg`}>
@@ -75,17 +67,17 @@ function PanelPhotoLeft({
             </div>
           </div>
 
-          <div className={`text-center ${PAD_X} mb-12`}>
+          <div className={`text-center ${PAD_X} mb-10`}>
             <Title>{title}</Title>
-            <Body>{body}</Body>
           </div>
 
           <div className={`text-center ${PAD_X}`}>
             <StepTag />
-            <BigNo n={stepNo} />
+            <BodyInNoSlot>{body}</BodyInNoSlot>
           </div>
         </div>
 
+        {/* DESKTOP */}
         <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
           <div className="relative overflow-hidden">
             <div className="h-full w-full flex items-center justify-center px-10">
@@ -101,14 +93,13 @@ function PanelPhotoLeft({
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
                 <Title>{title}</Title>
-                <Body>{body}</Body>
               </div>
             </div>
             <div className={`w-full border-t ${LINE}`} />
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
                 <StepTag />
-                <BigNo n={stepNo} />
+                <BodyInNoSlot>{body}</BodyInNoSlot>
               </div>
             </div>
           </div>
@@ -122,12 +113,10 @@ function PanelPhotoLeft({
    PANEL 02
 ========================================================= */
 function PanelPhotoRightRounded({
-  stepNo,
   bottomTitle,
   bottomBody,
   photoSrc,
 }: {
-  stepNo: string;
   bottomTitle: string;
   bottomBody: string;
   photoSrc: string;
@@ -135,10 +124,11 @@ function PanelPhotoRightRounded({
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
+        {/* MOBILE */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-          <div className={`text-center ${PAD_X} mb-12`}>
+          <div className={`text-center ${PAD_X} mb-10`}>
             <StepTag />
-            <BigNo n={stepNo} />
+            <BodyInNoSlot>{bottomBody}</BodyInNoSlot>
           </div>
 
           <div className="flex items-center justify-center mb-12">
@@ -149,23 +139,22 @@ function PanelPhotoRightRounded({
 
           <div className={`text-center ${PAD_X}`}>
             <Title>{bottomTitle}</Title>
-            <Body>{bottomBody}</Body>
           </div>
         </div>
 
+        {/* DESKTOP */}
         <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
           <div className="grid h-full grid-rows-[1fr_1px_1fr]">
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
                 <StepTag />
-                <BigNo n={stepNo} />
+                <BodyInNoSlot>{bottomBody}</BodyInNoSlot>
               </div>
             </div>
             <div className={`w-full border-t ${LINE}`} />
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
                 <Title>{bottomTitle}</Title>
-                <Body>{bottomBody}</Body>
               </div>
             </div>
           </div>
@@ -190,20 +179,19 @@ function PanelPhotoRightCircle({
   photoSrc,
   title,
   body,
-  stepNo,
 }: {
   photoSrc: string;
   title: string;
   body: string;
-  stepNo: string;
 }) {
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
+        {/* MOBILE */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-          <div className={`text-center ${PAD_X} mb-12`}>
+          <div className={`text-center ${PAD_X} mb-10`}>
             <StepTag />
-            <BigNo n={stepNo} />
+            <BodyInNoSlot>{body}</BodyInNoSlot>
           </div>
 
           <div className="flex items-center justify-center mb-12">
@@ -214,23 +202,22 @@ function PanelPhotoRightCircle({
 
           <div className={`text-center ${PAD_X}`}>
             <Title>{title}</Title>
-            <Body>{body}</Body>
           </div>
         </div>
 
+        {/* DESKTOP */}
         <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
           <div className="grid h-full grid-rows-[1fr_1px_1fr]">
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
                 <Title>{title}</Title>
-                <Body>{body}</Body>
               </div>
             </div>
             <div className={`w-full border-t ${LINE}`} />
             <div className={`flex items-center justify-center text-center ${PAD_X}`}>
               <div>
                 <StepTag />
-                <BigNo n={stepNo} />
+                <BodyInNoSlot>{body}</BodyInNoSlot>
               </div>
             </div>
           </div>
@@ -254,80 +241,75 @@ function PanelPhotoRightCircle({
    PANEL 04
 ========================================================= */
 function PanelNoPhotos({
-  topLeftTitle,
-  topLeftBody,
-  topRightStep,
-  bottomLeftStep,
-  bottomRightTitle,
-  bottomRightBody,
+  s4Title,
+  s4Body,
+  s5Title,
+  s5Body,
 }: {
-  topLeftTitle: string;
-  topLeftBody: string;
-  topRightStep: string;
-  bottomLeftStep: string;
-  bottomRightTitle: string;
-  bottomRightBody: string;
+  s4Title: string;
+  s4Body: string;
+  s5Title: string;
+  s5Body: string;
 }) {
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
+        {/* MOBILE */}
         <div className="md:hidden">
           <div className={`${SECTION_MOBILE} ${BORDER_MOBILE}`}>
             <div className={`text-center ${PAD_X} mb-8`}>
-              <StepTag />
-              <BigNo n={bottomLeftStep} />
+              <Title>{s4Title}</Title>
             </div>
             <div className={`text-center ${PAD_X}`}>
-              <Title>{topLeftTitle}</Title>
-              <Body>{topLeftBody}</Body>
+              <StepTag />
+              <BodyInNoSlot>{s4Body}</BodyInNoSlot>
             </div>
           </div>
 
           <div className={`${SECTION_MOBILE}`}>
             <div className={`text-center ${PAD_X} mb-8`}>
               <StepTag />
-              <BigNo n={topRightStep} />
+              <BodyInNoSlot>{s5Body}</BodyInNoSlot>
             </div>
             <div className={`text-center ${PAD_X}`}>
-              <Title>{bottomRightTitle}</Title>
-              <Body>{bottomRightBody}</Body>
+              <Title>{s5Title}</Title>
             </div>
           </div>
         </div>
 
+        {/* DESKTOP (2x2 grid) */}
         <div className={`hidden md:grid h-full grid-cols-2 grid-rows-2 ${LINE}`}>
+          {/* s4: title top */}
           <div className={`flex items-center justify-center text-center ${PAD_X} border-r ${LINE} border-b ${LINE}`}>
-            <div>
-              <Title>{topLeftTitle}</Title>
-              <Body>{topLeftBody}</Body>
-            </div>
+            <Title>{s4Title}</Title>
           </div>
 
+          {/* s4: body bottom */}
           <div className={`flex items-center justify-center text-center ${PAD_X} border-b ${LINE}`}>
             <div>
               <StepTag />
-              <BigNo n={topRightStep} />
+              <BodyInNoSlot>{s4Body}</BodyInNoSlot>
             </div>
           </div>
 
+          {/* s5: body top */}
           <div className={`flex items-center justify-center text-center ${PAD_X} border-r ${LINE}`}>
             <div>
               <StepTag />
-              <BigNo n={bottomLeftStep} />
+              <BodyInNoSlot>{s5Body}</BodyInNoSlot>
             </div>
           </div>
 
+          {/* s5: title bottom */}
           <div className={`flex items-center justify-center text-center ${PAD_X}`}>
-            <div>
-              <Title>{bottomRightTitle}</Title>
-              <Body>{bottomRightBody}</Body>
-            </div>
+            <Title>{s5Title}</Title>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* =========================================================
    MAIN
@@ -336,38 +318,37 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
   const photo1 = journey.photo1;
   const photo2 = journey.photo2;
   const photo3 = journey.photo3;
-
   const copy = journey.steps;
 
   return (
     <>
       <div className="md:hidden">
-        <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} stepNo={copy.s1.no} />
-        <PanelPhotoRightRounded stepNo={copy.s2.no} bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
-        <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} stepNo={copy.s3.no} />
-        <PanelNoPhotos
-          topLeftTitle={copy.s4.topLeftTitle}
-          topLeftBody={copy.s4.topLeftBody}
-          topRightStep={copy.s4.topRightStep}
-          bottomLeftStep={copy.s4.bottomLeftStep}
-          bottomRightTitle={copy.s4.bottomRightTitle}
-          bottomRightBody={copy.s4.bottomRightBody}
+        <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} />
+        <PanelPhotoRightRounded bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
+        <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} />
+       <PanelNoPhotos
+          s4Title={copy.s4.title}
+          s4Body={copy.s4.body}
+          s5Title={copy.s5.title}
+          s5Body={copy.s5.body}
         />
+
+
       </div>
 
       <div className="hidden md:block">
         <ScrollLockHorizontal speed={1.1} className={BG}>
-          <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} stepNo={copy.s1.no} />
-          <PanelPhotoRightRounded stepNo={copy.s2.no} bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
-          <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} stepNo={copy.s3.no} />
+          <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} />
+          <PanelPhotoRightRounded bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
+          <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} />
           <PanelNoPhotos
-            topLeftTitle={copy.s4.topLeftTitle}
-            topLeftBody={copy.s4.topLeftBody}
-            topRightStep={copy.s4.topRightStep}
-            bottomLeftStep={copy.s4.bottomLeftStep}
-            bottomRightTitle={copy.s4.bottomRightTitle}
-            bottomRightBody={copy.s4.bottomRightBody}
+            s4Title={copy.s4.title}
+            s4Body={copy.s4.body}
+            s5Title={copy.s5.title}
+            s5Body={copy.s5.body}
           />
+
+
         </ScrollLockHorizontal>
       </div>
     </>

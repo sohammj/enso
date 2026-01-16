@@ -51,7 +51,6 @@ export const aboutPage = defineType({
           title: "Step 01",
           type: "object",
           fields: [
-            defineField({ name: "no", title: "Step No", type: "string", initialValue: "01" }),
             defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
             defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
           ],
@@ -62,7 +61,6 @@ export const aboutPage = defineType({
           title: "Step 02",
           type: "object",
           fields: [
-            defineField({ name: "no", title: "Step No", type: "string", initialValue: "02" }),
             defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
             defineField({ name: "body", title: "Body", type: "text", rows: 5, validation: (r) => r.required() }),
           ],
@@ -73,25 +71,30 @@ export const aboutPage = defineType({
           title: "Step 03",
           type: "object",
           fields: [
-            defineField({ name: "no", title: "Step No", type: "string", initialValue: "03" }),
             defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
             defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
           ],
         }),
 
+        // ✅ NEW: Step 04 (No Photos)
         defineField({
           name: "s4",
-          title: "Step 04/05 Panel (No Photos)",
+          title: "Step 04 (No Photos)",
           type: "object",
           fields: [
-            defineField({ name: "topLeftTitle", title: "Top Left Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "topLeftBody", title: "Top Left Body", type: "text", rows: 4, validation: (r) => r.required() }),
+            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
+          ],
+        }),
 
-            defineField({ name: "bottomLeftStep", title: "Bottom Left Step No", type: "string", initialValue: "04" }),
-            defineField({ name: "topRightStep", title: "Top Right Step No", type: "string", initialValue: "05" }),
-
-            defineField({ name: "bottomRightTitle", title: "Bottom Right Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "bottomRightBody", title: "Bottom Right Body", type: "text", rows: 5, validation: (r) => r.required() }),
+        // ✅ NEW: Step 05 (No Photos)
+        defineField({
+          name: "s5",
+          title: "Step 05 (No Photos)",
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
           ],
         }),
       ],
