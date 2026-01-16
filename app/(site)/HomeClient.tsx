@@ -196,6 +196,8 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
         >
           <source src={DEFAULTS.hero.fallbackVideoPath} type="video/mp4" />
         </video>
+        <div className="absolute inset-0 z-[5] md:hidden pointer-events-none backdrop-blur-md" />
+
 
         {/* keep original look: bg-black/10 */}
         <div
@@ -209,6 +211,10 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
         >
           {muted ? DEFAULTS.hero.soundButtonLabelMuted : DEFAULTS.hero.soundButtonLabelUnmuted}
         </button>
+
+
+
+        
 
         <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16 max-w-3xl">
           <h1 className="font-title text-[32px] md:text-6xl leading-tight">
