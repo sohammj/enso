@@ -16,7 +16,9 @@ import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 
 
-import type { HomePageData, SupportCard } from "@/sanity/lib/types";
+// import type { HomePageData, SupportCard } from "@/sanity/lib/types";
+import type { HomePageData, SupportCard, HomeHighlight } from "@/sanity/lib/types";
+
 import { urlFor } from "@/sanity/lib/image";
 
 const DEFAULTS = {
@@ -44,7 +46,7 @@ const DEFAULTS = {
       { label: "Personal Growth" },
       { label: "Emotional Well-being" },
       { label: "Self-expression" },
-    ],
+    ] satisfies HomeHighlight[],
   },
   about: {
     title: "About ENSO",
@@ -158,9 +160,10 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
     ? urlFor(data.welcome.image).width(900).height(900).fit("crop").url()
     : DEFAULTS.welcome.fallbackImagePath;
 
-  const highlights =
-    (data?.welcome?.highlights?.length ? data.welcome.highlights : null) ||
-    DEFAULTS.welcome.highlights;
+  const highlights: HomeHighlight[] =
+  (data?.welcome?.highlights?.length ? data.welcome.highlights : null) ??
+  DEFAULTS.welcome.highlights;
+
 
   const aboutTitle = data?.about?.title || DEFAULTS.about.title;
   const aboutBody = data?.about?.body || DEFAULTS.about.body;
