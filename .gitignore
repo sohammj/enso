@@ -23,7 +23,9 @@ build/
 .env
 .env.*
 !.env.example
-
+# .env
+.env.local
+.env.*.local
 # =========================
 # Logs
 # =========================

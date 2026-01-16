@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { studioInfo } from "@/lib/data";
 import { useState } from "react";
 import Dragonfly from "@/components/ui/Dragonfly";
+import { toast } from "sonner";
 
 /* ================= Schema ================= */
 
@@ -162,13 +163,30 @@ export default function StartConversation() {
   });
 
   const onSubmit = async (data: FormData) => {
-    await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    reset();
+    const loadingToast = toast.loading("Sending...");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const j = await res.json().catch(() => null);
+        toast.error(j?.error || "Failed to send.");
+        return;
+      }
+
+      reset();
+      toast.success("Sent ✅ We'll reach out soon.");
+    } catch (err) {
+      toast.error("Network error. Please try again.");
+    } finally {
+      toast.dismiss(loadingToast);
+    }
   };
+
 
   return (
     <div className="relative mx-auto max-w-2xl px-4 py-14">
@@ -210,11 +228,7 @@ export default function StartConversation() {
       </p>
 
       {/* Success */}
-      {isSubmitSuccessful && (
-        <p className="mt-4 rounded-xl bg-tea/20 p-3 text-tea">
-          Thank you. Please check your messages soon for next steps.
-        </p>
-      )}
+      
 
       {/* Form */}
       <form

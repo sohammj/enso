@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 const Schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -24,14 +25,32 @@ export default function StartConversationSection() {
     defaultValues: { preferred: "Email" },
   });
 
+
   const onSubmit = async (data: FormData) => {
-    await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    reset();
+    const loadingToast = toast.loading("Sending...");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const j = await res.json().catch(() => null);
+        toast.error(j?.error || "Failed to send.");
+        return;
+      }
+
+      reset();
+      toast.success("Sent ✅ We'll reach out soon.");
+    } catch (err) {
+      toast.error("Network error. Please try again.");
+    } finally {
+      toast.dismiss(loadingToast);
+    }
   };
+
 
   return (
     <section className="relative py-28 bg-[url('/paper-texture.jpg')] bg-repeat overflow-hidden">

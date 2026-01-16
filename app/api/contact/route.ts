@@ -1,85 +1,82 @@
-export async function POST() {
-  return Response.json({ success: true });
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+function isEmail(v: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 }
 
-// import { Resend } from "resend";
+function renderTemplate(template: string, vars: Record<string, string>) {
+  let out = template;
+  for (const [k, v] of Object.entries(vars)) {
+    out = out.replaceAll(`{{${k}}}`, v);
+  }
+  return out;
+}
 
-// // const resend = new Resend(process.env.RESEND_API_KEY);
-// let resend: Resend | null = null;
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
 
-// function getResend() {
-//   if (!process.env.RESEND_API_KEY) return null;
-//   if (!resend) {
-//     resend = new Resend(process.env.RESEND_API_KEY);
-//   }
-//   return resend;
-// }
+    const name = String(body?.name ?? "").trim();
+    const contact = String(body?.contact ?? "").trim(); // can be email or phone
+    const preferred = String(body?.preferred ?? "").trim();
+    const message = String(body?.message ?? "").trim();
 
+    if (!name || !contact || !preferred || !message) {
+      return NextResponse.json({ ok: false, error: "Missing fields" }, { status: 400 });
+    }
 
-// export async function POST(req: Request) {
-//   try {
-//     const body = await req.json();
-//     const { name, contact, preferred, message } = body;
+    const toAdmin = process.env.CONTACT_TO_EMAIL;
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    const from = process.env.SMTP_FROM || user;
 
-//     if (!name || !contact || !message) {
-//       return new Response("Missing fields", { status: 400 });
-//     }
+    if (!toAdmin || !user || !pass || !from) {
+      return NextResponse.json({ ok: false, error: "Email env not set" }, { status: 500 });
+    }
 
-//     /* =========================
-//        1️⃣ EMAIL TO YOU (ADMIN)
-//     ========================== */
-//     await resend.emails.send({
-//       from: "ENSO <no-reply@ensomindmatters.com>",
-//       to: [process.env.CONTACT_TO_EMAIL!],
-//       subject: `New conversation from ${name}`,
-//       html: `
-//         <div style="font-family: Georgia, serif; line-height: 1.6">
-//           <h2>New conversation request</h2>
-//           <p><strong>Name:</strong> ${name}</p>
-//           <p><strong>Contact:</strong> ${contact}</p>
-//           <p><strong>Preferred:</strong> ${preferred}</p>
-//           <p><strong>Message:</strong></p>
-//           <p>${message.replace(/\n/g, "<br/>")}</p>
-//         </div>
-//       `,
-//     });
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user, pass },
+    });
 
-//     /* =========================
-//        2️⃣ AUTO-REPLY TO USER (STEP 6)
-//     ========================== */
-//     // Only send auto-reply if contact looks like an email
-//     if (contact.includes("@")) {
-//       await resend.emails.send({
-//         from: "ENSO <no-reply@ensomindmatters.com>",
-//         to: [contact],
-//         subject: "We’ve received your message",
-//         html: `
-//           <div style="font-family: Georgia, serif; line-height: 1.6">
-//             <p>Dear ${name},</p>
+    // 1) Mail to admin
+    await transporter.sendMail({
+      from,
+      to: toAdmin,
+      subject: `ENSO: New form submission — ${name}`,
+      text: [
+        `Name: ${name}`,
+        `Contact: ${contact}`,
+        `Preferred: ${preferred}`,
+        ``,
+        `Message:`,
+        message,
+      ].join("\n"),
+      // If they entered a real email, replying will go to them
+      replyTo: isEmail(contact) ? contact : undefined,
+    });
 
-//             <p>
-//               Thank you for reaching out to ENSO.
-//               We’ve received your message and will respond
-//               within <strong>24–48 hours</strong>.
-//             </p>
+    // 2) Auto-reply to client (ONLY if contact is email)
+    if (isEmail(contact)) {
+      const subject = process.env.AUTO_REPLY_SUBJECT || "We received your message";
+      const template = process.env.AUTO_REPLY_BODY || "Hi {{name}},\n\nThanks for reaching out.\n\n— ENSO";
 
-//             <p>
-//               Until then, take care and be gentle with yourself.
-//             </p>
+      const text = renderTemplate(template, { name });
 
-//             <p>
-//               Warmly,<br/>
-//               <strong>ENSO</strong>
-//             </p>
-//           </div>
-//         `,
-//       });
-//     }
+      await transporter.sendMail({
+        from,
+        to: contact,
+        subject,
+        text,
+      });
+    }
 
-//     return Response.json({ success: true });
-
-//   } catch (error) {
-//     console.error(error);
-//     return new Response("Failed to send message", { status: 500 });
-//   }
-// }
+    return NextResponse.json({ ok: true });
+  } catch (e: any) {
+    return NextResponse.json(
+      { ok: false, error: e?.message || "Server error" },
+      { status: 500 }
+    );
+  }
+}
