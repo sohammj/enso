@@ -8,7 +8,7 @@ export const studioInfo = {
     "At Enso Mind Matters, we believe in nurturing emotional well-being through creativity, mindfulness, and connection.",
   addressLine1: "3 United House, besides Starcity Cinema,",
   addressLine2: "Manmala Tank Road, Mahim, Mumbai 400016",
-  email: "paruldewal@gmail.com",
+  email: "parul.enso@gmail.com",
   phone: "", // if they give you one later
   cityTag: "Mumbai, India",
 };

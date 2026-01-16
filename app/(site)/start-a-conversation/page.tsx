@@ -14,7 +14,7 @@ import Dragonfly from "@/components/ui/Dragonfly";
 const Schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   contact: z.string().min(3, "Please enter your email or phone"),
-  preferred: z.enum(["Email", "Call", "WhatsApp"]),
+  preferred: z.enum(["Email", "Call"]),
   message: z.string().min(5, "Tell us a little about what you're looking for"),
 });
 
@@ -239,14 +239,36 @@ export default function StartConversation() {
           <p className="text-sm text-red-500">{errors.contact.message}</p>
         )}
 
-        <select
-          className="rounded-xl border border-black/10 bg-white px-4 py-3"
-          {...register("preferred")}
-        >
-          <option value="Email">Email</option>
-          <option value="Call">Call</option>
-          <option value="WhatsApp">WhatsApp</option>
-        </select>
+      <div className="grid gap-2">
+        <p className="text-xs opacity-70">Preferred contact</p>
+
+        <div className="flex gap-3">
+          <label className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 cursor-pointer">
+            <input
+              type="radio"
+              value="Email"
+              {...register("preferred")}
+              className="accent-black"
+            />
+            <span>Email</span>
+          </label>
+
+          <label className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 cursor-pointer">
+            <input
+              type="radio"
+              value="Call"
+              {...register("preferred")}
+              className="accent-black"
+            />
+            <span>Call</span>
+          </label>
+        </div>
+
+        {errors.preferred && (
+          <p className="text-sm text-red-500">{errors.preferred.message as string}</p>
+        )}
+      </div>
+
 
         <textarea
           className="rounded-xl border border-black/10 bg-white px-4 py-3"
