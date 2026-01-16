@@ -8,10 +8,12 @@ function isEmail(v: string) {
 function renderTemplate(template: string, vars: Record<string, string>) {
   let out = template;
   for (const [k, v] of Object.entries(vars)) {
-    out = out.replaceAll(`{{${k}}}`, v);
+    // replace ALL occurrences without replaceAll (Vercel TS lib issue)
+    out = out.split(`{{${k}}}`).join(v);
   }
   return out;
 }
+
 
 export async function POST(req: Request) {
   try {
