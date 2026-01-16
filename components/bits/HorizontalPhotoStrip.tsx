@@ -218,7 +218,7 @@ export default function HorizontalPhotoStrip({
           ref={containerRef}
           className="relative h-full"
           style={{
-            width: "250vw",
+            width: "260vw",
             transform: `translateX(-${translateX}px)`,
             transition: "transform 80ms ease-out",
           }}
