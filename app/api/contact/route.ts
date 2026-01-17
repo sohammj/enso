@@ -64,7 +64,8 @@ export async function POST(req: Request) {
       const subject = process.env.AUTO_REPLY_SUBJECT || "We received your message";
       const template = process.env.AUTO_REPLY_BODY || "Hi {{name}},\n\nThanks for reaching out.\n\n— ENSO";
 
-      const text = renderTemplate(template, { name });
+      const text = renderTemplate(template, { name }).replace(/\\n/g, "\n");
+
 
       await transporter.sendMail({
         from,
