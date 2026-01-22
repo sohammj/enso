@@ -11,7 +11,7 @@ export function Footer() {
           </div>
           <p className="p">Mumbai, India (placeholder)</p>
           <p className="p mt-2">
-            Email: <a href="mailto:info@example.com" className="underline underline-offset-4">info@example.com</a>
+            Email: <a href="mailto:parul.enso@gmail.com" className="underline underline-offset-4">parul.enso@gmail.com</a>
           </p>
         </div>
 

@@ -10,7 +10,7 @@ const DEFAULT_PHRASES = [
 
 export function TextCursor({
   phrases = DEFAULT_PHRASES,
-  holdMs = 1500,
+  holdMs = 3000,
   typeMs = 40,
   deleteMs = 20,
   className = "font-medium",
