@@ -33,10 +33,9 @@ export function Nav() {
           : "bg-transparent"
       }`}
     >
-      {/* <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 md:py-4"> */}
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 h-[80px]">
 
-        {/* Logo — use GIF */}
+        {/* Logo */}
         <Link href="/" className="flex items-center">
           <img
             src="/ensologo.gif"
@@ -45,22 +44,26 @@ export function Nav() {
           />
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex gap-8">
+        {/* Desktop & Landscape Tablet Links - hidden below lg (1024px) */}
+        <div className="hidden lg:flex gap-8">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-[18px] font-medium text-[#111] hover:opacity-70 transition"
+              className="relative text-[18px] font-medium text-[#111] transition-all duration-300
+                         hover:text-[#4A5568]
+                         after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 
+                         after:bg-[#111] after:transition-all after:duration-300 
+                         hover:after:w-full"
             >
               {l.label}
             </Link>
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile & Portrait Tablet Menu Button - shown below lg (1024px) */}
         <button
-          className="md:hidden text-[#111]"
+          className="lg:hidden text-[#111] hover:text-[#4A5568] transition-colors"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
         >
@@ -68,9 +71,9 @@ export function Nav() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile & Portrait Tablet Menu */}
       {open && (
-        <div className="md:hidden bg-white/90 backdrop-blur-md border-t border-gray-200">
+        <div className="lg:hidden bg-white/90 backdrop-blur-md border-t border-gray-200">
           <div className="mx-4 mb-4 rounded-2xl p-4">
             {links.map((l) => (
               <Link
