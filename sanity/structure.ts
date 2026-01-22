@@ -49,11 +49,23 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
 
       S.listItem()
-        .title("Private Booking Page")
-        .id("privateBookingPageSingleton")
+        .title("New Client Booking Page")
+        .id("newClientBookingPageSingleton")
         .child(
           S.document()
-            .schemaType("privateBookingPage")
-            .documentId("privateBookingPage")
+            .schemaType("newClientBookingPage")
+            .documentId("newClientBookingPage")
+        ),
+
+      S.divider(),
+
+      
+      S.listItem()
+        .title("Returning Client Booking Page")
+        .id("returningClientBookingPageSingleton")
+        .child(
+          S.document()
+            .schemaType("returningClientBookingPage")
+            .documentId("returningClientBookingPage")
         ),
     ]);

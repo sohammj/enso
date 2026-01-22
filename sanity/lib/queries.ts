@@ -144,22 +144,50 @@ export const GALLERY_ALBUM_BY_SLUG_QUERY = `*[_type == "galleryAlbum" && slug.cu
 }`;
 
 
-export const privateBookingPageQuery = `
-*[_type == "privateBookingPage" && _id == "privateBookingPage"][0]{
+export const newClientBookingPageQuery = `
+*[_type == "newClientBookingPage" && _id == "newClientBookingPage"][0]{
   _id,
   pageTitle,
   pageSubtitle,
   intakeFormEmbedUrl,
   calendarEmbedUrl,
-  instagramUrl,
+  
   sessionDurationText,
   feeAmount,
   feeCurrency,
-  afterIntakeMessage,
-  newClientLabel,
-  returningClientLabel
+  afterIntakeMessage
 }
 `;
+
+export const returningClientBookingPageQuery = `
+*[_type == "returningClientBookingPage" && _id == "returningClientBookingPage"][0]{
+  _id,
+  pageTitle,
+  pageSubtitle,
+  calendarEmbedUrl,
+
+  sessionDurationText,
+  feeAmount,
+  feeCurrency
+}
+`;
+
+// export const privateBookingPageQuery = `
+// *[_type == "privateBookingPage" && _id == "privateBookingPage"][0]{
+//   _id,
+//   pageTitle,
+//   pageSubtitle,
+//   intakeFormEmbedUrl,
+//   calendarEmbedUrl,
+//   instagramUrl,
+//   sessionDurationText,
+//   feeAmount,
+//   feeCurrency,
+//   afterIntakeMessage,
+//   newClientLabel,
+//   returningClientLabel
+// }
+// `;
 
 
 

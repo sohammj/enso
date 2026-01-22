@@ -59,26 +59,48 @@ export type Program = {
   photoStrip?: { image?: any; label?: string; caption?: string }[];
 };
 
-export type PrivateBookingPage = {
+// export type PrivateBookingPage = {
+//   _id: string;
+//   pageTitle?: string | null;
+//   pageSubtitle?: string | null;
+
+//   intakeFormEmbedUrl: string;
+//   calendarEmbedUrl: string;
+//   instagramUrl: string;
+
+//   sessionDurationText: string;
+//   feeAmount: number;
+//   feeCurrency: string;
+
+//   afterIntakeMessage: string;
+
+//   newClientLabel: string;
+//   returningClientLabel: string;
+// };
+
+export type NewClientBookingPage = {
   _id: string;
   pageTitle?: string | null;
   pageSubtitle?: string | null;
-
   intakeFormEmbedUrl: string;
   calendarEmbedUrl: string;
-  instagramUrl: string;
-
+  
   sessionDurationText: string;
   feeAmount: number;
   feeCurrency: string;
-
   afterIntakeMessage: string;
-
-  newClientLabel: string;
-  returningClientLabel: string;
 };
 
-
+export type ReturningClientBookingPage = {
+  _id: string;
+  pageTitle?: string | null;
+  pageSubtitle?: string | null;
+  calendarEmbedUrl: string;
+  
+  sessionDurationText: string;
+  feeAmount: number;
+  feeCurrency: string;
+};
 
 
 export type Service = {
