@@ -42,113 +42,6 @@ const socials = [
   { label: "Gmail", href: `mailto:${studioInfo.email}`, icon: "/icons/mail.svg" },
 ];
 
-/* ================= SOCIALS (Desktop Rail + Mobile FAB) ================= */
-
-function SocialDock() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      {/* ✅ DESKTOP: right edge, vertically centered, sticky to border */}
-      <div
-        className={[
-          "hidden lg:flex",
-          "fixed right-0 top-1/2 -translate-y-1/2",
-          "z-40",
-          "flex-col overflow-hidden",
-          "rounded-l-2xl border border-black/10 bg-white/85 backdrop-blur",
-          "shadow-soft",
-        ].join(" ")}
-      >
-        {socials.map((s) => (
-          <a
-            key={s.label}
-            href={s.href}
-            target={s.href.startsWith("http") ? "_blank" : undefined}
-            rel={s.href.startsWith("http") ? "noreferrer" : undefined}
-            className="group flex h-14 w-14 items-center justify-center border-b border-black/10 last:border-b-0 hover:bg-black/[0.03]"
-            aria-label={s.label}
-            title={s.label}
-          >
-            <Image
-              src={s.icon}
-              alt=""
-              width={22}
-              height={22}
-              className="opacity-80 transition group-hover:opacity-100"
-            />
-          </a>
-        ))}
-      </div>
-
-      {/* ✅ MOBILE: bottom-right button -> dropdown icons */}
-      <div className="lg:hidden fixed right-4 bottom-4 z-50">
-        {/* dropdown */}
-        <div
-          className={[
-            "absolute bottom-20 right-0",
-            "transition-all duration-200",
-            open ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none",
-          ].join(" ")}
-        >
-          <div className="flex flex-col overflow-hidden rounded-3xl border border-black/10 bg-white/95 backdrop-blur shadow-soft">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel={s.href.startsWith("http") ? "noreferrer" : undefined}
-                className="flex h-16 w-16 items-center justify-center border-b border-black/10 last:border-b-0 active:bg-black/[0.05]"
-                aria-label={s.label}
-                title={s.label}
-                onClick={() => setOpen(false)}
-              >
-                <Image
-                  src={s.icon}
-                  alt=""
-                  width={28}
-                  height={28}
-                  className="opacity-95"
-                />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* fab (logo-only) */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="p-0 bg-transparent border-0 shadow-none backdrop-blur-0 rounded-none"
-          aria-label="Open social links"
-          title="Socials"
-        >
-          <Image
-            src="/enso.png"
-            alt="Enso"
-            width={75}
-            height={75}
-            className={`cursor-pointer select-none opacity-90 hover:opacity-100 transition
-              translate-x-1
-              ${open ? "rotate-90" : "rotate-0"}
-            `}
-          />
-        </button>
-      </div>
-
-      {/* click outside overlay (mobile) */}
-      {open && (
-        <button
-          type="button"
-          className="lg:hidden fixed inset-0 z-40"
-          aria-label="Close socials"
-          onClick={() => setOpen(false)}
-        />
-      )}
-    </>
-  );
-}
-
 /* ================= Page ================= */
 
 export default function StartConversation() {
@@ -190,8 +83,37 @@ export default function StartConversation() {
 
   return (
     <div className="relative mx-auto max-w-2xl px-4 py-14">
-      {/* Social rail */}
-      <SocialDock />
+      {/* Desktop social rail only */}
+      <div
+        className={[
+          "hidden lg:flex",
+          "fixed right-0 top-1/2 -translate-y-1/2",
+          "z-40",
+          "flex-col overflow-hidden",
+          "rounded-l-2xl border border-black/10 bg-white/85 backdrop-blur",
+          "shadow-soft",
+        ].join(" ")}
+      >
+        {socials.map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            target={s.href.startsWith("http") ? "_blank" : undefined}
+            rel={s.href.startsWith("http") ? "noreferrer" : undefined}
+            className="group flex h-14 w-14 items-center justify-center border-b border-black/10 last:border-b-0 hover:bg-black/[0.03]"
+            aria-label={s.label}
+            title={s.label}
+          >
+            <Image
+              src={s.icon}
+              alt=""
+              width={22}
+              height={22}
+              className="opacity-80 transition group-hover:opacity-100"
+            />
+          </a>
+        ))}
+      </div>
 
       {/* 🦋 LEFT SIDE – gentle vertical cluster - NOW ANIMATED */}
       <div className="hidden lg:block absolute left-[-180px] top-[140px] opacity-80 z-0">
@@ -301,6 +223,29 @@ export default function StartConversation() {
           {isSubmitting ? "Sending..." : "Send"}
         </button>
       </form>
+
+      {/* Mobile social icons - horizontal bar below form */}
+      <div className="lg:hidden flex items-center justify-center gap-6 mt-8">
+        {socials.map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            target={s.href.startsWith("http") ? "_blank" : undefined}
+            rel={s.href.startsWith("http") ? "noreferrer" : undefined}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-white border border-black/10 shadow-sm hover:shadow-md active:scale-95 transition-all"
+            aria-label={s.label}
+            title={s.label}
+          >
+            <Image
+              src={s.icon}
+              alt=""
+              width={24}
+              height={24}
+              className="opacity-90"
+            />
+          </a>
+        ))}
+      </div>
 
       {/* Footer note */}
       <div className="mt-8 rounded-2xl bg-white p-5 shadow-soft text-sm">
