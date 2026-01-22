@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description: "A gentle, safe space for healing and self-exploration through counselling and  arts-based therapy with psychologist Parul Dewal-Hande.",
   twitter: {
     card: "summary_large_image",
-    title: "Enso Mind Matters",
+    title: "Enso Counselling & Art Therapy Centre.",
   },
   openGraph: {
-    title: "Enso Mind Matters",
+    title: "Enso Counselling & Art Therapy Centre.",
     type: "website",
   },
 };
