@@ -253,7 +253,7 @@ export default function StartConversation() {
           <p className="text-sm text-red-500">{errors.contact.message}</p>
         )}
 
-      <div className="grid gap-2">
+      {/* <div className="grid gap-2">
         <p className="text-xs opacity-70">Preferred contact</p>
 
         <div className="flex gap-3">
@@ -281,7 +281,7 @@ export default function StartConversation() {
         {errors.preferred && (
           <p className="text-sm text-red-500">{errors.preferred.message as string}</p>
         )}
-      </div>
+      </div> */}
 
 
         <textarea

@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { SanityLive } from "@/sanity/lib/live";
 
 export const metadata: Metadata = {
-  title: "Enso Mind Matters",
-  description: "Art-forward mental wellness – therapy, programs, community.",
+  title: "Enso Counselling & Art Therapy Centre.",
+  description: "A gentle, safe space for healing and self-exploration through counselling and  arts-based therapy with psychologist Parul Dewal-Hande.",
   twitter: {
     card: "summary_large_image",
     title: "Enso Mind Matters",
