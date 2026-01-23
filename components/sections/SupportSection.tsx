@@ -123,7 +123,7 @@ export default function SupportSection({
                       {card.title}
                     </h3>
 
-                    <p className="text-[16px] leading-[1.8] text-[#0E1E2A]/80 mt-2 text-justify">
+                    <p className="text-[16px] leading-[1.8] text-[#0E1E2A]/80 mt-2">
                       {card.description}
                     </p>
                   </div>
