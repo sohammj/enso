@@ -74,7 +74,7 @@ export default function SupportSection({
                   />
                 </div>
 
-                <p className="text-[15px] leading-[1.75] text-[#0E1E2A]/80">
+                <p className="text-[15px] leading-[1.75] text-[#0E1E2A]/80 text-justify">
                   {card.description}
                 </p>
               </div>
@@ -123,7 +123,7 @@ export default function SupportSection({
                       {card.title}
                     </h3>
 
-                    <p className="text-[16px] leading-[1.8] text-[#0E1E2A]/80 mt-2">
+                    <p className="text-[16px] leading-[1.8] text-[#0E1E2A]/80 mt-2 text-justify">
                       {card.description}
                     </p>
                   </div>
