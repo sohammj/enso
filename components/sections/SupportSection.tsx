@@ -74,7 +74,7 @@ export default function SupportSection({
                   />
                 </div>
 
-                <p className="text-[15px] leading-[1.75] text-[#0E1E2A]/80 text-justify">
+                <p className="text-[15px] leading-[1.75] text-[#0E1E2A]/80">
                   {card.description}
                 </p>
               </div>
