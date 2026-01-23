@@ -1,15 +1,18 @@
+// GROQ Query
 export const HOME_PAGE_QUERY = /* groq */ `
 *[_type == "homePage" && _id == "homePage"][0]{
-    hero{
+  hero{
     headlineLines,
     subheadline,
-    },
-
+  },
   welcome{
     title,
     body,
     image,
-    highlights[]{label, emoji}
+    highlights[]{
+      label,
+      icon
+    }
   },
   about{
     title,
@@ -23,6 +26,13 @@ export const HOME_PAGE_QUERY = /* groq */ `
   support{
     title,
     subtitle,
+    cards[]{
+      title,
+      description,
+      icon,
+      bg,
+      href
+    }
   }
 }
 `;

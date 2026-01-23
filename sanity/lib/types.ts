@@ -1,24 +1,22 @@
-export type HomeHighlight = { label?: string; icon?: any; };
+export type HomeHighlight = {
+  label?: string;
+  icon?: any; // Sanity image reference
+};
 
 export type SupportCard = {
   title?: string;
   description?: string;
+  icon?: any; // Sanity image reference
   bg?: string;
   href?: string;
-  icon?: any; // Sanity image object
-  fallbackIconPath?: string;
+  fallbackIconPath?: string; // For client-side fallback
 };
 
 export type HomePageData = {
   hero?: {
     headlineLines?: string[];
     subheadline?: string;
-    // overlayOpacity?: number;
-    // soundButtonLabelMuted?: string;
-    // soundButtonLabelUnmuted?: string;
-    // videoUrl?: string | null;
   };
-
   welcome?: {
     title?: string;
     body?: string;
@@ -37,7 +35,7 @@ export type HomePageData = {
   support?: {
     title?: string;
     subtitle?: string;
-    // cards?: SupportCard[];
+    cards?: SupportCard[];
   };
 };
 

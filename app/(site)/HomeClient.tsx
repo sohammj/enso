@@ -171,13 +171,30 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
   const aboutBody = data?.about?.body || DEFAULTS.about.body;
   const aboutQuote = data?.about?.quote || DEFAULTS.about.quote;
 
-  const supportTitle = data?.support?.title || DEFAULTS.support.title;
-  const supportSubtitle = data?.support?.subtitle || DEFAULTS.support.subtitle;
-  const supportCards = DEFAULTS.support.cards;
+ // In your HomeClient component, update the support cards section:
 
-//   const supportCards =
-//     (data?.support?.cards?.length ? data.support.cards : null) ||
-//     DEFAULTS.support.cards;
+const supportTitle = data?.support?.title || DEFAULTS.support.title;
+const supportSubtitle = data?.support?.subtitle || DEFAULTS.support.subtitle;
+
+// ✅ Use Sanity cards if available, otherwise use defaults
+const supportCards: SupportCard[] = (data?.support?.cards?.length 
+  ? data.support.cards 
+  : DEFAULTS.support.cards
+).map(card => ({
+  ...card,
+  // Add fallback icon paths for when Sanity images aren't available
+  fallbackIconPath: card.fallbackIconPath || getDefaultIconPath(card.title),
+}));
+
+// Helper function to get default icon based on title
+function getDefaultIconPath(title?: string): string {
+  const titleLower = title?.toLowerCase() || "";
+  if (titleLower.includes("individual")) return "/icons/individual.png";
+  if (titleLower.includes("group")) return "/icons/group.png";
+  if (titleLower.includes("ngo") || titleLower.includes("collaboration")) return "/icons/ngo.png";
+  if (titleLower.includes("corporate")) return "/icons/corporate.png";
+  return "/icons/individual.png"; // default fallback
+}
 
   const pauseLabel = data?.pauseReflect?.label || DEFAULTS.pauseReflect.label;
   const pausePhrases =

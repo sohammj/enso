@@ -97,6 +97,60 @@ export const homePage = defineType({
       fields: [
         defineField({ name: "title", title: "Title", type: "string" }),
         defineField({ name: "subtitle", title: "Subtitle", type: "string" }),
+        defineField({
+          name: "cards",
+          title: "Support Cards",
+          type: "array",
+          of: [
+            defineArrayMember({
+              name: "supportCard",
+              title: "Support Card",
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "text",
+                  rows: 3,
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "icon",
+                  title: "Icon Image",
+                  type: "image",
+                  options: { hotspot: true },
+                  description: "Upload an icon for this card",
+                }),
+                defineField({
+                  name: "bg",
+                  title: "Background Color",
+                  type: "string",
+                  description: "Hex color (e.g., #FFF2CC)",
+                  initialValue: "#F4EFEA",
+                }),
+                defineField({
+                  name: "href",
+                  title: "Link URL",
+                  type: "string",
+                  description: "Internal path (e.g., /services/individual-sessions)",
+                }),
+              ],
+              preview: {
+                select: {
+                  title: "title",
+                  subtitle: "description",
+                  media: "icon",
+                },
+              },
+            }),
+          ],
+        }),
       ],
     }),
   ],
@@ -108,7 +162,7 @@ export const homePage = defineType({
     },
     prepare({ line1, sub }: { line1?: string; sub?: string }) {
       return {
-        title: "   ",
+        title: "Home Page",
         subtitle: [line1, sub].filter(Boolean).join(" • "),
       };
     },
