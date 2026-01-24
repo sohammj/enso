@@ -77,6 +77,7 @@ export default function GalleryClient({ albums }: GalleryClientProps) {
                   onClick={() => setSelectedAlbum(album)}
                   className="album-card-hover group relative overflow-hidden rounded-3xl bg-white shadow-lg cursor-pointer"
                 >
+                  {/* Cover Image */}
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
                       src={album.coverImage}
@@ -84,17 +85,19 @@ export default function GalleryClient({ albums }: GalleryClientProps) {
                       className="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110"
                     />
                   </div>
-                  
-                  {/* Caption overlay */}
-                  <div className="album-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent px-6 py-5 group-hover:from-black/80">
-                    <p className="text-white font-medium text-lg">
+
+                  {/* Caption BELOW image */}
+                  <div className="px-6 py-5">
+                    <p className="text-[#2F2F2F] text-lg leading-snug">
                       {album.title}
                     </p>
-                    <p className="text-white/70 text-sm mt-1">
-                      {album.photos.length} photo{album.photos.length !== 1 ? 's' : ''}
+
+                    <p className="text-[#3A3A3A]/60 text-sm mt-1">
+                      {album.photos.length} photo{album.photos.length !== 1 ? "s" : ""}
                     </p>
                   </div>
                 </div>
+
               ))}
             </div>
           )}
