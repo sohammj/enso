@@ -7,6 +7,8 @@ import Dragonfly from "@/components/ui/Dragonfly";
 import type { Program } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 
 const float = {
   animate: {
@@ -108,9 +110,12 @@ export default function ProgramClient({ program }: { program: Program }) {
           variants={fadeUp}
           className="space-y-8 text-[18px] leading-[1.9] opacity-85"
         >
-          {(program.description || []).map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
+          {program.description && (
+            <div className="space-y-4">
+              <PortableText value={program.description} />
+            </div>
+          )}
+
         </motion.div>
       </section>
 

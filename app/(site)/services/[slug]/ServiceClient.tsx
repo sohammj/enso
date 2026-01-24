@@ -8,6 +8,8 @@ import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 import { useRef } from "react";
 import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 
 
 const float = {
@@ -182,9 +184,11 @@ export default function ServiceClient({ service }: { service: Service }) {
           variants={fadeUp}
           className="space-y-8 text-[18px] leading-[1.9] opacity-85"
         >
-          {(service.description || []).map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
+          {service.description && (
+            <div className="space-y-4">
+              <PortableText value={service.description} />
+            </div>
+          )}
         </motion.div>
       </section>
 

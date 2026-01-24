@@ -53,7 +53,8 @@ export type Program = {
   label?: string;
   subtitle?: string;
   preview?: string;
-  description?: string[];
+  // description?: string[];
+  description?: PortableTextBlock[];
   icon?: any; // Sanity image
   cta?: {
     tagline?: string;
@@ -115,7 +116,8 @@ export type Service = {
   subtitle?: string;
   status?: "active" | "hidden";
   preview?: string;
-  description?: string[];
+  // description?: string[];
+  description?: PortableTextBlock[];
   icon?: any; // Sanity image object
   cta?: {
     tagline?: string;
