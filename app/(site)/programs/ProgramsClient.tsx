@@ -6,6 +6,19 @@ import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 import type { Program } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
+import type { PortableTextBlock } from "@portabletext/types";
+
+function ptToPlainText(blocks?: PortableTextBlock[]) {
+  if (!blocks?.length) return "";
+  return blocks
+    .map((block) =>
+      block._type === "block"
+        ? (block.children || []).map((child: any) => child.text).join("")
+        : ""
+    )
+    .join("\n");
+}
+
 
 export default function ProgramsClient({ programs }: { programs: Program[] }) {
   const bgColors = ["#FFF2CC", "#F4EFEA", "#F8D7C4", "#DCEEEA"];
@@ -89,8 +102,9 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
                     </h3>
 
                     <p className="text-[15px] leading-[1.75] opacity-80 mt-2">
-                      {program.preview ?? program.description?.[0]}
+                      {program.preview ?? ptToPlainText(program.description).slice(0, 160)}
                     </p>
+
                   </div>
 
                   {/* ✅ DESKTOP: flip */}
@@ -173,7 +187,7 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
                         </h3>
 
                         <p className="text-[16px] leading-[1.8] opacity-80 mt-2">
-                          {program.preview ?? program.description?.[0]}
+                            {program.preview ?? ptToPlainText(program.description).slice(0, 160)}
                         </p>
                       </div>
                     </div>

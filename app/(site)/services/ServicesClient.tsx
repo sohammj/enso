@@ -6,6 +6,19 @@ import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 import type { Service } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
+import type { PortableTextBlock } from "@portabletext/types";
+
+function ptToPlainText(blocks?: PortableTextBlock[]) {
+  if (!blocks?.length) return "";
+  return blocks
+    .map((block) =>
+      block._type === "block"
+        ? (block.children || []).map((child: any) => child.text).join("")
+        : ""
+    )
+    .join("\n");
+}
+
 
 function isSvgUrl(url?: string | null) {
   if (!url) return false;
@@ -70,8 +83,10 @@ export default function ServicesClient({ services }: { services: Service[] }) {
               ? urlFor(service.icon).width(200).height(200).fit("max").url()
               : null;
 
+            const plainDesc = ptToPlainText(service.description);
             const previewText =
-              service.preview || service.description?.[0] || "";
+              service.preview || (plainDesc ? plainDesc.slice(0, 160) + (plainDesc.length > 160 ? "…" : "") : "");
+
 
             return (
               <Link key={service._id || slug || i} href={`/services/${slug}`} className="cursor-pointer">
