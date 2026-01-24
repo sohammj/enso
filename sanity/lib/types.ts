@@ -1,3 +1,6 @@
+import type { PortableTextBlock } from "@portabletext/types";
+
+
 export type HomeHighlight = {
   label?: string;
   icon?: any; // Sanity image reference
@@ -15,17 +18,20 @@ export type SupportCard = {
 export type HomePageData = {
   hero?: {
     headlineLines?: string[];
-    subheadline?: string;
+    // subheadline?: string;
+    subheadline?: PortableTextBlock[];
   };
   welcome?: {
     title?: string;
-    body?: string;
+    // body?: string;
+    body?: PortableTextBlock[];
     image?: any;
     highlights?: HomeHighlight[];
   };
   about?: {
     title?: string;
-    body?: string;
+    // body?: string;
+    body?: PortableTextBlock[];
     quote?: string;
   };
   pauseReflect?: {

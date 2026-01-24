@@ -21,8 +21,8 @@ export const homePage = defineType({
         defineField({
           name: "subheadline",
           title: "Subheadline",
-          type: "text",
-          rows: 3,
+          type: "array",
+          of: [{ type: "block" }],
         }),
       ],
     }),
@@ -33,7 +33,7 @@ export const homePage = defineType({
       type: "object",
       fields: [
         defineField({ name: "title", title: "Title", type: "string" }),
-        defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
+        defineField({ name: "body", title: "Body", type: "array", of: [{ type: "block" }] }),
         defineField({
           name: "image",
           title: "Image",
@@ -70,7 +70,7 @@ export const homePage = defineType({
       type: "object",
       fields: [
         defineField({ name: "title", title: "Title", type: "string" }),
-        defineField({ name: "body", title: "Body", type: "text", rows: 5 }),
+        defineField({ name: "body", title: "Body", type: "array", of: [{ type: "block" }] }),
         defineField({ name: "quote", title: "Quote", type: "text", rows: 3 }),
       ],
     }),

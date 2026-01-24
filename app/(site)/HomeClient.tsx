@@ -15,6 +15,8 @@ import StartConversationSection from "@/components/sections/StartConversationSec
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import Dragonfly from "@/components/ui/Dragonfly";
 import { toast } from "sonner";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 
 
 
@@ -32,8 +34,17 @@ const DEFAULTS = {
       "through art and",
       "conversation.",
     ],
-    subheadline:
-      "ENSO is a space for emotional growth, self-discovery, and inner balance through art therapy and counselling.",
+    subheadline: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "ENSO is a space for emotional growth, self-discovery, and inner balance through art therapy and counselling.",
+          },
+        ],
+      },
+    ] satisfies PortableTextBlock[],
     overlayOpacity: 0.1,
     soundButtonLabelMuted: "🔇",
     soundButtonLabelUnmuted: "🔊",
@@ -41,8 +52,18 @@ const DEFAULTS = {
   },
   welcome: {
     title: "Welcome to ENSO",
-    body:
-      "Enso Art Therapy and Counseling Centre offers a safe and inclusive space for emotional well-being, personal growth, and self-expression.",
+    body: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Enso Art Therapy and Counseling Centre offers a safe and inclusive space for emotional well-being, personal growth, and self-expression.",
+          },
+        ],
+      },
+    ] satisfies PortableTextBlock[],
+
     fallbackImagePath: "/hero11.jpeg",
     highlights: [
       { label: "Personal Growth" },
@@ -52,8 +73,17 @@ const DEFAULTS = {
   },
   about: {
     title: "About ENSO",
-    body:
-      "The Enso, a circle drawn in one continuous breath, holds within it the beauty of being incomplete yet whole. Inspired by the Enso — a circle drawn in one mindful stroke — we believe healing is not about perfection, but presence.",
+    body: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "The Enso, a circle drawn in one continuous breath, holds within it the beauty of being incomplete yet whole. Inspired by the Enso — a circle drawn in one mindful stroke — we believe healing is not about perfection, but presence.",
+          },
+        ],
+      },
+    ] satisfies PortableTextBlock[],
     quote:
       "Each session at Enso is an invitation to pause, reflect, and let your story unfold naturally, one breath at a time.",
   },
@@ -138,7 +168,10 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
     splitHeadlineToLines(data?.hero?.headlineLines?.join("\n")) ||
     DEFAULTS.hero.headlineLines;
 
-  const heroSub = data?.hero?.subheadline || DEFAULTS.hero.subheadline;
+  // const heroSub = data?.hero?.subheadline || DEFAULTS.hero.subheadline;
+  const heroSub: PortableTextBlock[] =
+    (data?.hero?.subheadline?.length ? data.hero.subheadline : null) ??
+    DEFAULTS.hero.subheadline;
 
 //   const overlayOpacity =
 //     typeof data?.hero?.overlayOpacity === "number"
@@ -156,7 +189,11 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
     DEFAULTS.hero.fallbackVideoPath;
 
   const welcomeTitle = data?.welcome?.title || DEFAULTS.welcome.title;
-  const welcomeBody = data?.welcome?.body || DEFAULTS.welcome.body;
+  // const welcomeBody = data?.welcome?.body || DEFAULTS.welcome.body;
+
+  const welcomeBody: PortableTextBlock[] =
+    (data?.welcome?.body?.length ? data.welcome.body : null) ??
+    DEFAULTS.welcome.body;
 
   const welcomeImageSrc = data?.welcome?.image
     ? urlFor(data.welcome.image).width(900).height(900).fit("crop").url()
@@ -168,7 +205,13 @@ export default function HomeClient({ data }: { data: HomePageData | null }) {
 
 
   const aboutTitle = data?.about?.title || DEFAULTS.about.title;
-  const aboutBody = data?.about?.body || DEFAULTS.about.body;
+  // const aboutBody = data?.about?.body || DEFAULTS.about.body;
+
+  const aboutBody: PortableTextBlock[] =
+    (data?.about?.body?.length ? data.about.body : null) ??
+    DEFAULTS.about.body;
+
+
   const aboutQuote = data?.about?.quote || DEFAULTS.about.quote;
 
  // In your HomeClient component, update the support cards section:
@@ -247,9 +290,10 @@ function getDefaultIconPath(title?: string): string {
           </h1>
 
           {/* <p className="font-body mt-4 md:mt-6 text-base md:text-lg opacity-100"> */}
-          <p className="font-body mt-4 md:mt-6 text-base md:text-lg text-[#000000]">
-            {heroSub}
-          </p>
+          <div className="font-body mt-4 md:mt-6 text-base md:text-lg text-[#000000]">
+            <PortableText value={heroSub} />
+          </div>
+
         </div>
       </section>
 
@@ -359,9 +403,14 @@ function getDefaultIconPath(title?: string): string {
                   {welcomeTitle}
                 </h3>
 
-                <p className="text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
+                {/* <p className="text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
                   {welcomeBody}
-                </p>
+                </p> */}
+
+                <div className="text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
+                  <PortableText value={welcomeBody} />
+                </div>
+
 
                 <ul className="space-y-4">
                   {highlights.map((h, idx) => (
@@ -468,9 +517,12 @@ function getDefaultIconPath(title?: string): string {
 
             <div className="w-28 h-[2px] bg-[#B88933]/70 mb-10" />
 
-            <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
+            {/* <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
               {aboutBody}
-            </p>
+            </p> */}
+            <div className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
+              <PortableText value={aboutBody} />
+            </div>
           </div>
 
           <p
