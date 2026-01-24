@@ -4,13 +4,32 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 const Schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   contact: z.string().min(3, "Please enter your email or phone"),
   preferred: z.enum(["Email", "WhatsApp"]),
   message: z.string().min(5, "Tell us a little about what you're feeling"),
-});
+}).refine((data) => {
+  // If Email is preferred, validate email format
+  if (data.preferred === "Email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(data.contact);
+  }
+  // If WhatsApp is preferred, validate phone number format
+  if (data.preferred === "WhatsApp") {
+    // Accepts formats like: +919876543210, 9876543210, +91 98765 43210, etc.
+    const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/;
+    return phoneRegex.test(data.contact.replace(/\s/g, ''));
+  }
+  return true;
+}, (data) => ({
+  message: data.preferred === "Email" 
+    ? "Please enter a valid email address" 
+    : "Please enter a valid phone number",
+  path: ["contact"],
+}));
 
 type FormData = z.infer<typeof Schema>;
 
@@ -19,13 +38,47 @@ export default function StartConversationSection() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    watch,
+    trigger,
+    formState: { errors, isSubmitting, isSubmitSuccessful, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(Schema),
     defaultValues: { preferred: "Email" },
+    mode: "all", // Validates on change, blur, and submit
   });
 
+  const preferredMethod = watch("preferred");
+  const contactValue = watch("contact");
+
+  // Re-validate contact field when preferred method changes
+  useEffect(() => {
+    if (contactValue) {
+      trigger("contact");
+    }
+  }, [preferredMethod, trigger, contactValue]);
+
+  // Check if contact field matches the preferred method
+  const isContactValid = () => {
+    if (!contactValue || contactValue.length < 3) return false;
+    
+    if (preferredMethod === "Email") {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactValue);
+    } else if (preferredMethod === "WhatsApp") {
+      return /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/.test(contactValue.replace(/\s/g, ''));
+    }
+    return false;
+  };
+
   const onSubmit = async (data: FormData) => {
+    // Double-check validation before submitting
+    const isEmailValid = data.preferred === "Email" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.contact);
+    const isPhoneValid = data.preferred === "WhatsApp" && /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/.test(data.contact.replace(/\s/g, ''));
+    
+    if (!isEmailValid && !isPhoneValid) {
+      toast.error(data.preferred === "Email" ? "Please enter a valid email address" : "Please enter a valid phone number");
+      return;
+    }
+
     const loadingToast = toast.loading("Sending...");
 
     try {
@@ -95,7 +148,7 @@ export default function StartConversationSection() {
             <div>
               <input
                 className="w-full rounded-2xl bg-white/80 px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#B88933]/40"
-                placeholder="Email or phone number"
+                placeholder={preferredMethod === "Email" ? "Your email address" : "Your phone number"}
                 {...register("contact")}
               />
               {errors.contact && (
@@ -141,8 +194,8 @@ export default function StartConversationSection() {
 
             {/* Submit */}
             <button
-              disabled={isSubmitting}
-              className="mt-4 self-start rounded-full bg-[#0E1E2A] px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-white hover:opacity-90 disabled:opacity-50 transition-opacity"
+              disabled={isSubmitting || !isValid || !isContactValid()}
+              className="mt-4 self-start rounded-full bg-[#0E1E2A] px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
             >
               {isSubmitting ? "Sending…" : "Get in touch"}
             </button>

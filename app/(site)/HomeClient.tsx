@@ -3,9 +3,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-
-import MagicBento from "@/components/bits/MagicBento";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"; 
 import { PauseReflect } from "@/components/sections/PauseReflect";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { MapEmbed } from "@/components/sections/MapEmbed";
@@ -510,11 +508,18 @@ function getDefaultIconPath(title?: string): string {
             />
           </div>
 
+          {/* <div className="max-w-5xl mx-auto px-6"> */}
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A]">
+            <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A] flex items-center gap-1">
+              <Image
+                src="/enso.png"
+                alt=""
+                width={45}
+                height={45}
+                className="inline-block opacity-100"
+              />
               {aboutTitle}
             </h2>
-
             <div className="w-28 h-[2px] bg-[#B88933]/70 mb-10" />
 
             {/* <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">

@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { studioInfo } from "@/lib/data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dragonfly from "@/components/ui/Dragonfly";
 import { toast } from "sonner";
 
@@ -17,7 +17,25 @@ const Schema = z.object({
   contact: z.string().min(3, "Please enter your email or phone"),
   preferred: z.enum(["Email", "Call"]),
   message: z.string().min(5, "Tell us a little about what you're looking for"),
-});
+}).refine((data) => {
+  // If Email is preferred, validate email format
+  if (data.preferred === "Email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(data.contact);
+  }
+  // If Call is preferred, validate phone number format
+  if (data.preferred === "Call") {
+    // Accepts formats like: +919876543210, 9876543210, +91 98765 43210, etc.
+    const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/;
+    return phoneRegex.test(data.contact.replace(/\s/g, ''));
+  }
+  return true;
+}, (data) => ({
+  message: data.preferred === "Email" 
+    ? "Please enter a valid email address" 
+    : "Please enter a valid phone number",
+  path: ["contact"],
+}));
 
 type FormData = z.infer<typeof Schema>;
 
@@ -49,13 +67,47 @@ export default function StartConversation() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful, isSubmitting },
+    watch,
+    trigger,
+    formState: { errors, isSubmitSuccessful, isSubmitting, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(Schema),
     defaultValues: { preferred: "Email" },
+    mode: "all", // Validates on change, blur, and submit
   });
 
+  const preferredMethod = watch("preferred");
+  const contactValue = watch("contact");
+
+  // Re-validate contact field when preferred method changes
+  useEffect(() => {
+    if (contactValue) {
+      trigger("contact");
+    }
+  }, [preferredMethod, trigger, contactValue]);
+
+  // Check if contact field matches the preferred method
+  const isContactValid = () => {
+    if (!contactValue || contactValue.length < 3) return false;
+    
+    if (preferredMethod === "Email") {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactValue);
+    } else if (preferredMethod === "Call") {
+      return /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/.test(contactValue.replace(/\s/g, ''));
+    }
+    return false;
+  };
+
   const onSubmit = async (data: FormData) => {
+    // Double-check validation before submitting
+    const isEmailValid = data.preferred === "Email" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.contact);
+    const isPhoneValid = data.preferred === "Call" && /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/.test(data.contact.replace(/\s/g, ''));
+    
+    if (!isEmailValid && !isPhoneValid) {
+      toast.error(data.preferred === "Email" ? "Please enter a valid email address" : "Please enter a valid phone number");
+      return;
+    }
+
     const loadingToast = toast.loading("Sending...");
 
     try {
@@ -149,9 +201,6 @@ export default function StartConversation() {
         Tell us what you're seeking support for. We will reach out to you soon.
       </p>
 
-      {/* Success */}
-      
-
       {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -168,43 +217,48 @@ export default function StartConversation() {
 
         <input
           className="rounded-xl border border-black/10 bg-white px-4 py-3"
-          placeholder="Email or phone number"
+          placeholder={preferredMethod === "Email" ? "Your email address" : "Your phone number"}
           {...register("contact")}
         />
         {errors.contact && (
           <p className="text-sm text-red-500">{errors.contact.message}</p>
         )}
-
-      {/* <div className="grid gap-2">
-        <p className="text-xs opacity-70">Preferred contact</p>
-
-        <div className="flex gap-3">
-          <label className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 cursor-pointer">
-            <input
-              type="radio"
-              value="Email"
-              {...register("preferred")}
-              className="accent-black"
-            />
-            <span>Email</span>
-          </label>
-
-          <label className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 cursor-pointer">
-            <input
-              type="radio"
-              value="Call"
-              {...register("preferred")}
-              className="accent-black"
-            />
-            <span>Call</span>
-          </label>
-        </div>
-
-        {errors.preferred && (
-          <p className="text-sm text-red-500">{errors.preferred.message as string}</p>
+        {!errors.contact && contactValue && preferredMethod === "Call" && !/^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,5}[)]?[-\s\.]?[0-9]{4,6}[-\s\.]?[0-9]{0,6}$/.test(contactValue.replace(/\s/g, '')) && (
+          <p className="text-sm text-red-500">Please enter a valid phone number</p>
         )}
-      </div> */}
+        {!errors.contact && contactValue && preferredMethod === "Email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactValue) && (
+          <p className="text-sm text-red-500">Please enter a valid email address</p>
+        )}
 
+        <div className="grid gap-2">
+          <p className="text-xs opacity-70">Preferred contact</p>
+
+          <div className="flex gap-3">
+            <label className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 cursor-pointer">
+              <input
+                type="radio"
+                value="Email"
+                {...register("preferred")}
+                className="accent-black"
+              />
+              <span>Email</span>
+            </label>
+
+            <label className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 cursor-pointer">
+              <input
+                type="radio"
+                value="Call"
+                {...register("preferred")}
+                className="accent-black"
+              />
+              <span>Call</span>
+            </label>
+          </div>
+
+          {errors.preferred && (
+            <p className="text-sm text-red-500">{errors.preferred.message as string}</p>
+          )}
+        </div>
 
         <textarea
           className="rounded-xl border border-black/10 bg-white px-4 py-3"
@@ -217,8 +271,9 @@ export default function StartConversation() {
         )}
 
         <button
-          disabled={isSubmitting}
-          className="rounded-xl bg-ink px-5 py-3 text-white hover:opacity-90 disabled:opacity-50"
+          disabled={isSubmitting || !isValid || !isContactValid()}
+          className="rounded-xl bg-ink px-5 py-3 text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          type="submit"
         >
           {isSubmitting ? "Sending..." : "Send"}
         </button>
