@@ -134,7 +134,7 @@ export type FAQItem = {
 
 export type FAQPageData = {
   title?: string;
-  subtitle?: string;
+  subtitle?: PortableTextBlock[];
   items?: FAQItem[];
   cta?: {
     text?: string;

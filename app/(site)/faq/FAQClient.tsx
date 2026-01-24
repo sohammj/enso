@@ -5,6 +5,8 @@ import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
 import { faqs as fallbackFaqs } from "@/lib/data";
 import type { FAQPageData } from "@/sanity/lib/types";
 import Dragonfly from "@/components/ui/Dragonfly";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 
 const float = {
   animate: {
@@ -17,7 +19,17 @@ const float = {
 export default function FAQClient({ data }: { data: FAQPageData | null }) {
   const title = data?.title || "Frequently Asked Questions";
   const subtitle =
-    data?.subtitle || "Answers to some common questions — gently explained.";
+    data?.subtitle?.length
+      ? data.subtitle
+      : [
+          {
+            _type: "block",
+            children: [
+              { _type: "span", text: "Answers to some common questions — gently explained." },
+            ],
+          },
+        ];
+
 
   const items =
     data?.items?.length
@@ -41,7 +53,10 @@ export default function FAQClient({ data }: { data: FAQPageData | null }) {
 
         <div className="w-28 h-[2px] bg-[#B88933]/70 mx-auto my-6" />
 
-        <p className="text-[18px] opacity-80 max-w-xl mx-auto">{subtitle}</p>
+        <div className="text-[18px] opacity-80 max-w-xl mx-auto">
+          <PortableText value={subtitle} />
+        </div>
+        
       </section>
 
       {/* 🦋 RIGHT DRAGONFLIES - ANIMATED */}

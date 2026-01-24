@@ -15,9 +15,19 @@ export const faqPage = defineType({
     defineField({
       name: "subtitle",
       title: "Subtitle",
-      type: "text",
-      rows: 3,
-      initialValue: "Answers to some common questions — gently explained.",
+      type: "array",
+      of: [{ type: "block" }],
+      initialValue: [
+        {
+          _type: "block",
+          children: [
+            {
+              _type: "span",
+              text: "Answers to some common questions — gently explained.",
+            },
+          ],
+        },
+      ],
     }),
 
     defineField({

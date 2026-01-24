@@ -91,7 +91,7 @@ export const program = defineType({
       name: "description",
       title: "Description (paragraphs)",
       type: "array",
-      of: [{ type: "text" }],
+      of: [{ type: "block" }],
       validation: (Rule) => Rule.min(1),
     }),
 

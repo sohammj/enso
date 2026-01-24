@@ -69,7 +69,7 @@ export default defineType({
       name: "description",
       title: "Description (paragraphs)",
       type: "array",
-      of: [{ type: "text" }],
+      of: [{ type: "block" }],
       validation: (r) => r.min(1),
     }),
 
