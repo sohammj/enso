@@ -40,10 +40,6 @@ function BodyInNoSlot({ children }: { children: React.ReactNode }) {
   );
 }
 
-function hasContent(title?: string, body?: string) {
-  return Boolean((title && title.trim()) || (body && body.trim()));
-}
-
 /* =========================================================
    PANEL 01
 ========================================================= */
@@ -110,7 +106,7 @@ function PanelPhotoLeft({
 }
 
 /* =========================================================
-   PANEL 02
+   PANEL 02 (rounded rectangle photo)
 ========================================================= */
 function PanelPhotoRightRounded({
   bottomTitle,
@@ -238,71 +234,42 @@ function PanelPhotoRightCircle({
 }
 
 /* =========================================================
-   PANEL 04
+   PANEL 04 (Step 4 only, no photo)
 ========================================================= */
-function PanelNoPhotos({
-  s4Title,
-  s4Body,
-  s5Title,
-  s5Body,
+function PanelStep4NoPhoto({
+  title,
+  body,
 }: {
-  s4Title: string;
-  s4Body: string;
-  s5Title: string;
-  s5Body: string;
+  title: string;
+  body: string;
 }) {
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
         {/* MOBILE */}
-        <div className="md:hidden">
-          <div className={`${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-            <div className={`text-center ${PAD_X} mb-8`}>
-              <Title>{s4Title}</Title>
-            </div>
-            <div className={`text-center ${PAD_X}`}>
-              <StepTag />
-              <BodyInNoSlot>{s4Body}</BodyInNoSlot>
-            </div>
+        <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
+          <div className={`text-center ${PAD_X} mb-8`}>
+            <Title>{title}</Title>
           </div>
-
-          <div className={`${SECTION_MOBILE}`}>
-            <div className={`text-center ${PAD_X} mb-8`}>
-              <StepTag />
-              <BodyInNoSlot>{s5Body}</BodyInNoSlot>
-            </div>
-            <div className={`text-center ${PAD_X}`}>
-              <Title>{s5Title}</Title>
-            </div>
+          <div className={`text-center ${PAD_X}`}>
+            <StepTag />
+            <BodyInNoSlot>{body}</BodyInNoSlot>
           </div>
         </div>
 
-        {/* DESKTOP (2x2 grid) */}
-        <div className={`hidden md:grid h-full grid-cols-2 grid-rows-2 ${LINE}`}>
-          {/* s4: title top */}
-          <div className={`flex items-center justify-center text-center ${PAD_X} border-r ${LINE} border-b ${LINE}`}>
-            <Title>{s4Title}</Title>
-          </div>
-
-          {/* s4: body bottom */}
-          <div className={`flex items-center justify-center text-center ${PAD_X} border-b ${LINE}`}>
-            <div>
-              <StepTag />
-              <BodyInNoSlot>{s4Body}</BodyInNoSlot>
-            </div>
-          </div>
-
-          {/* s5: body top */}
-          <div className={`flex items-center justify-center text-center ${PAD_X} border-r ${LINE}`}>
-            <div>
-              <StepTag />
-              <BodyInNoSlot>{s5Body}</BodyInNoSlot>
-            </div>
-          </div>
-
-          {/* s5: title bottom */}
+        {/* DESKTOP */}
+        <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
           <div className={`flex items-center justify-center text-center ${PAD_X}`}>
-            <Title>{s5Title}</Title>
+            <Title>{title}</Title>
+          </div>
+
+          <div className={`relative z-10 h-full border-l ${LINE}`} />
+
+          <div className={`flex items-center justify-center text-center ${PAD_X}`}>
+            <div>
+              <StepTag />
+              <BodyInNoSlot>{body}</BodyInNoSlot>
+            </div>
           </div>
         </div>
       </div>
@@ -310,6 +277,69 @@ function PanelNoPhotos({
   );
 }
 
+/* =========================================================
+   PANEL 05 (Step 5: Title -> Body -> Image) SAME PHOTO SIZE AS PANEL 02
+========================================================= */
+function PanelStep5TitleBodyThenImage({
+  title,
+  body,
+  photoSrc,
+}: {
+  title: string;
+  body: string;
+  photoSrc: string;
+}) {
+  return (
+    <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
+      <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
+        {/* MOBILE */}
+        <div className={`md:hidden ${SECTION_MOBILE}`}>
+          <div className={`text-center ${PAD_X} mb-8`}>
+            <Title>{title}</Title>
+          </div>
+          
+          
+          
+          <div className={`text-center ${PAD_X} mb-12`}>
+            <StepTag />
+            <BodyInNoSlot>{body}</BodyInNoSlot>
+          </div>
+
+          <div className="flex items-center justify-center">
+            {/* ✅ EXACT SAME AS PANEL 02 MOBILE PHOTO */}
+            <div className={`relative w-[320px] h-[320px] rounded-3xl overflow-hidden shadow-lg`}>
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP */}
+        <div className={`hidden md:grid h-full grid-cols-[minmax(520px,1fr)_1px_minmax(360px,0.75fr)] border-r ${LINE}`}>
+          {/* LEFT: title + body stacked (keeps the same order as mobile) */}
+          <div className={`flex items-center justify-center text-center ${PAD_X}`}>
+            <div>
+              <Title>{title}</Title>
+              <div className={`w-full border-t ${LINE}`} />
+              <div className="mt-6">
+                <StepTag />
+                <BodyInNoSlot>{body}</BodyInNoSlot>
+              </div>
+            </div>
+          </div>
+
+          <div className={`relative z-10 h-full border-l ${LINE}`} />
+
+          {/* RIGHT: image (same dimensions as PANEL 02 desktop photo) */}
+          <div className={`relative z-20 flex items-center justify-center ${PAD_X}`}>
+            <div className={`relative w-[360px] md:w-[400px] h-[360px] md:h-[400px] rounded-2xl overflow-hidden`}>
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* =========================================================
    MAIN
@@ -318,6 +348,10 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
   const photo1 = journey.photo1;
   const photo2 = journey.photo2;
   const photo3 = journey.photo3;
+
+  // Step 5 photo (fallback to photo2)
+  const photo5 = (journey as any).photo5 || photo2;
+
   const copy = journey.steps;
 
   return (
@@ -326,14 +360,12 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
         <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} />
         <PanelPhotoRightRounded bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
         <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} />
-       <PanelNoPhotos
-          s4Title={copy.s4.title}
-          s4Body={copy.s4.body}
-          s5Title={copy.s5.title}
-          s5Body={copy.s5.body}
-        />
 
+        {/* Step 4: title -> body */}
+        <PanelStep4NoPhoto title={copy.s4.title} body={copy.s4.body} />
 
+        {/* Step 5: title -> body -> image */}
+        <PanelStep5TitleBodyThenImage title={copy.s5.title} body={copy.s5.body} photoSrc={photo5} />
       </div>
 
       <div className="hidden md:block">
@@ -341,14 +373,9 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
           <PanelPhotoLeft photoSrc={photo1} title={copy.s1.title} body={copy.s1.body} />
           <PanelPhotoRightRounded bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
           <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} />
-          <PanelNoPhotos
-            s4Title={copy.s4.title}
-            s4Body={copy.s4.body}
-            s5Title={copy.s5.title}
-            s5Body={copy.s5.body}
-          />
 
-
+          <PanelStep4NoPhoto title={copy.s4.title} body={copy.s4.body} />
+          <PanelStep5TitleBodyThenImage title={copy.s5.title} body={copy.s5.body} photoSrc={photo5} />
         </ScrollLockHorizontal>
       </div>
     </>

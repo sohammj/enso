@@ -21,6 +21,11 @@ export default async function AboutPage() {
     photo1: imgUrl(data?.photos?.photo1, 900, 900),
     photo2: imgUrl(data?.photos?.photo2, 900, 900),
     photo3: imgUrl(data?.photos?.photo3, 900, 900),
+    photo5: imgUrl(data?.photos?.photo5, 900, 900),
+
+    // ✅ NEW: step-5 image (editable in Sanity)
+    
+
     steps: {
       s1: {
         title: data?.steps?.s1?.title || "",
@@ -34,13 +39,15 @@ export default async function AboutPage() {
         title: data?.steps?.s3?.title || "",
         body: data?.steps?.s3?.body || "",
       },
+      // ✅ FIXED: was incorrectly using s3
       s4: {
-        title: data?.steps?.s3?.title || "",
-        body: data?.steps?.s3?.body || "",
-      },
-      s5: {
         title: data?.steps?.s4?.title || "",
         body: data?.steps?.s4?.body || "",
+      },
+      // ✅ FIXED: was incorrectly using s4
+      s5: {
+        title: data?.steps?.s5?.title || "",
+        body: data?.steps?.s5?.body || "",
       },
     },
   };

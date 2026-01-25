@@ -150,6 +150,7 @@ export type AboutPageData = {
     photo1?: any;
     photo2?: any;
     photo3?: any;
+    photo5?: string;
   };
   steps?: {
     s1?: { title?: string; body?: string };
@@ -165,6 +166,7 @@ export type JourneyContent = {
   photo1: string;
   photo2: string;
   photo3: string;
+  photo5?: string;
   steps: {
     s1: { title: string; body: string };
     s2: { title: string; body: string };

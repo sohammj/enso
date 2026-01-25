@@ -35,6 +35,12 @@ export const journeyPage = defineType({
           type: "image",
           options: { hotspot: true },
         }),
+        defineField({
+          name: "photo5",
+          title: "Photo 5 (Step 05 panel)",
+          type: "image",
+          options: { hotspot: true },
+        }),
       ],
     }),
 
