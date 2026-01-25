@@ -509,26 +509,29 @@ function getDefaultIconPath(title?: string): string {
           </div>
 
           {/* <div className="max-w-5xl mx-auto px-6"> */}
-          <div className="max-w-5xl mx-auto px-6">
-            <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A] flex items-center gap-1">
-              <Image
-                src="/enso.png"
-                alt=""
-                width={45}
-                height={45}
-                className="inline-block opacity-100"
-              />
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A] flex items-center">
+            
+            <span className="order-1 md:order-2">
               {aboutTitle}
-            </h2>
-            <div className="w-28 h-[2px] bg-[#B88933]/70 mb-10" />
+            </span>
 
-            {/* <p className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
-              {aboutBody}
-            </p> */}
-            <div className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
-              <PortableText value={aboutBody} />
-            </div>
+            <Image
+              src="/enso.png"
+              alt=""
+              width={45}
+              height={45}
+              className="order-2 md:order-1 inline-block opacity-100 ml-2 md:ml-0 md:mr-2 flex-shrink-0"
+            />
+
+          </h2>
+
+          <div className="w-28 h-[2px] bg-[#B88933]/70 mb-10" />
+
+          <div className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
+            <PortableText value={aboutBody} />
           </div>
+        </div>
 
           <p
             className="
