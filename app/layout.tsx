@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { SanityLive } from "@/sanity/lib/live";
+import TransitionProvider from "./TransitionProvider";
 
 export const metadata: Metadata = {
   title: "Enso Counselling & Art Therapy Centre.",
@@ -23,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="bg-background text-foreground antialiased selection:bg-[var(--sky)]/40 selection:text-[var(--ink)]">
-        {children}
+        <TransitionProvider>{children}</TransitionProvider>
         <SanityLive />
       </body>
     </html>
