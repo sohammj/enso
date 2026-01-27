@@ -233,14 +233,16 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
                     </p>
                   )}
 
-                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-xl bg-gray-100">
-                    <Image
-                      src={imgUrl}
-                      alt={it.caption || it.label || "Photo"}
-                      fill
-                      className="object-contain transition-transform duration-500 hover:scale-105"
-                      sizes="(max-width: 768px) 90vw, 400px"
-                    />
+                  <div className="relative w-full rounded-2xl shadow-xl bg-gray-100 p-4">
+                    <div className="relative w-full aspect-[4/5]">
+                      <Image
+                        src={imgUrl}
+                        alt={it.caption || it.label || "Photo"}
+                        fill
+                        className="object-contain transition-transform duration-300"
+                        sizes="(max-width: 768px) 90vw, 400px"
+                      />
+                    </div>
                   </div>
 
                   {it.caption && (
@@ -306,15 +308,17 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
                   </p>
                 )}
 
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl bg-gray-100 border border-white/10">
-                  <Image
-                    src={imgUrl}
-                    alt={it.caption || it.label || "Photo"}
-                    fill
-                    className="object-contain transition-transform duration-500 hover:scale-105"
-                    sizes="(min-width: 1024px) 400px, 300px"
-                    priority={idx < 3}
-                  />
+                <div className="relative w-full rounded-2xl shadow-2xl bg-gray-100 border border-white/10 p-3">
+                  <div className="relative w-full aspect-[4/5]">
+                    <Image
+                      src={imgUrl}
+                      alt={it.caption || it.label || "Photo"}
+                      fill
+                      className="object-contain transition-transform duration-300"
+                      sizes="(min-width: 1024px) 400px, 300px"
+                      priority={idx < 3}
+                    />
+                  </div>
                 </div>
 
                 {it.caption && (
