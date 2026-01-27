@@ -78,10 +78,11 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
                   className="cursor-pointer w-full md:w-[calc(50%-1.75rem)] lg:w-[calc(33.333%-2.333rem)] max-w-[380px]"
                 >
                   {/* ✅ MOBILE: no flip */}
+                  {/* ✅ MOBILE: no flip */}
                   <div
                     style={{ backgroundColor: bg }}
-                    className="md:hidden relative h-[320px] w-full rounded-[28px] px-8 pt-16 pb-10 shadow-sm
-                               flex flex-col items-center text-center"
+                    className="md:hidden relative h-[360px] w-full rounded-[28px] px-8 pt-16 pb-10 shadow-sm
+                              flex flex-col items-center text-center"
                   >
                     <div className="absolute -top-5 -left-5 w-14 h-14">
                       <Image
@@ -99,15 +100,39 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
                       </div>
                     )}
 
-                    <h3 className="font-[Playfair_Display] text-[22px] text-[#0E1E2A] mb-3 border-b border-[#0E1E2A]/40 pb-2">
+                    <h3 className="font-[Playfair_Display] text-[22px] text-[#0E1E2A] mb-4 border-b border-[#0E1E2A]/40 pb-2">
                       {program.title}
                     </h3>
 
-                    <p className="text-[15px] leading-[1.75] opacity-80 mt-2">
+                    {/* ✅ ICON (same logic as desktop/support) */}
+                    <div className="h-[95px] flex items-center justify-center mb-4">
+                      {iconSrc ? (
+                        isSvgUrl(iconSrc) ? (
+                          <img
+                            src={iconSrc}
+                            alt={program.title || "Program"}
+                            className="w-[80px] h-[80px] object-contain"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <Image
+                            src={iconSrc}
+                            alt={program.title || "Program"}
+                            width={80}
+                            height={80}
+                            className="object-contain"
+                          />
+                        )
+                      ) : (
+                        <div className="text-sm opacity-60">Explore</div>
+                      )}
+                    </div>
+
+                    <p className="text-[15px] leading-[1.75] opacity-80">
                       {program.preview ?? ptToPlainText(program.description).slice(0, 160)}
                     </p>
-
                   </div>
+
 
                   {/* ✅ DESKTOP: flip */}
                   <div className="hidden md:block group" style={{ perspective: "1200px" }}>

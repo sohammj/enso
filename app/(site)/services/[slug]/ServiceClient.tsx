@@ -266,6 +266,8 @@ export default function ServiceClient({ service }: { service: Service }) {
       {service.photoStrip?.length ? (
         <HorizontalPhotoStrip items={service.photoStrip} />
       ) : null}
+
+      
       {/* Elfsight loader (only if any feed is enabled) */}
       {showAnyFeed && (
         <Script
@@ -285,7 +287,7 @@ export default function ServiceClient({ service }: { service: Service }) {
                   data-elfsight-app-lazy
                 />
                 {/* Enso Logo Cover for Instagram */}
-                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
+                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20 overflow-hidden rounded-b-3xl">
                     <img 
                       src="/white-paper-texture.jpg" 
                       alt="Enso" 
@@ -302,7 +304,7 @@ export default function ServiceClient({ service }: { service: Service }) {
                   data-elfsight-app-lazy
                 />
                 {/* Enso Logo Cover for LinkedIn */}
-                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
+                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20 overflow-hidden rounded-b-3xl">
                     <img 
                       src="/white-paper-texture.jpg" 
                       alt="Enso" 

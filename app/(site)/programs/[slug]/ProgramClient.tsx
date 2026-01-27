@@ -162,7 +162,7 @@ export default function ProgramClient({ program }: { program: Program }) {
                   data-elfsight-app-lazy
                 />
                 {/* Enso Logo Cover for Instagram */}
-                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
+                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20 overflow-hidden rounded-b-3xl">
                     <img 
                       src="/white-paper-texture.jpg" 
                       alt="Enso" 
@@ -179,7 +179,7 @@ export default function ProgramClient({ program }: { program: Program }) {
                   data-elfsight-app-lazy
                 />
                 {/* Enso Logo Cover for LinkedIn */}
-                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
+                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20 overflow-hidden rounded-b-3xl">
                     <img 
                       src="/white-paper-texture.jpg" 
                       alt="Enso" 

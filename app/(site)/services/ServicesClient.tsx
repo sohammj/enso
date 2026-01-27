@@ -98,9 +98,9 @@ export default function ServicesClient({ services }: { services: Service[] }) {
                 {/* ✅ MOBILE: static card */}
                 <div
                   style={{ backgroundColor: bg }}
-                  className="md:hidden relative h-[320px] w-full rounded-[28px]
-                             px-8 pt-16 pb-10 shadow-sm
-                             flex flex-col items-center text-center"
+                  className="md:hidden relative h-[360px] w-full rounded-[28px]
+                            px-8 pt-16 pb-10 shadow-sm
+                            flex flex-col items-center text-center"
                 >
                   <div className="absolute -top-5 -left-5 w-14 h-14">
                     <Image
@@ -112,14 +112,39 @@ export default function ServicesClient({ services }: { services: Service[] }) {
                     />
                   </div>
 
-                  <h3 className="font-[Playfair_Display] text-[22px] mb-3 border-b border-[#0E1E2A]/40 pb-2">
+                  <h3 className="font-[Playfair_Display] text-[22px] mb-4 border-b border-[#0E1E2A]/40 pb-2">
                     {service.title}
                   </h3>
 
-                  <p className="text-[15px] leading-[1.75] opacity-80 mt-2">
+                  {/* ✅ ICON on mobile (same logic as desktop) */}
+                  <div className="h-[95px] flex items-center justify-center mb-4">
+                    {iconSrc ? (
+                      isSvgUrl(iconSrc) ? (
+                        <img
+                          src={iconSrc}
+                          alt={service.title || "Service"}
+                          className="w-[80px] h-[80px] object-contain opacity-90"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <Image
+                          src={iconSrc}
+                          alt={service.title || "Service"}
+                          width={80}
+                          height={80}
+                          className="object-contain opacity-90"
+                        />
+                      )
+                    ) : (
+                      <div className="text-sm opacity-60">Explore</div>
+                    )}
+                  </div>
+
+                  <p className="text-[15px] leading-[1.75] opacity-80">
                     {previewText}
                   </p>
                 </div>
+
 
                 {/* ✅ DESKTOP: flip on hover */}
                 <div className="hidden md:block group" style={{ perspective: "1200px" }}>
