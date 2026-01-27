@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+// import { motion } from "framer-motion";
 import Image from "next/image";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react"; 
 import { PauseReflect } from "@/components/sections/PauseReflect";
@@ -15,6 +15,10 @@ import Dragonfly from "@/components/ui/Dragonfly";
 import { toast } from "sonner";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
+import SocialRail from "@/components/SocialRail";
+import { motion, AnimatePresence } from "framer-motion";
+
+
 
 
 
@@ -145,6 +149,29 @@ function splitHeadlineToLines(headline?: string): string[] | null {
 export default function HomeClient({ data }: { data: HomePageData | null }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+
+  const startConvRef = useRef<HTMLDivElement | null>(null);
+  const [showDesktopRail, setShowDesktopRail] = useState(false);
+
+  useEffect(() => {
+  const el = startConvRef.current;
+  if (!el) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      setShowDesktopRail(entry.isIntersecting);
+    },
+    {
+      threshold: 0.35, // 35% visible before enabling
+    }
+  );
+
+  observer.observe(el);
+
+  return () => observer.disconnect();
+}, []);
+
+
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -616,7 +643,11 @@ function getDefaultIconPath(title?: string): string {
         <HandwrittenNotesSection />
       </section>
 
-      <StartConversationSection />
+      {/* <StartConversationSection /> */}
+      <div ref={startConvRef}>
+        <StartConversationSection />
+      </div>
+
 
       {/* 🐉 MAP WHITESPACE */}
       <section className="relative">
@@ -672,6 +703,21 @@ function getDefaultIconPath(title?: string): string {
           />
         </div>
       </section>
+
+      {/* Desktop SocialRail (only when in StartConversation viewport) */}
+      <AnimatePresence>
+        {showDesktopRail && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <SocialRail desktop mobile="none" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
 
       <StickyGetInTouch showAfterScroll />
     </>

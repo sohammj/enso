@@ -5,6 +5,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import SocialRail from "@/components/SocialRail";
+
 
 const Schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -206,6 +208,11 @@ export default function StartConversationSection() {
             All messages are confidential. We'll respond within 24–48 hours.
           </p>
         </div>
+        {/* Mobile socials bar (below form) */}
+          <div className="mt-8 lg:hidden">
+            <SocialRail desktop={false} mobile="bar" />
+          </div>
+
       </div>
     </section>
   );

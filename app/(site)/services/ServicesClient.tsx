@@ -77,7 +77,10 @@ export default function ServicesClient({ services }: { services: Service[] }) {
 
       {/* SERVICES CARDS */}
       <section className="pb-32 md:pb-40 relative z-20">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-14 px-6">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex flex-wrap justify-center gap-8 md:gap-14">
+
+
           {services.map((service, i) => {
             const bg = getBg(i);
             const slug = service.slug || "";
@@ -91,7 +94,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
 
 
             return (
-              <Link key={service._id || slug || i} href={`/services/${slug}`} className="cursor-pointer">
+              <Link key={service._id || slug || i} href={`/services/${slug}`} className="cursor-pointer  w-full md:max-w-[420px]">
                 {/* ✅ MOBILE: static card */}
                 <div
                   style={{ backgroundColor: bg }}
@@ -207,6 +210,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
             );
           })}
         </div>
+      </div>
       </section>
       <SocialRail desktop mobile="bar" />
 
