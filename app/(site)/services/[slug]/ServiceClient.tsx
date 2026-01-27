@@ -195,7 +195,7 @@ export default function ServiceClient({ service }: { service: Service }) {
       
       <section className="max-w-4xl mx-auto px-6 pb-24 relative z-10">
         <p className="text-center font-[Playfair_Display] italic text-[20px] md:text-[24px] opacity-80">
-          {program.closingQuote || "Healing unfolds gently, when given the space to breathe."}
+          {service.ClosingQuote || "Healing unfolds gently, when given the space to breathe."}
         </p>
       </section>
 
