@@ -120,6 +120,7 @@ export type Service = {
   // description?: string[];
   description?: PortableTextBlock[];
   icon?: any; // Sanity image object
+  ClosingQuote?: string;
   cta?: {
     tagline?: string;
     subtitle?: string;

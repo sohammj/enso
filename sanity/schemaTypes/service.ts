@@ -74,6 +74,14 @@ export default defineType({
     }),
 
     defineField({
+      name: "closingQuote",
+      title: "Closing Quote (optional)",
+      type: "string",
+      description: "Shown below the description, above the photo strip.",
+    }),
+    
+
+    defineField({
       name: "cta",
       title: "CTA",
       type: "object",

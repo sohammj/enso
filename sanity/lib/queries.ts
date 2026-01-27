@@ -100,6 +100,7 @@ export const SERVICE_BY_SLUG_QUERY = /* groq */ `
   description,
   icon,
   cta,
+  closingQuote,
   photoStrip[]{ image, label, caption }
 
 }
