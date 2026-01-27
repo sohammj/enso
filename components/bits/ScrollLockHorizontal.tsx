@@ -35,6 +35,11 @@ export default function ScrollLockHorizontal({
   const pinRafRef = useRef<number | null>(null);
   const isTransitioningRef = useRef(false);
   const hasScrolledThroughRef = useRef(false);
+  const lastTopRef = useRef<number | null>(null);
+  // const lastTopRef = useRef<number | null>(null);
+  const lastScrollYRef = useRef<number>(0);
+
+
 
   // ---------- helpers ----------
   function clamp(v: number, min: number, max: number) {
@@ -138,12 +143,17 @@ export default function ScrollLockHorizontal({
   }, []);
 
   // ---------- inView detection (BUT centered at 171px, not 0px) ----------
+  
+  // ---------- inView detection + FORCE LOCK (fast scroll + bottom-up safe) ----------
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
 
     let rafId: number;
     let lastState = false;
+
+    // init
+    lastScrollYRef.current = window.scrollY;
 
     const checkPosition = () => {
       const rect = host.getBoundingClientRect();
@@ -152,16 +162,17 @@ export default function ScrollLockHorizontal({
       const visibleHeight = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
       const visibilityRatio = Math.max(0, visibleHeight) / rect.height;
 
-      // ✅ centered means "host.top is near 171px"
       const distanceFromLockLine = rect.top - LOCK_TOP_PX;
-      const isCentered = Math.abs(distanceFromLockLine) <= 60; // activation zone
 
+      // widen a bit so fast scroll can’t miss
+      const isNearLockLine = Math.abs(distanceFromLockLine) <= 160;
+
+      // inView = eligible zone
       let shouldBeActive: boolean;
       if (lastState) {
-        // deactivate a bit later (hysteresis)
-        shouldBeActive = visibilityRatio > 0.7 && isCentered;
+        shouldBeActive = visibilityRatio > 0.55 && isNearLockLine;
       } else {
-        shouldBeActive = visibilityRatio > 0.85 && isCentered;
+        shouldBeActive = visibilityRatio > 0.7 && isNearLockLine;
       }
 
       if (shouldBeActive !== inViewRef.current) {
@@ -169,8 +180,51 @@ export default function ScrollLockHorizontal({
         inViewRef.current = shouldBeActive;
         lastState = shouldBeActive;
 
-        // If leaving view, always unlock
         if (!shouldBeActive) unlockNow();
+      }
+
+      // ✅ detect scroll direction
+      const currScrollY = window.scrollY;
+      const scrollingUp = currScrollY < lastScrollYRef.current;
+      const scrollingDown = currScrollY > lastScrollYRef.current;
+      lastScrollYRef.current = currScrollY;
+
+      // ✅ FORCE LOCK ON CROSSING (works for fast scroll + bottom-up)
+      if (!lockedRef.current) {
+        const prevTop = lastTopRef.current;
+        if (prevTop !== null) {
+          const prevDist = prevTop - LOCK_TOP_PX;
+          const currDist = rect.top - LOCK_TOP_PX;
+
+          // crossed the lock line from either direction
+          const crossed =
+            (prevDist > 0 && currDist <= 0) || (prevDist < 0 && currDist >= 0);
+
+          const mostlyVisible = visibilityRatio > 0.7; // tune if needed
+          const nearLine = Math.abs(currDist) <= 160;
+
+          if (crossed && mostlyVisible && nearLine) {
+            // ✅ IMPORTANT:
+            // If coming from bottom going UP, force horizontal to END before locking
+            if (scrollingUp) {
+              const max = maxXRef.current;
+              xRef.current = max;
+              applyTransform(max);
+              hasScrolledThroughRef.current = true; // tells your wheel logic "we're in end state"
+            } else if (scrollingDown) {
+              // coming from top going DOWN -> ensure start
+              xRef.current = 0;
+              applyTransform(0);
+              hasScrolledThroughRef.current = false;
+            }
+
+            lockNow(); // snaps/pins to exactly 171
+          }
+        }
+
+        lastTopRef.current = rect.top;
+      } else {
+        lastTopRef.current = rect.top;
       }
 
       rafId = requestAnimationFrame(checkPosition);
@@ -179,6 +233,7 @@ export default function ScrollLockHorizontal({
     rafId = requestAnimationFrame(checkPosition);
     return () => cancelAnimationFrame(rafId);
   }, []);
+
 
   // ---------- wheel + touch ----------
   useEffect(() => {

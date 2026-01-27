@@ -65,40 +65,51 @@ export default async function AboutPage() {
       </div>
 
       {/* DESKTOP: hero section */}
-      <div className="hidden md:block">
-        {/* Hero section - EXACTLY full screen */}
-        <section className="relative h-screen w-full flex flex-col items-center justify-center px-6 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="font-display uppercase tracking-[0.22em] text-[64px] leading-tight text-black/80">
+      <section className="relative h-screen w-full px-6 text-center">
+        <div className="h-full max-w-5xl mx-auto grid grid-rows-[1fr_auto_1fr]">
+          {/* TOP */}
+          <div className="flex items-end justify-center pb-10">
+            <h1 className="font-display uppercase tracking-[0.22em] text-[72px] leading-[0.95] text-black/80">
               {journey.heading}
             </h1>
+          </div>
+
+          {/* MIDDLE */}
+          <div className="flex flex-col items-center justify-center">
+            {/* subtle divider to “use space” intentionally */}
+            <div className="h-px w-24 bg-black/15 mb-10" />
 
             {journey.subheading && (
-              <p className="mt-6 text-[16px] leading-relaxed text-black/60">
+              <p className="max-w-3xl text-[20px] leading-[1.9] text-black/55">
                 {journey.subheading}
               </p>
             )}
           </div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-black/40">
-            <span className="text-xs uppercase tracking-[0.2em]">Scroll to explore</span>
-            <svg 
-              className="w-6 h-6 animate-bounce" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M19 9l-7 7-7-7" 
-              />
-            </svg>
+          {/* BOTTOM */}
+          <div className="flex items-end justify-center pb-16">
+            <div className="flex flex-col items-center gap-3 text-black/40">
+              <span className="text-xs uppercase tracking-[0.2em]">
+                Scroll to explore
+              </span>
+              <svg
+                className="w-6 h-6 animate-bounce"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
 
       {/* Horizontal scroll section */}
       <JourneyHorizontal journey={journey} />
