@@ -88,9 +88,9 @@ export default async function AboutPage() {
 
 
 
-    {/* <!-- Elfsight Instagram Feed | Untitled Instagram Feed --> */}
+    {/* <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
     <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div className="elfsight-app-1decc3f6-c086-4ab9-9262-1d5ecf4ed33f" data-elfsight-app-lazy></div>
+    <div className="elfsight-app-1decc3f6-c086-4ab9-9262-1d5ecf4ed33f" data-elfsight-app-lazy></div> */}
 
     </main>
   );
