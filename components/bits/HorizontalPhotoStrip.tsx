@@ -5,14 +5,9 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
 type PhotoStripItem = {
-  image?: any; // ✅ Sanity image object
+  image?: any;
   label?: string;
   caption?: string;
-  top?: string;
-  left?: string;
-  width?: string;
-  zIndex?: number;
-  grayscale?: boolean;
   mobileOrder?: number;
   mobileAlign?: "left" | "center" | "right";
 };
@@ -40,7 +35,7 @@ function DecorativePath() {
       viewBox="0 0 3000 1000"
       fill="none"
       preserveAspectRatio="xMidYMid slice"
-      style={{ opacity: 0.12 }}
+      style={{ opacity: 0.15 }}
     >
       <path
         d="M0 500 C 200 300, 400 700, 600 500 S 1000 200, 1200 500 S 1600 800, 1800 500 S 2200 200, 2400 500 S 2800 700, 3000 500"
@@ -64,6 +59,20 @@ function DecorativePath() {
   );
 }
 
+// Function to calculate Y position on the main curve
+function getCurveY(x: number, totalWidth: number): number {
+  // Normalize x to 0-1 range
+  const t = x / totalWidth;
+  
+  // Use a sine wave that matches our SVG path better
+  // This creates the wave pattern that follows the middle SVG curve
+  const wave1 = Math.sin(t * Math.PI * 4) * 0.15; // 4 waves across
+  const wave2 = Math.sin(t * Math.PI * 2 + Math.PI / 4) * 0.08; // offset wave
+  
+  // Base at 50% (middle) + wave variations
+  return 50 + (wave1 + wave2) * 100;
+}
+
 export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[] }) {
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
@@ -73,47 +82,60 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
   const [isFixed, setIsFixed] = useState(false);
   const [maxTranslate, setMaxTranslate] = useState(0);
 
-  // ✅ spacing: 0.6–0.7 recommended
-  const SPACING_FACTOR = 0.7;
-  const BASE_LEFT = 5;
-  const STEP = 22 * SPACING_FACTOR;
-
-  // ✅ filter only valid items (prevents blank pinned scroll)
+  // Filter valid items
   const validItems = useMemo(
     () => (items || []).filter((it) => it?.image?.asset),
     [items]
   );
 
-  // If nothing to show, render nothing (prevents the “blank scroll world”)
   if (!validItems.length) return null;
 
-  // Build layout with smoother wave
+  // Dynamic spacing based on number of images
+  const SPACING = useMemo(() => {
+    const count = validItems.length;
+    if (count <= 3) return 20; // Closer spacing for fewer images
+    if (count <= 5) return 16;
+    return 14; // Even tighter for many images
+  }, [validItems.length]);
+
+  // Dynamic world width based on number of images
+  const WORLD_WIDTH_VW = useMemo(() => {
+    const count = validItems.length;
+    // Tighter base width + spacing per image
+    return Math.max(100, 60 + count * SPACING);
+  }, [validItems.length, SPACING]);
+
+  // Layout items on the curve
   const laidOut = useMemo(() => {
+    const count = validItems.length;
+    const worldWidthPx = (WORLD_WIDTH_VW * window.innerWidth) / 100;
+
     return validItems.map((it, idx) => {
-      if (it.top && it.left && it.width) return it;
-
-      const topVariants = ["8%", "45%", "18%", "55%", "12%", "40%"];
-      const top = topVariants[idx % topVariants.length];
-
-      const left = `${BASE_LEFT + idx * STEP}%`;
-
-      const widthVariants = ["280px", "320px", "240px", "300px", "260px", "340px"];
+      // Calculate horizontal position
+      const xPercent = 10 + (idx * (WORLD_WIDTH_VW - 20)) / Math.max(count - 1, 1);
+      const xPx = (xPercent * window.innerWidth) / 100;
+      
+      // Calculate Y position on curve
+      const yPercent = getCurveY(xPx, worldWidthPx);
+      
+      // Vary image sizes slightly
+      const widthVariants = [300, 340, 280, 320, 290, 310];
       const width = widthVariants[idx % widthVariants.length];
-
+      
+      // Alternate z-index for overlap effect
       const zIndex = idx % 2 === 0 ? 2 : 3;
 
-      return { ...it, top, left, width, zIndex };
+      return {
+        ...it,
+        left: `${xPercent}%`,
+        top: `${yPercent}%`,
+        width: `${width}px`,
+        zIndex,
+      };
     });
-  }, [validItems]);
+  }, [validItems, WORLD_WIDTH_VW, SPACING]);
 
-  // ✅ dynamic world width (so your tighter spacing doesn’t feel “too long”)
-  const WORLD_VW = useMemo(() => {
-    // roughly: base + n * step-ish
-    // tweak these constants if you want even tighter/shorter
-    const n = laidOut.length;
-    return Math.max(140, 140 + n * 28 * SPACING_FACTOR);
-  }, [laidOut.length, SPACING_FACTOR]);
-
+  // Calculate max translate for scroll
   useEffect(() => {
     if (isMobile) return;
 
@@ -125,14 +147,15 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
       setMaxTranslate(Math.max(0, containerWidth - viewportWidth));
     };
 
-    const t = setTimeout(calculate, 50);
+    const timer = setTimeout(calculate, 100);
     window.addEventListener("resize", calculate);
     return () => {
-      clearTimeout(t);
+      clearTimeout(timer);
       window.removeEventListener("resize", calculate);
     };
-  }, [isMobile, laidOut, WORLD_VW]);
+  }, [isMobile, laidOut, WORLD_WIDTH_VW]);
 
+  // Scroll handling
   useEffect(() => {
     if (isMobile) {
       setIsFixed(false);
@@ -142,10 +165,7 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
 
     const onScroll = () => {
       const section = sectionRef.current;
-      if (!section) return;
-
-      // if maxTranslate is tiny, don’t pin
-      if (maxTranslate < 5) {
+      if (!section || maxTranslate < 5) {
         setIsFixed(false);
         setTranslateX(0);
         return;
@@ -153,7 +173,6 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
 
       const sectionTop = section.offsetTop;
       const scrollY = window.scrollY;
-
       const scrollStart = sectionTop;
       const scrollEnd = sectionTop + maxTranslate;
 
@@ -175,20 +194,19 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
   }, [isMobile, maxTranslate]);
 
   const sectionHeight = useMemo(() => {
-    // little buffer so it exits cleanly
-    return `calc(100vh + ${maxTranslate}px + 200px)`;
+    return `calc(100vh + ${maxTranslate}px + 100px)`;
   }, [maxTranslate]);
 
-  // MOBILE stacked
+  // MOBILE VIEW
   if (isMobile) {
     const sorted = [...laidOut].sort(
       (a, b) => (a.mobileOrder ?? 9999) - (b.mobileOrder ?? 9999)
     );
 
     return (
-      <section className="relative z-10 pb-24">
+      <section className="relative z-10 py-16">
         <div className="relative px-6">
-          <div className="absolute inset-0 pointer-events-none opacity-30">
+          <div className="absolute inset-0 pointer-events-none opacity-20">
             <DecorativePath />
           </div>
 
@@ -201,30 +219,32 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
                   ? "ml-auto"
                   : "mx-auto";
 
-              const imgUrl = urlFor(it.image).width(1200).height(1200).fit("crop").url();
+              const imgUrl = urlFor(it.image)
+                .width(800)
+                .height(1000)
+                .fit("max")
+                .url();
 
               return (
                 <div key={idx} className={`${align} max-w-sm`}>
                   {it.label && (
-                    <p className="text-[11px] tracking-[0.15em] uppercase opacity-60 mb-3 font-medium">
+                    <p className="text-xs tracking-wider uppercase opacity-70 mb-3 font-medium">
                       {it.label}
                     </p>
                   )}
 
-                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
+                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-xl bg-gray-100">
                     <Image
                       src={imgUrl}
                       alt={it.caption || it.label || "Photo"}
                       fill
-                      className={`object-cover transition-transform duration-500 hover:scale-[1.02] ${
-                        it.grayscale ? "grayscale" : ""
-                      }`}
-                      sizes="(min-width: 1024px) 360px, 70vw"
+                      className="object-contain transition-transform duration-500 hover:scale-105"
+                      sizes="(max-width: 768px) 90vw, 400px"
                     />
                   </div>
 
                   {it.caption && (
-                    <p className="mt-4 text-[15px] leading-relaxed opacity-75 text-justify whitespace-normal break-words">
+                    <p className="mt-4 text-sm leading-relaxed opacity-80">
                       {it.caption}
                     </p>
                   )}
@@ -237,7 +257,7 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
     );
   }
 
-  // DESKTOP pinned
+  // DESKTOP HORIZONTAL SCROLL
   return (
     <section ref={sectionRef} className="relative z-10" style={{ height: sectionHeight }}>
       <div
@@ -251,50 +271,58 @@ export default function HorizontalPhotoStrip({ items }: { items: PhotoStripItem[
           ref={containerRef}
           className="relative h-full will-change-transform"
           style={{
-            width: `${WORLD_VW}vw`,
+            width: `${WORLD_WIDTH_VW}vw`,
             transform: `translate3d(-${translateX}px, 0, 0)`,
           }}
         >
-          <div className="absolute inset-0 opacity-40">
+          {/* Background SVG */}
+          <div className="absolute inset-0 opacity-30">
             <DecorativePath />
           </div>
 
+          {/* Images positioned on curve */}
           {laidOut.map((it, idx) => {
-            const imgUrl = urlFor(it.image).width(1600).height(1600).fit("crop").url();
+            const imgUrl = urlFor(it.image)
+              .width(800)
+              .height(1000)
+              .fit("max")
+              .url();
 
             return (
               <div
                 key={idx}
                 className="absolute"
                 style={{
-                  top: it.top ?? "20%",
-                  left: it.left ?? `${idx * 25}%`,
-                  width: it.width ?? "280px",
-                  zIndex: it.zIndex ?? 2,
+                  top: it.top,
+                  left: it.left,
+                  width: it.width,
+                  zIndex: it.zIndex,
+                  transform: "translate(-50%, -50%)", // Center on curve point
                 }}
               >
                 {it.label && (
-                  <p className="text-[11px] tracking-[0.15em] uppercase opacity-60 mb-3 font-medium">
+                  <p className="text-xs tracking-wider uppercase opacity-70 mb-2 font-medium text-center">
                     {it.label}
                   </p>
                 )}
 
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
+                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl bg-gray-100 border border-white/10">
                   <Image
                     src={imgUrl}
                     alt={it.caption || it.label || "Photo"}
                     fill
-                    className={`object-cover transition-transform duration-500 hover:scale-[1.02] ${
-                      it.grayscale ? "grayscale" : ""
-                    }`}
-                    sizes="(min-width: 1024px) 360px, 70vw"
+                    className="object-contain transition-transform duration-500 hover:scale-105"
+                    sizes="(min-width: 1024px) 400px, 300px"
+                    priority={idx < 3}
                   />
                 </div>
 
                 {it.caption && (
-                  <p className="mt-4 text-[15px] leading-relaxed opacity-75 text-justify whitespace-normal break-words">
-                    {it.caption}
-                  </p>
+                  <div className="mt-3 px-2 pb-24">
+                    <p className="text-sm leading-relaxed opacity-80 text-center max-w-[280px] mx-auto">
+                      {it.caption}
+                    </p>
+                  </div>
                 )}
               </div>
             );
