@@ -30,7 +30,25 @@ export default function SupportSection({
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-14 px-6">
+      {/* <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-14 px-6"> */}
+      {/* <div
+        className="
+          max-w-6xl mx-auto px-6
+          grid gap-8 md:gap-14
+          justify-center justify-items-center
+          [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]
+        "
+      > */}
+      <div
+        className={[
+          "max-w-6xl mx-auto px-6 grid gap-8 md:gap-14",
+          cards.length >= 4
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" // ✅ your original 4-card layout
+            : "justify-center justify-items-center [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]", // ✅ your centered auto-fit layout
+        ].join(" ")}
+      >
+
+
         {cards.map((card, i) => {
           const bg = card.bg || "#F4EFEA";
 
@@ -42,9 +60,10 @@ export default function SupportSection({
           return (
             <div
               key={i}
-              className="cursor-pointer"
+              className="cursor-pointer w-full"
               onClick={() => card.href && router.push(card.href)}
             >
+
               {/* MOBILE */}
               <div
                 style={{ backgroundColor: bg }}
