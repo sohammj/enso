@@ -74,6 +74,24 @@ export default async function AboutPage() {
       </div>
 
       <StickyGetInTouch />
+    {/* <div className="max-w-[540px] mx-auto my-24">
+      <div className="relative w-full" style={{ aspectRatio: "9 / 16" }}>
+        <iframe
+          src="https://www.instagram.com/reel/DOs817lAZPt/embed/captioned/?cr=1&v=14&captioned=0"
+          className="absolute inset-0 w-full h-full"
+          frameBorder="0"
+          scrolling="no"
+          allowTransparency
+        />
+      </div>
+    </div> */}
+
+
+
+    {/* <!-- Elfsight Instagram Feed | Untitled Instagram Feed --> */}
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div className="elfsight-app-1decc3f6-c086-4ab9-9262-1d5ecf4ed33f" data-elfsight-app-lazy></div>
+
     </main>
   );
 }

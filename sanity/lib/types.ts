@@ -56,6 +56,7 @@ export type Program = {
   // description?: string[];
   description?: PortableTextBlock[];
   icon?: any; // Sanity image
+  closingQuote?: string;
   cta?: {
     tagline?: string;
     text?: string;

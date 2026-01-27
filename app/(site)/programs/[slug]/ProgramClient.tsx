@@ -121,7 +121,7 @@ export default function ProgramClient({ program }: { program: Program }) {
 
       <section className="max-w-4xl mx-auto px-6 pb-24 relative z-10">
         <p className="text-center font-[Playfair_Display] italic text-[20px] md:text-[24px] opacity-80">
-          There is no right way to heal — only your way.
+          {program.closingQuote || "There is no right way to heal — only your way."}
         </p>
       </section>
 
