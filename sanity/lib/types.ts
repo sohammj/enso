@@ -125,6 +125,10 @@ export type Service = {
   description?: PortableTextBlock[];
   icon?: any; // Sanity image object
   ClosingQuote?: string;
+  socialFeeds?: {
+    instagram?: { enabled?: boolean; appId?: string };
+    linkedin?: { enabled?: boolean; appId?: string };
+  };
   cta?: {
     tagline?: string;
     subtitle?: string;

@@ -10,6 +10,7 @@ import { useRef } from "react";
 import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
+import Script from "next/script";
 
 
 const float = {
@@ -104,6 +105,10 @@ export default function ServiceClient({ service }: { service: Service }) {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } },
   };
+
+  const igEnabled = !!service.socialFeeds?.instagram?.enabled && !!service.socialFeeds?.instagram?.appId;
+  const liEnabled = !!service.socialFeeds?.linkedin?.enabled && !!service.socialFeeds?.linkedin?.appId;
+  const showAnyFeed = igEnabled || liEnabled;
 
   const iconSrc = service.icon
     ? urlFor(service.icon).width(200).height(200).fit("max").url()
@@ -204,6 +209,57 @@ export default function ServiceClient({ service }: { service: Service }) {
       {service.photoStrip?.length ? (
         <HorizontalPhotoStrip items={service.photoStrip} />
       ) : null}
+      {/* Elfsight loader (only if any feed is enabled) */}
+      {showAnyFeed && (
+        <Script
+          src="https://elfsightcdn.com/platform.js"
+          strategy="afterInteractive"
+        />
+      )}
+
+      {/* Social Feeds (toggleable from Sanity) */}
+      {showAnyFeed && (
+        <section className="max-w-7xl mx-auto px-4 pb-20 relative z-10">
+          <div className="space-y-10">
+            {igEnabled && (
+              <div className="bg-[var(--cream)]/60 rounded-3xl shadow-soft p-5 md:p-7 relative">
+                <div
+                  className={`elfsight-app-${service.socialFeeds?.instagram?.appId}`}
+                  data-elfsight-app-lazy
+                />
+                {/* Enso Logo Cover for Instagram */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
+                    <img 
+                      src="/white-paper-texture.jpg" 
+                      alt="Enso" 
+                      className="h-full w-full object-cover"
+                    />
+                </div>
+              </div>
+            )}
+            
+            {liEnabled && (
+              <div className="bg-[var(--cream)]/60 rounded-3xl shadow-soft p-5 md:p-7 relative">
+                <div
+                  className={`elfsight-app-${service.socialFeeds?.linkedin?.appId}`}
+                  data-elfsight-app-lazy
+                />
+                {/* Enso Logo Cover for LinkedIn */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
+                    <img 
+                      src="/white-paper-texture.jpg" 
+                      alt="Enso" 
+                      className="h-full w-full object-cover"
+                    />
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+
+
       {service.cta?.href && (
         <section className="pb-32 px-6 relative z-10">
           <motion.div
