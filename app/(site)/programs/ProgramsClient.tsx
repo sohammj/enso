@@ -7,6 +7,8 @@ import Dragonfly from "@/components/ui/Dragonfly";
 import type { Program } from "@/sanity/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 import type { PortableTextBlock } from "@portabletext/types";
+import SocialRail from "@/components/SocialRail";
+
 
 function ptToPlainText(blocks?: PortableTextBlock[]) {
   if (!blocks?.length) return "";
@@ -203,6 +205,7 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
 
   return (
     <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen relative overflow-visible">
+      <SocialRail desktop mobile="bar" />
       <section className="pt-24 md:pt-28 pb-12 md:pb-16 text-center px-6 relative z-20">
         <h1 className="font-[Playfair_Display] text-[40px] md:text-[56px] leading-tight">
           Our Programs

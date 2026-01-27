@@ -10,6 +10,7 @@ import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import Script from "next/script";
+import SocialRail from "@/components/SocialRail";
 
 
 
@@ -44,6 +45,7 @@ export default function ProgramClient({ program }: { program: Program }) {
 
   return (
     <main className="relative bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] overflow-visible">
+      <SocialRail desktop mobile="bar" />
       <div className="hidden md:block absolute left-[-260px] top-[-220px] w-[700px] pointer-events-none z-0">
         <Image src="/blob.png" alt="" width={700} height={700} className="opacity-90" />
       </div>
@@ -168,7 +170,7 @@ export default function ProgramClient({ program }: { program: Program }) {
                 </div>
               </div>
             )}
-            
+
             {liEnabled && (
               <div className="bg-[var(--cream)]/60 rounded-3xl shadow-soft p-5 md:p-7 relative">
                 <div

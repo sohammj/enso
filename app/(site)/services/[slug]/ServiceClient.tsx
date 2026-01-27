@@ -11,6 +11,8 @@ import HorizontalPhotoStrip from "@/components/bits/HorizontalPhotoStrip";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import Script from "next/script";
+import SocialRail from "@/components/SocialRail";
+
 
 import type { PortableTextComponents } from "@portabletext/react";
 
@@ -94,6 +96,7 @@ function PhotoStrip({
   };
 
   return (
+
     <section className="relative z-10 pb-28">
       <div
         ref={ref}
@@ -166,6 +169,7 @@ export default function ServiceClient({ service }: { service: Service }) {
 
   return (
     <main className="relative bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] overflow-visible">
+      <SocialRail desktop mobile="bar" />
       <div className="hidden md:block absolute left-[-260px] top-[-220px] w-[700px] pointer-events-none z-0">
         <Image src="/blob.png" alt="" width={700} height={700} className="opacity-90" />
       </div>
