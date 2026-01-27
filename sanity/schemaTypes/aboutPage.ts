@@ -13,6 +13,15 @@ export const aboutPage = defineType({
     }),
 
     defineField({
+      name: "subheading",
+      title: "Small Text Below Heading",
+      type: "text",
+      rows: 2,
+      initialValue: "A gentle look at how Enso came to be — and how it continues to grow.",
+    }),
+
+
+    defineField({
       name: "photos",
       title: "Journey Photos (3)",
       type: "object",

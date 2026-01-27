@@ -18,6 +18,7 @@ export default async function AboutPage() {
 
   const journey: JourneyContent = {
     heading: data?.heading || "Our Journey",
+    subheading: data?.subheading || "",
     photo1: imgUrl(data?.photos?.photo1, 900, 900),
     photo2: imgUrl(data?.photos?.photo2, 900, 900),
     photo3: imgUrl(data?.photos?.photo3, 900, 900),
@@ -54,24 +55,54 @@ export default async function AboutPage() {
 
   return (
     <main className="relative">
-      <div className="relative">
+      {/* MOBILE: normal flow (pushes content down) */}
+      <div className="md:hidden pt-24 px-6 text-center">
+        <h1 className="font-display uppercase tracking-[0.22em] text-[44px] text-black/80">
+          {journey.heading}
+        </h1>
+
+        {journey.subheading && (
+          <p className="mt-4 text-[14px] leading-relaxed text-black/60">
+            {journey.subheading}
+          </p>
+        )}
+      </div>
+
+      {/* DESKTOP: absolute overlay (your current look) */}
+      <div className="hidden md:block">
         <h1
           className="
             pointer-events-none
             absolute left-1/2 top-50 -translate-x-1/2
             z-30
             font-display uppercase tracking-[0.22em]
-            text-[46px] md:text-[64px]
+            text-[64px]
             text-black/80
           "
         >
           {journey.heading}
         </h1>
 
-        <div className="pt-24 md:pt-28">
+        {journey.subheading && (
+          <p
+            className="
+              pointer-events-none
+              absolute left-1/2 top-[120px] -translate-x-1/2
+              z-30
+              max-w-2xl px-6 text-center
+              text-[16px]
+              text-black/60
+            "
+          >
+            {journey.subheading}
+          </p>
+        )}
+      </div>
+
+      <div className="pt-38 md:pt-48">
           <JourneyHorizontal journey={journey} />
         </div>
-      </div>
+
 
       <StickyGetInTouch />
     </main>
