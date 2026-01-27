@@ -236,39 +236,60 @@ function PanelPhotoRightCircle({
 /* =========================================================
    PANEL 04 (Step 4 only, no photo)
 ========================================================= */
-function PanelStep4NoPhoto({
+/* =========================================================
+   PANEL 04 (Step 4 + Photo)  ✅ PHOTO FORMATTED LIKE PANEL 02
+========================================================= */
+function PanelStep4WithPhotoRounded({
   title,
   body,
+  photoSrc,
 }: {
   title: string;
   body: string;
+  photoSrc: string;
 }) {
   return (
     <section className={`relative flex-none w-screen ${PANEL_H_DESKTOP} ${BG}`}>
       <div className={`h-full ${FRAME_X} ${FRAME_Y}`}>
         {/* MOBILE */}
         <div className={`md:hidden ${SECTION_MOBILE} ${BORDER_MOBILE}`}>
-          <div className={`text-center ${PAD_X} mb-8`}>
+          <div className={`text-center ${PAD_X} mb-10`}>
             <Title>{title}</Title>
           </div>
-          <div className={`text-center ${PAD_X}`}>
+
+          <div className={`text-center ${PAD_X} mb-12`}>
             <StepTag />
             <BodyInNoSlot>{body}</BodyInNoSlot>
+          </div>
+
+          <div className="flex items-center justify-center">
+            {/* ✅ SAME AS PANEL 02 MOBILE PHOTO (rounded rectangle) */}
+            <div className={`relative w-[320px] h-[320px] rounded-3xl overflow-hidden shadow-lg`}>
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
+            </div>
           </div>
         </div>
 
         {/* DESKTOP */}
-        <div className={`hidden md:grid h-full grid-cols-[minmax(360px,0.75fr)_1px_minmax(520px,1fr)] border-r ${LINE}`}>
+        <div className={`hidden md:grid h-full grid-cols-[minmax(520px,1fr)_1px_minmax(360px,0.75fr)] border-r ${LINE}`}>
+          {/* LEFT: title + body stacked */}
           <div className={`flex items-center justify-center text-center ${PAD_X}`}>
-            <Title>{title}</Title>
+            <div>
+              <Title>{title}</Title>
+              <div className={`w-full border-t ${LINE}`} />
+              <div className="mt-6">
+                <StepTag />
+                <BodyInNoSlot>{body}</BodyInNoSlot>
+              </div>
+            </div>
           </div>
 
           <div className={`relative z-10 h-full border-l ${LINE}`} />
 
-          <div className={`flex items-center justify-center text-center ${PAD_X}`}>
-            <div>
-              <StepTag />
-              <BodyInNoSlot>{body}</BodyInNoSlot>
+          {/* RIGHT: image (same dimensions as PANEL 02 desktop) */}
+          <div className={`relative z-20 flex items-center justify-center ${PAD_X}`}>
+            <div className={`relative w-[360px] md:w-[400px] h-[360px] md:h-[400px] rounded-2xl overflow-hidden`}>
+              {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
         </div>
@@ -276,6 +297,7 @@ function PanelStep4NoPhoto({
     </section>
   );
 }
+
 
 /* =========================================================
    PANEL 05 (Step 5: Title -> Body -> Image) SAME PHOTO SIZE AS PANEL 02
@@ -306,11 +328,12 @@ function PanelStep5TitleBodyThenImage({
           </div>
 
           <div className="flex items-center justify-center">
-            {/* ✅ EXACT SAME AS PANEL 02 MOBILE PHOTO */}
-            <div className={`relative w-[320px] h-[320px] rounded-3xl overflow-hidden shadow-lg`}>
+            {/* ✅ SAME AS PANEL 01 MOBILE PHOTO (circle) */}
+            <div className={`relative ${PHOTO_SIZE_MOBILE} rounded-full overflow-hidden shadow-lg`}>
               {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
+
         </div>
 
         {/* DESKTOP */}
@@ -331,10 +354,11 @@ function PanelStep5TitleBodyThenImage({
 
           {/* RIGHT: image (same dimensions as PANEL 02 desktop photo) */}
           <div className={`relative z-20 flex items-center justify-center ${PAD_X}`}>
-            <div className={`relative w-[360px] md:w-[400px] h-[360px] md:h-[400px] rounded-2xl overflow-hidden`}>
+            <div className={`relative ${PHOTO_SIZE_DESKTOP} rounded-full overflow-hidden`}>
               {photoSrc ? <Image src={photoSrc} alt="" fill className="object-cover" priority /> : null}
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -348,6 +372,7 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
   const photo1 = journey.photo1;
   const photo2 = journey.photo2;
   const photo3 = journey.photo3;
+  const photo4 = (journey as any).photo4 || photo2;
 
   // Step 5 photo (fallback to photo2)
   const photo5 = (journey as any).photo5 || photo2;
@@ -362,7 +387,9 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
         <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} />
 
         {/* Step 4: title -> body */}
-        <PanelStep4NoPhoto title={copy.s4.title} body={copy.s4.body} />
+        {/* <PanelStep4NoPhoto title={copy.s4.title} body={copy.s4.body} /> */}
+        <PanelStep4WithPhotoRounded title={copy.s4.title} body={copy.s4.body} photoSrc={photo4} />
+
 
         {/* Step 5: title -> body -> image */}
         <PanelStep5TitleBodyThenImage title={copy.s5.title} body={copy.s5.body} photoSrc={photo5} />
@@ -374,7 +401,9 @@ export default function JourneyHorizontal({ journey }: { journey: JourneyContent
           <PanelPhotoRightRounded bottomTitle={copy.s2.title} bottomBody={copy.s2.body} photoSrc={photo2} />
           <PanelPhotoRightCircle photoSrc={photo3} title={copy.s3.title} body={copy.s3.body} />
 
-          <PanelStep4NoPhoto title={copy.s4.title} body={copy.s4.body} />
+          {/* <PanelStep4NoPhoto title={copy.s4.title} body={copy.s4.body} /> */}
+          <PanelStep4WithPhotoRounded title={copy.s4.title} body={copy.s4.body} photoSrc={photo4} />
+
           <PanelStep5TitleBodyThenImage title={copy.s5.title} body={copy.s5.body} photoSrc={photo5} />
         </ScrollLockHorizontal>
       </div>

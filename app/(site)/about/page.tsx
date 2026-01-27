@@ -22,6 +22,7 @@ export default async function AboutPage() {
     photo1: imgUrl(data?.photos?.photo1, 900, 900),
     photo2: imgUrl(data?.photos?.photo2, 900, 900),
     photo3: imgUrl(data?.photos?.photo3, 900, 900),
+    photo4: imgUrl(data?.photos?.photo4, 900, 900),
     photo5: imgUrl(data?.photos?.photo5, 900, 900),
 
     // ✅ NEW: step-5 image (editable in Sanity)

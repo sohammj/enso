@@ -48,6 +48,13 @@ export const aboutPage = defineType({
           validation: (r) => r.required(),
         }),
         defineField({
+          name: "photo4",
+          title: "Photo 4 (Step 04 panel)",
+          type: "image",
+          options: { hotspot: true },
+        }),
+
+        defineField({
           name: "photo5",
           title: "Photo 5 (Step 05 panel)",
           type: "image",

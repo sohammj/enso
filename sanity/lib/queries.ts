@@ -128,6 +128,7 @@ export const ABOUT_PAGE_QUERY = /* groq */ `
     photo1,
     photo2,
     photo3,
+    photo4,
     photo5
   },
   steps{
