@@ -8,7 +8,8 @@ import galleryAlbum from "./galleryAlbum";
 // import privateBookingPage from "./privateBookingPage";
 import newClientBookingPage from './newClientBookingPage'
 import returningClientBookingPage from './returningClientBookingPage'
+import interstitial from "./interstitial";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [homePage, program, service,faqPage, aboutPage, galleryAlbum, newClientBookingPage, returningClientBookingPage],
+  types: [homePage, program, service,faqPage, aboutPage, galleryAlbum, newClientBookingPage, returningClientBookingPage, interstitial],
 };

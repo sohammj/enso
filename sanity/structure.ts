@@ -68,4 +68,12 @@ export const structure: StructureResolver = (S) =>
             .schemaType("returningClientBookingPage")
             .documentId("returningClientBookingPage")
         ),
+
+      S.divider(),
+
+      S.listItem()
+        .title("Interstitial Popups")
+        .schemaType("interstitial")
+        .child(S.documentTypeList("interstitial").title("Interstitial Popups"))
+
     ]);

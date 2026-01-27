@@ -8,8 +8,6 @@ import { fetchAboutPage } from "@/sanity/lib/fetchAboutPage";
 import { urlFor } from "@/sanity/lib/image";
 import type { JourneyContent } from "@/sanity/lib/types";
 import { PortableText } from "@portabletext/react";
-import type { PortableTextBlock } from "@portabletext/types";
-
 
 function imgUrl(img: any, w = 900, h = 900) {
   if (!img) return "";
@@ -29,26 +27,11 @@ export default async function AboutPage() {
     photo5: imgUrl(data?.photos?.photo5, 900, 900),
 
     steps: {
-      s1: {
-        title: data?.steps?.s1?.title || [],
-        body: data?.steps?.s1?.body || [],
-      },
-      s2: {
-        title: data?.steps?.s2?.title || [],
-        body: data?.steps?.s2?.body || [],
-      },
-      s3: {
-        title: data?.steps?.s3?.title || [],
-        body: data?.steps?.s3?.body || [],
-      },
-      s4: {
-        title: data?.steps?.s4?.title || [],
-        body: data?.steps?.s4?.body || [],
-      },
-      s5: {
-        title: data?.steps?.s5?.title || [],
-        body: data?.steps?.s5?.body || [],
-      },
+      s1: { title: data?.steps?.s1?.title || [], body: data?.steps?.s1?.body || [] },
+      s2: { title: data?.steps?.s2?.title || [], body: data?.steps?.s2?.body || [] },
+      s3: { title: data?.steps?.s3?.title || [], body: data?.steps?.s3?.body || [] },
+      s4: { title: data?.steps?.s4?.title || [], body: data?.steps?.s4?.body || [] },
+      s5: { title: data?.steps?.s5?.title || [], body: data?.steps?.s5?.body || [] },
     },
   };
 
@@ -65,11 +48,13 @@ export default async function AboutPage() {
             <PortableText value={journey.subheading} />
           </div>
         ) : null}
-
       </div>
 
-      {/* DESKTOP: hero section */}
-      <section className="relative h-screen w-full px-6 text-center">
+      {/* ✅ DESKTOP ONLY: hero section (HIDE ON MOBILE) */}
+      <section
+        className="hidden md:block relative h-screen w-full px-6 text-center"
+        aria-hidden
+      >
         <div className="h-full max-w-5xl mx-auto grid grid-rows-[1fr_auto_1fr]">
           {/* TOP */}
           <div className="flex items-end justify-center pb-10">
@@ -80,7 +65,6 @@ export default async function AboutPage() {
 
           {/* MIDDLE */}
           <div className="flex flex-col items-center justify-center">
-            {/* subtle divider to “use space” intentionally */}
             <div className="h-px w-24 bg-black/15 mb-10" />
 
             {journey.subheading?.length ? (
@@ -113,7 +97,6 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
-
 
       {/* Horizontal scroll section */}
       <JourneyHorizontal journey={journey} />

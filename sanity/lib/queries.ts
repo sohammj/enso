@@ -189,6 +189,30 @@ export const returningClientBookingPageQuery = `
 }
 `;
 
+
+
+export const interstitialQuery = /* groq */ `
+*[
+  _type == "interstitial" &&
+  enabled == true &&
+  (!defined(startAt) || startAt <= now()) &&
+  (!defined(endAt) || endAt >= now())
+]
+| order(priority desc, _updatedAt desc)[0]{
+  _id,
+  title,
+  subtitle,
+  description,
+  ctaLabel,
+  ctaUrl,
+  showFrequency,
+  startAt,
+  endAt,
+  image
+}
+`;
+
+
 // export const privateBookingPageQuery = `
 // *[_type == "privateBookingPage" && _id == "privateBookingPage"][0]{
 //   _id,
