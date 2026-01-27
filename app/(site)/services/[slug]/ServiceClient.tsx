@@ -12,6 +12,56 @@ import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import Script from "next/script";
 
+import type { PortableTextComponents } from "@portabletext/react";
+
+const portableTextComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => (
+      <p className="my-4 leading-[1.9] text-[18px] opacity-85">{children}</p>
+    ),
+    h2: ({ children }) => (
+      <h2 className="mt-10 mb-4 text-[28px] md:text-[32px] font-[Playfair_Display] font-semibold opacity-95">
+        {children}
+      </h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="mt-8 mb-3 text-[22px] md:text-[24px] font-[Playfair_Display] font-semibold opacity-95">
+        {children}
+      </h3>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote className="my-6 border-l-4 border-[#B88933]/50 pl-5 italic opacity-85">
+        {children}
+      </blockquote>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="my-4 ml-6 list-disc space-y-2">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="my-4 ml-6 list-decimal space-y-2">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="leading-[1.8]">{children}</li>,
+    number: ({ children }) => <li className="leading-[1.8]">{children}</li>,
+  },
+  marks: {
+    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+    em: ({ children }) => <em className="italic">{children}</em>,
+    link: ({ children, value }) => (
+      <a
+        href={value?.href}
+        className="underline underline-offset-4 hover:opacity-80"
+        target={value?.blank ? "_blank" : undefined}
+        rel={value?.blank ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    ),
+  },
+};
 
 const float = {
   animate: {
@@ -190,10 +240,11 @@ export default function ServiceClient({ service }: { service: Service }) {
           className="space-y-8 text-[18px] leading-[1.9] opacity-85"
         >
           {service.description && (
-            <div className="space-y-4">
-              <PortableText value={service.description} />
+            <div>
+              <PortableText value={service.description} components={portableTextComponents} />
             </div>
           )}
+
         </motion.div>
       </section>
 
