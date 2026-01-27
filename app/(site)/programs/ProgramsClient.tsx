@@ -205,7 +205,6 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
 
   return (
     <main className="bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] min-h-screen relative overflow-visible">
-      <SocialRail desktop mobile="bar" />
       <section className="pt-24 md:pt-28 pb-12 md:pb-16 text-center px-6 relative z-20">
         <h1 className="font-[Playfair_Display] text-[40px] md:text-[56px] leading-tight">
           Our Programs
@@ -265,6 +264,7 @@ export default function ProgramsClient({ programs }: { programs: Program[] }) {
         subtitle="Programs we've previously hosted that continue to shape our approach and philosophy."
         items={past}
       />
+      <SocialRail desktop mobile="bar" />
 
       <div className="pb-32 md:pb-40">
         <StickyGetInTouch />

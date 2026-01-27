@@ -4,9 +4,12 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 type Props = {
   children: React.ReactNode;
-  speed?: number; // 1 = normal, 1.3 = slower, 0.8 = faster
+  speed?: number;
   className?: string;
 };
+
+const LOCK_TOP_PX = 171; // ✅ YOUR DEBUG SCREENSHOT VALUE
+const LOCK_TOLERANCE_PX = 2; // how exact you want it to be
 
 export default function ScrollLockHorizontal({
   children,
@@ -21,15 +24,99 @@ export default function ScrollLockHorizontal({
   const [inView, setInView] = useState(false);
   const inViewRef = useRef(false);
 
-  // ✅ this controls whether we are currently hijacking scroll
   const [locked, setLocked] = useState(false);
   const lockedRef = useRef(false);
 
   const xRef = useRef(0);
-  const maxXRef = useRef(0); // negative
+  const maxXRef = useRef(0);
   const touchYRef = useRef<number | null>(null);
 
-  // bounds
+  const lockedScrollPositionRef = useRef(0);
+  const pinRafRef = useRef<number | null>(null);
+  const isTransitioningRef = useRef(false);
+  const hasScrolledThroughRef = useRef(false);
+
+  // ---------- helpers ----------
+  function clamp(v: number, min: number, max: number) {
+    return Math.max(min, Math.min(max, v));
+  }
+
+  function applyTransform(x: number) {
+    const track = trackRef.current;
+    if (!track) return;
+    track.style.transform = `translate3d(${x}px, 0, 0)`;
+  }
+
+  function step(rawDelta: number) {
+    const max = maxXRef.current;
+    const next = clamp(xRef.current - rawDelta / speed, max, 0);
+    xRef.current = next;
+    applyTransform(next);
+  }
+
+  function snapHostToLockTop() {
+    const host = hostRef.current;
+    if (!host) return;
+
+    // How far the host is from your desired lock line (171px)
+    const rect = host.getBoundingClientRect();
+    const diff = rect.top - LOCK_TOP_PX;
+
+    // Scroll so rect.top becomes exactly LOCK_TOP_PX
+    const targetY = window.scrollY + diff;
+
+    // instant snap
+    window.scrollTo(0, targetY);
+
+    // store the snapped Y as the pinned position
+    lockedScrollPositionRef.current = targetY;
+  }
+
+  function startPinning() {
+    // keep it EXACTLY pinned even if browser tries momentum / trackpad drift
+    const tick = () => {
+      if (!lockedRef.current) return;
+      if (window.scrollY !== lockedScrollPositionRef.current) {
+        window.scrollTo(0, lockedScrollPositionRef.current);
+      }
+      pinRafRef.current = requestAnimationFrame(tick);
+    };
+
+    if (pinRafRef.current) cancelAnimationFrame(pinRafRef.current);
+    pinRafRef.current = requestAnimationFrame(tick);
+  }
+
+  function stopPinning() {
+    if (pinRafRef.current) cancelAnimationFrame(pinRafRef.current);
+    pinRafRef.current = null;
+  }
+
+  function lockNow() {
+    if (lockedRef.current) return;
+
+    isTransitioningRef.current = true;
+
+    // ✅ snap FIRST so we lock at the exact same visual height every time
+    snapHostToLockTop();
+
+    setLocked(true);
+    lockedRef.current = true;
+
+    startPinning();
+
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 80);
+  }
+
+  function unlockNow() {
+    if (!lockedRef.current) return;
+    setLocked(false);
+    lockedRef.current = false;
+    stopPinning();
+  }
+
+  // ---------- bounds ----------
   useEffect(() => {
     const compute = () => {
       const track = trackRef.current;
@@ -50,104 +137,126 @@ export default function ScrollLockHorizontal({
     return () => window.removeEventListener("resize", compute);
   }, []);
 
-  // detect in-view
+  // ---------- inView detection (BUT centered at 171px, not 0px) ----------
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        const on = entry.isIntersecting && entry.intersectionRatio > 0.65;
-        setInView(on);
-        inViewRef.current = on;
+    let rafId: number;
+    let lastState = false;
 
-        // ✅ when it becomes visible, lock immediately
-        if (on) {
-          setLocked(true);
-          lockedRef.current = true;
-        } else {
-          setLocked(false);
-          lockedRef.current = false;
-        }
-      },
-      { threshold: [0.65] }
-    );
+    const checkPosition = () => {
+      const rect = host.getBoundingClientRect();
+      const vh = window.innerHeight;
 
-    io.observe(host);
-    return () => io.disconnect();
+      const visibleHeight = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+      const visibilityRatio = Math.max(0, visibleHeight) / rect.height;
+
+      // ✅ centered means "host.top is near 171px"
+      const distanceFromLockLine = rect.top - LOCK_TOP_PX;
+      const isCentered = Math.abs(distanceFromLockLine) <= 60; // activation zone
+
+      let shouldBeActive: boolean;
+      if (lastState) {
+        // deactivate a bit later (hysteresis)
+        shouldBeActive = visibilityRatio > 0.7 && isCentered;
+      } else {
+        shouldBeActive = visibilityRatio > 0.85 && isCentered;
+      }
+
+      if (shouldBeActive !== inViewRef.current) {
+        setInView(shouldBeActive);
+        inViewRef.current = shouldBeActive;
+        lastState = shouldBeActive;
+
+        // If leaving view, always unlock
+        if (!shouldBeActive) unlockNow();
+      }
+
+      rafId = requestAnimationFrame(checkPosition);
+    };
+
+    rafId = requestAnimationFrame(checkPosition);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // apply body lock/unlock
-  useEffect(() => {
-    const shouldLock = inView && locked;
-    const prevHtml = document.documentElement.style.overflow;
-    const prevBody = document.body.style.overflow;
-
-    if (shouldLock) {
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-    } else {
-      document.documentElement.style.overflow = prevHtml || "";
-      document.body.style.overflow = prevBody || "";
-    }
-
-    return () => {
-      document.documentElement.style.overflow = prevHtml;
-      document.body.style.overflow = prevBody;
-    };
-  }, [inView, locked]);
-
-  // wheel + touch
+  // ---------- wheel + touch ----------
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
+      if (isTransitioningRef.current) return;
       if (!inViewRef.current) return;
 
       const delta = e.deltaY || e.deltaX || 0;
       const max = maxXRef.current;
       const x = xRef.current;
 
-      const atStart = x === 0;
-      const atEnd = x === max;
+      const atStart = x >= -10;
+      const atEnd = x <= max + 10;
 
-      // ✅ If currently locked, we own the scroll
+      const scrollingDown = delta > 0;
+      const scrollingUp = delta < 0;
+
+      // ✅ if locked, always prevent vertical scroll & pin exact position
       if (lockedRef.current) {
-        // If user tries to scroll past the end, unlock so page can continue
-        if ((atEnd && delta > 0) || (atStart && delta < 0)) {
-          setLocked(false);
-          lockedRef.current = false;
-          return; // allow natural page scroll
+        e.preventDefault();
+        e.stopPropagation();
+
+        // boundaries -> unlock rules
+        if (scrollingDown && atEnd) {
+          hasScrolledThroughRef.current = true;
+          unlockNow();
+          return;
+        }
+        if (scrollingUp && atStart) {
+          hasScrolledThroughRef.current = false;
+          unlockNow();
+          return;
         }
 
-        e.preventDefault();
         step(delta);
         return;
       }
 
-      // ✅ If unlocked, only relock when user reverses direction back into the horizontal range
-      const shouldRelock =
-        (atEnd && delta < 0) || // at end, user scrolls up -> go back horizontally
-        (atStart && delta > 0); // at start, user scrolls down -> go forward horizontally
+      // not locked yet -> decide when to lock
+      if (scrollingDown) {
+        if (atStart && !hasScrolledThroughRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          lockNow();
+          step(delta);
+        }
+      } else if (scrollingUp) {
+        if (hasScrolledThroughRef.current) {
+          // coming back up: lock near end
+          if (atEnd || Math.abs(x - max) < 100) {
+            e.preventDefault();
+            e.stopPropagation();
 
-      if (shouldRelock) {
-        e.preventDefault();
-        setLocked(true);
-        lockedRef.current = true;
-        step(delta);
+            if (!atEnd) {
+              xRef.current = max;
+              applyTransform(max);
+            }
+
+            lockNow();
+            step(delta);
+          }
+        }
       }
-      // otherwise: let page scroll
     };
 
     const onTouchStart = (e: TouchEvent) => {
+      if (isTransitioningRef.current) return;
       if (!inViewRef.current) return;
       touchYRef.current = e.touches[0]?.clientY ?? null;
     };
 
     const onTouchMove = (e: TouchEvent) => {
+      if (isTransitioningRef.current) return;
       if (!inViewRef.current) return;
       if (touchYRef.current == null) return;
 
       const y = e.touches[0]?.clientY ?? touchYRef.current;
-      const dy = touchYRef.current - y; // swipe up => positive
+      const dy = touchYRef.current - y;
       touchYRef.current = y;
 
       const delta = dy * 1.2;
@@ -155,57 +264,81 @@ export default function ScrollLockHorizontal({
       const max = maxXRef.current;
       const x = xRef.current;
 
-      const atStart = x === 0;
-      const atEnd = x === max;
+      const atStart = x >= -10;
+      const atEnd = x <= max + 10;
+
+      const scrollingDown = delta > 0;
+      const scrollingUp = delta < 0;
 
       if (lockedRef.current) {
-        if ((atEnd && delta > 0) || (atStart && delta < 0)) {
-          setLocked(false);
-          lockedRef.current = false;
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (scrollingDown && atEnd) {
+          hasScrolledThroughRef.current = true;
+          unlockNow();
+          return;
+        }
+        if (scrollingUp && atStart) {
+          hasScrolledThroughRef.current = false;
+          unlockNow();
           return;
         }
 
-        e.preventDefault();
         step(delta);
         return;
       }
 
-      const shouldRelock = (atEnd && delta < 0) || (atStart && delta > 0);
-      if (shouldRelock) {
+      if (scrollingDown && atStart && !hasScrolledThroughRef.current) {
         e.preventDefault();
-        setLocked(true);
-        lockedRef.current = true;
+        e.stopPropagation();
+        lockNow();
         step(delta);
+      } else if (scrollingUp && hasScrolledThroughRef.current) {
+        if (atEnd || Math.abs(x - max) < 100) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (!atEnd) {
+            xRef.current = max;
+            applyTransform(max);
+          }
+
+          lockNow();
+          step(delta);
+        }
       }
     };
 
-    window.addEventListener("wheel", onWheel, { passive: false });
+    const onTouchEnd = () => {
+      touchYRef.current = null;
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
     window.addEventListener("touchstart", onTouchStart, { passive: false });
     window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd);
 
     return () => {
-      window.removeEventListener("wheel", onWheel as any);
+      window.removeEventListener("wheel", onWheel as any, true);
       window.removeEventListener("touchstart", onTouchStart as any);
       window.removeEventListener("touchmove", onTouchMove as any);
+      window.removeEventListener("touchend", onTouchEnd as any);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function step(rawDelta: number) {
-    const max = maxXRef.current;
-    const next = clamp(xRef.current - rawDelta / speed, max, 0);
-    xRef.current = next;
-    applyTransform(next);
-  }
-
-  function applyTransform(x: number) {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.transform = `translate3d(${x}px, 0, 0)`;
-  }
+  // ---------- cleanup pinning if component unmounts ----------
+  useEffect(() => {
+    return () => stopPinning();
+  }, []);
 
   return (
-    <section ref={hostRef} className={`relative w-full h-screen overflow-hidden ${className}`}>
+    <section
+      ref={hostRef}
+      className={`relative w-full h-screen overflow-hidden ${className}`}
+      // optional: makes it easier to see the lock line while debugging
+      // style={{ outline: locked ? "2px solid red" : undefined }}
+    >
       <div
         ref={trackRef}
         className="h-full flex will-change-transform"
@@ -219,8 +352,4 @@ export default function ScrollLockHorizontal({
       </div>
     </section>
   );
-}
-
-function clamp(v: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, v));
 }

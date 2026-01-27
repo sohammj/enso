@@ -177,7 +177,17 @@ body {
 
 
 
+/* Add this to your app/globals.css or tailwind.css file */
 
+/* Disable smooth scroll behavior to prevent jumps during horizontal scroll */
+html {
+  scroll-behavior: auto !important;
+}
+
+/* Optional: Add smooth scroll only for non-horizontal-scroll pages */
+html.allow-smooth-scroll {
+  scroll-behavior: smooth !important;
+}
 /* 3D Flip Helpers */
 .perspective {
   perspective: 1200px;

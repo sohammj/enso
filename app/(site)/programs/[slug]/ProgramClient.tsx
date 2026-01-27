@@ -45,7 +45,6 @@ export default function ProgramClient({ program }: { program: Program }) {
 
   return (
     <main className="relative bg-[url('/paper-texture.jpg')] bg-repeat text-[#0E1E2A] overflow-visible">
-      <SocialRail desktop mobile="bar" />
       <div className="hidden md:block absolute left-[-260px] top-[-220px] w-[700px] pointer-events-none z-0">
         <Image src="/blob.png" alt="" width={700} height={700} className="opacity-90" />
       </div>
@@ -128,7 +127,9 @@ export default function ProgramClient({ program }: { program: Program }) {
           )}
 
         </motion.div>
+        <SocialRail desktop mobile="bar" />
       </section>
+      {/* <SocialRail desktop mobile="bar" /> */}
 
       <section className="max-w-4xl mx-auto px-6 pb-24 relative z-10">
         <p className="text-center font-[Playfair_Display] italic text-[20px] md:text-[24px] opacity-80">

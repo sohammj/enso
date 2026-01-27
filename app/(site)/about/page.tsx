@@ -25,9 +25,6 @@ export default async function AboutPage() {
     photo4: imgUrl(data?.photos?.photo4, 900, 900),
     photo5: imgUrl(data?.photos?.photo5, 900, 900),
 
-    // ✅ NEW: step-5 image (editable in Sanity)
-    
-
     steps: {
       s1: {
         title: data?.steps?.s1?.title || "",
@@ -41,12 +38,10 @@ export default async function AboutPage() {
         title: data?.steps?.s3?.title || "",
         body: data?.steps?.s3?.body || "",
       },
-      // ✅ FIXED: was incorrectly using s3
       s4: {
         title: data?.steps?.s4?.title || "",
         body: data?.steps?.s4?.body || "",
       },
-      // ✅ FIXED: was incorrectly using s4
       s5: {
         title: data?.steps?.s5?.title || "",
         body: data?.steps?.s5?.body || "",
@@ -55,55 +50,58 @@ export default async function AboutPage() {
   };
 
   return (
-    <main className="relative">
-      {/* MOBILE: normal flow (pushes content down) */}
-      <div className="md:hidden pt-24 px-6 text-center">
+    <main className="relative [scroll-behavior:auto]">
+      {/* MOBILE: normal flow */}
+      <div className="md:hidden pt-24 px-6 pb-12 text-center">
         <h1 className="font-display uppercase tracking-[0.22em] text-[44px] text-black/80">
           {journey.heading}
         </h1>
 
         {journey.subheading && (
-          <p className="mt-4 text-[14px] leading-relaxed text-black/60">
+          <p className="mt-4 text-[14px] leading-relaxed text-black/60 max-w-2xl mx-auto">
             {journey.subheading}
           </p>
         )}
       </div>
 
-      {/* DESKTOP: absolute overlay (your current look) */}
+      {/* DESKTOP: hero section */}
       <div className="hidden md:block">
-        <h1
-          className="
-            pointer-events-none
-            absolute left-1/2 top-50 -translate-x-1/2
-            z-30
-            font-display uppercase tracking-[0.22em]
-            text-[64px]
-            text-black/80
-          "
-        >
-          {journey.heading}
-        </h1>
+        {/* Hero section - EXACTLY full screen */}
+        <section className="relative h-screen w-full flex flex-col items-center justify-center px-6 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="font-display uppercase tracking-[0.22em] text-[64px] leading-tight text-black/80">
+              {journey.heading}
+            </h1>
 
-        {journey.subheading && (
-          <p
-            className="
-              pointer-events-none
-              absolute left-1/2 top-[120px] -translate-x-1/2
-              z-30
-              max-w-2xl px-6 text-center
-              text-[16px]
-              text-black/60
-            "
-          >
-            {journey.subheading}
-          </p>
-        )}
+            {journey.subheading && (
+              <p className="mt-6 text-[16px] leading-relaxed text-black/60">
+                {journey.subheading}
+              </p>
+            )}
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-black/40">
+            <span className="text-xs uppercase tracking-[0.2em]">Scroll to explore</span>
+            <svg 
+              className="w-6 h-6 animate-bounce" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M19 9l-7 7-7-7" 
+              />
+            </svg>
+          </div>
+        </section>
       </div>
 
-      <div className="pt-38 md:pt-48">
-          <JourneyHorizontal journey={journey} />
-        </div>
-
+      {/* Horizontal scroll section */}
+      <JourneyHorizontal journey={journey} />
 
       <StickyGetInTouch />
     </main>
