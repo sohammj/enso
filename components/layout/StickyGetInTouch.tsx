@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type StickyGetInTouchProps = {
-  showAfterScroll?: boolean; // use ONLY on pages with hero
+  showAfterScroll?: boolean;
 };
 
 export default function StickyGetInTouch({
@@ -34,25 +35,27 @@ export default function StickyGetInTouch({
         y: visible ? 0 : 20,
       }}
       transition={{ duration: 0.4, ease: "easeOut" }}
+      whileTap={{ scale: 0.95 }}
       onClick={() => router.push("/start-a-conversation")}
+      style={{ pointerEvents: visible ? "auto" : "none" }}
       className="
         fixed
-        bottom-[90px]
+        bottom-6
         right-6
         z-40
-        rounded-full
-        bg-[#0E1E2A]
-        px-6
-        py-3
-        text-sm
-        text-white
-        shadow-lg
-        hover:opacity-90
+        bg-transparent
+        p-0
       "
-      style={{ pointerEvents: visible ? "auto" : "none" }}
       aria-label="Get in touch"
     >
-      Get in touch
+      <Image
+        src="/g-removebg-preview.png"
+        alt="Get in touch"
+        width={54}
+        height={54}
+        className="hover:opacity-90 transition"
+        priority
+      />
     </motion.button>
   );
 }
