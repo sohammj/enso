@@ -176,6 +176,15 @@ export default function ProgramClient({ program }: { program: Program }) {
               </div>
             )}
 
+
+
+
+
+
+
+
+
+
             {liEnabled && (
               <div className="bg-[var(--cream)]/60 rounded-3xl shadow-soft p-5 md:p-7 relative">
                 <div
