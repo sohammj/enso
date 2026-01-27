@@ -160,18 +160,11 @@ export default function ProgramClient({ program }: { program: Program }) {
                 />
                 {/* Enso Logo Cover for Instagram */}
                 <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
-                  <a
-                    href={`https://www.instagram.com/${program.socialFeeds?.instagram?.handle || 'enso_mind_matters'}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full h-full flex items-center justify-center bg-white pointer-events-auto"
-                  >
                     <img 
                       src="/white-paper-texture.jpg" 
                       alt="Enso" 
                       className="h-full w-full object-cover"
                     />
-                  </a>
                 </div>
               </div>
             )}
@@ -193,18 +186,11 @@ export default function ProgramClient({ program }: { program: Program }) {
                 />
                 {/* Enso Logo Cover for LinkedIn */}
                 <div className="absolute bottom-0 left-0 right-0 h-20 flex justify-center items-center pointer-events-none z-20">
-                  <a
-                    href={`https://www.linkedin.com/company/${program.socialFeeds?.linkedin?.handle || 'enso-mind-matters'}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full h-full flex items-center justify-center bg-white pointer-events-auto"
-                  >
                     <img 
                       src="/white-paper-texture.jpg" 
                       alt="Enso" 
                       className="h-full w-full object-cover"
                     />
-                  </a>
                 </div>
               </div>
             )}
