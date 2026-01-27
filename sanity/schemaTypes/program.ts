@@ -109,6 +109,44 @@ export const program = defineType({
       description: "Shown below the description, above the photo strip.",
     }),
 
+    defineField({
+      name: "socialFeeds",
+      title: "Social Feeds (Elfsight)",
+      type: "object",
+      fields: [
+        defineField({
+          name: "instagram",
+          title: "Instagram Feed",
+          type: "object",
+          fields: [
+            defineField({ name: "enabled", title: "Enable", type: "boolean", initialValue: false }),
+            defineField({
+              name: "appId",
+              title: "Elfsight App ID",
+              type: "string",
+              description: "Example: 01e53896-4900-43b8-a6d6-058eeef9ea17",
+            }),
+          ],
+        }),
+
+        defineField({
+          name: "linkedin",
+          title: "LinkedIn Feed",
+          type: "object",
+          fields: [
+            defineField({ name: "enabled", title: "Enable", type: "boolean", initialValue: false }),
+            defineField({
+              name: "appId",
+              title: "Elfsight App ID",
+              type: "string",
+              description: "Example: 3f8dcfdc-d8f6-46ce-b581-d4ec19e07132",
+            }),
+          ],
+        }),
+      ],
+    }),
+
+
 
     defineField({
       name: "cta",

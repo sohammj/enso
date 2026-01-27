@@ -67,7 +67,8 @@ export const PROGRAM_BY_SLUG_QUERY = /* groq */ `
   icon,
   cta,
   closingQuote,
-  photoStrip[]{ image, label, caption }
+  photoStrip[]{ image, label, caption },
+  socialFeeds
 }
 `;
 

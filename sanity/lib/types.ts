@@ -57,6 +57,10 @@ export type Program = {
   description?: PortableTextBlock[];
   icon?: any; // Sanity image
   closingQuote?: string;
+  socialFeeds?: {
+    instagram?: { enabled?: boolean; appId?: string };
+    linkedin?: { enabled?: boolean; appId?: string };
+  };
   cta?: {
     tagline?: string;
     text?: string;
