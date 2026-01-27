@@ -7,6 +7,9 @@ import JourneyHorizontal from "@/components/sections/JourneyHorizontal";
 import { fetchAboutPage } from "@/sanity/lib/fetchAboutPage";
 import { urlFor } from "@/sanity/lib/image";
 import type { JourneyContent } from "@/sanity/lib/types";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
+
 
 function imgUrl(img: any, w = 900, h = 900) {
   if (!img) return "";
@@ -18,7 +21,7 @@ export default async function AboutPage() {
 
   const journey: JourneyContent = {
     heading: data?.heading || "Our Journey",
-    subheading: data?.subheading || "",
+    subheading: data?.subheading || [],
     photo1: imgUrl(data?.photos?.photo1, 900, 900),
     photo2: imgUrl(data?.photos?.photo2, 900, 900),
     photo3: imgUrl(data?.photos?.photo3, 900, 900),
@@ -27,24 +30,24 @@ export default async function AboutPage() {
 
     steps: {
       s1: {
-        title: data?.steps?.s1?.title || "",
-        body: data?.steps?.s1?.body || "",
+        title: data?.steps?.s1?.title || [],
+        body: data?.steps?.s1?.body || [],
       },
       s2: {
-        title: data?.steps?.s2?.title || "",
-        body: data?.steps?.s2?.body || "",
+        title: data?.steps?.s2?.title || [],
+        body: data?.steps?.s2?.body || [],
       },
       s3: {
-        title: data?.steps?.s3?.title || "",
-        body: data?.steps?.s3?.body || "",
+        title: data?.steps?.s3?.title || [],
+        body: data?.steps?.s3?.body || [],
       },
       s4: {
-        title: data?.steps?.s4?.title || "",
-        body: data?.steps?.s4?.body || "",
+        title: data?.steps?.s4?.title || [],
+        body: data?.steps?.s4?.body || [],
       },
       s5: {
-        title: data?.steps?.s5?.title || "",
-        body: data?.steps?.s5?.body || "",
+        title: data?.steps?.s5?.title || [],
+        body: data?.steps?.s5?.body || [],
       },
     },
   };
@@ -57,11 +60,12 @@ export default async function AboutPage() {
           {journey.heading}
         </h1>
 
-        {journey.subheading && (
-          <p className="mt-4 text-[14px] leading-relaxed text-black/60 max-w-2xl mx-auto">
-            {journey.subheading}
-          </p>
-        )}
+        {journey.subheading?.length ? (
+          <div className="mt-4 text-[14px] leading-relaxed text-black/60 max-w-2xl mx-auto">
+            <PortableText value={journey.subheading} />
+          </div>
+        ) : null}
+
       </div>
 
       {/* DESKTOP: hero section */}
@@ -79,11 +83,11 @@ export default async function AboutPage() {
             {/* subtle divider to “use space” intentionally */}
             <div className="h-px w-24 bg-black/15 mb-10" />
 
-            {journey.subheading && (
-              <p className="max-w-3xl text-[20px] leading-[1.9] text-black/55">
-                {journey.subheading}
-              </p>
-            )}
+            {journey.subheading?.length ? (
+              <div className="max-w-3xl text-[20px] leading-[1.9] text-black/55">
+                <PortableText value={journey.subheading} />
+              </div>
+            ) : null}
           </div>
 
           {/* BOTTOM */}

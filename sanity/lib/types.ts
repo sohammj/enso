@@ -156,7 +156,7 @@ export type FAQPageData = {
 };
 export type AboutPageData = {
   heading?: string;
-  subheading?: string;
+  subheading?: PortableTextBlock[];
   photos?: {
     photo1?: any;
     photo2?: any;
@@ -165,28 +165,28 @@ export type AboutPageData = {
     photo5?: string;
   };
   steps?: {
-    s1?: { title?: string; body?: string };
-    s2?: { title?: string; body?: string };
-    s3?: { title?: string; body?: string };
-    s4?: { title?: string; body?: string };
-    s5?: { title?: string; body?: string };
+      s1?: { title?: PortableTextBlock[]; body?: PortableTextBlock[] };
+      s2?: { title?: PortableTextBlock[]; body?: PortableTextBlock[] };
+      s3?: { title?: PortableTextBlock[]; body?: PortableTextBlock[] };
+      s4?: { title?: PortableTextBlock[]; body?: PortableTextBlock[] };
+      s5?: { title?: PortableTextBlock[]; body?: PortableTextBlock[] };
   };
 };
 
 export type JourneyContent = {
   heading: string;
-  subheading?: string;
+  subheading?: PortableTextBlock[];
   photo1: string;
   photo2: string;
   photo3: string;
   photo4?: any;
   photo5?: string;
   steps: {
-    s1: { title: string; body: string };
-    s2: { title: string; body: string };
-    s3: { title: string; body: string };
-    s4: { title: string; body: string };
-    s5: { title: string; body: string };
+    s1: { title: PortableTextBlock[]; body: PortableTextBlock[] };
+    s2: { title: PortableTextBlock[]; body: PortableTextBlock[] };
+    s3: { title: PortableTextBlock[]; body: PortableTextBlock[] };
+    s4: { title: PortableTextBlock[]; body: PortableTextBlock[] };
+    s5: { title: PortableTextBlock[]; body: PortableTextBlock[] };
   };
 };
 

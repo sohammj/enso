@@ -14,11 +14,11 @@ export const aboutPage = defineType({
 
     defineField({
       name: "subheading",
-      title: "Small Text Below Heading",
-      type: "text",
-      rows: 2,
-      initialValue: "A gentle look at how Enso came to be — and how it continues to grow.",
+      title: "Subheading",
+      type: "array",
+      of: [{ type: "block" }],
     }),
+
 
 
     defineField({
@@ -73,8 +73,21 @@ export const aboutPage = defineType({
           title: "Step 01",
           type: "object",
           fields: [
-            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "body",
+              title: "Body",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+
           ],
         }),
 
@@ -83,8 +96,21 @@ export const aboutPage = defineType({
           title: "Step 02",
           type: "object",
           fields: [
-            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body", type: "text", rows: 5, validation: (r) => r.required() }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "body",
+              title: "Body",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+
           ],
         }),
 
@@ -93,8 +119,21 @@ export const aboutPage = defineType({
           title: "Step 03",
           type: "object",
           fields: [
-            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "body",
+              title: "Body",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+
           ],
         }),
 
@@ -104,8 +143,21 @@ export const aboutPage = defineType({
           title: "Step 04 (No Photos)",
           type: "object",
           fields: [
-            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "body",
+              title: "Body",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+
           ],
         }),
 
@@ -115,8 +167,21 @@ export const aboutPage = defineType({
           title: "Step 05 (No Photos)",
           type: "object",
           fields: [
-            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (r) => r.required() }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "body",
+              title: "Body",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (r) => r.required(),
+            }),
+
           ],
         }),
       ],
