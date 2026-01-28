@@ -11,6 +11,7 @@ import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import Script from "next/script";
 import SocialRail from "@/components/SocialRail";
+import PhotoCarousel from "@/components/PhotoCarousel";
 
 
 
@@ -139,7 +140,15 @@ export default function ProgramClient({ program }: { program: Program }) {
 
       {/* Photo Strip Section - same as ServiceClient */}
       {program.photoStrip?.length ? (
-        <HorizontalPhotoStrip items={program.photoStrip} />
+        <PhotoCarousel 
+            items={program.photoStrip}
+            baseWidth={500}
+            autoplay={true}
+            autoplayDelay={4000}
+            pauseOnHover={true}
+            loop={true}
+            round={false}
+          />
       ) : null}
 
 

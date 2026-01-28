@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { motion, PanInfo, useMotionValue, useTransform } from 'motion/react';
+import { motion, PanInfo, useMotionValue, useTransform } from 'framer-motion';
 import React, { JSX } from 'react';
 
-// replace icons with your own if needed
-import { FiCircle, FiCode, FiFileText, FiLayers, FiLayout } from 'react-icons/fi';
 export interface CarouselItem {
   title: string;
   description: string;
@@ -21,43 +19,10 @@ export interface CarouselProps {
   round?: boolean;
 }
 
-const DEFAULT_ITEMS: CarouselItem[] = [
-  {
-    title: 'Text Animations',
-    description: 'Cool text animations for your projects.',
-    id: 1,
-    icon: <FiFileText className="h-[16px] w-[16px] text-white" />
-  },
-  {
-    title: 'Animations',
-    description: 'Smooth animations for your projects.',
-    id: 2,
-    icon: <FiCircle className="h-[16px] w-[16px] text-white" />
-  },
-  {
-    title: 'Components',
-    description: 'Reusable components for your projects.',
-    id: 3,
-    icon: <FiLayers className="h-[16px] w-[16px] text-white" />
-  },
-  {
-    title: 'Backgrounds',
-    description: 'Beautiful backgrounds and patterns for your projects.',
-    id: 4,
-    icon: <FiLayout className="h-[16px] w-[16px] text-white" />
-  },
-  {
-    title: 'Common UI',
-    description: 'Common UI components are coming soon!',
-    id: 5,
-    icon: <FiCode className="h-[16px] w-[16px] text-white" />
-  }
-];
-
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
-const GAP = 16;
-const SPRING_OPTIONS = { type: 'spring' as const, stiffness: 300, damping: 30 };
+const GAP = 32;
+const SPRING_OPTIONS = { type: 'spring' as const, stiffness: 280, damping: 32 };
 
 interface CarouselItemProps {
   item: CarouselItem;
@@ -71,53 +36,67 @@ interface CarouselItemProps {
 
 function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, transition }: CarouselItemProps) {
   const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
-  const outputRange = [90, 0, -90];
+  const outputRange = [4, 0, -4];
   const rotateY = useTransform(x, range, outputRange, { clamp: false });
+
+  // Better aspect ratio for desktop
+  const itemHeight = itemWidth < 380 ? 480 : 580;
 
   return (
     <motion.div
       key={`${item?.id ?? index}-${index}`}
-      className={`relative shrink-0 flex flex-col ${
+      className={`relative shrink-0 flex flex-col overflow-hidden cursor-grab active:cursor-grabbing shadow-xl hover:shadow-2xl transition-shadow duration-300 ${
         round
-          ? 'items-center justify-center text-center bg-[#060010] border-0'
-          : 'items-start justify-between bg-[#222] border border-[#222] rounded-[12px]'
-      } overflow-hidden cursor-grab active:cursor-grabbing`}
+          ? 'items-center justify-center text-center bg-white/95 backdrop-blur-sm border-0'
+          : 'items-start justify-between bg-white/98 backdrop-blur-sm border border-[#0E1E2A]/5 rounded-3xl'
+      }`}
       style={{
         width: itemWidth,
-        height: round ? itemWidth : '100%',
+        height: round ? itemWidth : itemHeight,
         rotateY: rotateY,
         ...(round && { borderRadius: '50%' })
       }}
       transition={transition}
     >
-      <div className={`${round ? 'p-0 m-0' : 'mb-4 p-5'}`}>
-        <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#060010]">
-          {item.icon}
-        </span>
+      {/* Icon/Image container */}
+      <div className={`relative w-full ${round ? 'h-full' : itemWidth < 380 ? 'h-[380px]' : 'h-[440px]'} overflow-visible`}>
+        {item.icon}
       </div>
-      <div className="p-5">
-        <div className="mb-1 font-black text-lg text-white">{item.title}</div>
-        <p className="text-sm text-white">{item.description}</p>
-      </div>
+      
+      {/* Text content - only show if not round */}
+      {!round && (item.title || item.description) && (
+        <div className="w-full p-6 md:p-8 bg-gradient-to-t from-white via-white/95 to-transparent">
+          {item.title && (
+            <h3 className="font-[Playfair_Display] text-xl md:text-2xl text-[#0E1E2A] mb-2 leading-tight line-clamp-2">
+              {item.title}
+            </h3>
+          )}
+          {item.description && (
+            <p className="text-sm md:text-base text-[#0E1E2A]/70 leading-relaxed line-clamp-3">
+              {item.description}
+            </p>
+          )}
+        </div>
+      )}
     </motion.div>
   );
 }
 
 export default function Carousel({
-  items = DEFAULT_ITEMS,
-  baseWidth = 300,
+  items = [],
+  baseWidth = 520,
   autoplay = false,
   autoplayDelay = 3000,
   pauseOnHover = false,
   loop = false,
   round = false
 }: CarouselProps): JSX.Element {
-  const containerPadding = 16;
+  const containerPadding = 0;
   const itemWidth = baseWidth - containerPadding * 2;
   const trackItemOffset = itemWidth + GAP;
+  
   const itemsForRender = useMemo(() => {
-    if (!loop) return items;
-    if (items.length === 0) return [];
+    if (!loop || items.length === 0) return items;
     return [items[items.length - 1], ...items, items[0]];
   }, [items, loop]);
 
@@ -128,6 +107,7 @@ export default function Carousel({
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (pauseOnHover && containerRef.current) {
       const container = containerRef.current;
@@ -235,17 +215,19 @@ export default function Carousel({
   const activeIndex =
     items.length === 0 ? 0 : loop ? (position - 1 + items.length) % items.length : Math.min(position, items.length - 1);
 
+  if (items.length === 0) return <></>;
+
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden p-4 ${
-        round ? 'rounded-full border border-white' : 'rounded-[24px] border border-[#222]'
-      }`}
+      className="relative overflow-visible"
       style={{
         width: `${baseWidth}px`,
-        ...(round && { height: `${baseWidth}px` })
+        ...(round && { height: `${baseWidth}px` }),
+        padding: `${containerPadding}px`
       }}
     >
+      {/* Main carousel track */}
       <motion.div
         className="flex"
         drag={isAnimating ? false : 'x'}
@@ -253,7 +235,7 @@ export default function Carousel({
         style={{
           width: itemWidth,
           gap: `${GAP}px`,
-          perspective: 1000,
+          perspective: 1800,
           perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%`,
           x
         }}
@@ -276,29 +258,54 @@ export default function Carousel({
           />
         ))}
       </motion.div>
-      <div className={`flex w-full justify-center ${round ? 'absolute z-20 bottom-12 left-1/2 -translate-x-1/2' : ''}`}>
-        <div className="mt-4 flex w-[150px] justify-between px-8">
+
+      {/* Navigation dots - improved positioning */}
+      <div className={`flex w-full justify-center ${round ? 'absolute z-20 bottom-8 left-1/2 -translate-x-1/2' : 'mt-8'}`}>
+        <div className="flex gap-3 px-8">
           {items.map((_, index) => (
-            <motion.div
+            <motion.button
               key={index}
-              className={`h-2 w-2 rounded-full cursor-pointer transition-colors duration-150 ${
+              className={`h-2 rounded-full cursor-pointer transition-all duration-300 ${
                 activeIndex === index
-                  ? round
-                    ? 'bg-white'
-                    : 'bg-[#333333]'
-                  : round
-                    ? 'bg-[#555]'
-                    : 'bg-[rgba(51,51,51,0.4)]'
+                  ? 'bg-[#B88933] w-10'
+                  : 'bg-[#0E1E2A]/25 w-2 hover:bg-[#0E1E2A]/50'
               }`}
               animate={{
-                scale: activeIndex === index ? 1.2 : 1
+                scale: activeIndex === index ? 1 : 0.9
               }}
               onClick={() => setPosition(loop ? index + 1 : index)}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.2 }}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </div>
+
+      {/* Navigation arrows - better positioning and styling */}
+      {/* {items.length > 1 && (
+        <>
+          <button
+            onClick={() => setPosition(prev => Math.max(0, prev - 1))}
+            className="absolute -left-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur-sm shadow-lg flex items-center justify-center text-[#0E1E2A] hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 z-20 group"
+            disabled={!loop && position === 0}
+            aria-label="Previous slide"
+          >
+            <svg className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setPosition(prev => Math.min(itemsForRender.length - 1, prev + 1))}
+            className="absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur-sm shadow-lg flex items-center justify-center text-[#0E1E2A] hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 z-20 group"
+            disabled={!loop && position === itemsForRender.length - 1}
+            aria-label="Next slide"
+          >
+            <svg className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )} */}
     </div>
   );
 }
