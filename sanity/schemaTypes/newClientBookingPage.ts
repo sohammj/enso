@@ -41,14 +41,12 @@ export default defineType({
       title: "Fee Amount",
       type: "number",
       initialValue: 1600,
-      validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
       name: "feeCurrency",
       title: "Fee Currency",
       type: "string",
       initialValue: "₹",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "afterIntakeMessage",

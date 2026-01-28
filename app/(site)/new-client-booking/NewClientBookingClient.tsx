@@ -46,7 +46,7 @@ export default function NewClientBookingClient({ data }: { data: NewClientBookin
               <span className="font-semibold">Session:</span> {data.sessionDurationText}
             </p>
             <p className="text-base">
-              <span className="font-semibold">Fee:</span> {data.feeCurrency}
+              {data.feeCurrency}
               {data.feeAmount}
             </p>
           </div>
