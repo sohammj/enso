@@ -96,7 +96,8 @@ export default function Carousel({
   const trackItemOffset = itemWidth + GAP;
   
   const itemsForRender = useMemo(() => {
-    if (!loop || items.length === 0) return items;
+    // Don't loop if we have 2 or fewer items, or if loop is disabled
+    if (!loop || items.length === 0 || items.length <= 2) return items;
     return [items[items.length - 1], ...items, items[0]];
   }, [items, loop]);
 
@@ -127,14 +128,22 @@ export default function Carousel({
     if (pauseOnHover && isHovered) return undefined;
 
     const timer = setInterval(() => {
-      setPosition(prev => Math.min(prev + 1, itemsForRender.length - 1));
+      setPosition(prev => {
+        const nextPos = prev + 1;
+        // If loop is disabled OR we have 2 or fewer items, stop at the last item
+        if ((!loop || items.length <= 2) && nextPos >= itemsForRender.length) {
+          return prev; // Stay at current position - stops autoplay at end
+        }
+        return nextPos;
+      });
     }, autoplayDelay);
 
     return () => clearInterval(timer);
-  }, [autoplay, autoplayDelay, isHovered, pauseOnHover, itemsForRender.length]);
+  }, [autoplay, autoplayDelay, isHovered, pauseOnHover, itemsForRender.length, loop, items.length]);
 
   useEffect(() => {
-    const startingPosition = loop ? 1 : 0;
+    // Start at position 1 only if we're looping AND have more than 2 items
+    const startingPosition = (loop && items.length > 2) ? 1 : 0;
     setPosition(startingPosition);
     x.set(-startingPosition * trackItemOffset);
   }, [items.length, loop, trackItemOffset, x]);
@@ -152,7 +161,8 @@ export default function Carousel({
   };
 
   const handleAnimationComplete = () => {
-    if (!loop || itemsForRender.length <= 1) {
+    // Only handle infinite loop logic if we're looping AND have more than 2 items
+    if (!loop || itemsForRender.length <= 1 || items.length <= 2) {
       setIsAnimating(false);
       return;
     }
@@ -203,7 +213,7 @@ export default function Carousel({
     });
   };
 
-  const dragProps = loop
+  const dragProps = (loop && items.length > 2)
     ? {}
     : {
         dragConstraints: {
@@ -213,7 +223,7 @@ export default function Carousel({
       };
 
   const activeIndex =
-    items.length === 0 ? 0 : loop ? (position - 1 + items.length) % items.length : Math.min(position, items.length - 1);
+    items.length === 0 ? 0 : (loop && items.length > 2) ? (position - 1 + items.length) % items.length : Math.min(position, items.length - 1);
 
   if (items.length === 0) return <></>;
 
@@ -273,7 +283,7 @@ export default function Carousel({
               animate={{
                 scale: activeIndex === index ? 1 : 0.9
               }}
-              onClick={() => setPosition(loop ? index + 1 : index)}
+              onClick={() => setPosition((loop && items.length > 2) ? index + 1 : index)}
               transition={{ duration: 0.2 }}
               aria-label={`Go to slide ${index + 1}`}
             />
