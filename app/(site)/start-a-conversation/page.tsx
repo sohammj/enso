@@ -305,7 +305,7 @@ export default function StartConversation() {
       {/* Footer note */}
       <div className="mt-8 rounded-2xl bg-white p-5 shadow-soft text-sm">
         <p className="opacity-80">
-          Prefer WhatsApp or email? Reach us at{" "}
+          Prefer email? Reach us at{" "}
           <a
             className="underline underline-offset-4"
             href={`mailto:${studioInfo.email}`}

@@ -448,9 +448,10 @@ function getDefaultIconPath(title?: string): string {
                   {welcomeBody}
                 </p> */}
 
-                <div className="text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
+                <div className="font-body text-[var(--ink)]/80 leading-relaxed mb-6 max-w-xl">
                   <PortableText value={welcomeBody} />
                 </div>
+
 
 
                 <ul className="space-y-4">
@@ -553,7 +554,9 @@ function getDefaultIconPath(title?: string): string {
 
           {/* <div className="max-w-5xl mx-auto px-6"> */}
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A] flex items-center">
+          {/* <h2 className="font-[Playfair_Display] text-[32px] md:text-[44px] mb-4 text-[#0E1E2A] flex items-center"> */}
+          <h2 className="font-[Playfair_Display] text-[40px] md:text-[56px] leading-tight text-[#0E1E2A] flex items-center">
+
             
             <span className="order-1 md:order-2">
               {aboutTitle}
