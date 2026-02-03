@@ -8,8 +8,8 @@ type Props = {
   className?: string;
 };
 
-const LOCK_TOP_PX = 171; // ✅ YOUR DEBUG SCREENSHOT VALUE
-const LOCK_TOLERANCE_PX = 2; // how exact you want it to be
+const LOCK_TOP_PX = 171;
+const LOCK_TOLERANCE_PX = 2;
 
 export default function ScrollLockHorizontal({
   children,
@@ -36,12 +36,8 @@ export default function ScrollLockHorizontal({
   const isTransitioningRef = useRef(false);
   const hasScrolledThroughRef = useRef(false);
   const lastTopRef = useRef<number | null>(null);
-  // const lastTopRef = useRef<number | null>(null);
   const lastScrollYRef = useRef<number>(0);
 
-
-
-  // ---------- helpers ----------
   function clamp(v: number, min: number, max: number) {
     return Math.max(min, Math.min(max, v));
   }
@@ -63,22 +59,15 @@ export default function ScrollLockHorizontal({
     const host = hostRef.current;
     if (!host) return;
 
-    // How far the host is from your desired lock line (171px)
     const rect = host.getBoundingClientRect();
     const diff = rect.top - LOCK_TOP_PX;
-
-    // Scroll so rect.top becomes exactly LOCK_TOP_PX
     const targetY = window.scrollY + diff;
 
-    // instant snap
     window.scrollTo(0, targetY);
-
-    // store the snapped Y as the pinned position
     lockedScrollPositionRef.current = targetY;
   }
 
   function startPinning() {
-    // keep it EXACTLY pinned even if browser tries momentum / trackpad drift
     const tick = () => {
       if (!lockedRef.current) return;
       if (window.scrollY !== lockedScrollPositionRef.current) {
@@ -100,8 +89,6 @@ export default function ScrollLockHorizontal({
     if (lockedRef.current) return;
 
     isTransitioningRef.current = true;
-
-    // ✅ snap FIRST so we lock at the exact same visual height every time
     snapHostToLockTop();
 
     setLocked(true);
@@ -121,7 +108,6 @@ export default function ScrollLockHorizontal({
     stopPinning();
   }
 
-  // ---------- bounds ----------
   useEffect(() => {
     const compute = () => {
       const track = trackRef.current;
@@ -142,9 +128,6 @@ export default function ScrollLockHorizontal({
     return () => window.removeEventListener("resize", compute);
   }, []);
 
-  // ---------- inView detection (BUT centered at 171px, not 0px) ----------
-  
-  // ---------- inView detection + FORCE LOCK (fast scroll + bottom-up safe) ----------
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
@@ -152,7 +135,6 @@ export default function ScrollLockHorizontal({
     let rafId: number;
     let lastState = false;
 
-    // init
     lastScrollYRef.current = window.scrollY;
 
     const checkPosition = () => {
@@ -163,11 +145,8 @@ export default function ScrollLockHorizontal({
       const visibilityRatio = Math.max(0, visibleHeight) / rect.height;
 
       const distanceFromLockLine = rect.top - LOCK_TOP_PX;
-
-      // widen a bit so fast scroll can’t miss
       const isNearLockLine = Math.abs(distanceFromLockLine) <= 160;
 
-      // inView = eligible zone
       let shouldBeActive: boolean;
       if (lastState) {
         shouldBeActive = visibilityRatio > 0.55 && isNearLockLine;
@@ -183,42 +162,36 @@ export default function ScrollLockHorizontal({
         if (!shouldBeActive) unlockNow();
       }
 
-      // ✅ detect scroll direction
       const currScrollY = window.scrollY;
       const scrollingUp = currScrollY < lastScrollYRef.current;
       const scrollingDown = currScrollY > lastScrollYRef.current;
       lastScrollYRef.current = currScrollY;
 
-      // ✅ FORCE LOCK ON CROSSING (works for fast scroll + bottom-up)
       if (!lockedRef.current) {
         const prevTop = lastTopRef.current;
         if (prevTop !== null) {
           const prevDist = prevTop - LOCK_TOP_PX;
           const currDist = rect.top - LOCK_TOP_PX;
 
-          // crossed the lock line from either direction
           const crossed =
             (prevDist > 0 && currDist <= 0) || (prevDist < 0 && currDist >= 0);
 
-          const mostlyVisible = visibilityRatio > 0.7; // tune if needed
+          const mostlyVisible = visibilityRatio > 0.7;
           const nearLine = Math.abs(currDist) <= 160;
 
           if (crossed && mostlyVisible && nearLine) {
-            // ✅ IMPORTANT:
-            // If coming from bottom going UP, force horizontal to END before locking
             if (scrollingUp) {
               const max = maxXRef.current;
               xRef.current = max;
               applyTransform(max);
-              hasScrolledThroughRef.current = true; // tells your wheel logic "we're in end state"
+              hasScrolledThroughRef.current = true;
             } else if (scrollingDown) {
-              // coming from top going DOWN -> ensure start
               xRef.current = 0;
               applyTransform(0);
               hasScrolledThroughRef.current = false;
             }
 
-            lockNow(); // snaps/pins to exactly 171
+            lockNow();
           }
         }
 
@@ -234,8 +207,6 @@ export default function ScrollLockHorizontal({
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-
-  // ---------- wheel + touch ----------
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
       if (isTransitioningRef.current) return;
@@ -251,12 +222,10 @@ export default function ScrollLockHorizontal({
       const scrollingDown = delta > 0;
       const scrollingUp = delta < 0;
 
-      // ✅ if locked, always prevent vertical scroll & pin exact position
       if (lockedRef.current) {
         e.preventDefault();
         e.stopPropagation();
 
-        // boundaries -> unlock rules
         if (scrollingDown && atEnd) {
           hasScrolledThroughRef.current = true;
           unlockNow();
@@ -272,7 +241,6 @@ export default function ScrollLockHorizontal({
         return;
       }
 
-      // not locked yet -> decide when to lock
       if (scrollingDown) {
         if (atStart && !hasScrolledThroughRef.current) {
           e.preventDefault();
@@ -282,7 +250,6 @@ export default function ScrollLockHorizontal({
         }
       } else if (scrollingUp) {
         if (hasScrolledThroughRef.current) {
-          // coming back up: lock near end
           if (atEnd || Math.abs(x - max) < 100) {
             e.preventDefault();
             e.stopPropagation();
@@ -382,7 +349,6 @@ export default function ScrollLockHorizontal({
     };
   }, []);
 
-  // ---------- cleanup pinning if component unmounts ----------
   useEffect(() => {
     return () => stopPinning();
   }, []);
@@ -391,16 +357,15 @@ export default function ScrollLockHorizontal({
     <section
       ref={hostRef}
       className={`relative w-full h-screen overflow-hidden ${className}`}
-      // optional: makes it easier to see the lock line while debugging
-      // style={{ outline: locked ? "2px solid red" : undefined }}
     >
       <div
         ref={trackRef}
         className="h-full flex will-change-transform"
         style={{ transform: "translate3d(0px,0,0)" }}
       >
+        {/* ✅ REMOVED w-screen - panels now size based on their content */}
         {panels.map((p, i) => (
-          <div key={i} className="h-full w-screen shrink-0">
+          <div key={i} className="h-full shrink-0">
             {p}
           </div>
         ))}
