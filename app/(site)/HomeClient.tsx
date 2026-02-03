@@ -48,8 +48,9 @@ const DEFAULTS = {
       },
     ] satisfies PortableTextBlock[],
     overlayOpacity: 0.1,
-    soundButtonLabelMuted: "🔇",
-    soundButtonLabelUnmuted: "🔊",
+    soundButtonIconMuted: "/icons/no-sound.png",
+    soundButtonIconUnmuted: "/icons/volume-up.png",
+
     fallbackVideoPath: "/enso-bg.mp4",
   },
   welcome: {
@@ -292,12 +293,27 @@ function getDefaultIconPath(title?: string): string {
           style={{ backgroundColor: "rgba(0,0,0,0.1)" }}
         />
 
-        <button
+        {/* <button
           onClick={toggleMute}
           className="absolute bottom-6 right-6 z-20 bg-white/70 hover:bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm shadow-md"
         >
           {muted ? DEFAULTS.hero.soundButtonLabelMuted : DEFAULTS.hero.soundButtonLabelUnmuted}
+        </button> */}
+        <button
+          onClick={toggleMute}
+          aria-label={muted ? "Unmute video" : "Mute video"}
+          className="absolute bottom-6 right-6 z-20 bg-white/70 hover:bg-white/90 backdrop-blur-sm px-3 py-3 rounded-full shadow-md flex items-center justify-center"
+        >
+          <Image
+            src={muted ? DEFAULTS.hero.soundButtonIconMuted : DEFAULTS.hero.soundButtonIconUnmuted}
+            alt=""
+            width={22}
+            height={22}
+            className="opacity-80 hover:opacity-100 transition-opacity"
+            priority
+          />
         </button>
+
 
 
 
