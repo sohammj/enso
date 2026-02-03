@@ -8,6 +8,8 @@ import { fetchAboutPage } from "@/sanity/lib/fetchAboutPage";
 import { urlFor } from "@/sanity/lib/image";
 import type { JourneyContent } from "@/sanity/lib/types";
 import { PortableText } from "@portabletext/react";
+import AboutStatsTicker from "@/components/sections/AboutStatsTicker";
+
 
 function imgUrl(img: any, w = 900, h = 900) {
   if (!img) return "";
@@ -16,6 +18,15 @@ function imgUrl(img: any, w = 900, h = 900) {
 
 export default async function AboutPage() {
   const data = await fetchAboutPage();
+
+
+  const clientsSeen = data?.clientsSeen ?? 0;
+  const workshops = data?.workshops ?? 0;
+
+
+  <AboutStatsTicker clientsSeen={clientsSeen} workshops={workshops} />
+
+
 
   // Create array of photos with their URLs, filtering out empty ones
   const photosArray = [
@@ -54,6 +65,7 @@ export default async function AboutPage() {
   return (
     <main className="relative [scroll-behavior:auto]">
       {/* MOBILE: normal flow */}
+      {/* MOBILE: normal flow */}
       <div className="md:hidden pt-24 px-6 pb-12 text-center">
         <h1 className="font-display uppercase tracking-[0.22em] text-[44px] text-black/80">
           {journey.heading}
@@ -64,7 +76,12 @@ export default async function AboutPage() {
             <PortableText value={journey.subheading} />
           </div>
         ) : null}
+
+        <div className="mt-10">
+          <AboutStatsTicker clientsSeen={clientsSeen} workshops={workshops} />
+        </div>
       </div>
+
 
       {/* ✅ DESKTOP ONLY: hero section (HIDE ON MOBILE) */}
       <section
@@ -88,7 +105,12 @@ export default async function AboutPage() {
                 <PortableText value={journey.subheading} />
               </div>
             ) : null}
+
+            <div className="mt-12">
+              <AboutStatsTicker clientsSeen={clientsSeen} workshops={workshops} />
+            </div>
           </div>
+
 
           {/* BOTTOM */}
           <div className="flex items-end justify-center pb-16">

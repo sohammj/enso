@@ -124,6 +124,10 @@ export const ABOUT_PAGE_QUERY = /* groq */ `
 *[_type == "aboutPage" && _id == "aboutPage"][0]{
   heading,
   subheading,
+
+  clientsSeen,
+  workshops,
+
   photos{
     photo1,
     photo2,

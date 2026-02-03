@@ -19,6 +19,47 @@ export const aboutPage = defineType({
       of: [{ type: "block" }],
     }),
 
+    // defineField({
+    //   name: "stats",
+    //   title: "Stats (Numbers)",
+    //   type: "object",
+    //   fields: [
+    //     defineField({
+    //       name: "clientsSeen",
+    //       title: "Number of clients seen",
+    //       type: "number",
+    //       validation: (r) => r.required().min(0),
+    //       initialValue: 0,
+    //     }),
+    //     defineField({
+    //       name: "workshops",
+    //       title: "Number of workshops",
+    //       type: "number",
+    //       validation: (r) => r.required().min(0),
+    //       initialValue: 0,
+    //     }),
+    //   ],
+    // }),
+
+
+    defineField({
+      name: "clientsSeen",
+      title: "Number of clients seen",
+      type: "number",
+      validation: (r) => r.required().min(0),
+      initialValue: 0,
+    }),
+
+    defineField({
+      name: "workshops",
+      title: "Number of workshops",
+      type: "number",
+      validation: (r) => r.required().min(0),
+      initialValue: 0,
+    }),
+
+
+
 
 
     defineField({

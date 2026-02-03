@@ -157,6 +157,8 @@ export type FAQPageData = {
 export type AboutPageData = {
   heading?: string;
   subheading?: PortableTextBlock[];
+  clientsSeen?: number;
+  workshops?: number;
   photos?: {
     photo1?: any;
     photo2?: any;
@@ -176,6 +178,8 @@ export type AboutPageData = {
 export type JourneyContent = {
   heading: string;
   subheading?: PortableTextBlock[];
+  clientsSeen?: number;
+  workshops?: number;
   photo1: string;
   photo2: string;
   photo3: string;
