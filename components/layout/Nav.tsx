@@ -1,7 +1,7 @@
 "use client";
+
 import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const links = [
@@ -17,28 +17,32 @@ const links = [
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const [gifSrc, setGifSrc] = useState("/ENSOLOGO1.gif");
+  const startedRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    // In Next dev mode, React StrictMode runs effects twice.
+    // This prevents double intervals → prevents “every second” restarts.
+    if (startedRef.current) return;
+    startedRef.current = true;
 
-    const playVideo = () => {
-      video.currentTime = 0;
-      video.play();
+    const restart = () => {
+      setGifSrc(`/ENSOLOGO1.gif?ts=${Date.now()}`);
     };
 
-    // Play immediately on mount
-    playVideo();
+    // play immediately
+    restart();
 
-    // Replay every 10 seconds
-    const interval = setInterval(playVideo, 10000);
+    // replay every 10 seconds
+    const interval = setInterval(restart, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -46,25 +50,19 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/60 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
+        scrolled ? "bg-white/60 backdrop-blur-md shadow-sm" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 h-[80px]">
-        {/* Logo */}
         <Link href="/" className="flex items-center">
-          <video
-            ref={videoRef}
+          <img
+            src={gifSrc}
+            alt="Enso logo"
             className="h-[100px] md:h-[110px] w-auto object-contain"
-            muted
-            playsInline
-          >
-            <source src="/ensologo.webm" type="video/webm" />
-          </video>
+            draggable={false}
+          />
         </Link>
 
-        {/* Desktop & Landscape Tablet Links - hidden below lg (1024px) */}
         <div className="hidden lg:flex gap-8">
           {links.map((l) => (
             <Link
@@ -81,7 +79,6 @@ export function Nav() {
           ))}
         </div>
 
-        {/* Mobile & Portrait Tablet Menu Button - shown below lg (1024px) */}
         <button
           className="lg:hidden text-[#111] hover:text-[#4A5568] transition-colors"
           onClick={() => setOpen((v) => !v)}
@@ -91,7 +88,6 @@ export function Nav() {
         </button>
       </nav>
 
-      {/* Mobile & Portrait Tablet Menu */}
       {open && (
         <div className="lg:hidden bg-white/90 backdrop-blur-md border-t border-gray-200">
           <div className="mx-4 mb-4 rounded-2xl p-4">
