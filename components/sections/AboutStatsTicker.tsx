@@ -12,7 +12,6 @@ function AnimatedCounter({
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    let start = 0;
     let startTime: number | null = null;
 
     function tick(timestamp: number) {
@@ -22,9 +21,7 @@ function AnimatedCounter({
       const current = Math.floor(progress * value);
       setDisplay(current);
 
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
+      if (progress < 1) requestAnimationFrame(tick);
     }
 
     requestAnimationFrame(tick);
@@ -44,9 +41,11 @@ export default function AboutStatsTicker({
     <section className="w-full">
       <div className="mx-auto max-w-3xl">
         <div className="grid grid-cols-2 gap-12 place-items-center">
-
           {/* CLIENTS */}
-          <div className="text-black/80 font-display text-[56px] leading-none">
+          <div
+            className="text-black/80 font-display leading-none
+                       text-[34px] sm:text-[40px] md:text-[44px] lg:text-[48px]"
+          >
             <AnimatedCounter value={clientsSeen} />
             <div className="text-[12px] uppercase tracking-[0.22em] text-black/45 mt-3 text-center">
               Number of clients seen
@@ -54,13 +53,15 @@ export default function AboutStatsTicker({
           </div>
 
           {/* WORKSHOPS */}
-          <div className="text-black/80 font-display text-[56px] leading-none">
+          <div
+            className="text-black/80 font-display leading-none
+                       text-[34px] sm:text-[40px] md:text-[44px] lg:text-[48px]"
+          >
             <AnimatedCounter value={workshops} />
             <div className="text-[12px] uppercase tracking-[0.22em] text-black/45 mt-3 text-center">
               Number of workshops
             </div>
           </div>
-
         </div>
       </div>
     </section>
