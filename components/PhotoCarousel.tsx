@@ -102,10 +102,10 @@ export default function PhotoCarousel({
       <div className="relative z-10 flex flex-col items-center">
         {/* Section header - refined typography */}
         <div className="text-center mb-14 md:mb-20 px-6">
-          <div className="w-20 h-[2px] bg-[#B88933]/60 mx-auto mb-5" />
-          <h2 className="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl text-[#0E1E2A] italic opacity-85">
-            Moments of Transformation
+          <h2 className="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl text-[#0E1E2A] italic opacity-85 mb-5">
+            Moments from Our Work
           </h2>
+          <div className="w-20 h-[2px] bg-[#B88933]/60 mx-auto" />
         </div>
 
         {/* Carousel container with enhanced styling */}

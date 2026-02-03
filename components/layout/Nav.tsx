@@ -1,8 +1,7 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const links = [
@@ -12,17 +11,36 @@ const links = [
   { href: "/gallery", label: "Gallery" },
   { href: "/start-a-conversation", label: "Start a conversation" },
   { href: "/faq", label: "FAQ" },
-  { href: "/about", label: "Our Journey" },
+  { href: "/about", label: "My Journey" },
 ];
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const playVideo = () => {
+      video.currentTime = 0;
+      video.play();
+    };
+
+    // Play immediately on mount
+    playVideo();
+
+    // Replay every 10 seconds
+    const interval = setInterval(playVideo, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -34,14 +52,16 @@ export function Nav() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 h-[80px]">
-
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img
-            src="/ensologo.gif"
-            alt="Enso Mind Matters"
+          <video
+            ref={videoRef}
             className="h-[100px] md:h-[110px] w-auto object-contain"
-          />
+            muted
+            playsInline
+          >
+            <source src="/ensologo.webm" type="video/webm" />
+          </video>
         </Link>
 
         {/* Desktop & Landscape Tablet Links - hidden below lg (1024px) */}

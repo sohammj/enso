@@ -555,7 +555,7 @@ function getDefaultIconPath(title?: string): string {
 
           <div className="w-28 h-[2px] bg-[#B88933]/70 mb-10" />
 
-          <div className="max-w-[520px] text-[17px] leading-[1.9] text-[#0E1E2A]/85">
+          <div className="max-w-[520px] text-[20px] md:text-[21px] leading-[1.9] text-[#0E1E2A]/85">
             <PortableText value={aboutBody} />
           </div>
         </div>

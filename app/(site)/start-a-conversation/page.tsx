@@ -55,7 +55,7 @@ const float = {
 
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/enso-mind-matters", icon: "/icons/linkedin.svg" },
-  { label: "WhatsApp", href: "https://wa.me/919967240799", icon: "/icons/whatsapp.svg" },
+  { label: "WhatsApp", href: "https://wa.me/917304818758", icon: "/icons/whatsapp.svg" },
   { label: "Instagram", href: "https://instagram.com/enso_mind_matters", icon: "/icons/instagram.svg" },
   { label: "Gmail", href: `mailto:${studioInfo.email}`, icon: "/icons/mail.svg" },
 ];

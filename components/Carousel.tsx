@@ -225,6 +225,24 @@ export default function Carousel({
   const activeIndex =
     items.length === 0 ? 0 : (loop && items.length > 2) ? (position - 1 + items.length) % items.length : Math.min(position, items.length - 1);
 
+  const handlePrevClick = () => {
+    setPosition(prev => {
+      if (loop && items.length > 2) {
+        return prev - 1;
+      }
+      return Math.max(0, prev - 1);
+    });
+  };
+
+  const handleNextClick = () => {
+    setPosition(prev => {
+      if (loop && items.length > 2) {
+        return prev + 1;
+      }
+      return Math.min(itemsForRender.length - 1, prev + 1);
+    });
+  };
+
   if (items.length === 0) return <></>;
 
   return (
@@ -269,53 +287,64 @@ export default function Carousel({
         ))}
       </motion.div>
 
-      {/* Navigation dots - improved positioning */}
-      <div className={`flex w-full justify-center ${round ? 'absolute z-20 bottom-8 left-1/2 -translate-x-1/2' : 'mt-8'}`}>
-        <div className="flex gap-3 px-8">
-          {items.map((_, index) => (
-            <motion.button
-              key={index}
-              className={`h-2 rounded-full cursor-pointer transition-all duration-300 ${
-                activeIndex === index
-                  ? 'bg-[#B88933] w-10'
-                  : 'bg-[#0E1E2A]/25 w-2 hover:bg-[#0E1E2A]/50'
-              }`}
-              animate={{
-                scale: activeIndex === index ? 1 : 0.9
-              }}
-              onClick={() => setPosition((loop && items.length > 2) ? index + 1 : index)}
-              transition={{ duration: 0.2 }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+      {/* Navigation controls - dots with small arrows */}
+      {items.length > 1 && (
+        <div className={`flex w-full justify-center items-center ${round ? 'absolute z-20 bottom-8 left-1/2 -translate-x-1/2' : 'mt-8'}`}>
+          <div className="flex items-center gap-6">
+            {/* Left Arrow - Small and subtle */}
+            <button
+              onClick={handlePrevClick}
+              className="group flex items-center justify-center w-7 h-7 rounded-full hover:bg-[#0E1E2A]/5 transition-all duration-200"
+              aria-label="Previous slide"
+            >
+              <svg 
+                className="w-4 h-4 text-[#0E1E2A]/50 group-hover:text-[#B88933] transition-colors"
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
 
-      {/* Navigation arrows - better positioning and styling */}
-      {/* {items.length > 1 && (
-        <>
-          <button
-            onClick={() => setPosition(prev => Math.max(0, prev - 1))}
-            className="absolute -left-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur-sm shadow-lg flex items-center justify-center text-[#0E1E2A] hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 z-20 group"
-            disabled={!loop && position === 0}
-            aria-label="Previous slide"
-          >
-            <svg className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={() => setPosition(prev => Math.min(itemsForRender.length - 1, prev + 1))}
-            className="absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur-sm shadow-lg flex items-center justify-center text-[#0E1E2A] hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 z-20 group"
-            disabled={!loop && position === itemsForRender.length - 1}
-            aria-label="Next slide"
-          >
-            <svg className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </>
-      )} */}
+            {/* Pagination Dots */}
+            <div className="flex gap-3">
+              {items.map((_, index) => (
+                <motion.button
+                  key={index}
+                  className={`h-2 rounded-full cursor-pointer transition-all duration-300 ${
+                    activeIndex === index
+                      ? 'bg-[#B88933] w-10'
+                      : 'bg-[#0E1E2A]/25 w-2 hover:bg-[#0E1E2A]/50'
+                  }`}
+                  animate={{
+                    scale: activeIndex === index ? 1 : 0.9
+                  }}
+                  onClick={() => setPosition((loop && items.length > 2) ? index + 1 : index)}
+                  transition={{ duration: 0.2 }}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Right Arrow - Small and subtle */}
+            <button
+              onClick={handleNextClick}
+              className="group flex items-center justify-center w-7 h-7 rounded-full hover:bg-[#0E1E2A]/5 transition-all duration-200"
+              aria-label="Next slide"
+            >
+              <svg 
+                className="w-4 h-4 text-[#0E1E2A]/50 group-hover:text-[#B88933] transition-colors"
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -17,14 +17,30 @@ function imgUrl(img: any, w = 900, h = 900) {
 export default async function AboutPage() {
   const data = await fetchAboutPage();
 
+  // Create array of photos with their URLs, filtering out empty ones
+  const photosArray = [
+    { key: 'photo1', url: imgUrl(data?.photos?.photo1, 900, 900), original: data?.photos?.photo1 },
+    { key: 'photo2', url: imgUrl(data?.photos?.photo2, 900, 900), original: data?.photos?.photo2 },
+    { key: 'photo3', url: imgUrl(data?.photos?.photo3, 900, 900), original: data?.photos?.photo3 },
+    { key: 'photo4', url: imgUrl(data?.photos?.photo4, 900, 900), original: data?.photos?.photo4 },
+    { key: 'photo5', url: imgUrl(data?.photos?.photo5, 900, 900), original: data?.photos?.photo5 },
+  ].filter(photo => photo.original); // Only keep photos that have actual data
+
+  // Build journey object with only valid photos
+  const photo1 = photosArray[0]?.url ?? "";
+  const photo2 = photosArray[1]?.url ?? "";
+  const photo3 = photosArray[2]?.url ?? "";
+  const photo4 = photosArray[3]?.url ?? "";
+  const photo5 = photosArray[4]?.url ?? "";
+
   const journey: JourneyContent = {
     heading: data?.heading || "Our Journey",
     subheading: data?.subheading || [],
-    photo1: imgUrl(data?.photos?.photo1, 900, 900),
-    photo2: imgUrl(data?.photos?.photo2, 900, 900),
-    photo3: imgUrl(data?.photos?.photo3, 900, 900),
-    photo4: imgUrl(data?.photos?.photo4, 900, 900),
-    photo5: imgUrl(data?.photos?.photo5, 900, 900),
+    photo1,
+    photo2,
+    photo3,
+    photo4,
+    photo5,
 
     steps: {
       s1: { title: data?.steps?.s1?.title || [], body: data?.steps?.s1?.body || [] },
@@ -78,7 +94,7 @@ export default async function AboutPage() {
           <div className="flex items-end justify-center pb-16">
             <div className="flex flex-col items-center gap-3 text-black/40">
               <span className="text-xs uppercase tracking-[0.2em]">
-                Scroll to explore
+                Scroll to know more about me
               </span>
               <svg
                 className="w-6 h-6 animate-bounce"
