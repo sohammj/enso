@@ -118,7 +118,7 @@ export default function StartConversationSection() {
           </h2>
 
           <p className="mt-3 max-w-xl text-sm sm:text-base text-[#0E1E2A]/80 leading-relaxed">
-            You don't have to have the right words. Share whatever feels safe —
+            You don't have to have the right words. Share whatever feels safe -
             we'll take it from there.
           </p>
 
