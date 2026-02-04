@@ -10,7 +10,7 @@ export const studioInfo = {
   addressLine2: "Manmala Tank Road, Mahim, Mumbai 400016",
   email: "parul.enso@gmail.com",
   phone: "", // if they give you one later
-  cityTag: "Mumbai, India",
+  cityTag: "United House, 3, Manmala Tank Rd, Mainak Wadi, Joshi Vadi, Mahim, Mumbai, Maharashtra 400016",
 };
 
 export const founder = {

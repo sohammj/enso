@@ -9,7 +9,7 @@ export function Footer() {
             <img src="/logo.svg" alt="Enso" className="w-8 h-8" />
             <span className="font-semibold">Enso Mind Matters</span>
           </div>
-          <p className="p">Mumbai, India (placeholder)</p>
+          <p className="p">United House, 3, Manmala Tank Rd, Mainak Wadi, Joshi Vadi, Mahim, Mumbai, Maharashtra 400016</p>
           <p className="p mt-2">
             Email: <a href="mailto:parul.enso@gmail.com" className="underline underline-offset-4">parul.enso@gmail.com</a>
           </p>

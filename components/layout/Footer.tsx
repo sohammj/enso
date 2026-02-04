@@ -12,7 +12,7 @@ export function Footer() {
               Enso Mind Matters
             </span>
           </div>
-          <p className="text-sm opacity-80">Mumbai, India</p>
+          <p className="text-sm opacity-80">United House, 3, Manmala Tank Rd, Mainak Wadi, Joshi Vadi, Mahim, Mumbai, Maharashtra 400016</p>
           <p className="text-sm mt-2 opacity-80">
             Email:{" "}
             <a
