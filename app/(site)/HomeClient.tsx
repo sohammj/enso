@@ -288,10 +288,7 @@ function getDefaultIconPath(title?: string): string {
 
 
         {/* keep original look: bg-black/10 */}
-        <div
-          className="absolute inset-0"
-          style={{ backgroundColor: "rgba(0,0,0,0.1)" }}
-        />
+        
 
         {/* <button
           onClick={toggleMute}
