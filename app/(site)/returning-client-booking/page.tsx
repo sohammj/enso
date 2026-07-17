@@ -1,6 +1,12 @@
 
 import { fetchReturningClientBookingPage } from "@/sanity/lib/fetchReturningClientBookingPage";
 import ReturningClientBookingClient from "./ReturningClientBookingClient";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Returning Client Booking",
+  robots: { index: false, follow: false },
+};
 
 export default async function ReturningClientBookingPage() {
   const data = await fetchReturningClientBookingPage();

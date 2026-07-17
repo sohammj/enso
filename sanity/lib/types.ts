@@ -53,6 +53,10 @@ export type Program = {
   label?: string;
   subtitle?: string;
   preview?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: any;
+  noIndex?: boolean;
   // description?: string[];
   description?: PortableTextBlock[];
   icon?: any; // Sanity image
@@ -121,6 +125,10 @@ export type Service = {
   subtitle?: string;
   status?: "active" | "hidden";
   preview?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: any;
+  noIndex?: boolean;
   // description?: string[];
   description?: PortableTextBlock[];
   icon?: any; // Sanity image object
@@ -201,4 +209,3 @@ export type PhotoStripItem = {
   label?: string;
   caption?: string;
 };
-

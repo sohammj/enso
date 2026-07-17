@@ -9,6 +9,13 @@ import { urlFor } from "@/sanity/lib/image";
 import type { JourneyContent } from "@/sanity/lib/types";
 import { PortableText } from "@portabletext/react";
 import AboutStatsTicker from "@/components/sections/AboutStatsTicker";
+import { staticMetadata } from "@/lib/seo";
+
+export const metadata = staticMetadata(
+  "About Parul Dewal-Hande",
+  "Learn about Parul Dewal-Hande, founder of Enso Mind Matters and an arts-based therapy practitioner and counsellor in Mumbai.",
+  "/about",
+);
 
 
 function imgUrl(img: any, w = 900, h = 900) {

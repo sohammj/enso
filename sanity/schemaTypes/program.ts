@@ -80,6 +80,34 @@ export const program = defineType({
     }),
 
     defineField({
+      name: "seoTitle",
+      title: "SEO title (optional)",
+      type: "string",
+      description: "Overrides the page title shown in search results.",
+      validation: (Rule) => Rule.max(60).warning("Keep search titles near 60 characters."),
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "SEO description (optional)",
+      type: "text",
+      rows: 3,
+      description: "Overrides the description shown in search results.",
+      validation: (Rule) => Rule.max(160).warning("Keep search descriptions near 160 characters."),
+    }),
+    defineField({
+      name: "seoImage",
+      title: "Social sharing image (optional)",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "noIndex",
+      title: "Hide from search engines",
+      type: "boolean",
+      initialValue: false,
+    }),
+
+    defineField({
       name: "preview",
       title: "Preview (optional)",
       type: "text",

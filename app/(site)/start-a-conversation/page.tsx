@@ -10,6 +10,8 @@ import { useState, useEffect } from "react";
 import Dragonfly from "@/components/ui/Dragonfly";
 import { toast } from "sonner";
 
+// Metadata for this client page is supplied by the route layout.
+
 /* ================= Schema ================= */
 
 const Schema = z.object({

@@ -7,6 +7,7 @@ import InterstitialPopup from "@/components/InterstitialPopup";
 import { urlFor } from "@/sanity/lib/image";
 import { fetchInterstitial } from "@/sanity/lib/fetchInterstitial";
 import { SanityLive } from "@/sanity/lib/live";
+import { JsonLd } from "@/components/JsonLd";
 
 function imgUrl(img: any, w = 1200, h = 1200) {
   if (!img) return "";
@@ -25,8 +26,33 @@ export default async function SiteLayout({
     ? imgUrl(interstitial.image, 1200, 1200)
     : "";
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": ["Organization", "LocalBusiness"],
+    "@id": "https://www.ensomindmatters.com/#organization",
+    name: "Enso Mind Matters",
+    url: "https://www.ensomindmatters.com",
+    logo: "https://www.ensomindmatters.com/ensologo.png",
+    image: "https://www.ensomindmatters.com/ensologo.png",
+    email: "parul.enso@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "United House, 3, Manmala Tank Road, Mainak Wadi, Mahim",
+      addressLocality: "Mumbai",
+      addressRegion: "Maharashtra",
+      postalCode: "400016",
+      addressCountry: "IN",
+    },
+    areaServed: { "@type": "City", name: "Mumbai" },
+    sameAs: [
+      "https://www.instagram.com/enso_mind_matters",
+      "https://www.linkedin.com/company/enso-mind-matters",
+    ],
+  };
+
   return (
     <div className="relative overflow-x-hidden">
+      <JsonLd data={organizationSchema} />
       <Nav />
       <main className="min-h-dvh pt-20">
         <TransitionProvider>{children}</TransitionProvider>

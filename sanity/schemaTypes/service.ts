@@ -50,6 +50,34 @@ export default defineType({
     defineField({ name: "label", title: "Label", type: "string" }),
     defineField({ name: "subtitle", title: "Subtitle", type: "string" }),
 
+    defineField({
+      name: "seoTitle",
+      title: "SEO title (optional)",
+      type: "string",
+      description: "Overrides the page title shown in search results.",
+      validation: (r) => r.max(60).warning("Keep search titles near 60 characters."),
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "SEO description (optional)",
+      type: "text",
+      rows: 3,
+      description: "Overrides the description shown in search results.",
+      validation: (r) => r.max(160).warning("Keep search descriptions near 160 characters."),
+    }),
+    defineField({
+      name: "seoImage",
+      title: "Social sharing image (optional)",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "noIndex",
+      title: "Hide from search engines",
+      type: "boolean",
+      initialValue: false,
+    }),
+
     // Use IMAGE (not file) so urlFor works consistently
     defineField({
       name: "icon",

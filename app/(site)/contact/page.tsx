@@ -1,6 +1,13 @@
 import { studioInfo } from "@/lib/data";
 import { MapEmbed } from "@/components/sections/MapEmbed";
 import StickyGetInTouch from "@/components/layout/StickyGetInTouch";
+import { staticMetadata } from "@/lib/seo";
+
+export const metadata = staticMetadata(
+  "Contact Enso Mind Matters in Mahim, Mumbai",
+  "Contact Enso Mind Matters for in-person counselling and arts-based therapy sessions in Mahim, Mumbai, or online sessions.",
+  "/contact",
+);
 
 
 export default function ContactPage() {
